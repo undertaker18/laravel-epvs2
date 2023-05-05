@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+     // for view 
+     public function index()
+     {
+         return view('users');
+     }
 }
