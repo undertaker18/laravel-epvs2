@@ -58,30 +58,25 @@
                                 accurate and exact before proceeding to the next step.</p>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">Payment for student
-                                    1:*</label>
+                                    1:<span class="asteris">*</span></label>
                                 <input type="text" class="form-control" id="formGroupExampleInput"
                                     placeholder="Type here...">
                             </div>
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput2" class="form-label">Payment for student
-                                    2:*</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2"
-                                    placeholder="Type here...">
-                            </div>
-                            <div class="mb-3">
+                            
+                            <div class="mb-3">  
                                 <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
-                                    *</label>
+                                    <span class="asteris">*</span></label>
                                 <input type="number" class="form-control" id="formGroupExampleInput2"
                                     placeholder="Edit here...">
                             </div>
                             <div class="mb-3">
-                                <label for="formGroupExampleInput2" class="form-label">Reference Number*</label>
+                                <label for="formGroupExampleInput2" class="form-label">Reference Number:<span class="asteris">*</span></label>
                                 <input type="number" class="form-control" id="formGroupExampleInput2"
                                     placeholder="Edit here...">
                             </div>
                             <div class="row">
                                 <label for="formGroupExampleInput2" class="form-label">Date & Time of Payment
-                                    <span class="quotation">(BASED ON YOUR RECEIPT)</span></label>
+                                    <span class="quotation">(BASED ON YOUR RECEIPT)</span><span class="asteris">*</span></label>
                                 <div class="col-sm-6">
                                     <input type="date" class="form-control" placeholder="Edit here..."
                                         aria-label="date">

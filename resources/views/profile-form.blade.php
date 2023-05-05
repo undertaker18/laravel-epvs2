@@ -174,7 +174,9 @@
         display: table;
         clear: both;
         } 
-    
+                .green-button {
+            background-color: green;
+        }
     </style> 
 
     <form action="{{ route('profile-form') }}" method="get">
@@ -189,25 +191,25 @@
                     <h2>Student 01</h2>
                     <div class="row">
                         <div class="col">
-                            <label for="inputLastname" class="form-label">Lastname:</label>
-                            <input type="text" class="form-control" placeholder="Lastname" aria-label="Lastname" required>
+                            <label for="inputLastname" class="form-label">Lastname:<span class="asteris">*</span></label>
+                            <input id="inputLastname" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname" required >
                         </div>
                         <div class="col">
-                            <label for="inputFirstname" class="form-label">Firstname:</label>
-                            <input type="text" class="form-control" placeholder="Firstname" aria-label=" Firstname" required>
+                            <label for="inputFirstname" class="form-label">Firstname:<span class="asteris">*</span></label>
+                            <input id="inputFirstname"type="text" class="form-control" placeholder="Firstname" aria-label=" Firstname" required>
                         </div>
                         <div class="col">
-                            <label for="inputMiddlename" class="form-label">Middlename:</label>
-                            <input type="text" class="form-control" placeholder="Middlename" aria-label="Middlename" required>
+                            <label for="inputMiddlename" class="form-label">Middlename:<span class="asteris">*</span></label>
+                            <input id="inputMiddlename" type="text" class="form-control" placeholder="Middlename" aria-label="Middlename" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="inputEmail" class="form-label">Email:</label>
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Email" required>
+                            <label for="inputEmail" class="form-label">Email:<span class="asteris">*</span></label>
+                            <input  id="inputEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" required>
                         </div>
                         <div class="col">
-                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                            <label for="inputScholarshipType" class="form-label">Student type:<span class="asteris">*</span></label>
                             <select id="inputScholarshipType" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
                                 <option selected>Choose...</option>
                                 <option >New Student</option>
@@ -218,7 +220,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="inputDepartment" class="form-label">Department:</label>
+                            <label for="inputDepartment" class="form-label">Department:<span class="asteris">*</span></label>
                             <select id="inputDepartment" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
                                 <option selected>Choose...</option>
                                 <option>Elementary</option>
@@ -228,7 +230,7 @@
                               
                         </div>
                         <div class="col">
-                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                            <label for="inputGradeCourse" class="form-label">Grade/Course:<span class="asteris">*</span></label>
                             <select id="inputGradeCourse" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;" required>
                                 <option selected>Choose...</option>
                                 <option>BSIS</option>
@@ -240,7 +242,7 @@
                               </select>
                         </div>
                         <div class="col">
-                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                            <label for="inputLevelYear" class="form-label">Level/Year:<span class="asteris">*</span></label>
                             <select id="inputLevelYear" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;" required>
                                 <option selected>Choose...</option>
                                 <option>1 Year</option>
@@ -252,8 +254,8 @@
                     </div>
                     <div class="row">
                         <div class="cols" style="width: 50%;">
-                            <label for="inputScholarshiptatus*" class="form-label">Scholarship Status:</label>
-                            <select id="inputScholarshiptatus" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
+                            <label for="inputScholarshipstatus*" class="form-label">Scholarship Status:<span class="asteris">*</span></label>
+                            <select id="inputScholarshipstatus" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
                                 <option selected>Choose...</option>
                                 <option >Partial Scholar</option>
                                 <option >Full Scholar</option>
@@ -261,38 +263,71 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="column " style="padding-top: 230px;">
-                
-                <div class="buttons">
-                    <a href="{{ url('/privacy-notice') }} ">
-                    <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
-                    </a>
-                   <a href="{{ url('/upload-form') }}">
-                    <button id="next-button" class="right-button" disabled>NEXT <i class="fas fa-arrow-right"></i></button>
-                    </a>
-
-                </div> 
-            </div>
+            </div>    
         </div>
-    
     </form>
+        <div class="column " style="padding-top: 230px;">
+                    
+            <div class="buttons">
+                <a href="{{ url('/privacy-notice') }} ">
+                <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
+                </a>
+            <a href="{{ url('/upload-form') }}">
+                <button id="next-button" class="right-button" disabled>NEXT <i class="fas fa-arrow-right"></i></button>
+                </a>
+
+            </div> 
+        </div>
 
     <script>
-        const nextButton = document.getElementById("next-button");
-        const inputFields = document.querySelectorAll(".form-control");
+        // button
+        const nextButton = document.getElementById('next-button');
     
-        function updateButtonState() {
-            const isEmpty = Array.from(inputFields).some(input => input.value === "");
-            nextButton.disabled = isEmpty;
-            nextButton.style.backgroundColor = isEmpty ? "" : "green";
-            const isEmpty2 = Array.from(inputFields).some(select => select.value === "");
-            nextButton.disabled = isEmpty2;
-            nextButton.style.backgroundColor = isEmpty ? "" : "green";
+        // input
+        const inputLastname = document.getElementById('inputLastname');
+        const inputFirstname = document.getElementById('inputFirstname');
+        const inputMiddlename = document.getElementById('inputMiddlename');
+        const inputEmail = document.getElementById('inputEmail');
+    
+        // select
+        const inputScholarshipType = document.getElementById('inputScholarshipType');
+        const inputDepartment = document.getElementById('inputDepartment');
+        const inputGradeCourse = document.getElementById('inputGradeCourse');
+        const inputLevelYear = document.getElementById('inputLevelYear');
+        const inputScholarshipstatus = document.getElementById('inputScholarshipstatus');
+        
+        // Add event listeners to input and select fields
+        inputLastname.addEventListener('input', checkInputs);
+        inputFirstname.addEventListener('input', checkInputs);
+        inputMiddlename.addEventListener('input', checkInputs);
+        inputEmail.addEventListener('input', checkInputs);
+    
+    
+        inputScholarshipType.addEventListener('change', checkInputs);
+        inputDepartment.addEventListener('change', checkInputs);
+        inputGradeCourse.addEventListener('change', checkInputs);
+        inputLevelYear.addEventListener('change', checkInputs);
+        inputScholarshipstatus.addEventListener('change', checkInputs);
+    
+        
+        // Function to check if all input and select fields are not empty
+        function checkInputs() {
+            if (inputLastname.value.trim() !== '' &&
+                inputFirstname.value.trim() !== '' &&
+                inputMiddlename.value.trim() !== '' &&
+                inputEmail.value.trim() !== '' &&
+                inputScholarshipType.value !== 'Choose...' &&
+                inputDepartment.value !== 'Choose...' &&
+                inputGradeCourse.value !== 'Choose...' &&
+                inputLevelYear.value !== 'Choose...' &&
+                inputScholarshipstatus.value !== 'Choose...') {
+                
+                nextButton.disabled = false;
+                nextButton.classList.add('green-button');
+            } else {
+                nextButton.disabled = true;
+                nextButton.classList.remove('green-button');
+            }
         }
-    
-        inputFields.forEach(input => {
-            input.addEventListener("input", updateButtonState);
-        });
     </script>
 </x-form-layout>
