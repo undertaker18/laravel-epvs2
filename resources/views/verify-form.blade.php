@@ -1,0 +1,111 @@
+
+<x-form-layout>
+    <style>
+        .row.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    }
+          /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .border-line {
+        margin-left: 200px;
+        margin-right: 100px;
+        padding-top: 30px;
+
+    }
+
+    .quotation {
+        font-size: 12px;
+    }
+
+    .form-label {
+        text-align: left;
+    }
+
+    .card-body {
+        text-align: left;
+    }
+    .card {
+        border: none;
+    }
+    .form-control {
+        border: none;
+        background-color: #EAF1F8;
+    }
+    </style>
+
+        <div class="row main-content ">
+
+            <div class="row border-line">
+                <div class="col-sm-7">
+                    <div class="card">
+                        <img src="../ASSETS/verify/receipt.png" alt="Image Description" width="100% " height="550px"
+                            title="Image Title" style=" border-radius: 10px;;" class="image-class">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Take note: </h5>
+                            <p class="card-text">Ensure that all information provided are
+                                accurate and exact before proceeding to the next step.</p>
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Payment for student
+                                    1:*</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                    placeholder="Type here...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Payment for student
+                                    2:*</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Type here...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
+                                    *</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Edit here...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Reference Number*</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Edit here...">
+                            </div>
+                            <div class="row">
+                                <label for="formGroupExampleInput2" class="form-label">Date & Time of Payment
+                                    <span class="quotation">(BASED ON YOUR RECEIPT)</span></label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" placeholder="Edit here..."
+                                        aria-label="date">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="time" class="form-control" placeholder="Edit here..."
+                                        aria-label="time">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column " style="padding-top: 30px;">
+
+                <div class="buttons">
+                    <a href="../pages/upload.html ">
+                        <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
+                    </a>
+                    <a href="../pages/review.html">
+                        <button class="right-button">NEXT <i class="fas fa-arrow-right"></i></button>
+                    </a>
+                </div>
+            </div>
+        </div>
+</x-form-layout>

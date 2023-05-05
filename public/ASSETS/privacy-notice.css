@@ -1,0 +1,134 @@
+
+    body {
+        background: #EAF1F8;
+        /* Set the background color to light gray */
+    }
+
+    .image {
+        text-align: center;
+        border-radius: 30px;
+        height: auto;   
+        background-color: #ffffff;
+
+
+    }
+
+    .container {
+        margin-top: 30px;
+        justify-content: center;
+      
+    }
+
+    ul {
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+
+    }
+
+    li {
+        align-items: center;
+        font-size: 25px;
+        margin: 0 10px;
+        padding: 5px 10px;
+    }
+
+    .icon {
+        font-size: 60px;
+        /* Set the font size to 50 pixels */
+    }
+
+    .main-content {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .privacy-content {
+        padding: 20px;
+        font-weight:normal;
+        font-size: 28px;
+        text-align: left;
+        margin-bottom: 250px;
+        margin-left: 160px;
+        margin-right: 160px;
+        color: #000000;
+        padding-left: 50px;
+
+
+    }
+    .p{
+        padding-left: 10px;
+    }
+
+    .asteris {
+        color: red;
+    }
+
+    /*check box */
+    .checkbox {
+        size: 20px;
+        position: relative; /* set the position to relative */
+        z-index: 1000; /* set the z-index to a high value */    
+
+    }
+
+    input[type=checkbox] {
+        height: 20px;
+        width: 20px;
+        
+    }
+
+    /*button */
+
+    .buttons {
+        justify-content: center;
+        align-items: center;
+        margin-left: 130px;
+        margin-right: 130px;
+        
+    }
+
+    .left-button {
+        float: left;
+        width: 200px;
+        height: 50px;
+        padding: 8px;
+        margin-left: 8px;
+        background-color: #1266B4;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+
+    .right-button {
+        float: right;
+        width: 200px;
+        height: 50px;
+        padding: 8px;
+        margin-left: 8px;
+        background-color: #879BAE;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+
+   /* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 100%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+} 
