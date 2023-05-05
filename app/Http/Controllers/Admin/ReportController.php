@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SystemlogController extends Controller
+class ReportController extends Controller
 {
-    // for sent 
+    // for view 
     public function index()
     {
-        return view('system-log');
+        return view('reports');
     }
 }

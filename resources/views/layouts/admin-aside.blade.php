@@ -1,3 +1,17 @@
+<style>
+  a {
+  color: #879BAE;
+
+  }
+
+  a:hover {
+    color: #1266b4;
+  }
+
+  .active {
+    color: #1266b4;
+  }
+</style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1266B4; position: fixed">
     <!-- Brand Logo --> 
     <a href="" class="brand-link">
@@ -18,7 +32,7 @@
           <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{ route('dashboard') }}" class="nav-link active">
+            <a href="{{ url('/dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -27,7 +41,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('users') }}" class="nav-link">
+            <a href="{{ url('/users') }}" class="nav-link {{ Request::is('users') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -36,7 +50,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a  class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject') ? 'active' : '' }}">
               <i class="nav-icon fas fa-receipt"></i>
               <p>
                 Receipts
@@ -45,19 +59,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('receipt-valid') }}" class="nav-link">
+                <a href="{{ url('/receipt-valid') }}" class="nav-link {{ Request::is('receipt-valid') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Valid</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('receipt-pending') }}" class="nav-link">
+                <a href="{{ url('/receipt-pending') }}" class="nav-link {{ Request::is('receipt-pending') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pending</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('receipt-reject') }}" class="nav-link">
+                <a href="{{ url('/receipt-reject') }}" class="nav-link {{ Request::is('receipt-reject') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reject</p>
                 </a>
@@ -65,7 +79,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a class="nav-link {{ Request::is('xero-send', 'xero-sent') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Xero
@@ -74,13 +88,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('xero-send') }}" class="nav-link">
+                <a href="{{ url('/xero-send') }}" class="nav-link {{ Request::is('xero-send') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Send</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('xero-sent') }}" class="nav-link">
+                <a href="{{ url('/xero-sent') }}" class="nav-link {{ Request::is('xero-sent') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sent</p>
                 </a>
@@ -89,7 +103,7 @@
 
           </li>
           <li class="nav-item">
-            <a href="{{ route('reports') }}" class="nav-link">
+            <a href="{{ url('/reports') }}" class="nav-link {{ Request::is('reports') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Reports
@@ -97,7 +111,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('bdo-receipts') }}" class="nav-link">
+            <a href="{{ url('/bdo-receipts') }}" class="nav-link {{ Request::is('bdo-receipts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 BDO Receipts
@@ -105,7 +119,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('system-log') }}" class="nav-link">
+            <a href="{{ url('/system-log') }}" class="nav-link {{ Request::is('system-log') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 System Log

@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-8">
                         <!-- small box -->
-                        <a href="./xero-send.html">
+                        <a href="{{ url('/xero-send') }}">
                             <div class="small-box"
                                 style="background-color: #FFFFFF;  border: 0px solid #D78C47; border-radius: 12px; color: black;">
                                 <div class="inner ml-3 ">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-lg-6 col-6">
                         <!-- small box -->
-                        <a href="./xero-sent.html">
+                        <a href="{{ url('/xero-sent') }}">
                             <div class="small-box"
                                 style="background-color: #FFFFFF;  border: 5px solid #008000; border-radius: 12px; color: black;">
                                 <div class="inner ml-3 ">

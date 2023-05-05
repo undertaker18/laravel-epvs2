@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BdoReceiptController;
 use App\Http\Controllers\Admin\ReceiptController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
 use Illuminate\Support\Facades\Route;
@@ -71,32 +72,33 @@ Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->name('receipt-reject');
     
 /* For Xero intergration */
-Route::get('/xero-send', function () {
-    return view('xero-send');
-})->middleware(['auth', 'verified'])->name('xero-send');
 
-Route::get('/xero-sent', function () {
-    return view('xero-sent');
-})->middleware(['auth', 'verified'])->name('xero-sent');
+Route::get('/xero-send', [XeroController::class, 'send'])
+    ->middleware(['auth', 'verified'])
+    ->name('xero-send');
+
+Route::get('/xero-sent', [XeroController::class, 'sent'])
+    ->middleware(['auth', 'verified'])
+    ->name('xero-sent');
+
 
 /* Reports*/
-Route::get('/reports', function () {
-    return view('reports');
-})->middleware(['auth', 'verified'])->name('reports');
+Route::get('/reports', [ReportController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('reports');
 
 /* Bdo Receipts*/
-Route::get('/bdo-receipts', function () {
-    return view('bdo-receipts');
-})->middleware(['auth', 'verified'])->name('bdo-receipts');
+
+Route::get('/bdo-receipts', [BdoReceiptController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('bdo-receipts');
 
 /* System log*/
-Route::get('/system-log', function () {
-    return view('system-log');
-})->middleware(['auth', 'verified'])->name('system-log');
+Route::get('/system-log', [SystemlogController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('system-log');
 
-
-
-
+/* user account*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
