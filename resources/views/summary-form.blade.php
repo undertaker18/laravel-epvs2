@@ -159,12 +159,6 @@
                                 placeholder="" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Payment for student
-                                2:*</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2"
-                                placeholder="" readonly>
-                        </div>
-                        <div class="mb-3">
                             <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
                                 *</label>
                             <input type="text" class="form-control" id="formGroupExampleInput2"

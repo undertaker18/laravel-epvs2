@@ -59,19 +59,25 @@
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">Payment for student
                                     1:<span class="asteris">*</span></label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"
-                                    placeholder="Type here...">
+                                <select id="inputDepartment" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
+                                        <option selected>Choose...</option>
+                                        <option>Notarial Fee:</option>
+                                        <option>Missellaneous Fees:</option>
+                                        <option>Digital System Access Fee:</option>
+                                        <option>Registration:</option>
+                                        <option>Initial Payment:</option>
+                                </select>
                             </div>
                             
                             <div class="mb-3">  
                                 <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
                                     <span class="asteris">*</span></label>
-                                <input type="number" class="form-control" id="formGroupExampleInput2"
+                                <input type="text" class="form-control" id="formGroupExampleInput2"
                                     placeholder="Edit here...">
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Reference Number:<span class="asteris">*</span></label>
-                                <input type="number" class="form-control" id="formGroupExampleInput2"
+                                <input type="text" class="form-control" id="formGroupExampleInput2"
                                     placeholder="Edit here...">
                             </div>
                             <div class="row">
