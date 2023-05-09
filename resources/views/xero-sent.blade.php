@@ -73,18 +73,28 @@
                     <!-- SidebarSearch Form -->
                     <form action="#">
                         <div class="input-group"
-                            style="width: 100%; float: right; margin-bottom:20px; margin-top:5px; margin-right: 100px;">
-                            <input type="search" class="form-control form-control-lg"
+                            style="width: 80%; float: right; margin-bottom:20px; margin-top:5px; margin-right: 100px;">
+                            <input type="search" class="form-control form-control-lg br-10"
                                 placeholder="Type your keywords here">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-lg btn-default">
                                     <i class="fa fa-search" style="color: #1266B4;"></i>
                                 </button>
                             </div>
+                           
                         </div>
                     </form>
                 </div>
+               
+                    <div class="input-group-append-end mr-4">
+                        <button type="submit" class="btn btn-lg btn-default">
+                            <i class="fa fa-filter" style="color: #1266B4;"></i>
+                        </button>
+                    </div>
+
+                
             </div>
+            
             <!-- Table row -->
             <div class="row">
                 <div class="col-12 table-responsive">
@@ -92,56 +102,28 @@
                         style="width:100%; margin-left: 0px; margin-right: 0px;">
                         <thead>
                             <tr style="color: #1266B4;">
-                                <th>Lastname</th>
-                                <th>Firstname</th>
-                                <th>Grade/Course</th>
-                                <th>Date</th>
-                                <th>time</th>
-                                <th>Amount</th>
+                                <th>Fullname:</th>
+                                <th>Grade/Course:</th>
+                                <th>Date&Time:</th>
+                                <th>Payment For:</th>
                                 <th>Reference No.</th>
-                                <th>Status</th>
-                                <th>Receipt Image</th>
+                                <th>Status:</th>
+                                <th>Receipt Image:</th>
+                                <th>Action:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
+                                <td>Pascua, Jordan Earl Imperial</td>
                                 <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
+                                <td>06/25/2023 09:00:00</td>
+                                <td>Notarial Fee</td>
                                 <td>150.00</td>
                                 <td>347360483798</td>
-                                <td style="color: #008000;">Valid</td>
-                                <td style="color: #1266B4"> <i class="fas fa-eye"></i>Full View</td>
-                            </tr>
-
-                            <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #008000;">Valid</td>
-                                <td style="color: #1266B4"> <i class="fas fa-eye"></i>Full View</td>
-                            </tr>
-
-                            <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #008000;">Valid</td>
-                                <td style="color: #1266B4"> <i class="fas fa-eye"></i>Full View</td>
-                            </tr>
-                           
+                                <td style="color: #008000;">Sent</td>
+                                <td style="color: #1266B4"  > <i class="fas fa-eye"></i>Full View</td>
+                            </tr>               
                         </tbody>
-                      
                     </table>
                 </div>
                 <!-- /.col -->
