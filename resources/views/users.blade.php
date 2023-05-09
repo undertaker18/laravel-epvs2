@@ -67,7 +67,7 @@
                                       <td>jordan earl pascua</td>
                                       <td>jordanearlpascua@student.laverdad.edu.ph</td>
                                       <td>Admin</td>
-                                      <td style="margin: 0px ;border-radius: 30px; width: 170px ; border-color: #EC7100; background-color: #EC7100; color: white;">update bdo receipts</td>
+                                      <td>update bdo receipts</td>
                                       <td > <a  href="#"  style=" color: #1266B4"><i class="fas fa-edit"></i>Edit </a> <a href="#"  style=" color: #D74747"><i class="fas fa-user-slash"></i>Disable</a> </td>
                                   </tr>
                               </tbody>
