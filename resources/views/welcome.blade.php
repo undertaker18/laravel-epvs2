@@ -204,7 +204,7 @@
     <section  class="image-bg"
     style=" background-image: url('./assets/landing/landingpage.png'); "> 
         <div class="d-flex flex-wrap justify-content-center py-3 mb-4 ">
-            <a href="./ADMIN/index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
+            <a href="{{ url('/login') }}"   target="_blank" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
                 <img src="./assets/landing/lvcclogo.png" alt="lvcc Logo" style=" width:250px ; height: 250px;">
             <span class="font-logo"><b>LVCC Enrollment Payment<br>
                 Validation System<b> 
