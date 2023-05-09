@@ -70,6 +70,10 @@ Route::get('/receipt-pending', [ReceiptController::class, 'pending'])
 Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-reject');
+
+Route::get('/receipt-image', [ReceiptController::class, 'image'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-image');
     
 /* For Xero intergration */
 

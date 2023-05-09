@@ -22,4 +22,9 @@ class ReceiptController extends Controller
      {
          return view('receipt-reject');
      }
+
+     public function image()
+     {
+         return view('receipt-image');
+     }
 }

@@ -131,7 +131,7 @@
                                         <td>150.00</td>
                                         <td>347360483798</td>
                                         <td style="color: #008000;">Valid</td>
-                                        <td>View</td>
+                                        <td><a href="{{ url('/receipt-image') }}">View</a></td>
                                     </tr>
     
                                     <tr>
@@ -143,7 +143,7 @@
                                         <td>150.00</td>
                                         <td>347360483798</td>
                                         <td  style="color: #008000;">Valid</td>
-                                        <td>View</td>
+                                        <td><a href="{{ url('/receipt-image') }}">View</a></td>
                                     </tr>
     
                                     <tr>
@@ -155,7 +155,7 @@
                                         <td>150.00</td>
                                         <td>347360483798</td>
                                         <td  style="color: #008000;">Valid</td>
-                                        <td>View</td>
+                                        <td><a href="{{ url('/receipt-image') }}">View</a></td>
                                     </tr>
                                    
                                 </tbody>
@@ -164,6 +164,29 @@
                         </div>
                         <!-- /.col -->
                     </div>
+                     <!--pagination -->
+             
+                    <!--pagination -->
+                    <nav aria-label="Page navigation example">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="dataTables_info ml-5 mt-2" id="example1_info" role="status" aria-live="polite">Showing 1 to 3 of 3 entries</div>
+                            </div>
+                            <div class="col-md-8">
+                                <ul class="pagination justify-content-center mb-3">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1"  style=" font-weight:bold;">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" style="color: #1266B4; font-weight:bold;">Next</a>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </nav>
                 </section>
                 <!-- right col -->
     

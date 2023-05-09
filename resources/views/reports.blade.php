@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-lg-3 col-8">
+                    <div class="col-lg-2 col-8">
                         <!-- small box -->
                         <div class="col">
                             <select id="inputStudentType" class="form-select"
@@ -34,7 +34,27 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-8">
+                    <div class="col-lg-2 col-8">
+                        <!-- small box -->
+                        <div class="col">
+                            <select id="inputStudentType" class="form-select"
+                                style="border-radius: 8px; outline: none; box-shadow: none; padding: 10px; margin-bottom: 12px; background-color: white; width: 100%;">
+                                <option selected>RECEIPTS</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-8">
+                        <!-- small box -->
+                        <div class="col">
+                            <select id="inputStudentType" class="form-select"
+                                style="border-radius: 8px; outline: none; box-shadow: none; padding: 10px; margin-bottom: 12px; background-color: white; width: 100%;">
+                                <option selected>XERO</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-8">
                         <!-- small box -->
                         <div class="col">
                             <select id="inputStudentType" class="form-select"
@@ -44,7 +64,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-8">
+                    <div class="col-lg-2 col-8">
                         <!-- small box -->
                         <div class="col">
                             <select id="inputStudentType" class="form-select"
@@ -54,7 +74,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-8">
+                    <div class="col-lg-2 col-8">
                         <!-- small box -->
                         <div class="col">
                             <select id="inputStudentType" class="form-select"
@@ -74,13 +94,12 @@
                 style="background-color: #D74747; color: #ffffff; width: 150px;"><i
                     class="fas fa-print"></i>&nbsp;&nbsp;&nbsp;PRINT</button>
         </div>
-
         <!-- data tables -->
         <section class="invoice" style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
             <!-- Title Form -->
             <div class="row" style="margin-top:20px;">
                 <div class="col" style=" margin-left: 50px; margin-top:0px;">
-                    <h2 class="" style="color: #1266B4;">List of Enrollment Payment Receipt</h2>
+                    <h2 class="" style="color: #1266B4; ">List of Enrollment Payment Receipt</h2>
                 </div>
                 <div class="col">
                     <!-- SidebarSearch Form -->
@@ -98,6 +117,8 @@
                     </form>
                 </div>
             </div>
+            
+              
             <!-- Table row -->
             <div class="row">
                 <div class="col-12 table-responsive">
@@ -159,9 +180,30 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <!--pagination -->
+            <nav aria-label="Page navigation example">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="dataTables_info ml-5 mt-2" id="example1_info" role="status" aria-live="polite">Showing 1 to 3 of 3 entries</div>
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="pagination justify-content-center mb-3">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"  style=" font-weight:bold;">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" style="color: #1266B4; font-weight:bold;">Next</a>
+                            </li>
+                        </ul>
+                    </div> 
+                </div>
+            </nav>
         </section>
         <!-- right col -->
-
+       
         <!-- /.row -->
     </div><!-- /.container-fluid -->
     </section>

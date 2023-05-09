@@ -34,7 +34,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
       </head>
-      
+      <style>
+        h2{
+        font-size: 40px;
+        color: #1266B4;
+        }   
+      </style>
     
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
