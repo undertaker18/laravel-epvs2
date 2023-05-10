@@ -10,7 +10,7 @@ a:hover {
 }
 
 .active {
-  color: #  ;
+  color: #1266b4  ;
 }
 
 </style>
