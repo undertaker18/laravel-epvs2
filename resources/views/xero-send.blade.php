@@ -64,7 +64,7 @@
         </section>
 
         <div style="text-align: right;  ">
-            <button id="myButton" class="btn btn-default mr-4 mb-3" onclick="alert('Button clicked!')" style="background-color: #D74747; color: #ffffff; width: 170px;"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;SEND TO XERO</button>
+            <button id="send-to-xero-btn" class="btn btn-default mr-4 mb-3" style="background-color: #D74747; color: #ffffff; width: 170px;"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;SEND TO XERO</button>
         </div>
 
         <!-- data tables -->
@@ -90,63 +90,41 @@
                     </form>
                 </div>
             </div>
-            <!-- Table row -->
-            <div class="row">
+
+            <div class="row mt-4">
                 <div class="col-12 table-responsive">
                     <table class="table table-striped" id="example"
                         style="width:100%; margin-left: 0px; margin-right: 0px;">
                         <thead>
                             <tr style="color: #1266B4;">
                                 <th>Select</th>
-                                <th>Lastname</th>
-                                <th>Firstname</th>
-                                <th>Grade/Course</th>
-                                <th>Payment for</th>
+                                <th>Name</th>
+                                <th>Xero Account Id</th>
+                                <th>Description</th>
                                 <th>Amount</th>
-                                <th>Reference No.</th>
-                                <th>Send</th>
-                                <th>Receipt Image</th>
+                                <th>Reference</th>
+                                <th>Created At</th>
+                                <th>Created By</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($xeroInvoice as $value)
                             <tr>
-                                <td><input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox"></td>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>Notarial fee</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D74747;">No</td>
-                                <td style="color: #1266B4;"><i class="fas fa-eye"></i>Full View</td>
+                            <td><input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox invoice_checkbox" data-id="{{$value->id}}"></td>
+                                <td>{{$value->xero_account_name}}</td>
+                                <td>{{$value->xero_account_id}}</td>
+                                <td>{{$value->description}}</td>
+                                <td>{{$value->amount}}</td>
+                                <td>{{$value->reference}}</td>
+                                <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
                             </tr>
 
-                            <tr>
-                                <td><input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox"></td>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>Notarial fee</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D74747;">No</td>
-                                <td style="color: #1266B4;"><i class="fas fa-eye"></i>Full View</td>
-                            </tr>
+                            @endforeach
 
-                            <tr>
-                                <td><input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox"></td>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>Notarial fee</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D74747;">No</td>
-                                <td style="color: #1266B4;"><i class="fas fa-eye"></i>Full View</td>
-                            </tr>
-                           
+
                         </tbody>
-                      
+                        <input type="text" id="selected_as_json"></input>
                     </table>
                 </div>
                 <!-- /.col -->
@@ -156,5 +134,94 @@
 
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Launch demo modal
+                      </button> --}}
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalCenterTitle">Loading</h5>
+                              {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button> --}}
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="spinner-border text-warning" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            {{-- <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div> --}}
+                          </div>
+                        </div>
+                      </div>
+
     </section>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+    <script>
+
+$(document).ready(function () {
+    let invoice_obj = {};
+
+    $(".invoice_checkbox").change(function(e){
+        console.log(this.checked)
+        let id = this.getAttribute('data-id');
+        if (this.checked == true) {
+            // add to list
+            invoice_obj[id] = id
+        } else {
+            // remove from list
+            delete invoice_obj[id]
+        }
+
+        console.log(invoice_obj);
+    });
+
+    $('#send-to-xero-btn').click(function(e) {
+        handleSendToXero();
+    });
+
+    function handleSendToXero() {
+
+        let invoiceIdCsv = Object.keys(invoice_obj).map(function (key, index) {
+        return invoice_obj[key]
+        }).join(', ')
+
+        console.log(invoiceIdCsv);
+        sendToXeroApi(invoiceIdCsv);
+    }
+
+    function sendToXeroApi(invoice_ids_csv) {
+        $.ajax({
+            url: '/v1/xero/makeInvoiceAndPay',
+            method: 'GET',
+            data: {
+                invoice_ids: invoice_ids_csv
+            },
+            xhrFields: { withCredentials: true },
+            beforeSend: function() {
+                $('#exampleModalCenter').modal('toggle');
+            },
+            error: function (error) {
+                console.log(error);
+                $('#exampleModalCenter').modal('toggle');
+            },
+            success: function (response) {
+                var result = $.parseJSON(response);
+                location.reload()
+            }
+        });
+    }
+
+
+
+});
+
+        </script>
 </x-admin-layout>

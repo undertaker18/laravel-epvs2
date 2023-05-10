@@ -139,9 +139,9 @@
                                 <td style="color: #008000;">Valid</td>
                                 <td style="color: #1266B4"> <i class="fas fa-eye"></i>Full View</td>
                             </tr>
-                           
+
                         </tbody>
-                      
+
                     </table>
                 </div>
                 <!-- /.col -->
