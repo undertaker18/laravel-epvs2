@@ -81,20 +81,20 @@
                                     <i class="fa fa-search" style="color: #1266B4;"></i>
                                 </button>
                             </div>
-                           
+
                         </div>
                     </form>
                 </div>
-               
+
                     <div class="input-group-append-end mr-4">
                         <button type="submit" class="btn btn-lg btn-default">
                             <i class="fa fa-filter" style="color: #1266B4;"></i>
                         </button>
                     </div>
 
-                
+
             </div>
-            
+
             <!-- Table row -->
             <div class="row">
                 <div class="col-12 table-responsive">
@@ -122,7 +122,7 @@
                                 <td>347360483798</td>
                                 <td style="color: #008000;">Sent</td>
                                 <td style="color: #1266B4"  > <i class="fas fa-eye"></i>Full View</td>
-                            </tr>               
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -146,7 +146,7 @@
                                 <a class="page-link" href="#" style="color: #1266B4; font-weight:bold;">Next</a>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
             </nav>
         </section>

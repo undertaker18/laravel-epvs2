@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
+use App\Http\Controllers\XeroApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,7 +59,7 @@ Route::get('/users', [UserController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('users');
 
-   /* For Receipts*/ 
+   /* For Receipts*/
 Route::get('/receipt-valid', [ReceiptController::class, 'valid'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-valid');
@@ -74,7 +75,7 @@ Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-image');
-    
+
 /* For Xero intergration */
 
 Route::get('/xero-send', [XeroController::class, 'send'])
@@ -84,6 +85,10 @@ Route::get('/xero-send', [XeroController::class, 'send'])
 Route::get('/xero-sent', [XeroController::class, 'sent'])
     ->middleware(['auth', 'verified'])
     ->name('xero-sent');
+Route::get('/xero-sync-accounts', [XeroController::class, 'syncAccount'])
+    ->middleware(['auth'])
+    ->name('xero-sync-account');
+
 
 
 /* Reports*/
@@ -108,5 +113,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::get('/v1/xero/auth', [XeroApiController::Class, 'getAuth'])->name('xero-auth');
+Route::get('/v1/xero/token', [XeroApiController::Class, 'getToken'])->name('xero-token');
+Route::get('/v1/xero/token-refresh', [XeroApiController::Class, 'tokenRefresh'])->name('xero-token-refreh');
+Route::get('/v1/xero/invoice', [XeroApiController::Class, 'postInvoice'])->name('post-invoice');
+Route::get('/v1/xero/invoice1', [XeroApiController::Class, 'getInvoice'])->name('get-invoice');
+Route::get('/v1/xero/payment', [XeroApiController::Class, 'postPayment'])->name('post-payment');
+
+Route::get('/v1/xero/accounts', [XeroApiController::Class, 'postAccounts'])->name('post-accounts');
+Route::get('/v1/xero/accounts1', [XeroApiController::Class, 'getAccounts'])->name('get-accounts');
+Route::get('/v1/xero/syncAccounts', [XeroApiController::Class, 'syncAccounts'])->name('sync-accounts');
+Route::get('/v1/xero/makeInvoiceAndPay', [XeroApiController::Class, 'makeInvoiceAndPay'])->name('make-invoice-and-pay');
+
+
 
 require __DIR__.'/auth.php';

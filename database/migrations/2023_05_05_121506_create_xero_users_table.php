@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('xero_users', function (Blueprint $table) {
             $table->id();
-            
-            $table->timestamps();
+            $table->string('xero_account_id')->nullable();
+            $table->string('description')->nullable();
+            $table->string('xero_account_name')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

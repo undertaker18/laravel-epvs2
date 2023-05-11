@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('xero_invoice', function (Blueprint $table) {
+        Schema::create('xero_auth', function (Blueprint $table) {
             $table->id();
-            $table->string('users_id')->nullable();
-            $table->string('xero_account_id')->nullable();
-            $table->string('description')->nullable();
-            $table->string('amount')->default(0)->nullable();
-            $table->string('reference')->nullable();
-            $table->string('status')->default(0); // 0 - pending, 1 - pending
+            $table->string('code')->nullable();
+            $table->string('xero_expires_datetime')->nullable();
+            $table->string('xero_refresh_token')->nullable();
             $table->timestamp('created_at')->useCurrent();
-
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('xero_invoice');
+        Schema::dropIfExists('xero_auths');
     }
 };

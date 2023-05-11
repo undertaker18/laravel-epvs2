@@ -13,7 +13,7 @@
   }
 </style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1266B4; position: fixed">
-    <!-- Brand Logo --> 
+    <!-- Brand Logo -->
     <a href="" class="brand-link">
       <img src="{{ asset('dist/img/lvcclogo.png') }}" alt="LVCC Logo" class="brand-image img-circle elevation-3"
       style="opacity: .8">
@@ -97,6 +97,12 @@
                 <a href="{{ url('/xero-sent') }}" class="nav-link {{ Request::is('xero-sent') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sent</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/xero-sync-accounts') }}" class="nav-link {{ Request::is('xero-sync-accounts') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sync Account</p>
                 </a>
               </li>
             </ul>

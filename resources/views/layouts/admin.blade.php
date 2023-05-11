@@ -38,9 +38,9 @@
         h2{
         font-size: 40px;
         color: #1266B4;
-        }   
+        }
       </style>
-    
+
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.admin-navigation')
@@ -49,17 +49,10 @@
             <main>
                 {{ $slot }}
             </main>
-            
+
         </div>
-    
-         <!-- ./wrapper -->
-        <script>
-            $(document).ready(function () {
-            $('#example').DataTable({
-                pagingType: 'full_numbers',
-            });
-            });
-        </script>
+
+
                     <!-- jQuery -->
             <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
@@ -93,5 +86,45 @@
             <script src="{{ asset('dist/js/adminlte.js') }}"></script>
             <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
+            <!-- ./wrapper -->
+        <script>
+//             $(document).ready(function () {
+//             //     // $('#example').DataTable({
+//             //     //     pagingType: 'full_numbers',
+//             //     // });
+
+
+
+// // alert('asdasd');
+// syncAccountApi();
+//         function syncAccountApi() {
+//             $.ajax({
+//                 url: '/api/v1/xero/syncAccounts',
+//                 method: 'GET',
+//                 data: {
+//                 },
+//                 beforeSend: function() {
+//                     // var tableContent = "<td class='loadingTd' colspan='40'><i class='fa fa-spinner fa-spin'></i> Loading</td>";
+//                     // $("#tblResult tbody").html(tableContent);
+//                     console.log('asdsad');
+//                 },
+//                 error: function (error) {
+//                     // $("#ajaxError").modal("show");
+//                     console.log(error);
+//                     console.log('error');
+//                 },
+//                 success: function (response) {
+//                     var result = $.parseJSON(response);
+//                     // var tableContent = "";
+//                     // var legend;
+//                     // var legendClass;
+
+//                     console.log(result);
+//                 }
+//         });
+//         }
+
+//             });
+        </script>
     </body>
 </html>
