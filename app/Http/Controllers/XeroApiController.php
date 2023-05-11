@@ -459,7 +459,7 @@ class XeroApiController extends Controller
                 ];
 
 
-                // dev todo: to remove
+                // dev todo: to remove ; test data generator
                 $invoiceTest[] = [
                     'xero_account_id' => $value['ContactID'],
                     'description' => 'with Sync',
@@ -467,7 +467,7 @@ class XeroApiController extends Controller
                     'reference' => 'reference',
                 ];
             }
-            // dev todo: to remove
+            // dev todo: to remove ; test data generator
             DB::table('xero_invoice')->truncate();
             DB::table('xero_invoice')->insert($invoiceTest);
 
