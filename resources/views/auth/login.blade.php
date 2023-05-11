@@ -32,7 +32,29 @@
        color: white;
        margin-bottom: 30px;
      }
+     .display-1  {
+      font-size: 7rem; /* Change this value to resize the text */
+     }   
     
+     @media (max-width: 575.98px) { 
+      .display-1  {
+      font-size: 1rem; /* Change this value to resize the text */
+     }  
+     }
+
+    
+      @media (max-width: 767.98px) { 
+        .display-1  {
+      font-size: 1rem; /* Change this value to resize the text */
+     }  
+       }
+
+      @media (max-width: 991.98px) { 
+        .display-1  {
+      font-size: 4rem; /* Change this value to resize the text */
+     }  
+       }
+
    </style>
  
    <div class="container-fluid  text-center text-lg-start my-5">
@@ -44,7 +66,7 @@
               
            <div class="card-body px-4 py-5 px-md-5 b-0">
                <div class=" d-flex justify-content-center">
-                   <img class="" src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">  
+                   <img class="" src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 250px; height: 250px;">  
                </div>
                <div class=" d-flex justify-content-center">
                    <p class="display-5 head-color">LOGIN</p>
@@ -89,7 +111,7 @@
          </div>
        </div>
  
-       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+       <div class="col-lg-7 mb-5 mb-lg-0 position-relative">
            <h1 class="my-5 display-1    fw-bold ls-tight" style="color: #1A2E63)">
                Payment  <br />
                <span style="color: #1266b4">Validation System</span>
