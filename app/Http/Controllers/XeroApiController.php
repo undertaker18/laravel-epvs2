@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\XeroAuth;
 use App\Models\XeroInvoice;
 use App\Models\XeroUsers;
 use Carbon\Carbon;
@@ -89,15 +90,24 @@ class XeroApiController extends Controller
 
         curl_close($curl);
         $responseArray = json_decode($response, true);
-        echo '<pre>';
-        var_dump($responseArray);
+        // echo '<pre>';
+        // var_dump($responseArray);
 
-        // session(['xero_access_token' => $responseArray['access_token']]);
+        $xeroAuth = [
+            'code' => $code,
+            'xero_expires_datetime' => strtotime('+1800 seconds'),
+            'xero_refresh_token' => $responseArray['refresh_token']
+        ];
+
+        DB::table('xero_auth')->truncate();
+        DB::table('xero_auth')->insert($xeroAuth);
+
         Session::put('xero_access_token_final', $responseArray['token_type'] . ' ' . $responseArray['access_token']);
-        // session(['xero_expires_in' => $responseArray['expires_in']]);
         Session::put('xero_code', $code);
         Session::put('xero_expires_datetime', strtotime('+1800 seconds'));
         Session::put('xero_refresh_token', $responseArray['refresh_token']);
+
+        return;
     }
 
     public function tokenRefresh()
@@ -132,25 +142,41 @@ class XeroApiController extends Controller
         echo $response;
         $responseArray = json_decode($response, true);
 
-        // session(['xero_access_token' => $responseArray['access_token']]);
+        $xeroAuth = [
+            'code' => $code,
+            'xero_expires_datetime' => strtotime('+1800 seconds'),
+            'xero_refresh_token' => $responseArray['refresh_token']
+        ];
+
+        DB::table('xero_auth')->truncate();
+        DB::table('xero_auth')->insert($xeroAuth);
+
         Session::put('xero_access_token_final', $responseArray['token_type'] . ' ' . $responseArray['access_token']);
-        // session(['xero_expires_in' => $responseArray['expires_in']]);
         Session::put('xero_code', $code);
         Session::put('xero_expires_datetime', strtotime('+1800 seconds'));
         Session::put('xero_refresh_token', $responseArray['refresh_token']);
+
         return;
     }
 
     private function isTokenExpired()
     {
-        return session('xero_expires_datetime') < strtotime('now');
+        if (is_null(session('xero_access_token_final'))) {
+            return true;
+        }
+
+        if (session('xero_expires_datetime')) {
+            return session('xero_expires_datetime') < strtotime('now');
+        }
     }
 
     private function getRefreshToken()
     {
-        if ($this->isTokenExpired() === true) {
+        if ($this->isTokenExpired() === true
+            || (XeroAuth::first()->xero_expires_datetime < strtotime('now'))) {
             $this->tokenRefresh([]);
         }
+        return;
     }
 
     public function postInvoice($params = [])
@@ -159,8 +185,6 @@ class XeroApiController extends Controller
         $curl = curl_init();
         $authorization = Session::get('xero_access_token_final');
         $tenantId = '9b095c99-9f1d-4703-ab1e-27f968adebb5';
-
-
         // $contactId = '85d15bf3-207f-4278-8449-e12dade98c66';
         // $description = 'THIS IS A TEST';
         // $amount = 20;
@@ -446,6 +470,8 @@ class XeroApiController extends Controller
                     'xero_account_name' => $value['Name']
                 ];
 
+
+                // dev todo: to remove
                 $invoiceTest[] = [
                     'xero_account_id' => $value['ContactID'],
                     'description' => 'with Sync',
@@ -453,6 +479,7 @@ class XeroApiController extends Controller
                     'reference' => 'reference',
                 ];
             }
+            // dev todo: to remove
             DB::table('xero_invoice')->truncate();
             DB::table('xero_invoice')->insert($invoiceTest);
 

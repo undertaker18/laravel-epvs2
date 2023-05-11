@@ -124,7 +124,7 @@
 
 
                         </tbody>
-                        <input type="text" id="selected_as_json"></input>
+
                     </table>
                 </div>
                 <!-- /.col -->
