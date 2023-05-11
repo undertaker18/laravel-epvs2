@@ -90,8 +90,6 @@ class XeroApiController extends Controller
 
         curl_close($curl);
         $responseArray = json_decode($response, true);
-        // echo '<pre>';
-        // var_dump($responseArray);
 
         $xeroAuth = [
             'code' => $code,
@@ -114,8 +112,8 @@ class XeroApiController extends Controller
     {
 
         $this->grantType = 'refresh_token';
-        $refresh_token = Session::get('xero_refresh_token');
-        $code = Session::get('xero_code');
+        $refresh_token = XeroAuth::first()->xero_refresh_token;
+        $code = XeroAuth::first()->code;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -371,10 +369,10 @@ class XeroApiController extends Controller
         ));
 
         $response = curl_exec($curl);
-        echo '<pre>';
-        echo $response;
-        $responseArray = json_decode($response, true);
-
+        // echo '<pre>';
+        // echo $response;
+        // $responseArray = json_decode($response, true);
+        return $response;
     }
 
     private function generateAccounts()
@@ -493,7 +491,7 @@ class XeroApiController extends Controller
             ];
         }
 
-        echo json_encode($result);
+        return json_encode($result);
     }
 
 
@@ -548,6 +546,6 @@ class XeroApiController extends Controller
             }
 
         }
-        echo json_encode($result);
+        return json_encode($result);
     }
 }
