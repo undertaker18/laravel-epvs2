@@ -294,10 +294,6 @@ class XeroApiController extends Controller
         $tenantId = '9b095c99-9f1d-4703-ab1e-27f968adebb5';
         // params
 
-        // $invoiceId = 'afa5fdc0-a1b2-4e6a-85b1-a274466a4dca';
-        // $amount = '20.00';
-        // $date = '2023-05-04';
-
         $invoiceId = $params['invoiceId'];
         $amount = $params['amount'];
         $date = $params['date'];
@@ -337,7 +333,6 @@ class XeroApiController extends Controller
 
         $response = curl_exec($curl);
         return $response;
-        // $responseArray = json_decode($response, true);
     }
 
     public function postAccounts()
@@ -369,9 +364,6 @@ class XeroApiController extends Controller
         ));
 
         $response = curl_exec($curl);
-        // echo '<pre>';
-        // echo $response;
-        // $responseArray = json_decode($response, true);
         return $response;
     }
 
@@ -423,7 +415,6 @@ class XeroApiController extends Controller
         $tenantId = '9b095c99-9f1d-4703-ab1e-27f968adebb5';
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://api.xero.com/api.xro/2.0/Contacts',
-        // CURLOPT_URL => 'https://api.xero.com/api.xro/2.0/Contacts?where=EmailAddress="'. $email. '"',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -431,7 +422,6 @@ class XeroApiController extends Controller
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
-        // CURLOPT_POSTFIELDS => $this->generateAccounts(),
         CURLOPT_HTTPHEADER => array(
         "xero-tenant-id: $tenantId",
         "Authorization: $authorization",
