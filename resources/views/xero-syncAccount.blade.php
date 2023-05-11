@@ -118,7 +118,6 @@
                         <thead>
                             <tr style="color: #1266B4;">
                                 <th>Name</th>
-                                <th>User ID</th>
                                 <th>Xero Account ID</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
@@ -128,7 +127,6 @@
                             @foreach ($xeroAccount as $account)
                             <tr>
                                 <td>{{$account->xero_account_name}}</td>
-                                <td>{{$account->users_id}}</td>
                                 <td>{{$account->xero_account_id}}</td>
                                 <td>{{ \Carbon\Carbon::parse($account->created_at)->format('M d, Y h:i A')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($account->updated_at)->format('M d, Y h:i A')}}</td>

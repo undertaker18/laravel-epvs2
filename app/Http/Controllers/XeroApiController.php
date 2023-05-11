@@ -137,7 +137,7 @@ class XeroApiController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+
         $responseArray = json_decode($response, true);
 
         $xeroAuth = [
@@ -154,7 +154,7 @@ class XeroApiController extends Controller
         Session::put('xero_expires_datetime', strtotime('+1800 seconds'));
         Session::put('xero_refresh_token', $responseArray['refresh_token']);
 
-        return;
+        return $response;
     }
 
     private function isTokenExpired()
