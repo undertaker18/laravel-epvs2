@@ -38,7 +38,7 @@ Route::get('/privacy-notice', [FormController::Class, 'privacy' ])->name('privac
 
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
 
-Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
+Route::get('/upload-form', [FormController::Class, 'upload' ])->name('form-upload');
 
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
 
@@ -96,11 +96,32 @@ Route::get('/reports', [ReportController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('reports');
 
-/* Bdo Receipts*/
+// Bdo Receipts
 
-Route::get('/bdo-receipts', [BdoReceiptController::class, 'index'])
+
+Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipts');
+
+Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
+    ->middleware(['auth', 'verified'])
+    ->name('upload');
+
+Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
+    ->middleware(['auth', 'verified'])
+    ->name('bdo-receipt.upload');
+
+    Route::post('/search-bdo-receipts', [BdoReceiptController::class, 'search'])
+    ->middleware(['auth', 'verified'])
+    ->name('search-bdo-receipts');
+  
+
+/*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/
+->middleware(['auth', 'verified'])
+->name('bdo-receipts.store'); */
+
+
+
 
 /* System log*/
 Route::get('/system-log', [SystemlogController::class, 'index'])

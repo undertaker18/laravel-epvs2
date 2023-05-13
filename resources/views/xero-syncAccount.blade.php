@@ -24,7 +24,7 @@
                             <div class="small-box"
                                 style="background-color: #FFFFFF;  border: 0px solid #D78C47; border-radius: 12px; color: black;">
                                 <div class="inner ml-3 ">
-                                    <p class="mt-2">LAST SYNC: {{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : ''}} </p>
+                                    <p class="mt-2 mb-4">LAST SYNC: {{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : ''}} </p>
                                     {{-- <h1 style="color:#D78C47; font-size: 60px;"><b>1000</b></h1> --}}
                                 </div>
                                 <div class='ml-3' style="">

@@ -23,7 +23,7 @@ class FormController extends Controller
         // for upload
     public function upload(Request $request )
     {
-        return view('upload-form');
+        return view('form-upload');
     }
 
         // for verify
