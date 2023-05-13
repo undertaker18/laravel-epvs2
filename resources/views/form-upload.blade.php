@@ -9,10 +9,9 @@
         }
        
         .drag-area {
-            margin-top: 50px;
             border: 2px dashed #080808;
-            height: 500px;
-            width: 700px;
+            height: 300px;
+            width: 300px;
             border-radius: 15px;
             
             align-items: center;
@@ -61,8 +60,8 @@
         }
     
         .drag-area img {
-            height: 100%;
-            width: 100%;
+            height: auto;
+            width: auto;
             object-fit: cover;
             border-radius: 5px;
         }
