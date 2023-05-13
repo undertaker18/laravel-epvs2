@@ -39,7 +39,7 @@ Route::get('/privacy-notice', [FormController::Class, 'privacy' ])->name('privac
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
 
 Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
-
+Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
 
 Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
