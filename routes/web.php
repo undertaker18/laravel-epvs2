@@ -111,10 +111,7 @@ Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipt.upload');
 
-    Route::post('/search-bdo-receipts', [BdoReceiptController::class, 'search'])
-    ->middleware(['auth', 'verified'])
-    ->name('search-bdo-receipts');
-  
+
 
 /*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/
 ->middleware(['auth', 'verified'])

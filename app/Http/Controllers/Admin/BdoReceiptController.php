@@ -61,13 +61,6 @@ class BdoReceiptController extends Controller
 
     }
 
-    public function search(Request $request)
-    {
-    $query = $request->input('query');
-    $bdoReceipts = BdoReceipt::where('description', 'LIKE', "%$query%")
-        ->orderBy('posting_datetime', 'desc')
-        ->paginate(10);
-    return view('bdo-receipts-table', ['bdoReceipts' => $bdoReceipts])->render();
-    }
+    
 
 }
