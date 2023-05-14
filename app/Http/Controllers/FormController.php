@@ -34,10 +34,13 @@ class FormController extends Controller
         if($request->hasFile('receipt')){
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
-            $image->move(public_path('ASSETS/receipts/temp/'), $filename);
+            $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
 
+            // set session
             Session::put('receipt_type', $request->input('receipt_type'));
             Session::put('receipt', $filename);
+
+            // todo: customize route
             return redirect()->route('verify-form');
         }
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
@@ -46,6 +49,7 @@ class FormController extends Controller
         // for verify
     public function verify(Request $request )
     {
+        // get from session
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
 
@@ -53,12 +57,17 @@ class FormController extends Controller
             return redirect()->route('upload-form');
         }
 
+        // Veryfi API Credentials
+        // Change when Veryfi expires
         $client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
         $client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
         $username = 'jordanearlpascua1';
         $api_key = '4849078385c87162e2e014c19b99383a';
+        // end
+
         $file = public_path() . '/ASSETS/receipts/temp/' . $receipt;
 
+        // Veryfi API
         $veryfi_client = new Client($client_id, $client_secret, $username, $api_key);
         $categories = array('Advertising & Marketing', 'Automotive');
         $return_associative = true;
@@ -67,6 +76,8 @@ class FormController extends Controller
 
         $json_response = json_decode($response, $return_associative);
         $finalresult = '';
+
+        // Depends on $type = receipt type
         switch ($type) {
             case 'gcash':
                 $finalResult = $this->getDataGcash($json_response);
@@ -83,6 +94,27 @@ class FormController extends Controller
             case 'bdo_cash_transaction_slip':
                 $finalResult = $this->getDataBdoCashTransactionSlip($json_response);
                 break;
+
+            /**
+             * New receipt Type
+             *  case 'new_receipt type':
+             *      $finalResult = $this->someCustomeMethod($json_response);    --> use $finalResultVariable
+             *
+             *
+             *      // create new method within this File
+             *      Sample method: getDataBdoCashTransactionSlip()
+             *
+             *
+             *      // format
+             *      $finalResult = [
+             *          'dateTime' => Y-m-d H:i:s
+             *          'referenceNumber' => 'data'
+             *          'amount' => float --> currency 'PHP' not included
+             *      ];
+             *
+             *  break;
+             */
+
             default:
                 echo 'Invalid Update';
         }
@@ -126,14 +158,14 @@ class FormController extends Controller
 
     private function getDataGcashInstapay($json_response) {
         $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+        $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
         $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
         return $gcashFinalResult;
     }
 
     private function getDataGcash($json_response) {
         $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+        $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
         $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
         return $gcashFinalResult;
     }
