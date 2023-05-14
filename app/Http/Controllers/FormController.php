@@ -49,10 +49,14 @@ class FormController extends Controller
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
 
-        $client_id = 'vrfzC6v7NcwuER96kIkXyxlwiGsb5UPVpmBOSy8';
-        $client_secret = 'YryRAGBSexUNPbsFSj0JzvmHhr3PxdI9vgTf3jKsGwb3w0DhyfLaGUpwwLxAE6lJdkKEDe1cSy6PB8VUr2m4VeGoVmi7xi506XBIfo5NmU39EdpgLO1ktBrgPJJvikN2';
-        $username = 'pgw.2023.01';
-        $api_key = '25b85e2df9baeaa13fbbee9ff283c1e8';
+        if (is_null($receipt) || is_null($type)) {
+            return redirect()->route('upload-form');
+        }
+
+        $client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
+        $client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
+        $username = 'jordanearlpascua1';
+        $api_key = '4849078385c87162e2e014c19b99383a';
         $file = public_path() . '/ASSETS/receipts/temp/' . $receipt;
 
         $veryfi_client = new Client($client_id, $client_secret, $username, $api_key);
