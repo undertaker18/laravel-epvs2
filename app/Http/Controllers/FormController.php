@@ -26,24 +26,7 @@ class FormController extends Controller
         // for upload
     public function upload(Request $request )
     {
-        return view('upload-form-2');
-    }
-
-    public function postUpload(Request $request) {
-
-        if($request->hasFile('receipt')){
-            $image = $request->file('receipt');
-            $filename = $image->getClientOriginalName();
-            $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
-
-            // set session
-            Session::put('receipt_type', $request->input('receipt_type'));
-            Session::put('receipt', $filename);
-
-            // todo: customize route
-            return redirect()->route('verify-form');
-        }
-        return redirect()->back()->with('error', 'Please Upload your Receipt.');
+        return view('form-upload');
     }
 
         // for verify
