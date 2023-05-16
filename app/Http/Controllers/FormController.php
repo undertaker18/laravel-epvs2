@@ -10,27 +10,46 @@ use veryfi\Client;
 class FormController extends Controller
 {
         // for privacy
-    public function privacy(Request $request )
+    public function showPrivacy(Request $request )
     {
-        return view('privacy-notice-form');
+        return view('form.privacy-form');
     }
+
+//=========================================================================================
+
         // for profile
-    public function profile(Request $request )
+    public function showProfile(Request $request )
     {
         $firstname=$request->input('firstname');
         $lastname=$request->input('lastname');
 
-        return view('profile-form', compact('firstname','lastname'));
+        return view('form.profile-form', compact('firstname','lastname'));
     }
+
+    public function postProfile(Request $request )
+    {
+        return view('form.profile-form');
+    }
+
+//=========================================================================================
+
 
         // for upload
-    public function upload(Request $request )
+    public function showUpload(Request $request )
     {
-        return view('form-upload');
+        return view('form.upload-form');
     }
 
+    public function postUpload(Request $request )
+    {
+        return view('form.upload-form');
+    }
+
+
+//=========================================================================================
+
         // for verify
-    public function verify(Request $request )
+    public function showVerify(Request $request )
     {
         // get from session
         $type = Session::get('receipt_type');
@@ -110,19 +129,7 @@ class FormController extends Controller
             'ocr_result' => $finalResult,
             'receipt' => "/ASSETS/receipts/temp/". $receipt
         ];
-        return view('verify-form', compact('details'));
-    }
-
-        // for summary
-    public function summary(Request $request )
-    {
-        return view('summary-form');
-    }
-
-        // for submit
-    public function submit(Request $request )
-    {
-        return view('submit-form');
+        return view('form.verify-form', compact('details'));
     }
 
     private function getValueBetweenstrings($paragraph ,$string1, $string2) {
@@ -174,5 +181,33 @@ class FormController extends Controller
         return $gcashFinalResult;
     }
 
+
+//=========================================================================================
+
+        // for summary
+    public function showSummary(Request $request )
+    {
+        return view('form.summary-form');
+    }
+
+    public function postSummary(Request $request )
+    {
+        return view('form.summary-form');
+    }
+
+
+//=========================================================================================
+
+
+        // for submit
+    public function showSubmit(Request $request )
+    {
+        return view('form.submit-form');
+    }
+
+
+//=========================================================================================
+
+   
 
 }

@@ -26,10 +26,11 @@
         <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+       <!-- DataTables -->
+        <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
         <!-- Chart -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -41,7 +42,7 @@
         }
       </style>
 
-    <body class="font-sans antialiased">
+    <body class="hold-transition layout-fixed">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.admin-navigation')
             @include('layouts.admin-aside')
@@ -139,6 +140,23 @@
 //         }
 
 //             });
+            <script>
+            $(function () {
+                $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                });
+            });
+            </script>
         </script>
     </body>
 </html>

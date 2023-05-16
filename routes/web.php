@@ -22,30 +22,38 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+ /* POST - ADD or CREATE
+    GET - READ
+    PUT - UPDATE
+    DELETE - DELETE
+ */
 
 /* PUBLIC USER*/
 
 Route::get('/', function () {
-    return view('sync-form');
+    return view('welcome');
 });
 
-Route::get('/privacy-notice', function () {
-    return view('privacy-notice-form');
-})->name('privacy-notice');
+/* Privacy */
+Route::get('/privacy-form', [FormController::Class, 'showPrivacy' ])->name('privacy-form');
 
-Route::get('/privacy-notice', [FormController::Class, 'privacy' ])->name('privacy-notice');
+/* Profile */
+Route::get('/profile-form', [FormController::Class, 'showProfile' ])->name('profile-form');
+Route::post('/profile-form', [FormController::Class, 'postProfile' ])->name('post-profile-form');
 
-Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
-
-Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
+/* Upload */
+Route::get('/upload-form', [FormController::Class, 'showUpload' ])->name('upload-form');
 Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
 
-Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
+/* Verify */
+Route::get('/verify-form', [FormController::Class, 'showVerify' ])->name('verify-form');
 
-Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
+/* Summary */
+Route::get('/summary-form', [FormController::Class, 'showSummary' ])->name('summary-form');
+Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
 
-Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
+/* Submit */
+Route::get('/submit-form', [FormController::Class, 'showSubmit' ])->name('submit-form');
 
 
 

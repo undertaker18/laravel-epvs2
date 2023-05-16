@@ -15,19 +15,26 @@
         <link href="{{ asset('assets/privacy-notice.css') }}" rel="stylesheet">
         <link href="../CSS/landingpage.css" rel="stylesheet">
     </head>
-    <body>
-        <!-- Your page content here -->
-        <section>
-            <main class="container ">
-                <div class="p-1 p-md-1 mb-4 image">
-                    <img src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">
-                
-                    <main>
-                        {{ $slot }}
-                    </main>
-                </div>
-            </main>
-        </section>
+    <body class="">
+        <div class="wrapper ">
+            <!-- Your page content here -->
+            <!-- Content Wrapper -->
+            <div class="content-wrapper bg-dark">
+                <section class="content">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">
+                        @include('layouts.form-navigation')
+                        <main>
+                            {{ $slot }}
+                        </main>
+                    </div>
+                </section>
+            </div>
+        </div>
+   
+    
+        
+
         
 
         <!--  cdn for bootstrap  -->
@@ -49,7 +56,7 @@
         <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-        <script src="{{ asset('dist/js/demo.js') }}"></script>
+        
 
     </body>
 </html>

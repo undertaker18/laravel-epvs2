@@ -229,7 +229,7 @@
               <div class="col-md-6 px-0">
               </div>
             </div>
-            <a href="{{ url('/privacy-notice') }}">
+            <a href="{{ url('/privacy-form') }}">
               <button id="proceed-btn" class="right-button btn-green{{ old('my-checkbox') ? ' green' : '' }}" disabled>Proceed <i class="fas fa-arrow-right"></i></button>
             </a>
 
