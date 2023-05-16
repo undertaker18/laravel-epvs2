@@ -23,6 +23,10 @@ class FormController extends Controller
         return view('profile-form', compact('firstname','lastname'));
     }
 
+
+
+
+
         // for upload
     public function upload(Request $request )
     {
@@ -130,6 +134,15 @@ class FormController extends Controller
         return view('verify-form', compact('details'));
     }
 
+
+
+
+
+
+
+
+
+
         // for summary
     public function summary(Request $request )
     {
@@ -141,6 +154,18 @@ class FormController extends Controller
     {
         return view('submit-form');
     }
+
+
+
+
+
+
+
+
+
+
+
+    
 
     private function getValueBetweenstrings($paragraph ,$string1, $string2) {
         $stringOnePosition = strpos($paragraph, $string1, 0);
