@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 /* PUBLIC USER*/
 
 Route::get('/', function () {
-    return view('sync-form');
+    return view('welcome');
 });
 
 Route::get('/privacy-notice', function () {
@@ -40,7 +40,6 @@ Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-
 
 Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
 Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
-
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
 
 Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
@@ -97,29 +96,11 @@ Route::get('/reports', [ReportController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('reports');
 
-// Bdo Receipts
+/* Bdo Receipts*/
 
-
-Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
+Route::get('/bdo-receipts', [BdoReceiptController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipts');
-
-Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
-    ->middleware(['auth', 'verified'])
-    ->name('upload');
-
-Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
-    ->middleware(['auth', 'verified'])
-    ->name('bdo-receipt.upload');
-
-
-
-/*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/
-->middleware(['auth', 'verified'])
-->name('bdo-receipts.store'); */
-
-
-
 
 /* System log*/
 Route::get('/system-log', [SystemlogController::class, 'index'])
