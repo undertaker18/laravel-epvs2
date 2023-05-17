@@ -188,7 +188,6 @@
                                 <thead>
                                     <tr style="color: #1266B4;">
                                         <th>Posting Date</th>
-                                        <th>Posting Time</th>
                                         <th>Branch</th>
                                         <th>Description</th>
                                         <th>Credit</th>
@@ -198,7 +197,6 @@
                                     @foreach($bdoReceipts as $bdoReceipt)
                                         <tr>
                                             <td>{{ date('m/d/Y', strtotime($bdoReceipt->posting_datetime)) }}</td>
-                                            <td>{{ date('h:i:sA', strtotime($bdoReceipt->posting_datetime)) }}</td>
                                             <td>{{ $bdoReceipt->branch }}</td>
                                             <td>{{ $bdoReceipt->description }}</td>
                                             <td>{{ $bdoReceipt->credit }}</td>
