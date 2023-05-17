@@ -30,19 +30,18 @@ Route::get('/', function () {
     return view('sync-form');
 });
 
-Route::get('/privacy-notice', function () {
-    return view('privacy-notice-form');
-})->name('privacy-notice');
-
-Route::get('/privacy-notice', [FormController::Class, 'privacy' ])->name('privacy-notice');
+Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
 
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
+Route::post('/profile-form', [FormController::Class, 'postProfile' ])->name('post-profile-form');
 
 Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
 Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
+
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
 
 Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
+Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
 
 Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
 

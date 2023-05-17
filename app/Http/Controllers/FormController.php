@@ -12,22 +12,33 @@ class FormController extends Controller
         // for privacy
     public function privacy(Request $request )
     {
-        return view('privacy-notice-form');
+        return view('form.privacy-notice-form');
     }
+    //=================================================================================
         // for profile
     public function profile(Request $request )
     {
         $firstname=$request->input('firstname');
         $lastname=$request->input('lastname');
 
-        return view('profile-form', compact('firstname','lastname'));
+        return view('form.profile-form', compact('firstname','lastname'));
     }
 
-        // for upload
+    public function postProfile(Request $request )
+    {
+        
+
+        return view('form.profile-form');
+    }
+    
+    //========================================================================================
+        
+    // for upload
     public function upload(Request $request )
     {
-        return view('upload-form-2');
+        return view('form.upload-form-2');
     }
+
 
     public function postUpload(Request $request) {
 
@@ -41,11 +52,13 @@ class FormController extends Controller
             Session::put('receipt', $filename);
 
             // todo: customize route
-            return redirect()->route('verify-form');
+            return redirect()->route('form.verify-form');
         }
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
+
+    // =========================================================================================
         // for verify
     public function verify(Request $request )
     {
@@ -65,7 +78,7 @@ class FormController extends Controller
         $api_key = '4849078385c87162e2e014c19b99383a';
         // end
 
-        $file = public_path() . '/ASSETS/receipts/temp/' . $receipt;
+        $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
         // Veryfi API
         $veryfi_client = new Client($client_id, $client_secret, $username, $api_key);
@@ -119,77 +132,88 @@ class FormController extends Controller
                 echo 'Invalid Update';
         }
 
-        $dateTime = is_null($finalResult['dateTime']) ? NULL : Carbon::createFromFormat('Y-m-d H:i:s', $finalResult['dateTime']);
-        $finalResult['date'] = is_null($dateTime) ? NULL :$dateTime->format('Y-m-d');
-        $finalResult['time'] = is_null($dateTime) ? NULL :$dateTime->format('H:i:s');
+            $dateTime = is_null($finalResult['dateTime']) ? NULL : Carbon::createFromFormat('Y-m-d H:i:s', $finalResult['dateTime']);
+            $finalResult['date'] = is_null($dateTime) ? NULL :$dateTime->format('Y-m-d');
+            $finalResult['time'] = is_null($dateTime) ? NULL :$dateTime->format('H:i:s');
 
-        $details = [
-            'ocr_result' => $finalResult,
-            'receipt' => "/ASSETS/receipts/temp/". $receipt
-        ];
-        return view('verify-form', compact('details'));
-    }
+            $details = [
+                'ocr_result' => $finalResult,
+                'receipt' => "/ASSETS/receipts/temp/". $receipt
+            ];
+            return view('verify-form', compact('details'));
+        }
 
-        // for summary
-    public function summary(Request $request )
-    {
-        return view('summary-form');
-    }
 
-        // for submit
-    public function submit(Request $request )
-    {
-        return view('submit-form');
-    }
+        private function getValueBetweenstrings($paragraph ,$string1, $string2) {
+            $stringOnePosition = strpos($paragraph, $string1, 0);
+            $stringTwoPosition =  strpos($paragraph, $string2, $stringOnePosition);
 
-    private function getValueBetweenstrings($paragraph ,$string1, $string2) {
-        $stringOnePosition = strpos($paragraph, $string1, 0);
-        $stringTwoPosition =  strpos($paragraph, $string2, $stringOnePosition);
+            return rtrim(ltrim(substr($paragraph, $stringOnePosition + (strlen($string1)), $stringTwoPosition - $stringOnePosition - (strlen($string1)))));
+        }
 
-        return rtrim(ltrim(substr($paragraph, $stringOnePosition + (strlen($string1)), $stringTwoPosition - $stringOnePosition - (strlen($string1)))));
-    }
+        private function getDataBdoMobileBanking($json_response) {
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');
+            $gcashFinalResult['amount'] = floatval($json_response['total']);
+            return $gcashFinalResult;
+        }
 
-    private function getDataBdoMobileBanking($json_response) {
-        $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');
-        $gcashFinalResult['amount'] = floatval($json_response['total']);
-        return $gcashFinalResult;
-    }
+        private function getDataGcashInstapay($json_response) {
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
+            $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
+            return $gcashFinalResult;
+        }
 
-    private function getDataGcashInstapay($json_response) {
-        $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
-        $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
-        return $gcashFinalResult;
-    }
+        private function getDataGcash($json_response) {
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
+            $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
+            return $gcashFinalResult;
+        }
 
-    private function getDataGcash($json_response) {
-        $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
-        $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
-        return $gcashFinalResult;
-    }
+        private function getDataInstapay($json_response) {
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
+            $gcashFinalResult['amount'] = floatval($json_response['subtotal']);
+            return $gcashFinalResult;
+        }
 
-    private function getDataInstapay($json_response) {
-        $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
-        $gcashFinalResult['amount'] = floatval($json_response['subtotal']);
-        return $gcashFinalResult;
-    }
+        private function getDataBdoCashTransactionSlip($json_response) {
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
 
-    private function getDataBdoCashTransactionSlip($json_response) {
-        $gcashFinalResult['dateTime'] = $json_response['date'];
-        $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+            $string1 = 'Cash In:';
+            $string2 = '.';
+            $stringOnePosition = strpos($json_response['ocr_text'], $string1, 0);
+            $stringTwoPosition =  strpos($json_response['ocr_text'], $string2, $stringOnePosition);
 
-        $string1 = 'Cash In:';
-        $string2 = '.';
-        $stringOnePosition = strpos($json_response['ocr_text'], $string1, 0);
-        $stringTwoPosition =  strpos($json_response['ocr_text'], $string2, $stringOnePosition);
+            $amount = rtrim(ltrim(substr($json_response['ocr_text'], $stringOnePosition + (strlen($string1)), $stringTwoPosition + 3 - $stringOnePosition - (strlen($string1)))));
+            $gcashFinalResult['amount'] = (float)number_format(floatval(str_replace(",","",($amount))), 2, '.', '');
+            return $gcashFinalResult;
+        }
 
-        $amount = rtrim(ltrim(substr($json_response['ocr_text'], $stringOnePosition + (strlen($string1)), $stringTwoPosition + 3 - $stringOnePosition - (strlen($string1)))));
-        $gcashFinalResult['amount'] = (float)number_format(floatval(str_replace(",","",($amount))), 2, '.', '');
-        return $gcashFinalResult;
-    }
+        //==============================================================================================================
+
+        
+            // for summary
+        public function summary(Request $request )
+        {
+            return view('summary-form');
+        }
+
+        public function postSummary(Request $request )
+        {
+            return view('summary-form');
+        }
+
+
+        //=====================================================================================================
+            // for submit
+        public function submit(Request $request )
+        {
+            return view('submit-form');
+        }
 
 
 }
