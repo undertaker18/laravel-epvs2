@@ -16,7 +16,7 @@ a:hover {
 </style>
 <ul >
     <li>
-        <a href="{{ url('/privacy-form') }}" class="{{ Request::is('privacy-form') ? 'active' : '' }}">
+        <a href="{{ url('/privacy-notice') }}" class="{{ Request::is('privacy-notice') ? 'active' : '' }}">
             <i class="fas fa-user-shield icon" ></i><br>PRIVACY
           </a>        
         

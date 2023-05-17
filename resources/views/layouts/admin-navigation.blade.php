@@ -22,16 +22,14 @@
                 </div>
               <div class="user-panel d-flex">
                 <div class="image">
-                  <img src="{{ asset('assets/dist/img/user2-160x160.png') }}" alt="Example Image" style="border-radius: 50px;">
+                  <img src="{{ asset('dist/img/user2-160x160.jpg') }}" alt="Example Image" style="border-radius: 50px;">
                 </div>
               </div>
             </a>
 
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <a  class="dropdown-item  ">
-              
                 <x-dropdown-link :href="route('profile.edit')">
-                  <i class="fas fa-user " ></i>
                     {{ __('Profile') }}
                 </x-dropdown-link>
               </a>
@@ -41,7 +39,6 @@
                 <x-dropdown-link :href="route('logout')"
                         onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                                    <i class="fas fa-user"></i>
                     {{ __('Log Out') }}
                 </x-dropdown-link>
               </form>
