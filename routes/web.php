@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 /* PUBLIC USER*/
 
 Route::get('/', function () {
-    return view('sync-form');
+    return view('welcome');
 });
 
 Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');

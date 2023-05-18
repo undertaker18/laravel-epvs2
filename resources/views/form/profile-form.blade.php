@@ -1,333 +1,691 @@
 <x-form-layout>
     <style>
-        body {
-            background: #EAF1F8;
-            /* Set the background color to light gray */
+        .btn {
+           width: 200px;
+           margin-top: 15px;
+           margin-bottom: 15px;
         }
-    
-        .image {
-            text-align: center;
-            border-radius: 30px;
-            height: 1010px;   
-            background-color: #ffffff;
-    
-    
+        .btn-primary2 {
+            background-color: green !important;
+            color: white !important;
+            border-radius: 5px !important;
+            padding: 9px;
         }
-    
+       
+        .btn-primary {
+            background-color: #1266b4 !important;
+        }
+
+
+        
+        .tab-content {
+            border: none !important;
+        }
+
+        .card {
+            border: none !important;
+            border-radius: 50px !important;
+            box-shadow: none !important;
+        }
+        .card-2 {
+            border-radius: 12px !important;
+            box-shadow: none !important;
+        }
+
+        .form-group {
+            text-align: left !important;
+        }
+
+        .form-label {
+
+            padding-top: 5px;
+        }
+
+        /* .card-title {
+
+        font-size: 1.5rem; 
+        text-align: left !important;
+        }
+
+        .card-tools {
+            text-align: right !important;
+        } */
+
         .container {
             margin-top: 30px;
             justify-content: center;
-          
+
         }
-    
-        ul {
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-    
-    
-        }
-    
-        li {
-            align-items: center;
-            font-size: 25px;
-            margin: 0 10px;
-            padding: 5px 10px;
-        }
-    
-        .icon {
-            font-size: 60px;
-            /* Set the font size to 50 pixels */
-        }
-    
+
+
         .main-content {
-            display: flex;
             align-items: center;
-    
+            margin-left: 19%;
+            margin-right: 19%;
+            color: #000000 !important;
+
         }
-    
+
         .privacy-content {
-            padding: 20px;
-            font-family: Georgia;
-            font-size: 25px;
+            padding: 5px;
+            font-weight: normal;
+            font-size: 24px;
             text-align: left;
-            margin-bottom: 250px;
-            margin-left: 160px;
-            margin-right: 160px;
-            color: #000000
-    
-    
+           
+            color: #000000;
+
         }
-    
-        .asteris {
-            color: red;
-        }
-    
-        /*check box */
-        .checkbox {
-            size: 20px;
-    
-        }
-    
-        input[type=checkbox] {
-            height: 20px;
-            width: 20px;
-    
-        }
-    
-        /*button */
-    
-        .buttons {
-            justify-content: center;
-            align-items: center;
-            margin-left: 130px;
-            margin-right: 150px;
-            
-        }
-    
-        .left-button {
-            float: left;
+
+        .btn {
             width: 200px;
-            height: 50px;
-            padding: 8px;
-            margin-left: 8px;
-            background-color: #1266B4;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
-    
-        .right-button {
-            float: right;
-            width: 200px;
-            height: 50px;
-            padding: 8px;
-            margin-left: 8px;
-            background-color: #879BAE;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
+
+        .btn-primary2 {
+            background-color: green !important;
+            color: white !important;
+            border-radius: 5px !important;
+            padding: 9px;
         }
-        .right-button-student {
-            float: right;
-            width: 200px;
-            height: 50px;
-            padding: 8px;
-            margin-left: 8px;
-            background-color: #1266b4;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
-            margin-right: 150px;
-            margin-top: 20px;
+
+        .align-left {
+            text-align: left;
+            padding-top: 15px;
+            margin: 0;
         }
-        .form-content {
+
+        .align-right {
+            text-align: right;
+            margin: 0;
+        }
+        .bg-form {
             background-color: #EAF1F8;
-            margin-left: 150px;
-            margin-right: 150px;
-            margin-top: 90px;
-            border-radius: 15px;  
-            position: relative; /* set the position to relative */
-            z-index: 1000; /* set the z-index to a high value */
         }
-      
-        .form-control {
-           border: none;   
-        }
-        .col {
-            text-align: left;
-            margin-left: 25px;
-            margin-right: 25px;
-            margin-bottom: 5px;
-            
-    
-        }
-        .cols {
-            text-align: left;
-            margin-left: 25px;
-            margin-right: 25px;
-            margin-bottom: 30px;
-            
-    
-        }
-        h2{
-           padding-top: 20px;
-    
-        }
-    
-        /* Create two equal columns that floats next to each other */
-        .column {
-        float: left;
-        width: 100%;
-        padding: 10px;
-        height: 300px; /* Should be removed. Only for demonstration */
-        }
-        
-        /* Clear floats after the columns */
-        .row:after {
-        content: "";
-        display: table;
-        clear: both;
-        } 
-                .green-button {
-            background-color: green;
-        }
-    </style> 
 
-    <form action="{{ route('profile-form') }}" method="get">
+    </style>
+    <div class="card-body">
+        <div class="tab-content">
 
-        <div class="row main-content ">
-            <div class="column " >
-                <div class="button-student">
-                    <button class="right-button-student"><i class="fas fa-plus"></i> ADD STUDENT </button>
+            <div class="active tab-pane" id="profile">
+                <div class=" main-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title align-left">Student Information</h3>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card-tools align-right">
+                                        <form action="{{ route('profile-form') }}" method="get">
+                                            @if ($counts != null)
+                                            <input hidden name="counts" type="text" value="2">
+                                            @else
+                                            <input hidden name="counts" type="text" value="1">
+                                            @endif
+
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-plus"></i> Add Student
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if ($countForm == 1)
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 01</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" hidden>Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @elseif ($countForm == 2)
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 01</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" >Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 02</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" >Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @elseif ($countForm == 3)
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 01</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" >Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <br>
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 02</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" >Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <br>
+
+                    <form action="{{ route('profile-form') }}" method="get" id="form-01">
+                        <div class="card-2 m-3 bg-form ">
+                            <h2 class="card-title pt-3">Student 03</h2>
+                            <div id="formsContainer" class="card-body  p-3 ">
+                                <div class="row ">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputFullname" class="form-label">Fullname:</label>
+                                            <input id="inputFullname" type="text" class="form-control"
+                                                placeholder="Fullname" aria-label="Fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="form-label">LV Email:</label>
+                                            <input id="inputEmail" type="email" class="form-control" placeholder="Email"
+                                                aria-label="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                Status:</label>
+                                            <select id="inputScholarshipstatus" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>Partial Scholar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputDepartment" class="form-label">Department:</label>
+                                            <select id="inputDepartment" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>College</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputGradeCourse" class="form-label">Grade/Course:</label>
+                                            <select id="inputGradeCourse" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>BSIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputLevelYear" class="form-label">Level/Year:</label>
+                                            <select id="inputLevelYear" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputScholarshipType" class="form-label">Student type:</label>
+                                            <select id="inputScholarshipType" class="form-control" required>
+                                                <option selected>Choose...</option>
+                                                <option>New Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label for="inputAmount" class="form-label" >Amount of Payment:</label>
+                                            <input type="text" class="form-control" placeholder="Input Amount"
+                                                aria-label="inputAmount"  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @endif
+
+                    <div class="col-md-12">
+                        <div class="row ">
+                            <div class="col-md-6  " style="text-align:left;">
+                                <button class="btn btn-lg btn-primary pl-5 pr-5" onclick="window.location.href='{{ url('/profile-form') }}'" data-toggle="tab" >
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                            </div>
+                            <div class="col-md-6"  style="text-align:right;">
+                                <button id="next-button" class="btn btn-lg btn-secondary pl-5 pr-5" onclick="window.location.href='{{ url('/upload-form') }}'" data-toggle="tab" disabled >
+                                    Next <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <script>
+                                    function toggleButton() {
+                                        var checkBox = document.getElementById("my-checkbox");
+                                        var button = document.getElementById("next-button");
+                                        if (checkBox.checked) {
+                                            button.disabled = false;
+                                            button.classList.remove("btn-secondary");
+                                            button.classList.add("btn-primary2");
+                                        } else {
+                                            button.disabled = true;
+                                            button.classList.remove("btn-primary2");
+                                            button.classList.add("btn-secondary");
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!--Student 01 -->
-                <div class="form-content">
-                    <h2>Student 01</h2>
-                    <div class="row">
-                        <div class="col">
-                            <label for="inputLastname" class="form-label">Lastname:<span class="asteris">*</span></label>
-                            <input id="inputLastname" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname" required >
-                        </div>
-                        <div class="col">
-                            <label for="inputFirstname" class="form-label">Firstname:<span class="asteris">*</span></label>
-                            <input id="inputFirstname"type="text" class="form-control" placeholder="Firstname" aria-label=" Firstname" required>
-                        </div>
-                        <div class="col">
-                            <label for="inputMiddlename" class="form-label">Middlename:<span class="asteris">*</span></label>
-                            <input id="inputMiddlename" type="text" class="form-control" placeholder="Middlename" aria-label="Middlename" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="inputEmail" class="form-label">Email:<span class="asteris">*</span></label>
-                            <input  id="inputEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" required>
-                        </div>
-                        <div class="col">
-                            <label for="inputScholarshipType" class="form-label">Student type:<span class="asteris">*</span></label>
-                            <select id="inputScholarshipType" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
-                                <option selected>Choose...</option>
-                                <option >New Student</option>
-                                <option >Old Student</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="inputDepartment" class="form-label">Department:<span class="asteris">*</span></label>
-                            <select id="inputDepartment" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
-                                <option selected>Choose...</option>
-                                <option>Elementary</option>
-                                <option>High School</option>
-                                <option>College</option>
-                              </select>
-                              
-                        </div>
-                        <div class="col">
-                            <label for="inputGradeCourse" class="form-label">Grade/Course:<span class="asteris">*</span></label>
-                            <select id="inputGradeCourse" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;" required>
-                                <option selected>Choose...</option>
-                                <option>BSIS</option>
-                                <option>BAB</option>
-                                <option>BSAIS</option>
-                                <option>BSSW</option>
-                                <option>BSA</option>
-                                <option>ACT</option>
-                              </select>
-                        </div>
-                        <div class="col">
-                            <label for="inputLevelYear" class="form-label">Level/Year:<span class="asteris">*</span></label>
-                            <select id="inputLevelYear" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;" required>
-                                <option selected>Choose...</option>
-                                <option>1 Year</option>
-                                <option>2 Year</option>
-                                <option>3 Year</option>
-                                <option>4 Year</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="cols" style="width: 50%;">
-                            <label for="inputScholarshipstatus*" class="form-label">Scholarship Status:<span class="asteris">*</span></label>
-                            <select id="inputScholarshipstatus" class="form-select" style="border: none; outline: none; box-shadow: none; background-color: white;"required>
-                                <option selected>Choose...</option>
-                                <option >Partial Scholar</option>
-                                <option >Full Scholar</option>
-                              </select>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </div>
-    </form>
-        <div class="column " style="padding-top: 230px;">
-                    
-            <div class="buttons">
-                <a href="{{ url('/privacy-notice') }} ">
-                <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
-                </a>
-            <a href="{{ url('/upload-form') }}">
-                <button id="next-button" class="right-button" disabled>NEXT <i class="fas fa-arrow-right"></i></button>
-                </a>
+            </div>
 
-            </div> 
         </div>
+    </div>
 
-    <script>
-        // button
-        const nextButton = document.getElementById('next-button');
-    
-        // input
-        const inputLastname = document.getElementById('inputLastname');
-        const inputFirstname = document.getElementById('inputFirstname');
-        const inputMiddlename = document.getElementById('inputMiddlename');
-        const inputEmail = document.getElementById('inputEmail');
-    
-        // select
-        const inputScholarshipType = document.getElementById('inputScholarshipType');
-        const inputDepartment = document.getElementById('inputDepartment');
-        const inputGradeCourse = document.getElementById('inputGradeCourse');
-        const inputLevelYear = document.getElementById('inputLevelYear');
-        const inputScholarshipstatus = document.getElementById('inputScholarshipstatus');
-        
-        // Add event listeners to input and select fields
-        inputLastname.addEventListener('input', checkInputs);
-        inputFirstname.addEventListener('input', checkInputs);
-        inputMiddlename.addEventListener('input', checkInputs);
-        inputEmail.addEventListener('input', checkInputs);
-    
-    
-        inputScholarshipType.addEventListener('change', checkInputs);
-        inputDepartment.addEventListener('change', checkInputs);
-        inputGradeCourse.addEventListener('change', checkInputs);
-        inputLevelYear.addEventListener('change', checkInputs);
-        inputScholarshipstatus.addEventListener('change', checkInputs);
-    
-        
-        // Function to check if all input and select fields are not empty
-        function checkInputs() {
-            if (inputLastname.value.trim() !== '' &&
-                inputFirstname.value.trim() !== '' &&
-                inputMiddlename.value.trim() !== '' &&
-                inputEmail.value.trim() !== '' &&
-                inputScholarshipType.value !== 'Choose...' &&
-                inputDepartment.value !== 'Choose...' &&
-                inputGradeCourse.value !== 'Choose...' &&
-                inputLevelYear.value !== 'Choose...' &&
-                inputScholarshipstatus.value !== 'Choose...') {
-                
-                nextButton.disabled = false;
-                nextButton.classList.add('green-button');
-            } else {
-                nextButton.disabled = true;
-                nextButton.classList.remove('green-button');
-            }
-        }
-    </script>
+
 </x-form-layout>

@@ -19,9 +19,21 @@ class FormController extends Controller
     public function profile(Request $request )
     {
         $firstname=$request->input('firstname');
-        $lastname=$request->input('lastname');
+        $lastname=$request->input('lastname'); 
 
-        return view('form.profile-form', compact('firstname','lastname'));
+        $counts = $request->input('counts');
+        $countForm = $request->input('counts') + 1 ; // Initial value for $count
+        $countAddForm =  $countForm + 1;
+
+        return view('form.profile-form')
+        ->with('firstname', $firstname)
+        ->with('lastname', $lastname)
+        ->with('countForm', $countForm)
+        ->with('counts', $counts)
+        ->with('countAddForm', $countAddForm);
+     
+    
+
     }
 
     public function postProfile(Request $request )
@@ -52,7 +64,7 @@ class FormController extends Controller
             Session::put('receipt', $filename);
 
             // todo: customize route
-            return redirect()->route('form.verify-form');
+            return redirect()->route('verify-form');
         }
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
@@ -77,6 +89,11 @@ class FormController extends Controller
         $username = 'jordanearlpascua1';
         $api_key = '4849078385c87162e2e014c19b99383a';
         // end
+
+        //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
+        //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
+        //$username = 'jordanearlimperialpascua20';
+        //$api_key = '4f708f480170a044368643ef0929850e';
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
@@ -140,7 +157,7 @@ class FormController extends Controller
                 'ocr_result' => $finalResult,
                 'receipt' => "/ASSETS/receipts/temp/". $receipt
             ];
-            return view('verify-form', compact('details'));
+            return view('form.verify-form', compact('details'));
         }
 
 
@@ -199,12 +216,12 @@ class FormController extends Controller
             // for summary
         public function summary(Request $request )
         {
-            return view('summary-form');
+            return view('form.summary-form');
         }
 
         public function postSummary(Request $request )
         {
-            return view('summary-form');
+            return view('form.summary-form');
         }
 
 
@@ -212,7 +229,7 @@ class FormController extends Controller
             // for submit
         public function submit(Request $request )
         {
-            return view('submit-form');
+            return view('form.submit-form');
         }
 
 
