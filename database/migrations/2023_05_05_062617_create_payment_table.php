@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->string('users_id');
-            $table->string('xero_account_id');
-            $table->string('reference_number');
-            $table->string('amount_of_payment');
+
+            $table->string('payment_key');
+            
+            $table->string('imageName');
+            $table->string('receipt_type');
             $table->string('payment_for');
-            $table->datetime('submitted_date');
-            $table->string('receipt_status');
-            $table->string('receipt_update_status');
+            $table->string('reference');
+            $table->string('amount');
+            $table->date('date');
+            $table->time('time');
+           
             $table->timestamps();
         });
     }

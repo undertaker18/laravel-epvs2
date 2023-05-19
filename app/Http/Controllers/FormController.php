@@ -6,42 +6,97 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use veryfi\Client;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\Privacy;
+use App\Models\Profile;
+use App\Models\Payment;
 
 class FormController extends Controller
 {
         // for privacy
     public function privacy(Request $request )
     {
-        return view('form.privacy-notice-form');
+        $privacy = new Privacy();
+        return view('form.privacy-notice-form', compact('privacy'));
     }
+    
+    public function postPrivacy(Request $request)
+    {
+        $request->validate([
+            'privacy_notice' => 'required',
+        ]);
+
+        $privacy = new Privacy();
+
+        $counter = Privacy::count() + 1; // Get the count of existing records and increment by 1
+        $paddingLength = 9; // Generate a random padding length between 1 and 9
+
+        $privacy->privacy_key = 'PK-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+        $privacy->privacy_notice = $request->privacy_notice;
+
+        if ($privacy->save()) {
+            $request->session()->put('LoggedUser', $privacy->privacy_key);
+            return redirect('/profile-form');
+        }
+
+        return redirect('/privacy-form');
+    }
+
+    
     //=================================================================================
+
         // for profile
     public function profile(Request $request )
     {
-        $firstname=$request->input('firstname');
-        $lastname=$request->input('lastname'); 
-
         $counts = $request->input('counts');
         $countForm = $request->input('counts') + 1 ; // Initial value for $count
-        $countAddForm =  $countForm + 1;
 
-        return view('form.profile-form')
-        ->with('firstname', $firstname)
-        ->with('lastname', $lastname)
+        
+        $data = ['LoggedUserPrivacy'=>Privacy::where('privacy_key','=', session('LoggedUser'))->first()];
+        return view('form.profile-form', $data)
         ->with('countForm', $countForm)
-        ->with('counts', $counts)
-        ->with('countAddForm', $countAddForm);
+        ->with('counts', $counts);
      
     
 
     }
 
-    public function postProfile(Request $request )
+    public function postProfile(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'fullname' => 'required',
+            'email' => 'required',
+            'scholarshipStatus' => 'required',
+            'department' => 'required',
+            'section_course' => 'required',
+            'grade_year' => 'required',
+            'student_type' => 'required',
+        ]);
 
-        return view('form.profile-form');
+        $profile = new Profile();
+        $profile->profile_key = $request->profile_key;
+        $profile->fullname = $validatedData['fullname'];
+        $profile->email = $validatedData['email'];
+        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
+        $profile->department = $validatedData['department'];
+        $profile->section_course = $validatedData['section_course'];
+        $profile->grade_year = $validatedData['grade_year'];
+        $profile->student_type = $validatedData['student_type'];
+        $profile->save();
+
+        try {
+            $profile->save();
+        } catch (\Exception $e) {
+           
+            // Log the error or handle it as needed
+            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
+        }
+
+        $request->session()->put('LoggedUser', $profile->profile_key);
+        return redirect('/upload-form');
     }
+
     
     //========================================================================================
         
@@ -210,17 +265,60 @@ class FormController extends Controller
             return $gcashFinalResult;
         }
 
+        public function postVerify(Request $request )
+        {
+  
+            $request->validate ([
+               
+                
+                'imageName' => 'required',
+                'receipt_type' => 'required',
+
+                'payment_for' => 'required',
+                'reference' => 'required|unique:payment',
+                'amount' => 'required',
+                'date' => 'required',
+                
+            ]);
+    
+            $payment  = new Payment();
+
+            $payment->payment_key = $request->payment_key;
+
+            $payment->imageName = $request->imageName;
+            $payment->receipt_type = $request->receipt_type;
+           
+            $payment->payment_for = $request->payment_for;
+            $payment->reference = $request->reference;
+            $payment->amount = $request->amount;
+            $payment->date = $request->date;
+            $payment->time = $request->time;
+            
+            $payment->save();
+
+            return redirect('/summary-form')
+            ->with('success', ' Submitted Successfully!!!');
+
+        }
+
         //==============================================================================================================
 
         
             // for summary
         public function summary(Request $request )
         {
+            $profile = Profile::all();
+            $payment = Payment::all();
+
+            return redirect('/submit-form', compact('profile','payment'));
+
             return view('form.summary-form');
         }
 
+
         public function postSummary(Request $request )
         {
+
             return view('form.summary-form');
         }
 

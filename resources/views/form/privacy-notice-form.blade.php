@@ -156,6 +156,9 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-12">
+
+                                        <form action="/privacy-form" method="POST">
+                                            @csrf 
                                         <div class="privacy-content">
                                             <p><b>PRIVACY NOTICE:</b> Dear student(s)/parent(s)/guardian(s), we would 
                                                 like to inform you that we are collecting your personal information(s)
@@ -167,8 +170,9 @@
                                                 Database. The use, storage, retention and disposal of your personal 
                                                 information(s) shall be governed by our data privacy policies. If you 
                                                 agree to this privacy notice, kindly check the box below. *I ACCEPT</p>
-                                                <input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox" onchange="toggleButton()">
-                                                <label for="my-checkbox" class="font"><b>I ACCEPT</b></label>
+                                                <input type="text" name="privacy_key" value="{{ $privacy->privacy_key }}" hidden>
+                                                <input type="checkbox" id="privacy_notice" name="privacy_notice" value="1" class="checkbox" onchange="toggleButton()">
+                                                <label for="checkbox" class="font"><b>I ACCEPT</b></label>
                                         </div>
                                     </div>
 
@@ -180,12 +184,14 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-6">
-                                                <button id="next-button" class="btn btn-lg btn-secondary pl-5 pr-5" onclick="window.location.href='{{ url('/profile-form') }}'" data-toggle="tab" disabled>
+                                                <button id="next-button" type="submit"  value="submit" class="btn btn-lg btn-secondary pl-5 pr-5" data-toggle="tab" disabled>
                                                     Next <i class="fas fa-arrow-right"></i>
                                                 </button>
+                                            </form>
+
                                                 <script>
                                                     function toggleButton() {
-                                                        var checkBox = document.getElementById("my-checkbox");
+                                                        var checkBox = document.getElementById("privacy_notice");
                                                         var button = document.getElementById("next-button");
                                                         if (checkBox.checked) {
                                                             button.disabled = false;
@@ -198,6 +204,7 @@
                                                         }
                                                     }
                                                 </script>
+                                                
                                             </div>
                                         </div>
                                     </div>
