@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Privacy;
 use App\Models\Profile;
+use App\Models\UploadForm;
 use App\Models\Payment;
 
 class FormController extends Controller
@@ -103,24 +104,37 @@ class FormController extends Controller
     // for upload
     public function upload(Request $request )
     {
-        return view('form.upload-form-2');
+        
+        $data = ['LoggedUserProfile'=>Profile::where('profile_key','=', session('LoggedUser'))->first()];
+        return view('form.upload-form-2', $data);
     }
 
 
     public function postUpload(Request $request) {
 
-        if($request->hasFile('receipt')){
+        if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
             $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
+        
+            // Store data in session
+            $request->session()->put('receipt_type', $request->input('receipt_type'));
+            $request->session()->put('receipt', $filename);
 
-            // set session
-            Session::put('receipt_type', $request->input('receipt_type'));
-            Session::put('receipt', $filename);
-
-            // todo: customize route
+            $uploadform = new UploadForm();
+            $uploadform->uploadform_key = $request->uploadform_key;
+            $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
+            $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
+            
+            $uploadform->save();
+            
+            // Store 'LoggedUser' in session
+            
+            $request->session()->put('LoggedUser', $uploadform->uploadform_key);
             return redirect()->route('verify-form');
+
         }
+        
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
@@ -128,7 +142,7 @@ class FormController extends Controller
     // =========================================================================================
         // for verify
     public function verify(Request $request )
-    {
+    {   
         // get from session
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
@@ -139,16 +153,16 @@ class FormController extends Controller
 
         // Veryfi API Credentials
         // Change when Veryfi expires
-        $client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
-        $client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
-        $username = 'jordanearlpascua1';
-        $api_key = '4849078385c87162e2e014c19b99383a';
+        //$client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
+        //$client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
+        //$username = 'jordanearlpascua1';
+        //$api_key = '4849078385c87162e2e014c19b99383a';
         // end
 
-        //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
-        //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
-        //$username = 'jordanearlimperialpascua20';
-        //$api_key = '4f708f480170a044368643ef0929850e';
+        $client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
+        $client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
+        $username = 'jordanearlimperialpascua20';
+        $api_key = '4f708f480170a044368643ef0929850e';
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
@@ -210,11 +224,77 @@ class FormController extends Controller
 
             $details = [
                 'ocr_result' => $finalResult,
-                'receipt' => "/ASSETS/receipts/temp/". $receipt
+                'receipt' => "/ASSETS/receipts/temp/". $receipt,
+                
             ];
-            return view('form.verify-form', compact('details'));
+            
+            $data = ['LoggedUserUploadForm'=>UploadForm::where('uploadform_key','=', session('LoggedUser'))->first()];
+                return view('form.verify-form', $data)
+                ->with('details', $details);
+
         }
 
+        public function postVerify(Request $request )
+        {
+            $request->validate ([
+                'payment_for' => 'required',
+                'reference' => 'required|unique:payment',
+                'amount' => 'required',
+                'date' => 'required',
+                
+            ]);
+    
+            $payment  = new Payment();
+
+            $payment->payment_key = $request->payment_key;
+           
+            $payment->payment_for = $request->payment_for;
+            $payment->reference = $request->reference;
+            $payment->amount = $request->amount;
+            $payment->date = $request->date;
+            $payment->time = $request->time;
+            
+            $payment->save();
+
+            // Store 'LoggedUser' in session
+            $request->session()->put('LoggedUser', $payment->payment_key);
+           
+            return redirect('/summary-form')
+            ->with('success', ' Submitted Successfully!!!');
+
+        }
+
+        //==============================================================================================================
+
+        
+            // for summary
+        public function summary(Request $request )
+        {
+            $profile = Profile::all();
+            $uploadform = UploadForm::all();
+            $payment = Payment::all();
+
+            return redirect('/submit-form', compact('profile','uploadform', 'payment'));
+
+            return view('form.summary-form');
+        }
+
+
+        public function postSummary(Request $request )
+        {
+
+            return view('form.summary-form');
+        }
+
+
+        //=====================================================================================================
+            // for submit
+        public function submit(Request $request )
+        {
+            return view('form.submit-form');
+        }
+
+        
 
         private function getValueBetweenstrings($paragraph ,$string1, $string2) {
             $stringOnePosition = strpos($paragraph, $string1, 0);
@@ -223,6 +303,7 @@ class FormController extends Controller
             return rtrim(ltrim(substr($paragraph, $stringOnePosition + (strlen($string1)), $stringTwoPosition - $stringOnePosition - (strlen($string1)))));
         }
 
+        // create new method within this File
         private function getDataBdoMobileBanking($json_response) {
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');
@@ -263,71 +344,6 @@ class FormController extends Controller
             $amount = rtrim(ltrim(substr($json_response['ocr_text'], $stringOnePosition + (strlen($string1)), $stringTwoPosition + 3 - $stringOnePosition - (strlen($string1)))));
             $gcashFinalResult['amount'] = (float)number_format(floatval(str_replace(",","",($amount))), 2, '.', '');
             return $gcashFinalResult;
-        }
-
-        public function postVerify(Request $request )
-        {
-  
-            $request->validate ([
-               
-                
-                'imageName' => 'required',
-                'receipt_type' => 'required',
-
-                'payment_for' => 'required',
-                'reference' => 'required|unique:payment',
-                'amount' => 'required',
-                'date' => 'required',
-                
-            ]);
-    
-            $payment  = new Payment();
-
-            $payment->payment_key = $request->payment_key;
-
-            $payment->imageName = $request->imageName;
-            $payment->receipt_type = $request->receipt_type;
-           
-            $payment->payment_for = $request->payment_for;
-            $payment->reference = $request->reference;
-            $payment->amount = $request->amount;
-            $payment->date = $request->date;
-            $payment->time = $request->time;
-            
-            $payment->save();
-
-            return redirect('/summary-form')
-            ->with('success', ' Submitted Successfully!!!');
-
-        }
-
-        //==============================================================================================================
-
-        
-            // for summary
-        public function summary(Request $request )
-        {
-            $profile = Profile::all();
-            $payment = Payment::all();
-
-            return redirect('/submit-form', compact('profile','payment'));
-
-            return view('form.summary-form');
-        }
-
-
-        public function postSummary(Request $request )
-        {
-
-            return view('form.summary-form');
-        }
-
-
-        //=====================================================================================================
-            // for submit
-        public function submit(Request $request )
-        {
-            return view('form.submit-form');
         }
 
 

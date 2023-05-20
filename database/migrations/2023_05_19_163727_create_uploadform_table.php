@@ -11,24 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment', function (Blueprint $table) {
+        Schema::create('uploadform', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_key');
-            $table->string('payment_for');
-            $table->string('reference');
-            $table->string('amount');
-            $table->date('date');
-            $table->time('time');
-           
+            $table->string('uploadform_key');
+            $table->string('receipt_type');
+            $table->string('receipt_filename');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment');
+        Schema::dropIfExists('uploadform');
     }
 };

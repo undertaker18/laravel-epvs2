@@ -86,9 +86,11 @@
         <div class="column " >
             <!--Student 01 -->
             <div class="form-content">
+                <input type="text" value="{{ $LoggedUserVerify['verify_key'] }}" name="summary_key" hidden>
                 <h2>Student 01</h2>
                 <div class="row">
                     <div class="col">
+                        
                         <label for="inputLastname" class="form-label">Lastname</label>
                         <input type="text" class="form-control" placeholder="" aria-label="Lastname">
                     </div>

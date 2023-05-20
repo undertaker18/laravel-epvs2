@@ -90,16 +90,17 @@
                 </div>
             <div class="col-md-5 col-sm-12 my-3 mx-auto my-auto px-5">
                 <div class="my-2">
-                <input type="file" name="receipt" id="receipt">
+                    <input type="text" value="{{ $LoggedUserProfile['profile_key'] }}" name="uploadform_key" hidden>
+                    <input type="file" name="receipt" id="receipt">
                 </div>
-            <select id="" name="receipt_type" class="form-select " style="" required>
-                <option selected disabled>Receipt Type</option>
-                <option value="instapay">Instapay</option>
-                <option value="gcash">Gcash</option>
-                <option value="gcash_instapay">Gcash Powered by Instapay</option>
-                <option value="bdo_mobile_banking">BDO Mobile Banking</option>
-                <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
-            </select>
+                <select id="" name="receipt_type" class="form-select " style="" required>
+                    <option selected disabled>Receipt Type</option>
+                    <option value="instapay">Instapay</option>
+                    <option value="gcash">Gcash</option>
+                    <option value="gcash_instapay">Gcash Powered by Instapay</option>
+                    <option value="bdo_mobile_banking">BDO Mobile Banking</option>
+                    <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
+                </select>
             </div>
 
 
@@ -111,7 +112,7 @@
                     <button type="button" class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
                 </a>
                 {{-- <a href="../pages/verify.html"> --}}
-                    <button type="submit" class="right-button">NEXT <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" value="submit"  class="right-button">NEXT <i class="fas fa-arrow-right"></i></button>
                 {{-- </a> --}}
             </div>
         </div>
