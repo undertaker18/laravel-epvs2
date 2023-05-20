@@ -108,7 +108,7 @@
 
         <div class="column  mx-auto" style="padding-top: 30px;">
             <div class="buttons">
-                <a href="../pages/profile.html ">
+                <a href="{{ url('/profile-form') }}">
                     <button type="button" class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
                 </a>
                 {{-- <a href="../pages/verify.html"> --}}

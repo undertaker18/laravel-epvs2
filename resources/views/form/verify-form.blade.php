@@ -195,10 +195,10 @@
                 <div class="column " style="padding-top: 30px;">
     
                     <div class="buttons">
-                        <a href="/upload-form">
+                        <a href="{{ url('/upload-form') }}">
                             <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
                         </a>
-                        <a href="../pages/review.html">
+                        <a href="">
                             <button class="right-button" type="submit"  value="submit" >NEXT <i class="fas fa-arrow-right"></i></button>
                         </a>
                     </div>

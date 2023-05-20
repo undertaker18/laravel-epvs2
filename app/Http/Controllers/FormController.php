@@ -63,7 +63,7 @@ class FormController extends Controller
 
     }
 
-    public function postProfile(Request $request)
+    public function postProfile1(Request $request)
     {
         $validatedData = $request->validate([
             'fullname' => 'required',
@@ -98,6 +98,78 @@ class FormController extends Controller
         return redirect('/upload-form');
     }
 
+    public function postProfile2(Request $request)
+    {
+        $validatedData = $request->validate([
+            'fullname' => 'required',
+            'email' => 'required',
+            'scholarshipStatus' => 'required',
+            'department' => 'required',
+            'section_course' => 'required',
+            'grade_year' => 'required',
+            'student_type' => 'required',
+        ]);
+
+        $profile = new Profile();
+        $profile->profile_key = $request->profile_key;
+        $profile->fullname = $validatedData['fullname'];
+        $profile->email = $validatedData['email'];
+        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
+        $profile->department = $validatedData['department'];
+        $profile->section_course = $validatedData['section_course'];
+        $profile->grade_year = $validatedData['grade_year'];
+        $profile->student_type = $validatedData['student_type'];
+        $profile->save();
+
+        try {
+            $profile->save();
+        } catch (\Exception $e) {
+           
+            // Log the error or handle it as needed
+            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
+        }
+
+        $request->session()->put('LoggedUser', $profile->profile_key);
+        return redirect('/upload-form');
+    }
+
+    public function postProfile3(Request $request)
+    {
+        $validatedData = $request->validate([
+            'fullname' => 'required',
+            'email' => 'required',
+            'scholarshipStatus' => 'required',
+            'department' => 'required',
+            'section_course' => 'required',
+            'grade_year' => 'required',
+            'student_type' => 'required',
+        ]);
+
+        $profile = new Profile();
+        $profile->profile_key = $request->profile_key;
+        $profile->fullname = $validatedData['fullname'];
+        $profile->email = $validatedData['email'];
+        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
+        $profile->department = $validatedData['department'];
+        $profile->section_course = $validatedData['section_course'];
+        $profile->grade_year = $validatedData['grade_year'];
+        $profile->student_type = $validatedData['student_type'];
+        $profile->save();
+
+        try {
+            $profile->save();
+        } catch (\Exception $e) {
+           
+            // Log the error or handle it as needed
+            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
+        }
+
+        $request->session()->put('LoggedUser', $profile->profile_key);
+        return redirect('/upload-form');
+    }
+
+
+  
     
     //========================================================================================
         
@@ -256,9 +328,14 @@ class FormController extends Controller
             
             $payment->save();
 
+            try {
+                $payment->save();
+            } catch (\Exception $e) {
+               
+                dd($payment); // Add this line for debugging
+            }
             // Store 'LoggedUser' in session
             $request->session()->put('LoggedUser', $payment->payment_key);
-           
             return redirect('/summary-form')
             ->with('success', ' Submitted Successfully!!!');
 

@@ -34,10 +34,16 @@ Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-
 Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
 
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
-Route::post('/profile-form', [FormController::Class, 'postProfile' ])->name('post-profile-form');
+
+Route::post('/profile-form1', [FormController::class, 'postProfile1'])->name('post-upload-form1');
+Route::post('/profile-form2', [FormController::class, 'postProfile2'])->name('post-upload-form2');
+Route::post('/profile-form3', [FormController::class, 'postProfile3'])->name('post-upload-form3');
+
 
 Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
 Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
+
+
 
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
 Route::post('/verify-form', [FormController::Class, 'postVerify' ])->name('verify-form');
