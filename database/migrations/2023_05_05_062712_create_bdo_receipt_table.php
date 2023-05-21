@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('bdo_receipt', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('posting_datetime');
+            $table->string('branch');
+            $table->string('description');
+            $table->string('debit');
+            $table->string('credit');
+            $table->string('running_balance');
+            $table->string('check_number');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
@@ -24,4 +31,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('bdo_receipt');
     }
+    
 };

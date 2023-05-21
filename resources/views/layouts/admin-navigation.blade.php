@@ -5,9 +5,9 @@
           <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
-  
+
         </ul>
-  
+
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Notifications Dropdown Menu -->
@@ -15,10 +15,10 @@
             <a  class="nav-link">{{ Auth::user()->name }}</a>
           </li>
           <li class="nav-item dropdown">
-           
+
             <a class="nav-link" data-toggle="dropdown" >
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                
+
                 </div>
               <div class="user-panel d-flex">
                 <div class="image">
@@ -26,7 +26,7 @@
                 </div>
               </div>
             </a>
-     
+
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <a  class="dropdown-item  ">
                 <x-dropdown-link :href="route('profile.edit')">
@@ -43,19 +43,19 @@
                 </x-dropdown-link>
               </form>
               <br>
-              
-              
-  
-  
+
+
+
+
             </div>
           </li>
-  
+
           <li class="nav-item  mt-1 ">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
               <i class="fas fa-expand-arrows-alt"></i>
             </a>
           </li>
-  
+
           <!-- <li class="nav-item">
           <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
             <i class="fas fa-th-large"></i>
@@ -67,4 +67,3 @@
 
 
 
-     

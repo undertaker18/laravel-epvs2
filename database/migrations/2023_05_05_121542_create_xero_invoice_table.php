@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('xero_invoice', function (Blueprint $table) {
             $table->id();
-            
-            $table->timestamps();
+            $table->string('users_id')->nullable();
+            $table->string('xero_account_id')->nullable();
+            $table->string('description')->nullable();
+            $table->string('amount')->default(0)->nullable();
+            $table->string('reference')->nullable();
+            $table->string('status')->default(0); // 0 - pending, 1 - pending
+            $table->timestamp('created_at')->useCurrent();
+
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

@@ -67,4 +67,8 @@
   .blog-footer p:last-child {
     margin-bottom: 0;
   }
+   .font {
+    color:#12283A;
+    font-family: Arial, Helvetica, sans-serif;
+   }
   

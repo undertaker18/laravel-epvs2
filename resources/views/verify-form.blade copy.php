@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
     }
           /* Clear floats after the columns */
     .row:after {
@@ -68,8 +68,8 @@
                                         <option>Initial Payment:</option>
                                 </select>
                             </div>
-                            
-                            <div class="mb-3">  
+
+                            <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
                                     <span class="asteris">*</span></label>
                                 <input type="text" class="form-control" id="formGroupExampleInput2"

@@ -109,7 +109,7 @@
       .container-fluid{
         width: 90%;
         height: 90%;
-        padding-bottom: 90px;
+        padding-bottom: 20px;
       }
 
        /*check box */
@@ -124,7 +124,7 @@
     }
         /*button */
       .right-button {
-        float: right;
+        float: left;
         width: 250px;
         height: 70;
         padding: 8px;
@@ -147,13 +147,19 @@
         font-size: 25px;
        
     }
+    
     .font {
-        font-weight:normal ;
-        margin-left: 10px;
+      color: #12283A;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 19px;
     }
     .font2 {
-       
-        margin-left: 70px;
+      color: #1266b4;
+      margin-left: 70px;
+    }
+    .font3 {
+      color: #1266b4;
+      margin-left: 10px;
     }
 
     header {
@@ -190,66 +196,84 @@
       .container{
         text-align: center;
       }
+
       .button {
             width: 300px;
       }
-      .green {
-        background-color: green;
-    }
+
+      .btn {
+           width: 300px;
+           padding: 10px;
+        }
+        .btn-primary2 {
+            width: 300px !important;
+            background-color: rgb(27, 170, 27) !important;
+            color: white !important;
+            border-radius: 5px !important;
+           
+
+            
+        }
+        .btn-primary {
+            width: 300px !important;
+            background-color: #1266b4 !important;
+        }
+
+        .logo-welcome {
+
+          margin-top: 30px !important;
+          margin-bottom: 30px !important;
+        }
+     
 
 </style>
 
 <body>
     <!--  section  -->
-    <section  class="image-bg"
-    style=" background-image: url('./assets/landing/landingpage.png'); "> 
-        <div class="d-flex flex-wrap justify-content-center py-3 mb-4 ">
-            <a href="{{ url('/login') }}"   target="_blank" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
-                <img src="./assets/landing/lvcclogo.png" alt="lvcc Logo" style=" width:250px ; height: 250px;">
-            <span class="font-logo"><b>LVCC Enrollment Payment<br>
-                Validation System<b> 
-            </h2></span>
-            </a>
-        </div>
+    <section  class="image-bg" style=" background-image: url('./assets/landing/landingpage.png');"> 
         <main class="container-fluid">
-            <div class="p- p-md-5 mb-4 rounded bg-white">
-              <img src="./assets/landing/bdo.png" alt="bdo" style=" width:100% ; height: 100%;">
+            <div class="col-md-6">
+              <a href="{{ url('/login') }}"   target="_blank" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                <img class="logo-welcome" src="{{ asset('assets/landing/LVCC.png') }}" alt="lvcc Logo" style=" width:908px ; height:169px;">
+              </a>
+            </div>
+            <div class="p-md-5 mb-4 rounded bg-white">
+              <img src="{{ asset('assets/landing/bdo2.png') }}" alt="bdo" style=" width:100% ; height: 100%;">
               <div class="wrapper">
-                <div class="box">
-                  <input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox">
-                  <label for="my-checkbox" class="font">Yes, I have paid and completed the payment.
-                                                          <br>(Oo, nagbayad na ako at natapos ko na ang 
-                                                          <br> pagbabayad. )
-                                                          <br></label>
+                <div class="box row ">
+                  <div class="col-11">
+                    <input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox" onchange="toggleButton()">
+                  </div>
                 </div>
                 <div class="box">
-                  <i class="fas fa-link font2"></i><a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font">How to Use Enrollment Payment Form</a>
+                  <i class="fas fa-link font2"></i><a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font3">How to Use Enrollment Payment Form</a>
                 </div>
               </div>
               <div class="col-md-6 px-0">
               </div>
             </div>
-            <a href="{{ url('/privacy-notice') }}">
-              <button id="proceed-btn" class="right-button btn-green{{ old('my-checkbox') ? ' green' : '' }}" disabled>Proceed <i class="fas fa-arrow-right"></i></button>
-            </a>
+            <button id="next-button" class="btn btn-lg btn-secondary pl-5 pr-5" onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
+              Proceed <i class="fas fa-arrow-right"></i>
+            </button>
 
             <script>
-                const checkbox = document.getElementById('my-checkbox');
-                const proceedBtn = document.getElementById('proceed-btn');
-              
-                checkbox.addEventListener('change', function() {
-                  if (checkbox.checked) {
-                    proceedBtn.classList.add('btn-green');
-                    proceedBtn.removeAttribute('disabled');
+              function toggleButton() {
+                  var checkBox = document.getElementById("my-checkbox");
+                  var button = document.getElementById("next-button");
+                  if (checkBox.checked) {
+                      button.disabled = false;
+                      button.classList.remove("btn-secondary");
+                      button.classList.add("btn-primary2");
                   } else {
-                    proceedBtn.classList.remove('btn-green');
-                    proceedBtn.setAttribute('disabled', true);
+                      button.disabled = true;
+                      button.classList.remove("btn-primary2");
+                      button.classList.add("btn-secondary");
                   }
-                });
-            </script>
+              }
+          </script>
           </main>
         <main class="container-fluid ">
-            <div class="p- p-md-5 mb-4 rounded bg-white ">
+            <div class=" p-md-5 mb-4 rounded bg-white ">
                 <header>
                     <h1>Example of Valid Receipt</h1>
                 </header>
@@ -257,49 +281,49 @@
                     <li class="box2"> 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#FromDesktopBDO">
-                            From Desktop BDO
+                           Gcash Email 
                         </button>
                     </li>
                     <li class="box2">
                          <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary button" style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#DepositSlipfromBDOBranch">
-                            Deposit Slip from BDO Branch
+                          Gcash Mobile App
                         </button>
                     </li>
                     <li class="box2">
                          <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#MobileBankingBDO">
-                            Mobile Banking BDO
+                          Gcash Mobile ScreenShot
                         </button>   
                     </li>
                     <li class="box2">
                         <!-- Button trigger modal -->
                        <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#TransactionHistoryfromGcashApp">
-                        Transaction History from Gcash App
+                        Metrobank
                        </button>   
                    </li>
                    <li class="box2">
                     <!-- Button trigger modal -->
                    <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#EmailfromGcash">
-                        Email from Gcash
+                        Unionbank
                    </button>   
                     </li>
                     <li class="box2">
                         <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#InboxofGcashApp">
-                        Inbox of Gcash App
+                      PNB Debit
                     </button>   
                     </li>
                     <li class="box2">
                         <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary button" style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#TextMessagefromGcash">
-                        Text Message from Gcash
+                        Send via Instapay
                     </button>   
                     </li>
                     <li class="box2">
                         <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary button"  style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#Metrobank">
-                        Metrobank                    
+                        Pesonet Gateway                     
                     </button>   
                     </li>
                 </ul>
@@ -307,14 +331,14 @@
                 
                 <!-- FromDesktopBDO -->
                 <div class="modal fade" id="FromDesktopBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">From Desktop BDO</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Email</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="fromdesktopbdo" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/Gcash-email.png') }}" alt="fromdesktopbdo" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -324,14 +348,14 @@
                 </div>
 
                 <div class="modal fade" id="DepositSlipfromBDOBranch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Deposit Slip from BDO Branch</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Mobile App </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="DepositSlipfromBDOBranch" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/Gcash-mobile-save.jpg') }}" alt="DepositSlipfromBDOBranch" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -341,14 +365,14 @@
                 </div>
 
                 <div class="modal fade" id="MobileBankingBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mobile Banking BDO</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Gcash Mobile ScreenShot</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="MobileBankingBDO" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/Gcash-mobile-ss.jpg') }}" alt="MobileBankingBDO" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -361,11 +385,11 @@
                     <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaction History from Gcash App</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Metrobank</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="TransactionHistoryfromGcashApp" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/metrobank.jpg') }}" alt="TransactionHistoryfromGcashApp" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -375,14 +399,14 @@
                 </div>
 
                 <div class="modal fade" id="EmailfromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Email from Gcash</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Unionbank</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="EmailfromGcash" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/unionbank.jpg') }}" alt="EmailfromGcash" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -392,14 +416,14 @@
                 </div>
 
                 <div class="modal fade" id="InboxofGcashApp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
+                    <div class="modal-dialog ">
+                    <div class="modal-content"> 
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Inbox of Gcash App</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">PNB Debit</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="InboxofGcashApp" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/PNB-debit.jpg') }}" alt="InboxofGcashApp" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -409,14 +433,14 @@
                 </div>
                 
                 <div class="modal fade" id="TextMessagefromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Text Message from Gcash</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Send via Instapay</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="TextMessagefromGcash" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/send-money-instapay.jpg') }}" alt="TextMessagefromGcash" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -426,14 +450,14 @@
                 </div>
 
                 <div class="modal fade" id="Metrobank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Metrobank</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Pesonet Gateway</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="./assets/landing/fromdesktopbdo.png" alt="Metrobank" width="100%" height="100%">
+                            <img src="{{ asset('assets/sample-receipts/pesonet-gateway.jpg') }}" alt="Metrobank" width="100%" height="100%">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

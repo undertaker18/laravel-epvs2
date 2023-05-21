@@ -8,24 +8,28 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-       
-        <link href="{{ asset('assets/privacy-notice.css') }}" rel="stylesheet">
-        <link href="../CSS/landingpage.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+        <link href="{{ asset('form.css') }}" rel="stylesheet">
     </head>
     <body>
-        <!-- Your page content here -->
-        <section>
-            <main class="container ">
-                <div class="p-1 p-md-1 mb-4 image">
-                    <img src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">
-                    
-                    @include('layouts.form-navigation')
-                
-                    <main>
-                        {{ $slot }}
-                    </main>
+        <!-- Your page content here --> 
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="p-1 p-md-1 mb-4 image">
+                            <img src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">
+                            @include('layouts.form-navigation')
+                            <main >
+                                {{ $slot }}
+                            </main>
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
         </section>
         
 
@@ -45,5 +49,10 @@
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <!--  end ionicons  -->
+        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+        <script src="{{ asset('dist/js/demo.js') }}"></script>
+
     </body>
 </html>

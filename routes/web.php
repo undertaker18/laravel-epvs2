@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
+use App\Http\Controllers\XeroApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,19 +30,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/privacy-notice', function () {
-    return view('privacy-notice-form');
-})->name('privacy-notice');
-
-Route::get('/privacy-notice', [FormController::Class, 'privacy' ])->name('privacy-notice');
+Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
+Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
 
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
 
+Route::post('/profile-form1', [FormController::class, 'postProfile1'])->name('post-upload-form1');
+Route::post('/profile-form2', [FormController::class, 'postProfile2'])->name('post-upload-form2');
+Route::post('/profile-form3', [FormController::class, 'postProfile3'])->name('post-upload-form3');
+
+
 Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
+Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
+
+
 
 Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
+Route::post('/verify-form', [FormController::Class, 'postVerify' ])->name('verify-form');
 
 Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
+Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
 
 Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
 
@@ -58,7 +66,7 @@ Route::get('/users', [UserController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('users');
 
-   /* For Receipts*/ 
+   /* For Receipts*/
 Route::get('/receipt-valid', [ReceiptController::class, 'valid'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-valid');
@@ -74,7 +82,7 @@ Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-image');
-    
+
 /* For Xero intergration */
 
 Route::get('/xero-send', [XeroController::class, 'send'])
@@ -84,6 +92,10 @@ Route::get('/xero-send', [XeroController::class, 'send'])
 Route::get('/xero-sent', [XeroController::class, 'sent'])
     ->middleware(['auth', 'verified'])
     ->name('xero-sent');
+Route::get('/xero-sync-accounts', [XeroController::class, 'syncAccount'])
+    ->middleware(['auth'])
+    ->name('xero-sync-account');
+
 
 
 /* Reports*/
@@ -91,11 +103,29 @@ Route::get('/reports', [ReportController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('reports');
 
-/* Bdo Receipts*/
+// Bdo Receipts
 
-Route::get('/bdo-receipts', [BdoReceiptController::class, 'index'])
+
+Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipts');
+
+Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
+    ->middleware(['auth', 'verified'])
+    ->name('upload');
+
+Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
+    ->middleware(['auth', 'verified'])
+    ->name('bdo-receipt.upload');
+
+
+
+/*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/
+->middleware(['auth', 'verified'])
+->name('bdo-receipts.store'); */
+
+
+
 
 /* System log*/
 Route::get('/system-log', [SystemlogController::class, 'index'])
@@ -108,5 +138,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::get('/v1/xero/auth', [XeroApiController::Class, 'getAuth'])->name('xero-auth');
+Route::get('/v1/xero/token', [XeroApiController::Class, 'getToken'])->name('xero-token');
+Route::get('/v1/xero/token-refresh', [XeroApiController::Class, 'tokenRefresh'])->name('xero-token-refreh');
+Route::get('/v1/xero/invoice', [XeroApiController::Class, 'postInvoice'])->name('post-invoice');
+Route::get('/v1/xero/invoice1', [XeroApiController::Class, 'getInvoice'])->name('get-invoice');
+Route::get('/v1/xero/payment', [XeroApiController::Class, 'postPayment'])->name('post-payment');
+
+Route::get('/v1/xero/accounts', [XeroApiController::Class, 'postAccounts'])->name('post-accounts');
+Route::get('/v1/xero/accounts1', [XeroApiController::Class, 'getAccounts'])->name('get-accounts');
+Route::get('/v1/xero/syncAccounts', [XeroApiController::Class, 'syncAccounts'])->name('sync-accounts');
+Route::get('/v1/xero/makeInvoiceAndPay', [XeroApiController::Class, 'makeInvoiceAndPay'])->name('make-invoice-and-pay');
+
+
 
 require __DIR__.'/auth.php';
