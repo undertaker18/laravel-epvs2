@@ -2,7 +2,7 @@
 <x-form-layout>
     <style>
         .row.main-content {
-    display: flex;
+            display: flex;
     justify-content: center;
     align-items: center;
 
@@ -82,132 +82,98 @@
 #mySelectOptions label:hover {
   background-color: #1e90ff;
 }
+
+.align_right {
+    align-content: right;
+}
     
     </style>
 
-        <div class="row main-content ">
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <div class="card-body">
+        <div class="tab-content">
 
-            <form action="/verify-form" method="post">
-                @csrf
-                <div class="row border-line">
-                    <div class="col-sm-7">
-                        <div class="card">
-                        <img src="{{ $details['receipt'] }}" alt="Image Description"
-                                title="Image Title" style=" border-radius: 10px; width:50%" class="image-class mx-auto">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Take note: </h5>
-                                <p class="card-text">Ensure that all information provided are
-                                    accurate and exact before proceeding to the next step.</p>
-                                <div class="mb-3">
-                                    <input type="text" value="{{ $LoggedUserUploadForm['uploadform_key'] }}" name="payment_key" hidden>
+            <div class="active tab-pane" id="profile">
+                <div class=" main-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title align-left">Student Information</h3>
+                                </div>
 
-                                    <div class="container-fluid">
-                                        <div class="form-group col-sm-12">
-                                          <label for="myMultiselect">Payment For:</label>
-                                            <div id="myMultiselect" class="multiselect">
-                                                <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
-                                                    <select class="form-select" name="payment_for">
-                                                        <option>Kindly Check your payment for...</option>
-                                                        <option value="dropdownValue"></option>
-                                                    </select>
-                                                <div class="overSelect"></div>
+                                <div class="col-md-6">
+                                    <div class="card-tools align-right">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card align_right">
+                                        <img src="{{ $details['receipt'] }}" alt="Image Description" title="Image Title" style="border-radius: 10px; width: 50%;"  class="image-class align_right">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <form action="/verify-form" method="post">
+                                        @csrf
+                                        <div class="card align-left">
+                                            <div class="card-body">
+                                                
+                                                        <h5 class="card-title">Take note:</h5>
+                                                        <p class="card-text">Ensure that all information provided are accurate and exact before proceeding to the next step.</p>
+                                                        <div class="form-group">
+                                                            <input type="text" value="{{ $LoggedUserProfile['profile_key'] ?? $firstProfileKey }}" name="uploadform_key" hidden>
+                                
+                                                            <label for="paymentFor">Payment For:</label>
+                                                            <select id="paymentFor" class="form-control" name="payment_for">
+                                                                <option>Kindly check your payment for...</option>
+                                                                <option value="dropdownValue"></option>
+                                                            </select>
+                                                            <div class="checkbox-group">
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Notarial Fee"> Notarial Fee</label>
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Miscellaneous Fee"> Miscellaneous Fee</label>
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Digital System Access Fee"> Digital System Access Fee</label>
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Registration"> Registration</label>
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Initial Payment"> Initial Payment</label>
+                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Full Payment"> Full Payment</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="amount">Amount of Payment: <span class="asterisk">*</span></label>
+                                                            <input type="text" class="form-control" id="amount" placeholder="Edit here..." name="amount" value="{{$details['ocr_result']['amount']}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="reference">Reference Number: <span class="asterisk">*</span></label>
+                                                            <input type="text" class="form-control" id="reference" name="reference" value="{{$details['ocr_result']['referenceNumber']}}" placeholder="Edit here...">
+                                                        </div>
+                                                        <div class="row">
+                                                            <label class="col-sm-12">Date & Time of Payment <span class="quotation">(BASED ON YOUR RECEIPT)</span> <span class="asterisk">*</span></label>
+                                                            <div class="col-sm-6">
+                                                                <input type="date" class="form-control" placeholder="Edit here..." value="{{$details['ocr_result']['date']}}" name="date">
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <input type="time" class="form-control" placeholder="Edit here..." value="{{$details['ocr_result']['time']}}" name="time">
+                                                            </div>
+                                                        </div>
+
                                             </div>
-                                            <div id="mySelectOptions">
-                                                <label for="one"><input type="checkbox" id="one" onchange="checkboxStatusChange()" value="Notarial Fee" /> Notarial Fee</label>
-                                                <label for="two"><input type="checkbox" id="two" onchange="checkboxStatusChange()" value="Missellaneous Fee" /> Missellaneous Fee</label>
-                                                <label for="three"><input type="checkbox" id="three" onchange="checkboxStatusChange()" value="Digital System Access Fee" /> Digital System Access Fee</label>
-                                                <label for="four"><input type="checkbox" id="four" onchange="checkboxStatusChange()" value="Registration" /> Registration</label>
-                                                <label for="five"><input type="checkbox" id="five" onchange="checkboxStatusChange()" value="Initial Payment:" /> Initial Payment</label>
-                                                <label for="six"><input type="checkbox" id="six" onchange="checkboxStatusChange()" value="Full Payment" /> Full Payment</label>
-                                            </div>
-                                            <script>
-                                                function checkboxStatusChange() {
-                                                var multiselect = document.getElementById("mySelectLabel");
-                                                var multiselectOption = multiselect.getElementsByTagName('option')[0];
-    
-                                                var values = [];
-                                                var checkboxes = document.getElementById("mySelectOptions");
-                                                var checkedCheckboxes = checkboxes.querySelectorAll('input[type=checkbox]:checked');
-    
-                                                for (const item of checkedCheckboxes) {
-                                                    var checkboxValue = item.getAttribute('value');
-                                                    values.push(checkboxValue);
-                                                }
-    
-                                                var dropdownValue = "Nothing is selected";
-                                                if (values.length > 0) {
-                                                    dropdownValue = values.join(', ');
-                                                }
-    
-                                                multiselectOption.innerText = dropdownValue;
-                                                }
-    
-                                                function toggleCheckboxArea(onlyHide = false) {
-                                                var checkboxes = document.getElementById("mySelectOptions");
-                                                var displayValue = checkboxes.style.display;
-    
-                                                if (displayValue != "block") {
-                                                    if (onlyHide == false) {
-                                                    checkboxes.style.display = "block";
-                                                    }
-                                                } else {
-                                                    checkboxes.style.display = "none";
-                                                }
-                                                }
-                                            </script>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="{{ url('/upload-form') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> BACK</a>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <button class="btn btn-primary" type="submit" value="submit">NEXT <i class="fas fa-arrow-right"></i></button>
+                                        </div>
+                                    </div> 
+                                </form>  
                             </div>
-    
-                                <div class="mb-3">
-                                    <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
-                                        <span class="asteris">*</span></label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput2"
-                                    placeholder="Edit here..." name="amount" value="{{$details['ocr_result']['amount']}}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="formGroupExampleInput2" class="form-label">Reference Number:<span class="asteris">*</span></label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2" name="reference" value="{{$details['ocr_result']['referenceNumber']}}"
-                                        placeholder="Edit here...">
-                                </div>
-                                <div class="row">
-                                    <label for="formGroupExampleInput2" class="form-label">Date & Time of Payment
-                                        <span class="quotation">(BASED ON YOUR RECEIPT)</span><span class="asteris">*</span></label>
-                                    <div class="col-sm-6">
-                                    <input type="date" class="form-control" placeholder="Edit here..." value="{{$details['ocr_result']['date']}}"
-                                            name="date">
-                                    </div>
-                                    <div class="col-sm-6">
-                                    <input type="time" class="form-control" placeholder="Edit here..." value="{{$details['ocr_result']['time']}}"
-                                            name="time">
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
-                </div>
-    
-                <div class="column " style="padding-top: 30px;">
-    
-                    <div class="buttons">
-                        <a href="{{ url('/upload-form') }}">
-                            <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
-                        </a>
-                        <a href="">
-                            <button class="right-button" type="submit"  value="submit" >NEXT <i class="fas fa-arrow-right"></i></button>
-                        </a>
-                    </div>
-                </div>
-
-
-
-            </form>
-
-
-        </div>
+                   
 </x-form-layout>

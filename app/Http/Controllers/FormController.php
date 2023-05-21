@@ -299,9 +299,12 @@ class FormController extends Controller
                 'receipt' => "/ASSETS/receipts/temp/". $receipt,
                 
             ];
+             // Fetch the first profile key from the data table
+             $firstProfileKey = Profile::value('profile_key');
             
             $data = ['LoggedUserUploadForm'=>UploadForm::where('uploadform_key','=', session('LoggedUser'))->first()];
                 return view('form.verify-form', $data)
+                   ->with('firstProfileKey', $firstProfileKey)
                 ->with('details', $details);
 
         }
@@ -334,6 +337,8 @@ class FormController extends Controller
                
                 dd($payment); // Add this line for debugging
             }
+           
+
             // Store 'LoggedUser' in session
             $request->session()->put('LoggedUser', $payment->payment_key);
             return redirect('/summary-form')
