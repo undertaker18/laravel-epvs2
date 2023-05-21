@@ -1,0 +1,44 @@
+{
+  "name": "veryfi/veryfi-php",
+  "description": "veryfi sdk for php",
+  "type": "library",
+  "keywords": ["ocr", "veryfi", "data processing"],
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Carmona",
+      "email": "sebastiancarmona@veryfi.com"
+    },
+    {
+      "name": "Alejandro Uribe",
+      "email": "alejandro@veryfi.com"
+    }
+  ],
+
+  "require": {
+    "php": ">=7.4",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": ">=9.5.18"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "veryfi\\": "src/veryfi/"
+    }
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "veryfi\\": "src/veryfi/"
+    }
+  },
+
+  "config": {
+    "sort-packages": true
+  }
+}
