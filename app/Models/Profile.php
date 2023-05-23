@@ -10,4 +10,5 @@ class Profile extends Model
     use HasFactory;
     
     protected $table = 'profile';
+
 }
