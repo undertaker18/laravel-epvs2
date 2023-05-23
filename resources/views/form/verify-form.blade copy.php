@@ -99,7 +99,7 @@
                         <h5 class="card-title">Take note:</h5>
                         <p class="card-text">Ensure that all information provided are accurate and exact before proceeding to the next step.</p>
                         <div class="form-group">
-                            <input type="text" value="{{ $LoggedUserUploadForm['uploadform_key'] }}" name="payment_key" hidden>
+                            <input type="text" value="{{ $firstPrivacyKey['privacy_key'] }}" name="payment_key" hidden>
                             <label for="paymentFor">Payment For:</label>
                             <select id="paymentFor" class="form-control" name="payment_for">
                                 <option>Kindly check your payment for...</option>

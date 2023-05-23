@@ -236,6 +236,11 @@ class FormController extends Controller
         $username = 'jordanearlimperialpascua20';
         $api_key = '4f708f480170a044368643ef0929850e';
 
+        //$client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
+        //$client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
+        //$username = 'angelblaze779';
+        //$api_key = '434562be5ba93a74021d918a963f43f2';
+
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
         // Veryfi API
@@ -299,13 +304,19 @@ class FormController extends Controller
                 'receipt' => "/ASSETS/receipts/temp/". $receipt,
                 
             ];
-             // Fetch the first profile key from the data table
-             $firstProfileKey = Profile::value('profile_key');
-            
-            $data = ['LoggedUserUploadForm'=>UploadForm::where('uploadform_key','=', session('LoggedUser'))->first()];
-                return view('form.verify-form', $data)
-                   ->with('firstProfileKey', $firstProfileKey)
-                ->with('details', $details);
+
+            $privacy = Privacy::find('privacy_key');
+
+            if ($privacy !== null) {
+                $firstPrivacyKey = $privacy->first();
+                return view('form.verify-form')
+                        ->with('firstProfileKey', $firstPrivacyKey)
+                        ->with('details', $details);
+            } else {
+                dd($privacy);
+            }
+
+             
 
         }
 
@@ -330,15 +341,7 @@ class FormController extends Controller
             $payment->time = $request->time;
             
             $payment->save();
-
-            try {
-                $payment->save();
-            } catch (\Exception $e) {
-               
-                dd($payment); // Add this line for debugging
-            }
-           
-
+            dd($payment); // Add this line for debugging
             // Store 'LoggedUser' in session
             $request->session()->put('LoggedUser', $payment->payment_key);
             return redirect('/summary-form')
@@ -356,9 +359,9 @@ class FormController extends Controller
             $uploadform = UploadForm::all();
             $payment = Payment::all();
 
-            return redirect('/submit-form', compact('profile','uploadform', 'payment'));
+            return view('form.summary-form', compact('profile','uploadform', 'payment'));
 
-            return view('form.summary-form');
+            
         }
 
 

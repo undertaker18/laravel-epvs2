@@ -1,191 +1,181 @@
-
 <x-form-layout>
 
     <style>
-    
-    .row.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-    }
+        .row.main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    .form-content {
-        background-color: #EAF1F8;
-        margin-left: 65px;
-        margin-right: 65px;
-        margin-top: 90px;
-        border-radius: 15px;    
-    }
-  
-    .col {
-        text-align: left;
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-bottom: 5px;
-        
+        }
 
-    }
-    .cols {
-        text-align: left;
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-bottom: 30px;
-        
+        .form-content {
+            background-color: #EAF1F8;
+            margin-left: 65px;
+            margin-right: 65px;
+            margin-top: 90px;
+            border-radius: 15px;
+        }
 
-    }
-    h2{
-       padding-top: 20px;
+        .col {
+            text-align: left;
+            margin-left: 25px;
+            margin-right: 25px;
+            margin-bottom: 5px;
 
-    }
-        
-    /* Create two equal columns that floats next to each other */
-    .column {
-    float: left;
-    width: 100%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-    }
 
-    /* Clear floats after the columns */
-    .row:after {
-    content: "";
-    display: table;
-    clear: both;
-    } 
+        }
 
-    .border-line {
-        margin-left: 200px;
-        margin-right: 100px;
-        padding-top: 250px;
+        .cols {
+            text-align: left;
+            margin-left: 25px;
+            margin-right: 25px;
+            margin-bottom: 30px;
 
-    }
 
-    .quotation {
-        font-size: 12px;
-    }
+        }
 
-    .form-label {
-        text-align: left;
-    }
+        h2 {
+            padding-top: 20px;
 
-    .card-body {
-        text-align: left;
-    }
+        }
 
-    .card {
-        border: none;
-    }
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 100%;
+            padding: 10px;
+            height: 300px;
+            /* Should be removed. Only for demonstration */
+        }
 
-    .form-control {
-        border: none;
-        background-color: white;
-    }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .border-line {
+            margin-left: 200px;
+            margin-right: 100px;
+            padding-top: 250px;
+
+        }
+
+        .quotation {
+            font-size: 12px;
+        }
+
+        .form-label {
+            text-align: left;
+        }
+
+        .card-body {
+            text-align: left;
+        }
+
+        .card {
+            border: none;
+        }
+
+        .form-control {
+            border: none;
+            background-color: white;
+        }
+
     </style>
     <div class="row main-content ">
-        <div class="column " >
-            <!--Student 01 -->
-            <div class="form-content">
-                <input type="text" value="{{ $LoggedUserVerify['verify_key'] }}" name="summary_key" hidden>
-                <h2>Student 01</h2>
-                <div class="row">
-                    <div class="col">
-                        
-                        <label for="inputLastname" class="form-label">Lastname</label>
-                        <input type="text" class="form-control" placeholder="" aria-label="Lastname">
-                    </div>
-                    <div class="col">
-                        <label for="inputFirstname" class="form-label">Firstname</label>
-                        <input type="text" class="form-control" placeholder="" aria-label=" Firstname">
-                    </div>
-                    <div class="col">
-                        <label for="inputMiddlename" class="form-label">Middlename</label>
-                        <input type="text" class="form-control" placeholder="" aria-label="Middlename">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" placeholder="" aria-label="Email">
-                    </div>
-                    <div class="col">
-                        <label for="inputStudentType" class="form-label">Student Type</label>
-                        <input type="text" class="form-control" id="inputStudentType"
-                        placeholder="" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="inputDepartment" class="form-label">Department</label>
-                        <input type="text" class="form-control" id="inputDepartment"
-                        placeholder="" readonly>
-                    </div>
-                    <div class="col">
-                        <label for="inputGradeCourse" class="form-label">Grade/Course</label>
-                        <input type="text" class="form-control" id="inputGradeCourse"
-                        placeholder="" readonly>
-                    </div>
-                    <div class="col">
-                        <label for="inputLevelYear" class="form-label">Level/Year</label>
-                        <input type="text" class="form-control" id="inputLevelYear"
-                        placeholder="" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="cols" style="width: 50%;">
-                        <label for="inputScholarshiptatus*" class="form-label">Scholarship Status</label>
-                        <input type="text" class="form-control" id="inputScholarshiptatus"
-                        placeholder="" readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row border-line">
-            <div class="col-sm-7">
-                <div class="card">
-                    <img src="../ASSETS/verify/receipt.png" alt="Image Description" width="100% "
-                        height="550px" title="Image Title" style=" border-radius: 10px;;"
-                        class="image-class">
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Take note: </h5>
-                        <p class="card-text">Ensure that all information provided are
-                            accurate and exact before proceeding to the next step.</p>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">Payment for student
-                                1:*</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput"
-                                placeholder="" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Amount of Payment:
-                                *</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2"
-                                placeholder="" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Reference Number*</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2"
-                                placeholder="" readonly>
-                        </div>
-                        <div class="row">
-                            <label for="formGroupExampleInput2" class="form-label">Date & Time of Payment
-                                <span class="quotation">(BASED ON YOUR RECEIPT)</span></label>
-                            <div class="col-sm-6">
-                                <input type="date" class="form-control" placeholder=""
-                                    aria-label="text" readonly>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <form>
+                            @foreach ($profile as $profiles)
+                            <div class="form-group">
+                                <label for="fullname">Full Name</label>
+                                <input type="text" class="form-control" id="fullname" name="fullname"
+                                    value="{{ $profiles->fullname }}" readonly>
                             </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder=""
-                                    aria-label="time" readonly>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                    value="{{ $profiles->email }}" readonly>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="scholarshipStatus">Scholarship Status</label>
+                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus"
+                                    value="{{ $profiles->scholarshipStatus }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <input type="text" class="form-control" id="department" name="department"
+                                    value="{{ $profiles->department }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="section_course">Section Course</label>
+                                <input type="text" class="form-control" id="section_course" name="section_course"
+                                    value="{{ $profiles->section_course }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade_year">Grade Year</label>
+                                <input type="text" class="form-control" id="grade_year" name="grade_year"
+                                    value="{{ $profiles->grade_year }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="student_type">Student Type</label>
+                                <input type="text" class="form-control" id="student_type" name="student_type"
+                                    value="{{ $profiles->student_type }}" readonly>
+                            </div>
+                            @endforeach
+
+                            @foreach ($uploadform as $uploadforms)
+                            <div class="form-group">
+                                <label for="receipt_type">Receipt Type</label>
+                                <input type="text" class="form-control" id="receipt_type" name="receipt_type"
+                                    value="{{ $uploadforms->receipt_type }}" readonly>
+                            </div>
+                            @endforeach
+
+                            @foreach ($payment as $payments)
+
+                            <div class="form-group">
+                                <label for="payment_for">Payment For</label>
+                                <input type="text" class="form-control" id="payment_for" name="payment_for"
+                                    value="{{ $payments->payment_for }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="reference">Reference</label>
+                                <input type="text" class="form-control" id="reference" name="reference"
+                                    value="{{ $payments->reference }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="text" class="form-control" id="amount" name="amount"
+                                    value="{{ $payments->amount }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="text" class="form-control" id="date" name="date" value="{{ $payments->date }}"
+                                    readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Time</label>
+                                <input type="text" class="form-control" id="time" name="time" value="{{ $payments->time }}"
+                                    readonly>
+                            </div>
+                            @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <img src="#" alt="Image">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="column " style="padding-top: 30px;">
@@ -200,5 +190,5 @@
             </div>
         </div>
     </div>
-    
+
 </x-form-layout>
