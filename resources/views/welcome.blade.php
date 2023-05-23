@@ -230,7 +230,7 @@
 
 <body>
     <!--  section  -->
-    <section  class="image-bg" style=" background-image: url('./assets/landing/landingpage.png');"> 
+    <section  class="image-bg" style=" background-image: url({{ asset('assets/landing/landingpage.png') }});"> 
         <main class="container-fluid">
             <div class="col-md-6">
               <a href="{{ url('/login') }}"   target="_blank" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
