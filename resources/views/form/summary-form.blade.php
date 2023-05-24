@@ -83,6 +83,10 @@
             background-color: white;
         }
 
+        .align_right {
+            align-content: right;
+        }
+
     </style>
     <div class="row main-content ">
         <div class="row">
@@ -171,7 +175,7 @@
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <img src="#" alt="Image">
+                        <img src="{{ $details['receipt'] }}" alt="Image Description" title="Image Title" style="border-radius: 10px; width: 50%;"  class="image-class align_right">
                     </div>
                 </div>
             </div>

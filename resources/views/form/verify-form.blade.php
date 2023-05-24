@@ -125,7 +125,7 @@
                                                         <h5 class="card-title">Take note:</h5>
                                                         <p class="card-text">Ensure that all information provided are accurate and exact before proceeding to the next step.</p>
                                                         <div class="form-group">
-                                                            <input type="text" value="{{ $LoggedUserProfile['profile_key'] ?? $firstProfileKey }}" name="uploadform_key" hidden>
+                                                            <input type="text" value="{{ $firstPrivacyKey['profile_key'] ?? $firstPrivacyKey }}" name="uploadform_key" hidden>
                                 
                                                             <label for="paymentFor">Payment For:</label>
                                                             <select id="paymentFor" class="form-control" name="payment_for">
@@ -171,6 +171,37 @@
                                         </div>
                                     </div> 
                                 </form>  
+
+                                <!-- error Modal -->
+                                <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if(Session::has('error'))
+                                                    <p>{{ Session::get('error') }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if(Session::has('error'))
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#errorModal').modal('show');
+                                        });
+                                    </script>
+                                @endif
+
                             </div>
 
                         </div>

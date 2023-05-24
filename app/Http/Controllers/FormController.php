@@ -231,15 +231,15 @@ class FormController extends Controller
         //$api_key = '4849078385c87162e2e014c19b99383a';
         // end
 
-        $client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
-        $client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
-        $username = 'jordanearlimperialpascua20';
-        $api_key = '4f708f480170a044368643ef0929850e';
+        //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
+        //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
+        //$username = 'jordanearlimperialpascua20';
+        //$api_key = '4f708f480170a044368643ef0929850e';
 
-        //$client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
-        //$client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
-        //$username = 'angelblaze779';
-        //$api_key = '434562be5ba93a74021d918a963f43f2';
+        $client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
+        $client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
+        $username = 'angelblaze779';
+        $api_key = '434562be5ba93a74021d918a963f43f2';
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
@@ -306,14 +306,17 @@ class FormController extends Controller
             ];
 
             $privacy = Privacy::find('privacy_key');
+            
 
             if ($privacy !== null) {
                 $firstPrivacyKey = $privacy->first();
                 return view('form.verify-form')
-                        ->with('firstProfileKey', $firstPrivacyKey)
-                        ->with('details', $details);
+                    ->with('firstProfileKey', $firstPrivacyKey)
+                    ->with('details', $details);
             } else {
-                dd($privacy);
+                $errorMessage = 'Privacy must be selected.';
+                Session::flash('error', $errorMessage);
+                return redirect()->back();
             }
 
              
@@ -355,11 +358,24 @@ class FormController extends Controller
             // for summary
         public function summary(Request $request )
         {
+
+            // Retrieve the upload form record
+            $uploadForm = UploadForm::first();
+
+           
+            // Get the receipt filename from the upload form record
+            $receiptFilename = $uploadForm->receipt_filename;
+
+            $details = [
+                'receipt' => "/assets/receipts/temp/" . $receiptFilename,
+            ];
+
             $profile = Profile::all();
             $uploadform = UploadForm::all();
             $payment = Payment::all();
 
-            return view('form.summary-form', compact('profile','uploadform', 'payment'));
+            return view('form.summary-form', compact('profile', 'uploadform', 'payment'))
+                ->with('details', $details);
 
             
         }
