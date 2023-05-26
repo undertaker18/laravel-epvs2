@@ -12,7 +12,7 @@
         <ul class="navbar-nav ml-auto">
           <!-- Notifications Dropdown Menu -->
           <li class="nav-item d-flex ">
-            <a  class="nav-link mt-1">{{ Auth::user()->name }}</a>
+            <a  class="nav-link mt-1 text-dark">{{ Auth::user()->name }} | Roles</a>
           </li>
           <li class="nav-item dropdown">
 
@@ -20,8 +20,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 </div>
               <div class="user-panel d-flex">
-                <div class="image">
-                  <i class="fa fa-circle-user" style="color: #1266B4; border-radius: 50px; font-size: 30px; margin-top: 3px;" ></i> 
+                <div class="image mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16" style="color: #1266B4;">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                  </svg>
+       
                 </div>
               </div>
             </a>

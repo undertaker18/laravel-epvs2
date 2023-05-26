@@ -88,6 +88,16 @@
         }
 
     </style>
+        <div class="card-body">
+            <div class="tab-content">
+
+                <div class="active tab-pane" id="profile">
+                    <div class=" main-content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row main-content ">
         <div class="row">
             <div class="col-md-6">
