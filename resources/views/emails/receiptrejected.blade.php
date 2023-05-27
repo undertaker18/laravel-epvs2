@@ -7,7 +7,6 @@ Thank you!
 
 Please refer to the sample valid receipts below.
 
-
 Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>
