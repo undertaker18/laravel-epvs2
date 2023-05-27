@@ -14,22 +14,14 @@
 </style>
 
 <body>
-    <img src="{{public_path() .'/assets/data-privacy/lvcclogo.png' }}">
-    <!--  section  -->
+
     <section  class="image-bg">
         <main class="container-fluid">
-
-
-        {{-- Hi {{ $data['data']['name'] }},<br><br> --}}
-        Thanks for filling out Enrollment Payment Form.
-        Here's what was received.
-
+            Hi {{$data['name']}}
 <br><br>
-{{-- {{ $data['attachment']['path']}} --}}
-{{-- <a href="{{ $data['attachment']['path']}}">KLIK</a>** --}}
-
-    <img src="{{ asset('assets/landing/LVCC.png')}}">
-
+            Your receipt is invalid. Kindly send a valid receipt. Make sure the date, time, reference, and amount are visible. Thank you!
+<br><br>
+            Please refer to the sample valid receipts below:
           </main>
         <main class="container-fluid ">
 

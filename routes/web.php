@@ -72,57 +72,6 @@ Route::get('/2', function () {
 });
 
 
-Route::get('/3', function () {
-
-    $data = [
-        'data' => [
-            'summary' => [
-                'studentsInfo' => [
-                    [
-                        'Full Name' => 'fullNamexc',
-                        'Email' => 'emaillll',
-                        'Scholarship Status' => 'scholarship_status',
-                        'Department' => 'dept',
-                        'Dection' => 'section',
-                        'Grade' => 'gra',
-                        'StudentType' => 'student_type',
-                        'Amount' => '1000'
-                    ],
-                    [
-                        'Full Name' => '2fullNamexc',
-                        'Email' => '2emaillll',
-                        'Scholarship Status' => '2scholarship_status',
-                        'Department' => '2dept',
-                        'Dection' => '2section',
-                        'Grade' => '2gra',
-                        'StudentType' => '2student_type',
-                        'Amount' => '21000',
-                    ]
-                ],
-                'receipt' => [
-
-                    'receipt_type' => 'receipt',
-                    'amount' => 'payment1 amount',
-                    'reference' => 'reffff',
-                    'date' => 'date',
-                    'time' => 'time'
-                ]
-            ]
-        ],
-        'subject' => 'Receipt Rejected',
-        'recipient' => 'pgw.2023.01@gmail.com'
-    ];
-
-    try {
-        Mail::to($data['recipient'])->send(new PaymentSummary($data));
-    } catch (Exception $e) {
-        dd($e->getMessage());
-    }
-    // return view('email/payment-summary', $data);
-
-    // return view('welcome');
-});
-
 
 Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
 Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
@@ -173,6 +122,10 @@ Route::get('/receipt-pending', [ReceiptController::class, 'pending'])
 Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-reject');
+
+    Route::post('/receipt-reject', [ReceiptController::class, 'postReject'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-post-reject');
 
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
