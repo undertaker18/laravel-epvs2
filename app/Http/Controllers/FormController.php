@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentSummary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,6 +13,8 @@ use App\Models\Privacy;
 use App\Models\Profile;
 use App\Models\UploadForm;
 use App\Models\Payment;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -21,7 +24,7 @@ class FormController extends Controller
         $privacy = new Privacy();
         return view('form.privacy-notice-form', compact('privacy'));
     }
-    
+
     public function postPrivacy(Request $request)
     {
         $request->validate([
@@ -44,7 +47,7 @@ class FormController extends Controller
         return redirect('/privacy-form');
     }
 
-    
+
     //=================================================================================
 
         // for profile
@@ -53,13 +56,13 @@ class FormController extends Controller
         $counts = $request->input('counts');
         $countForm = $request->input('counts') + 1 ; // Initial value for $count
 
-        
+
         $data = ['LoggedUserPrivacy'=>Privacy::where('privacy_key','=', session('LoggedUser'))->first()];
         return view('form.profile-form', $data)
         ->with('countForm', $countForm)
         ->with('counts', $counts);
-     
-    
+
+
 
     }
 
@@ -89,7 +92,7 @@ class FormController extends Controller
         try {
             $profile->save();
         } catch (\Exception $e) {
-           
+
             // Log the error or handle it as needed
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
@@ -124,7 +127,7 @@ class FormController extends Controller
         try {
             $profile->save();
         } catch (\Exception $e) {
-           
+
             // Log the error or handle it as needed
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
@@ -159,7 +162,7 @@ class FormController extends Controller
         try {
             $profile->save();
         } catch (\Exception $e) {
-           
+
             // Log the error or handle it as needed
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
@@ -169,14 +172,14 @@ class FormController extends Controller
     }
 
 
-  
-    
+
+
     //========================================================================================
-        
+
     // for upload
     public function upload(Request $request )
     {
-        
+
         $data = ['LoggedUserProfile'=>Profile::where('profile_key','=', session('LoggedUser'))->first()];
         return view('form.upload-form-2', $data);
     }
@@ -188,7 +191,7 @@ class FormController extends Controller
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
             $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
-        
+
             // Store data in session
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
@@ -197,16 +200,16 @@ class FormController extends Controller
             $uploadform->uploadform_key = $request->uploadform_key;
             $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
             $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
-            
+
             $uploadform->save();
-            
+
             // Store 'LoggedUser' in session
-            
+
             $request->session()->put('LoggedUser', $uploadform->uploadform_key);
             return redirect()->route('verify-form');
 
         }
-        
+
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
@@ -214,7 +217,7 @@ class FormController extends Controller
     // =========================================================================================
         // for verify
     public function verify(Request $request )
-    {   
+    {
         // get from session
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
@@ -302,11 +305,11 @@ class FormController extends Controller
             $details = [
                 'ocr_result' => $finalResult,
                 'receipt' => "/ASSETS/receipts/temp/". $receipt,
-                
+
             ];
 
             $privacy = Privacy::find('privacy_key');
-            
+
 
             if ($privacy !== null) {
                 $firstPrivacyKey = $privacy->first();
@@ -319,7 +322,7 @@ class FormController extends Controller
                 return redirect()->back();
             }
 
-             
+
 
         }
 
@@ -330,19 +333,19 @@ class FormController extends Controller
                 'reference' => 'required|unique:payment',
                 'amount' => 'required',
                 'date' => 'required',
-                
+
             ]);
-    
+
             $payment  = new Payment();
 
             $payment->payment_key = $request->payment_key;
-           
+
             $payment->payment_for = $request->payment_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
             $payment->time = $request->time;
-            
+
             $payment->save();
             dd($payment); // Add this line for debugging
             // Store 'LoggedUser' in session
@@ -354,7 +357,7 @@ class FormController extends Controller
 
         //==============================================================================================================
 
-        
+
             // for summary
         public function summary(Request $request )
         {
@@ -362,7 +365,7 @@ class FormController extends Controller
             // Retrieve the upload form record
             $uploadForm = UploadForm::first();
 
-           
+
             // Get the receipt filename from the upload form record
             $receiptFilename = $uploadForm->receipt_filename;
 
@@ -377,14 +380,14 @@ class FormController extends Controller
             return view('form.summary-form', compact('profile', 'uploadform', 'payment'))
                 ->with('details', $details);
 
-            
+
         }
 
 
         public function postSummary(Request $request )
         {
 
-            return view('form.summary-form');
+
         }
 
 
@@ -395,7 +398,60 @@ class FormController extends Controller
             return view('form.submit-form');
         }
 
-        
+
+        public function postSubmit(Request $request )
+        {
+
+            $data = [];
+            $labels = [
+                "receipt_type" => "Receipt Type",
+                "reference" => "Reference",
+                "receiptamount" => "Receipt Amount",
+                "date" => "Receipt Date",
+                "time" => "Receipt Date",
+                "fullname" => "Full Name",
+                "email" => "Email",
+                "scholarshipStatus" => "Scholarship Status",
+                "department" => "Department",
+                "section_course" => "Section/Course",
+                "grade_year" => "Grade/Year",
+                "student_type" => "Student Type",
+                "payment_for" => "Payment For",
+            ];
+
+            foreach ($request->all() as $key => $value){
+                $explodeValue = explode('##', $key);
+                if ($key === '_token') {
+                } else if (in_array($explodeValue[0], ['receipt_type', 'reference', 'date', 'time', 'receiptamount']) === false) {
+                    $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
+                } else {
+                    $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
+                }
+            }
+
+            foreach ($data['data']['summary']['studentsInfo'] as $key => $stud) {
+                $recipient[$key]['fullname'] = $stud['Full Name'];
+                $recipient[$key]['email'] = $stud['Email'];
+            }
+
+            $data['subject'] = 'Payment Summary';
+            // $data['recipient'] = 'pgw.2023.01@gmail.com';
+            $data['labels'] = $labels;
+
+            try {
+                foreach ($recipient as $recipientKey => $rec) {
+                    $data['name'] = $rec['fullname'];
+                    $email = $rec['email'];
+                    Mail::to($email)->send(new PaymentSummary($data));
+                }
+            } catch (Exception $e) {
+                dd($e->getMessage());
+            }
+            // return view('email/payment-summary', $data);
+
+            // return view('welcome');
+        }
+
 
         private function getValueBetweenstrings($paragraph ,$string1, $string2) {
             $stringOnePosition = strpos($paragraph, $string1, 0);

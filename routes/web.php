@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
 use App\Http\Controllers\XeroApiController;
+use App\Mail\PaymentSummary;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +29,100 @@ use Illuminate\Support\Facades\Route;
 /* PUBLIC USER*/
 
 Route::get('/', function () {
+
     return view('welcome');
 });
+
+Route::get('/2', function () {
+
+    $sampleReceipt = [
+        'Gcash-email' => public_path() . '/assets/sample-receipts/Gcash-email.png',
+        'Gcash-mobile-save' => public_path() . '/assets/sample-receipts/Gcash-mobile-save.jpg',
+        'Gcash-mobile-ss' => public_path() . '/assets/sample-receipts/Gcash-mobile-ss.jpg',
+        'metrobank' => public_path() . '/assets/sample-receipts/metrobank.jpg',
+        'unionbank' => public_path() . '/assets/sample-receipts/unionbank.jpg',
+        'PNB-debit' => public_path() . '/assets/sample-receipts/PNB-debit.jpg',
+        'send-money-instapay' => public_path() . '/assets/sample-receipts/send-money-instapay.jpg',
+        'pesonet-gateway' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
+    ];
+
+    $data = [
+        'data' => [
+            'name' => 'test name',
+            'attachment' => [
+                'path' => $sampleReceipt['Gcash-email']
+            ],
+        ],
+        'subject' => 'Receipt Rejected',
+        'recipient' => 'pgw.2023.01@gmail.com'
+    ];
+
+    try {
+        Mail::send('email/reject-receipt', $data, function($messages) use ($data){
+            $messages->to($data['recipient']);
+            $messages->subject($data['subject']);
+            $messages->attach($data['data']['attachment']['path']);
+        });
+    } catch (Exception $e) {
+        dd($e->getMessage());
+    }
+    return view('email/reject-receipt');
+
+    // return view('welcome');
+});
+
+
+Route::get('/3', function () {
+
+    $data = [
+        'data' => [
+            'summary' => [
+                'studentsInfo' => [
+                    [
+                        'Full Name' => 'fullNamexc',
+                        'Email' => 'emaillll',
+                        'Scholarship Status' => 'scholarship_status',
+                        'Department' => 'dept',
+                        'Dection' => 'section',
+                        'Grade' => 'gra',
+                        'StudentType' => 'student_type',
+                        'Amount' => '1000'
+                    ],
+                    [
+                        'Full Name' => '2fullNamexc',
+                        'Email' => '2emaillll',
+                        'Scholarship Status' => '2scholarship_status',
+                        'Department' => '2dept',
+                        'Dection' => '2section',
+                        'Grade' => '2gra',
+                        'StudentType' => '2student_type',
+                        'Amount' => '21000',
+                    ]
+                ],
+                'receipt' => [
+
+                    'receipt_type' => 'receipt',
+                    'amount' => 'payment1 amount',
+                    'reference' => 'reffff',
+                    'date' => 'date',
+                    'time' => 'time'
+                ]
+            ]
+        ],
+        'subject' => 'Receipt Rejected',
+        'recipient' => 'pgw.2023.01@gmail.com'
+    ];
+
+    try {
+        Mail::to($data['recipient'])->send(new PaymentSummary($data));
+    } catch (Exception $e) {
+        dd($e->getMessage());
+    }
+    // return view('email/payment-summary', $data);
+
+    // return view('welcome');
+});
+
 
 Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
 Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
@@ -52,6 +146,7 @@ Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-
 Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
 
 Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
+Route::post('/submit-form', [FormController::Class, 'postSubmit' ])->name('submit-form');
 
 
 

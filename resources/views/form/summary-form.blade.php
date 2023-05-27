@@ -103,81 +103,96 @@
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <form>
-                            @foreach ($profile as $profiles)
+                        <form action='submit-form' method="POST">
+                            @csrf
+                            @foreach ($profile as $key => $profiles)
+
+
                             <div class="form-group">
                                 <label for="fullname">Full Name</label>
-                                <input type="text" class="form-control" id="fullname" name="fullname"
+                                <input type="text" class="form-control" id="fullname" name="fullname##{{$key}}"
                                     value="{{ $profiles->fullname }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
+                                <input type="text" class="form-control" id="email" name="email##{{$key}}"
                                     value="{{ $profiles->email }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="scholarshipStatus">Scholarship Status</label>
-                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus"
+                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus##{{$key}}"
                                     value="{{ $profiles->scholarshipStatus }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="department">Department</label>
-                                <input type="text" class="form-control" id="department" name="department"
+                                <input type="text" class="form-control" id="department" name="department##{{$key}}"
                                     value="{{ $profiles->department }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="section_course">Section Course</label>
-                                <input type="text" class="form-control" id="section_course" name="section_course"
+                                <input type="text" class="form-control" id="section_course" name="section_course##{{$key}}"
                                     value="{{ $profiles->section_course }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="grade_year">Grade Year</label>
-                                <input type="text" class="form-control" id="grade_year" name="grade_year"
+                                <input type="text" class="form-control" id="grade_year" name="grade_year##{{$key}}"
                                     value="{{ $profiles->grade_year }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="student_type">Student Type</label>
-                                <input type="text" class="form-control" id="student_type" name="student_type"
+                                <input type="text" class="form-control" id="student_type" name="student_type##{{$key}}"
                                     value="{{ $profiles->student_type }}" readonly>
                             </div>
                             @endforeach
 
-                            @foreach ($uploadform as $uploadforms)
+                            @foreach ($uploadform as $uploadKey => $uploadforms)
+
                             <div class="form-group">
                                 <label for="receipt_type">Receipt Type</label>
-                                <input type="text" class="form-control" id="receipt_type" name="receipt_type"
+                                <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
                                     value="{{ $uploadforms->receipt_type }}" readonly>
                             </div>
                             @endforeach
 
-                            @foreach ($payment as $payments)
+                            @foreach ($payment as $paymentKey => $payments)
 
                             <div class="form-group">
                                 <label for="payment_for">Payment For</label>
-                                <input type="text" class="form-control" id="payment_for" name="payment_for"
+                                <input type="text" class="form-control" id="payment_for" name="payment_for##{{$paymentKey}}"
                                     value="{{ $payments->payment_for }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="reference">Reference</label>
-                                <input type="text" class="form-control" id="reference" name="reference"
-                                    value="{{ $payments->reference }}" readonly>
+                                <input type="text" class="form-control" id="reference" name="reference##{{$paymentKey }}"
+                                    value="{{ $payments->reference_number }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount</label>
-                                <input type="text" class="form-control" id="amount" name="amount"
-                                    value="{{ $payments->amount }}" readonly>
+                                <input type="text" class="form-control" id="amount" name="receiptamount##{{$paymentKey }}"
+                                    value="{{ $payments->amount_of_payment }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="date">Date</label>
-                                <input type="text" class="form-control" id="date" name="date" value="{{ $payments->date }}"
+                                <input type="text" class="form-control" id="date" name="date##{{$paymentKey }}" value="{{ $payments->submitted_date }}"
                                     readonly>
                             </div>
                             <div class="form-group">
                                 <label for="time">Time</label>
-                                <input type="text" class="form-control" id="time" name="time" value="{{ $payments->time }}"
+                                <input type="text" class="form-control" id="time" name="time##{{$paymentKey }}" value="{{ $payments->submitted_date }}"
                                     readonly>
                             </div>
                             @endforeach
+                            <div class="column " style="padding-top: 30px;">
+
+                                <div class="buttons">
+                                    <a href="../pages/verify.html ">
+                                        <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
+                                    </a>
+                                    <a href="submit-form">
+                                        <button class="right-button">NEXT<i class="fas fa-arrow-right"></i></button>
+                                    </a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -192,17 +207,7 @@
 
         </div>
 
-        <div class="column " style="padding-top: 30px;">
 
-            <div class="buttons">
-                <a href="../pages/verify.html ">
-                    <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
-                </a>
-                <a href="../pages/submit.html">
-                    <button class="right-button">NEXT <i class="fas fa-arrow-right"></i></button>
-                </a>
-            </div>
-        </div>
     </div>
 
 </x-form-layout>
