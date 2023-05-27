@@ -182,6 +182,8 @@
                                     readonly>
                             </div>
                             @endforeach
+
+                            <input type="hidden" value="{{ $details['receipt'] }}" name="receipt_source##">
                             <div class="column " style="padding-top: 30px;">
 
                                 <div class="buttons">

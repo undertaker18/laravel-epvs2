@@ -421,7 +421,7 @@ class FormController extends Controller
 
             foreach ($request->all() as $key => $value){
                 $explodeValue = explode('##', $key);
-                if ($key === '_token') {
+                if (in_array($key, ['_token', 'receipt_source##']) === true) {
                 } else if (in_array($explodeValue[0], ['receipt_type', 'reference', 'date', 'time', 'receiptamount']) === false) {
                     $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
                 } else {
@@ -436,12 +436,14 @@ class FormController extends Controller
 
             $data['subject'] = 'Payment Summary';
             $data['labels'] = $labels;
+            $data['receipt'] = $request->all()['receipt_source##'];
 
             try {
                 foreach ($recipient as $recipientKey => $rec) {
                     $data['name'] = $rec['fullname'];
                     $email = $rec['email'];
                     Mail::to($email)->send(new PaymentSummary($data));
+
                 }
             } catch (Exception $e) {
                 dd($e->getMessage());
