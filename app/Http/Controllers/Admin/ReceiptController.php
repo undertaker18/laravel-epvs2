@@ -56,9 +56,9 @@ class ReceiptController extends Controller
         try {
 
             foreach ($xeroInvoice as $key => $value) {
-                // this is for testing
+                // this is for testing - Change the following
                 $sampleReceipt =  $sampleReceiptType['Gcash-email'];
-                $recipient = 'pgw.2023.01@gmail.com';
+                $recipient = 'laverdad.epvsystem@gmail.com';
                 //end
 
                 $data = [
