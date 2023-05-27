@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\receiptrejected;
 use App\Models\XeroInvoice;
 use Exception;
 use Illuminate\Http\Request;
@@ -70,13 +71,7 @@ class ReceiptController extends Controller
                     'subject' => 'Receipt Rejected',
                     'recipient' => $recipient
                 ];
-
-
-                Mail::send('email/reject-receipt', $data, function($messages) use ($data){
-                    $messages->to($data['recipient']);
-                    $messages->subject($data['subject']);
-                    $messages->attach($data['data']['attachment']['path']);
-                });
+                Mail::to($data['recipient'])->send(new receiptrejected($data));
 
             }
         } catch (Exception $e) {
