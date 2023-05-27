@@ -435,7 +435,6 @@ class FormController extends Controller
             }
 
             $data['subject'] = 'Payment Summary';
-            // $data['recipient'] = 'pgw.2023.01@gmail.com';
             $data['labels'] = $labels;
 
             try {
@@ -447,9 +446,7 @@ class FormController extends Controller
             } catch (Exception $e) {
                 dd($e->getMessage());
             }
-            // return view('email/payment-summary', $data);
-
-            // return view('welcome');
+            return redirect('/submit-form');
         }
 
 
