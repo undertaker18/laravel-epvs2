@@ -29,7 +29,7 @@ class receiptrejected extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Receiptrejected',
+            subject: 'Receipt Rejected',
         );
     }
 
@@ -53,6 +53,6 @@ class receiptrejected extends Mailable
      */
     public function attachments(): array
     {
-        return [$this->data['data']['attachment']['path']];
+        return [];
     }
 }

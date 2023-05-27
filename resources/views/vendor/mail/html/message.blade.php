@@ -1,10 +1,11 @@
 <x-mail::layout>
 {{-- Header --}}
+
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-La Verdad Christian College
+{{-- La Verdad Christian College
 
-Enrollment Payment Validation System
+Enrollment Payment Validation System --}}
 </x-mail::header>
 </x-slot:header>
 

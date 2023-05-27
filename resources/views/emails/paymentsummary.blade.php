@@ -1,6 +1,9 @@
 <x-mail::message>
-    {{-- <img src="{{public_path() .'/assets/data-privacy/lvcclogo.png' }}">
-<img src="{{public_path() .'/assets/data-privacy/lvcclogo.png' }}" class="logo" alt="EPVS Logo"> --}}
+<img src="{{ $message->embed(public_path(). '/' . 'assets/data-privacy/lvcclogo.png') }}" style="height:100px; width:100px">
+
+# La Verdad Christian College
+## Enrollment Payment Validation System
+***
 
 Hi {{ $data['name'] }},
 
