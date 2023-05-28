@@ -49,12 +49,11 @@
                             class="form-inline">
                             @csrf
                             <div class="form-group m-3">
-                                <label for="csv_file" class="mr-3">CSV File:</label>
-                                <input type="file" name="csv_file" id="csv_file" class="form-control-file mr-3"
-                                    accept=".csv">
-                                <button type="submit" class="btn btn-primary mt-3 ml-0"
-                                    style="background-color:#008000; margin-left: 10px;">UPLOAD LIST OF RECEIPT</button>
+                                <label for="csv_file" class="mr-3">CSV File (Format: posting_datetime, branch, description, debit, credit, running_balance, check_number):</label>
+                                <input type="file" name="csv_file" id="csv_file" class="form-control-file mr-3" accept=".csv">
+                                <button type="submit" class="btn btn-primary mt-3 ml-0" style="background-color:#008000; margin-left: 10px;">UPLOAD LIST OF RECEIPT</button>
                             </div>
+                            
                         </form>
                     </div>
                     <div class="col-lg-5 col-8">
@@ -78,27 +77,64 @@
                     </div>
 
                 </div>
+                @if(session('error'))
+                    <!-- Error modal code here -->
+                    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                    <h5 class="modal-title" id="errorModalLabel">ERROR!</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <i class="fas fa-times-circle fa-5x text-danger mb-3"></i>
+                                    <p class="modal-message">An error occurred.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 @if(session('success'))
                 <!-- Success modal code here -->
-                <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
-                    aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-success">
-
-                                <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                                <h5 class="modal-title" id="successModalLabel">SUCCESS!</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body text-center">
+                            <div class="modal-body text-center mb-5">
                                 <i class="fas fa-check-circle fa-5x text-success mb-3"></i>
-                                <p class="modal-message ">File uploaded successfully!</p>
+                                <p class="modal-message">File uploaded successfully!</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            @endif
+            <!-- Place this code at the bottom of your blade template, before the closing </body> tag -->
+                        
+            <script>
+                @if(session('success'))
+                    $(document).ready(function() {
+                        $('#successModal').modal('show');
+                    });
                 @endif
+
+                @if(session('error'))
+                    $(document).ready(function() {
+                        $('#errorModal').modal('show');
+                    });
+                @endif
+            </script>
+
+            
                 <!-- /.row -->
         </section>
 
@@ -113,7 +149,10 @@
                                 <th>Posting Date:</th>
                                 <th>Branch:</th>
                                 <th>Description:</th>
+                                <th>Debit:</th>
                                 <th>Credit:</th>
+                                <th>Running Balance:</th>
+                                <th>Check Number:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,10 +161,12 @@
                                 <td>{{ date('m/d/Y', strtotime($bdoReceipt->posting_datetime)) }}</td>
                                 <td>{{ $bdoReceipt->branch }}</td>
                                 <td>{{ $bdoReceipt->description }}</td>
+                                <td>{{ $bdoReceipt->debit }}</td>
                                 <td>{{ $bdoReceipt->credit }}</td>
+                                <td>{{ $bdoReceipt->running_balance }}</td>
+                                <td>{{ $bdoReceipt->check_number }}</td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -135,4 +176,8 @@
         <!-- right col -->
 
     </div><!-- /.container-fluid -->
+    <!-- Example of including jQuery and Bootstrap JS files, adjust the paths according to your setup -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </x-admin-layout>

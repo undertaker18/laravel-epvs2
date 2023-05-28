@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_scholarship', function (Blueprint $table) {
+        Schema::create('year_level_senior', function (Blueprint $table) {
             $table->id();
-            $table->string('student_scholarship_list');
+            $table->string('senior_high_list');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_scholarship');
+        Schema::dropIfExists('year_level');
     }
 };
