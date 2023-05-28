@@ -53,6 +53,6 @@ class PaymentSummary extends Mailable
      */
     public function attachments(): array
     {
-        return [public_path() . '/'. $this->data['receipt']];
+        return [];
     }
 }

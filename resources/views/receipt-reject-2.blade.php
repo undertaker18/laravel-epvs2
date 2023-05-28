@@ -182,7 +182,6 @@
             let invoice_obj = {};
 
             $(".invoice_checkbox").change(function (e) {
-                console.log(this.checked)
                 let id = this.getAttribute('data-id');
                 if (this.checked == true) {
                     // add to list
@@ -197,7 +196,6 @@
 
                 $('#csv_ids').val(csv);
                 console.log(csv);
-                console.log(invoice_obj);
             });
 
         });

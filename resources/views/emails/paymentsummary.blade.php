@@ -33,6 +33,8 @@ Here's what was received.
 </table>
 
 
+<img src="{{ $message->embed(public_path(). '/' . $data['receipt']) }}">
+
 
 Thanks,
 

@@ -15,7 +15,7 @@ class XeroController extends Controller
      {
          $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
          ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
-         ->where([['status', '=', '0']])
+         ->where([['status', '=', '0']]) // 0 - di pa nasesend, 1 - sent
          ->get();
          return view('xero-send', compact(['xeroInvoice']));
      }
