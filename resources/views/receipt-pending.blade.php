@@ -82,114 +82,47 @@
         <!-- right col -->
      
 
-        <!-- data tables -->
-        <section class="invoice" style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
-            <!-- Title Form -->
-            <div class="row" style="margin-top:20px;">
-                <div class="col" style=" margin-left: 50px; margin-top:0px;">
-                    <h2 class="">Pending Receipts</h2>
-                </div>
-                <div class="col">
-                    <!-- SidebarSearch Form -->
-                    <form action="#">
-                        <div class="input-group"
-                            style="width: 100%; float: right; margin-bottom:20px; margin-top:5px; margin-right: 100px;">
-                            <input type="search" class="form-control form-control-lg"
-                                placeholder="Type your keywords here">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-lg btn-default">
-                                    <i class="fa fa-search" style="color: #1266B4;"></i>
-                                </button>
-                            </div>
+         <!-- data tables -->
+                <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
+                    <!-- Title Form -->
+                    <div class="card" style="background-color: ; ">
+                        <div class="card-body"  style="color: #000000; ">
+                            <table id="example1" class="table table-bordered  table-hover">
+                                <thead>
+                                    <tr style="color: #000000;">
+                                        <th>Fullname</th>
+                                        <th>Grade/Course</th>
+                                        <th>Date of Payment</th>
+                                        <th>Time of Payment</th>
+                                        <th>Payment For</th>
+                                        <th>Amount</th>
+                                        <th>Reference No.</th>
+                                        <th>Receipt Type</th>
+                                        <th>Status</th>
+                                        <th>Receipt Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="color: #000000;">
+                                        <td>jordan earl pascua</td>
+                                        <td>BSIS-4</td>
+                                        <td>06/25/2023</td>
+                                        <td>09:00:00</td>
+                                        <td>Notarial</td>
+                                        <td>150.00</td>
+                                        <td>347360483798</td>
+                                        <td>Gcash</td>
+                                        <td style="color: #D78C47;">Pending</td>
+                                        <td style="color: #1266B4; text-decoration: underline;"><i class="fas fa-eye"></i>Full
+                                        View</td>
+                                    </tr>  
+                                    
+                                </tbody>
+                            </table>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table table-striped" id="example"
-                        style="width:100%; margin-left: 0px; margin-right: 0px;">
-                        <thead>
-                            <tr style="color: #1266B4;">
-                                <th>Lastname</th>
-                                <th>Firstname</th>
-                                <th>Grade/Course</th>
-                                <th>Date</th>
-                                <th>time</th>
-                                <th>Amount</th>
-                                <th>Reference No.</th>
-                                <th>Status</th>
-                                <th>Receipt Image</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D78C47;">Pending</td>
-                                <td>View</td>
-                            </tr>
-
-                            <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D78C47;">Pending</td>
-                                <td>View</td>
-                            </tr>
-
-                            <tr>
-                                <td>jordan earl</td>
-                                <td>pascua</td>
-                                <td>BSIS-4</td>
-                                <td>06/25/2023</td>
-                                <td>09:00:00</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #D78C47;">Pending</td>
-                                <td>View</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-                </div>
-                <!-- /.col -->
-            </div>
-             <!--pagination -->
-             <nav aria-label="Page navigation example">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="dataTables_info ml-5 mt-2" id="example1_info" role="status" aria-live="polite">Showing 1 to 3 of 3 entries</div>
                     </div>
-                    <div class="col-md-8">
-                        <ul class="pagination justify-content-center mb-3">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1"  style=" font-weight:bold;">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" style="color: #1266B4; font-weight:bold;">Next</a>
-                            </li>
-                        </ul>
-                    </div> 
-                </div>
-            </nav>
-        </section>
-        <!-- right col -->
-
+                
+                </section>
         <!-- /.row -->
     </div><!-- /.container-fluid -->
     </section>

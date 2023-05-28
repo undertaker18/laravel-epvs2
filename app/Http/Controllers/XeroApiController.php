@@ -442,6 +442,7 @@ class XeroApiController extends Controller
             // truncate table then delete
             DB::table('xero_users')->truncate();
             DB::table('xero_users')->insert($accountToSync);
+            
         } catch (Exception $e) {
             $result = [
                 'status' => false,

@@ -12,6 +12,7 @@ use App\Models\Privacy;
 use App\Models\Profile;
 use App\Models\UploadForm;
 use App\Models\Payment;
+use App\Models\XeroUsers;
 
 class FormController extends Controller
 {
@@ -47,21 +48,27 @@ class FormController extends Controller
     
     //=================================================================================
 
-        // for profile
-    public function profile(Request $request )
+    public function profile(Request $request)
     {
         $counts = $request->input('counts');
-        $countForm = $request->input('counts') + 1 ; // Initial value for $count
+        $countForm = $request->input('counts') + 1; // Initial value for $count
 
-        
-        $data = ['LoggedUserPrivacy'=>Privacy::where('privacy_key','=', session('LoggedUser'))->first()];
-        return view('form.profile-form', $data)
-        ->with('countForm', $countForm)
-        ->with('counts', $counts);
-     
-    
+        $searchQuery = $request->input('search');
+        $results = []; // Initialize the $results variable as an empty array
 
+        if ($searchQuery) {
+            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+        } else {
+            $results = XeroUsers::all(['xero_account_name']);
+        }
+
+        // Pass the search results to the view
+        $data['results'] = $results;
+
+
+        return view('form.profile-form', compact('data','countForm','counts'));
     }
+     
 
     public function postProfile1(Request $request)
     {

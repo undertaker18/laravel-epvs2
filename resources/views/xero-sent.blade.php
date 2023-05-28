@@ -30,7 +30,7 @@
                                 style="background-color: #FFFFFF;  border: 0px solid #D78C47; border-radius: 12px; color: black;">
                                 <div class="inner ml-3 ">
                                     <p class="mt-2">SENDING RECEIPTS</p>
-                                    <h1 style="color:#D78C47; font-size: 60px;"><b>1000</b></h1>
+                                    <h1 style="color:#D78C47; font-size: 60px;"><b>{{ $countsend }}</b></h1>
                                 </div>
 
                                 <div class="icon">
@@ -47,7 +47,7 @@
                                 style="background-color: #FFFFFF;  border: 5px solid #008000; border-radius: 12px; color: black;">
                                 <div class="inner ml-3 ">
                                     <p class="mt-2">SENT RECEIPTS</p>
-                                    <h1 style="color:#008000; font-size: 60px;"><b>1000</b></h1>
+                                    <h1 style="color:#008000; font-size: 60px;"><b>{{ $countsent }}</b></h1>
                                 </div>
 
                                 <div class="icon">
@@ -61,8 +61,6 @@
                 </div>
                 <!-- /.row -->
         </section>
-
-
         <!-- data tables -->
         <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
             <!-- Title Form -->
@@ -71,27 +69,27 @@
                     <table id="example1" class="table table-bordered  table-hover">
                         <thead>
                             <tr style="color: #000000;">
-                                <th>Fullname:</th>
-                                <th>Date:</th>
-                                <th>Payment For:</th>
-                                <th>Amount:</th>
-                                <th>Reference No:</th>
-                                <th>Status:</th>
-                                <th>Receipt Image:</th>
+                                <th>FullName</th>
+                                <th>Xero Account Id</th>
+                                <th>Payment For</th>
+                                <th>Amount</th>
+                                <th>Reference</th>
+                                <th>Created At</th>
+                                <th>Created By</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="color: #000000;">
-                                <td>Pascua, Jordan Earl Imperial</td>
-                                <td>06/25/2023</td>
-                                <td>Notarial Fee</td>
-                                <td>150.00</td>
-                                <td>347360483798</td>
-                                <td style="color: #008000;">Sent</td>
-                                <td style="color: #1266B4; text-decoration: underline;"><i class="fas fa-eye"></i>Full
-                                    View</td>
-                            </tr>
-
+                                @foreach ($xeroInvoice as $value)
+                                <tr style="color: #000000;">
+                                    <td>{{$value->xero_account_name}}</td>
+                                    <td>{{$value->xero_account_id}}</td>
+                                    <td>{{$value->description}}</td>
+                                    <td>{{$value->amount}}</td>
+                                    <td>{{$value->reference}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -99,10 +97,7 @@
 
         </section>
         <!-- right col -->
-        <!-- right col -->
-
         <!-- /.row -->
     </div><!-- /.container-fluid -->
-    </section>
 
 </x-admin-layout>
