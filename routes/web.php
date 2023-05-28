@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
 use App\Http\Controllers\XeroApiController;
+use App\Mail\PaymentSummary;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 /* PUBLIC USER*/
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -53,6 +56,7 @@ Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-
 Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
 
 Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
+Route::post('/submit-form', [FormController::Class, 'postSubmit' ])->name('submit-form');
 
 
 
@@ -79,6 +83,10 @@ Route::get('/receipt-pending', [ReceiptController::class, 'pending'])
 Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-reject');
+
+    Route::post('/receipt-reject', [ReceiptController::class, 'postReject'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-post-reject');
 
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
