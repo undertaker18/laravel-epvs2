@@ -48,6 +48,16 @@
             justify-content: center;
             flex-direction: column;
         }
+        .drag-area1 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: none;
+            /* height: 500px;
+            width: 700px; */
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
 
         .drag-area .icon {
             font-size: 100px;
@@ -95,11 +105,24 @@
 
     </style>
 
-    {{-- <div class="row main-content">
+    <div class="row main-content">
         <form method="post" action="/upload-form" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <header class="h3"><b>Take Note:</b> Make sure your receipt is readable!</header>
+                <header class="h4"><b>Take Note:</b> Make sure your receipt is readable!</header>
+                
+                <div class="drag-area1 mx-auto col-md-7 col-sm-12">
+                    <input class="form-control" name="receipt" type="file" id="receipt">
+                    <select id="" name="receipt_type" class="form-select" style="" required>
+                        <option value="" selected disabled>Receipt Type</option>
+                        <option value="instapay">Instapay</option>
+                        <option value="gcash">Gcash</option>
+                        <option value="gcash_instapay">Gcash Powered by Instapay</option>
+                        <option value="bdo_mobile_banking">BDO Mobile Banking</option>
+                        <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
+                    </select>
+                    <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
+                </div>
                 <div class="drag-area mx-auto col-md-7 col-sm-12">
                     @if(session('error'))
                     <div class="alert alert-danger">
@@ -108,72 +131,41 @@
                     @endif
                     <div class="icon my-auto"><i class="fas fa-cloud-upload-alt"></i></div>
                     <header>Proof of Payment</header>
-                    <p>Image Type: .jpg .jpeg .png</p>
-                    <p>Upload File Here!</p>
-                    <span>OR</span>
-                    <br>
-
-                    <input class="file-input" name="receipt" type="file" id="receipt"
-                        onchange="handleFileChange(event)">
-
-                    <label for="receipt" class="custom-file-input btn btn-primary mb-2">Choose File</label>
-                    {{-- <input type="hidden" name="receipt_filename" id="file-name"> --}}
-
-                {{-- </div> --}}
-{{-- 
-                <div class="col-md-7 col-sm-12 my-1 mx-auto my-auto px-1"> --}}
-
-                    {{-- <input type="hidden" name="receipt_type" id="receipt_type" > --}}
-
-                    {{-- <select name="receipt_type" class="form-select" required>
-                        <option value="" selected disabled>Receipt Type</option>
-                        <option value="instapay">Instapay</option>
-                        <option value="gcash">Gcash</option>
-                        <option value="gcash_instapay">Gcash Powered by Instapay</option>
-                        <option value="bdo_mobile_banking">BDO Mobile Banking</option>
-                        <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
-                    </select> --}}
-                    <div class="row main-content">
-                        <form method="post" action="/upload-form" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="drag-area mx-auto col-md-7 col-sm-12">
-                                    <br><br>
-                                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                    <header>Proof of Payment</header>
-                                    <p>Image Type: .jpg .jpeg .png</p>
-                                    <br>
-                                </div>
-                            <div class="col-md-5 col-sm-12 my-3 mx-auto my-auto px-5">
-                                <div class="my-2">
-                                   
-                                    <input type="file" name="receipt" id="receipt">
-                                </div>
-                                <select id="" name="receipt_type" class="form-select " style="" required>
-                                    <option selected disabled>Receipt Type</option>
-                                    <option value="instapay">Instapay</option>
-                                    <option value="gcash">Gcash</option>
-                                    <option value="gcash_instapay">Gcash Powered by Instapay</option>
-                                    <option value="bdo_mobile_banking">BDO Mobile Banking</option>
-                                    <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
-                                </select>
-                            </div>
-                    </div>
-                    <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
-
+                    <p>Image Type: .jpg .jpeg .png</p> 
+                </div>
+                <script>
+                    var receiptTypeSelect = document.querySelector('select[name="receipt_type"]');
+                        var receiptTypeValidationMessage = document.getElementById('receiptTypeValidationMessage');
+                      
+                        receiptTypeSelect.addEventListener('change', function () {
+                          if (receiptTypeSelect.value !== '') {
+                            receiptTypeSelect.classList.remove('is-invalid');
+                            receiptTypeValidationMessage.textContent = '';
+                          } else {
+                            receiptTypeSelect.classList.add('is-invalid');
+                            receiptTypeValidationMessage.textContent = 'Please select a receipt type.';
+                          }
+                          enableDisableButton();
+                        });
+                      
+                        receiptTypeSelect.addEventListener('focus', function () {
+                          receiptTypeSelect.classList.remove('is-invalid');
+                          receiptTypeValidationMessage.textContent = '';
+                        });      
+                </script>
+                <div class="drag-area1 mx-auto col-md-7 col-sm-12">    
                     <div class="row mt-4">
                         <div class="col-md-6 d-flex justify-content-start">
                             <div>
-                                <a href="{{ url('/profile-form') }}" class="btn btn-lg btn-primary"
-                                    style="width: 200px;">
+                                <a href="{{ url('/profile-form') }}" class="btn btn-lg btn-primary" style="width: 200px;">
                                     <i class="fas fa-arrow-left"></i> Back
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <div>
-                                <button id="nextBtn" class="btn btn-lg btn-success" style="width: 200px;" type="submit"
-                                    name="submit" disabled>
+                                <button id="nextBtn" class="btn btn-lg btn-success" style="width: 200px;" type="submit" name="submit"
+                                    disabled>
                                     Next <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -181,61 +173,32 @@
                     </div>
                 </div>
             </div>
-
         </form>
+    </div>
 
-        <script>
-            var receiptTypeSelect = document.querySelector('select[name="receipt_type"]');
-            var receiptTypeValidationMessage = document.getElementById('receiptTypeValidationMessage');
-            var receiptTypeClicked = false;
+   
+    <script>
+        function checkFormValidity() {
+            var inputs = document.querySelectorAll('input[required], select[required]');
+            var nextBtn = document.getElementById('nextBtn');
+            var isValid = true;
 
-            receiptTypeSelect.addEventListener('change', function () {
-                if (receiptTypeSelect.value !== '') {
-                    receiptTypeSelect.classList.remove('is-invalid');
-                    receiptTypeValidationMessage.textContent = '';
-                } else {
-                    receiptTypeSelect.classList.add('is-invalid');
-                    receiptTypeValidationMessage.textContent = 'Please select a receipt type.';
+            inputs.forEach(function (input) {
+                if (!input.value) {
+                    isValid = false;
                 }
-                enableDisableButton();
             });
 
-            receiptTypeSelect.addEventListener('click', function () {
-                receiptTypeClicked = true;
-            });
+            nextBtn.disabled = !isValid;
+        }
 
-            receiptTypeSelect.addEventListener('blur', function () {
-                if (receiptTypeClicked && receiptTypeSelect.value === '') {
-                    receiptTypeSelect.classList.add('is-invalid');
-                    receiptTypeValidationMessage.textContent = 'Please select a receipt type.';
-                }
+        // Call the checkFormValidity function whenever an input value changes
+        var formInputs = document.querySelectorAll('input[required], select[required]');
+        formInputs.forEach(function (input) {
+            input.addEventListener('input', checkFormValidity);
+        });
 
-                receiptTypeClicked = false;
-            });
-
-        </script>
-        <script>
-            function checkFormValidity() {
-                var inputs = document.querySelectorAll('input[required], select[required]');
-                var nextBtn = document.getElementById('nextBtn');
-                var isValid = true;
-
-                inputs.forEach(function (input) {
-                    if (!input.value) {
-                        isValid = false;
-                    }
-                });
-
-                nextBtn.disabled = !isValid;
-            }
-
-            // Call the checkFormValidity function whenever an input value changes
-            var formInputs = document.querySelectorAll('input[required], select[required]');
-            formInputs.forEach(function (input) {
-                input.addEventListener('input', checkFormValidity);
-            });
-
-        </script>
+    </script>
     </div>
     <script>
         // Update the selected file name on change

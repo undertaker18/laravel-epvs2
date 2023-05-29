@@ -556,13 +556,9 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputFullname" class="form-label">Fullname:</label>
-                                            <input type="text" id="searchInput" class="form-control" name="search"
+                                            <input type="text" id="searchInput" class="form-control" name="search[]"
                                                 list="searchOptions" placeholder="Fullname" required>
-                                            <datalist id="searchOptions">
-                                                @foreach($data['results'] as $result)
-                                                <option value="{{ $result->xero_account_name }}">
-                                                    @endforeach
-                                            </datalist>
+                                           
                                             <div id="fullnameValidationMessage" class="invalid-feedback"></div>
                                             <script>
                                                 var fullnameInput = document.getElementById('searchInput');
@@ -917,11 +913,7 @@
                                             <label for="inputFullname" class="form-label">Fullname:</label>
                                             <input type="text" id="searchInput" class="form-control" name="search"
                                                 list="searchOptions" placeholder="Fullname" required>
-                                            <datalist id="searchOptions">
-                                                @foreach($data['results'] as $result)
-                                                <option value="{{ $result->xero_account_name }}">
-                                                    @endforeach
-                                            </datalist>
+                                           
                                             <div id="fullnameValidationMessage" class="invalid-feedback"></div>
                                             <script>
                                                 var fullnameInput = document.getElementById('searchInput');

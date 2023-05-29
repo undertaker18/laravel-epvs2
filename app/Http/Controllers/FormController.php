@@ -301,52 +301,42 @@ class FormController extends Controller
 
             $details = [
                 'ocr_result' => $finalResult,
-                'receipt' => "/ASSETS/receipts/temp/". $receipt,
+                'receipt' => "/assets/receipts/temp/". $receipt,
 
             ];
 
-            $privacy = Privacy::find('privacy_key');
 
-
-            if ($privacy !== null) {
-                $firstPrivacyKey = $privacy->first();
-                return view('form.verify-form')
-                    ->with('firstProfileKey', $firstPrivacyKey)
-                    ->with('details', $details);
-            } else {
-                $errorMessage = 'Privacy must be selected.';
-                Session::flash('error', $errorMessage);
-                return redirect()->back();
-            }
-
-
-
+            return view('form.verify-form', compact('details'));
         }
+
 
         public function postVerify(Request $request )
         {
             $request->validate ([
                 'payment_for' => 'required',
-                'reference' => 'required|unique:payment',
+                'reference' => 'required',
                 'amount' => 'required',
                 'date' => 'required',
-
+                'time' => 'required',
             ]);
 
             $payment  = new Payment();
-
-            $payment->payment_key = $request->payment_key;
-
             $payment->payment_for = $request->payment_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
             $payment->time = $request->time;
 
+
+        //     $check= Payment::where([
+        //         ['reference','=', $payment->reference ]
+        //     ]);
+        //    if($check){
+        //     $request->session()->flash('error','Reference is already used')
+        //    };
+
             $payment->save();
-            dd($payment); // Add this line for debugging
-            // Store 'LoggedUser' in session
-            $request->session()->put('LoggedUser', $payment->payment_key);
+            
             return redirect('/summary-form')
             ->with('success', ' Submitted Successfully!!!');
 
@@ -370,13 +360,18 @@ class FormController extends Controller
                 'receipt' => "/assets/receipts/temp/" . $receiptFilename,
             ];
 
-            $profile = Profile::all();
-            $uploadform = UploadForm::all();
-            $payment = Payment::all();
+            $profiles = Profile::latest()->get();
+            $latestProfile = $profiles->first();
 
-            return view('form.summary-form', compact('profile', 'uploadform', 'payment'))
+            $uploadforms = UploadForm::latest()->get(); // Retrieve all UploadForms ordered by the latest first
+            $latestUploadForm = $uploadforms->first(); // Get the latest UploadForm from the collection
+
+            $payments = Payment::latest()->get();
+            $latestPayment = $payments->first();
+
+            return view('form.summary-form', compact('profiles' , 'uploadforms' , 'payments' , 'latestProfile' , 'latestUploadForm','latestPayment'))
                 ->with('details', $details);
-
+            
 
         }
 
@@ -403,14 +398,13 @@ class FormController extends Controller
             $labels = [
                 "receipt_type" => "Receipt Type",
                 "reference" => "Reference",
-                "receiptamount" => "Receipt Amount",
+                "amount" => "Receipt Amount",
                 "date" => "Receipt Date",
                 "time" => "Receipt Date",
                 "fullname" => "Full Name",
                 "email" => "Email",
                 "scholarshipStatus" => "Scholarship Status",
                 "department" => "Department",
-                "section_course" => "Section/Course",
                 "grade_year" => "Grade/Year",
                 "student_type" => "Student Type",
                 "payment_for" => "Payment For",

@@ -32,7 +32,7 @@
         <div class="column " style="padding-top: 20px;">
 
             <div class="buttons">
-                <a href="../index.html">
+                <a href="{{ '/' }}">
                     <button class="right-button">Back to HomePage</button>
                 </a>
             </div>
