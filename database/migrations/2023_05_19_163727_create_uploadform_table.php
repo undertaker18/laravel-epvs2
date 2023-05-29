@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('uploadform', function (Blueprint $table) {
             $table->id();
-            $table->string('uploadform_key');
             $table->string('receipt_type');
             $table->string('receipt_filename');
             $table->timestamps();

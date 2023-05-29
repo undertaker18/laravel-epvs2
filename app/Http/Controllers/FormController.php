@@ -16,6 +16,10 @@ use App\Models\Payment;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 use App\Models\XeroUsers;
+use App\Models\YearLevelElem;
+use App\Models\YearLevelJunior;
+use App\Models\YearLevelSenior;
+use App\Models\YearLevelCollege;
 
 class FormController extends Controller
 {
@@ -64,16 +68,18 @@ class FormController extends Controller
         } else {
             $results = XeroUsers::all(['xero_account_name']);
         }
-
         // Pass the search results to the view
         $data['results'] = $results;
 
+        $yearlevelelem = YearLevelElem::all();
+        $yearleveljunior = YearLevelJunior::all();
+        $yearlevelsenior = YearLevelSenior::all();
+        $yearlevelcollege = YearLevelCollege::all();
 
-        return view('form.profile-form', compact('data','countForm','counts'));
+        return view('form.profile-form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
+
     }
      
-     
-
     public function postProfile1(Request $request)
     {
         $validatedData = $request->validate([
@@ -81,32 +87,22 @@ class FormController extends Controller
             'email' => 'required',
             'scholarshipStatus' => 'required',
             'department' => 'required',
-            'section_course' => 'required',
             'grade_year' => 'required',
-            'student_type' => 'required',
+            'student_type' => 'required',   
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
+        
         $profile->fullname = $validatedData['fullname'];
-        $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
+        $profile->email = $validatedData['email'];
         $profile->department = $validatedData['department'];
-        $profile->section_course = $validatedData['section_course'];
         $profile->grade_year = $validatedData['grade_year'];
         $profile->student_type = $validatedData['student_type'];
         $profile->save();
 
-        try {
-            $profile->save();
-        } catch (\Exception $e) {
-
-            // Log the error or handle it as needed
-            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
-        }
-
-        $request->session()->put('LoggedUser', $profile->profile_key);
         return redirect('/upload-form');
+
     }
 
     public function postProfile2(Request $request)
@@ -122,7 +118,7 @@ class FormController extends Controller
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
+       
         $profile->fullname = $validatedData['fullname'];
         $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
@@ -157,7 +153,6 @@ class FormController extends Controller
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
         $profile->fullname = $validatedData['fullname'];
         $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
@@ -175,7 +170,6 @@ class FormController extends Controller
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
 
-        $request->session()->put('LoggedUser', $profile->profile_key);
         return redirect('/upload-form');
     }
 
@@ -187,9 +181,7 @@ class FormController extends Controller
     // for upload
     public function upload(Request $request )
     {
-
-        $data = ['LoggedUserProfile'=>Profile::where('profile_key','=', session('LoggedUser'))->first()];
-        return view('form.upload-form-2', $data);
+        return view('form.upload-form-2');
     }
 
 
@@ -198,26 +190,23 @@ class FormController extends Controller
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
-            $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
+            $image->move(public_path('assets/receipts/temp/'), $filename); // save to temporary folder
 
             // Store data in session
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
-
+           
             $uploadform = new UploadForm();
-            $uploadform->uploadform_key = $request->uploadform_key;
+        
             $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
             $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
-
+           
             $uploadform->save();
-
-            // Store 'LoggedUser' in session
-
-            $request->session()->put('LoggedUser', $uploadform->uploadform_key);
+           
             return redirect()->route('verify-form');
 
         }
-
+       
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 

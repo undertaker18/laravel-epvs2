@@ -14,6 +14,11 @@
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
         <link href="{{ asset('form.css') }}" rel="stylesheet">
     </head>
+    <style>
+        .image{
+            background-color: #F7F7F7 !important;
+        }
+    </style>
     <body>
         <!-- Your page content here --> 
         <section class="content">
@@ -52,7 +57,7 @@
         <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-        <script src="{{ asset('dist/js/demo.js') }}"></script>
+        
 
     </body>
 </html>

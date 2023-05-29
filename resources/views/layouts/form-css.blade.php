@@ -4,9 +4,7 @@
         background: #000000;
         /* Set the background color to light gray  #EAF1F8*/
     }
-    .card{
-                background-color: #879BAE;
-            }
+
     a {
     color: #879BAE;
     list-style: none;
@@ -54,10 +52,7 @@
     .tab-content {
         border: none !important;
     }
-    .card {
-        border: none !important;
-        box-shadow: none !important;
-    }
+    
 
    
 
@@ -169,7 +164,7 @@
         text-align: center;
         border-radius: 30px;
         height: auto;   
-        background-color: #ffffff;
+        background-color: #F7F7F7;
 
 
     }

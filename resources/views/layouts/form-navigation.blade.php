@@ -13,8 +13,9 @@ a:hover {
   color: #1266b4  ;
 }
 
+
 </style>
-                <div class="card">
+                <div class="">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
