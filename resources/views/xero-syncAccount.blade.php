@@ -1,6 +1,53 @@
 <x-admin-layout>
-       <!-- Content Wrapper. Contains page content -->
-       <div class="content-wrapper" style="background-color: #EAF1F8;">
+    <style> 
+        .lds-spinner {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    }
+
+    .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+    }
+
+    .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #1266B4;
+    }
+
+    .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+    }
+
+    .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+    }
+
+    /* ... Repeat the following styles for div:nth-child(3) to div:nth-child(12) with different animation delays ... */
+
+    @keyframes lds-spinner {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+    }
+    </style>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="background-color: #EAF1F8;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -20,103 +67,128 @@
                 <div class="row">
                     <div class="col-lg-6 col-8">
                         <!-- small box -->
-
-                            <div class="small-box"
-                                style="background-color: #FFFFFF;  border: 0px solid #D78C47; border-radius: 12px; color: black;">
-                                <div class="inner ml-3 ">
-                                    <p class="mt-2 mb-4">LAST SYNC: {{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : ''}} </p>
-                                    {{-- <h1 style="color:#D78C47; font-size: 60px;"><b>1000</b></h1> --}}
-                                </div>
-                                <div class='ml-3' style="">
-                                    <button id="sync-btn" class="btn btn-default mr-4 mb-3" style="background-color: #D74747; color: #ffffff; width: 125px;"><i class="fas fa-check"></i>&nbsp;&nbsp;SYNC</button>
-                                </div>
-
-                                <div class="icon">
-                                    <i class="ion ion-card mr-3 mt-3" style="color:#D78C47;"></i>
-                                </div>
-                                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                        <div class="small-box"
+                            style="background-color: #FFFFFF;  border: 5px solid #1266B4; border-radius: 12px; color: black;">
+                            <div class="inner ml-3 ">
+                                <p class="mt-2"><b>LAST SYNC</b></p>
+                                <h1 class="mb-3" style="color:#1266B4; font-size: 50px;">
+                                    <b>{{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : ''}}</b>
+                                </h1>
                             </div>
+
+                            <div class="icon">
+                                <i class="ion ion-card mr-3 mt-3" style="color:#1266B4;"></i>
+                            </div>
+                            <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel"><b>Authentication</b></h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>You Need Authenticate to Xero!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- Button to open URL in new tab -->
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="openXeroAuthInNewTab()">Go to Xero Auth</button>
+                                        <button type="button" class="btn btn-primary"
+                                            style="background-color: #D74747; color:"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function openXeroAuthInNewTab() {
+                                var url = "{{ url('/v1/xero/auth') }}";
+                                window.open(url, '_blank');
+                            }
+
+                        </script>
 
                     </div>
-                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        Launch demo modal
-                      </button> --}}
 
-                      <!-- Modal -->
-                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
+                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                Launch demo modal
+                            </button> --}}
+
+                   <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalCenterTitle">Loading</h5>
-                              {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button> --}}
+                                <h5 class="modal-title" id="exampleModalCenterTitle"><b>Loading</b></h5>
                             </div>
                             <div class="modal-body text-center">
-                                <div class="spinner-border text-warning" role="status">
-                                    <span class="sr-only">Loading...</span>
+                                <div class="text-warning" role="status">
+                                    <div class="lds-spinner">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                      </div>
                                 </div>
                             </div>
-                            {{-- <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
-                            </div> --}}
-                          </div>
                         </div>
-                      </div>
+                    </div>
+                    </div>
+
+
 
                     <div class="col-lg-6 col-6">
                         <!-- small box -->
-
-                            <div class="small-box"
-                                style="background-color: #FFFFFF;  border: 5px solid #008000; border-radius: 12px; color: black;">
-                                <div class="inner ml-3 ">
-                                    <p class="mt-2">Synced User Count</p>
-                                    <h1 style="color:#008000; font-size: 60px;"><b>{{count($xeroAccount)}}</b></h1>
-                                </div>
-
-                                <div class="icon">
-                                    <i class="ion ion-card mr-3 mt-3" style="color:#008000;"></i>
-                                </div>
-                                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                        <div class="small-box"
+                            style="background-color: #FFFFFF;  border: 5px solid #1266B4; border-radius: 12px; color: black;">
+                            <div class="inner ml-3 ">
+                                <p class="mt-2"><b>SYNCED USER COUNT</b></p>
+                                <h1 style="color:#1266B4; font-size: 63px;"><b>{{count($xeroAccount)}}</b></h1>
                             </div>
 
-                    </div>
+                            <div class="icon">
+                                <i class="ion ion-card mr-3 mt-3" style="color:#1266B4;"></i>
+                            </div>
+                            <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                        </div>
 
+                    </div>
+                </div>
+                <div class='ml-3 text-right' style="">
+                    <!-- In your Blade template file -->
+                    <button type="button" class="btn btn-default mr-4 mb-3"
+                        style="background-color: #1266B4; color: #ffffff;  width: 175px; " data-toggle="modal"
+                        data-target="#myModal">AUTHENTICATE</button>
+                    <button id="sync-btn" class="btn btn-default mr-4 mb-3"
+                        style="background-color: #D74747; color: #ffffff; width: 125px;"><i
+                            class="fas fa-check"></i>&nbsp;&nbsp;SYNC</button>
                 </div>
                 <!-- /.row -->
         </section>
 
-        <!-- data tables -->
-        <section class="invoice" style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
+        <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
             <!-- Title Form -->
-            <div class="row" style="margin-top:20px;">
-                <div class="col" style=" margin-left: 50px; margin-top:0px;">
-                    <h2 class=""style="color: #1266B4;">List of Enrollment Payment Receipt</h2>
-                </div>
-                <div class="col">
-                    <!-- SidebarSearch Form -->
-                    <form action="#">
-                        <div class="input-group"
-                            style="width: 100%; float: right; margin-bottom:20px; margin-top:5px; margin-right: 100px;">
-                            <input type="search" class="form-control form-control-lg"
-                                placeholder="Type your keywords here">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-lg btn-default">
-                                    <i class="fa fa-search" style="color: #1266B4;"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table table-striped" id="example"
-                        style="width:100%; margin-left: 0px; margin-right: 0px;">
+            <div class="card" style="background-color: ; ">
+                <div class="card-body" style="color: #000000; ">
+                    <table id="example1" class="table table-bordered  table-hover">
                         <thead>
-                            <tr style="color: #1266B4;">
+                            <tr style="color: #000000;">
                                 <th>Name</th>
                                 <th>Xero Account ID</th>
                                 <th>Created At</th>
@@ -135,51 +207,47 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.col -->
             </div>
+
         </section>
-        <!-- right col -->
+        <!-- jQuery -->
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
-    </section>
-              <!-- jQuery -->
-              <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                //     // $('#example').DataTable({
+                //     //     pagingType: 'full_numbers',
+                //     // });
 
-<script>
+                $('#sync-btn').click(function () {
+                    syncAccountApi();
+                });
 
-$(document).ready(function () {
-            //     // $('#example').DataTable({
-            //     //     pagingType: 'full_numbers',
-            //     // });
+                function syncAccountApi() {
+                    $.ajax({
+                        url: '/v1/xero/syncAccounts',
+                        method: 'GET',
+                        data: {},
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        beforeSend: function () {
+                            $('#exampleModalCenter').modal('toggle');
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            $('#exampleModalCenter').modal('toggle');
+                        },
+                        success: function (response) {
+                            var result = $.parseJSON(response);
+                            location.reload()
+                        }
+                    });
+                }
 
-    $('#sync-btn').click(function(){
-        syncAccountApi();
-    });
-    function syncAccountApi() {
-        $.ajax({
-            url: '/v1/xero/syncAccounts',
-            method: 'GET',
-            data: {
-            },
-            xhrFields: { withCredentials: true },
-            beforeSend: function() {
-                $('#exampleModalCenter').modal('toggle');
-            },
-            error: function (error) {
-                console.log(error);
-                $('#exampleModalCenter').modal('toggle');
-            },
-            success: function (response) {
-                var result = $.parseJSON(response);
-                location.reload()
-            }
-        });
-    }
+            });
 
-});
+        </script>
 
-</script>
 
 </x-admin-layout>
-

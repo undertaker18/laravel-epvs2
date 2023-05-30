@@ -13,7 +13,7 @@ class BdoReceiptController extends Controller
 {
     public function timestamp()
     {
-        $bdoReceipts = BdoReceipt::orderBy('posting_datetime', 'desc')->paginate(10);
+        $bdoReceipts = BdoReceipt::all();
         $latestUploadTimestamp = BdoReceipt::latest('created_at')->value('created_at');
         
         return view('bdo-receipts', [
@@ -23,44 +23,48 @@ class BdoReceiptController extends Controller
     }
     
     public function upload(Request $request)
-    {    
-        $file = $request->file('csv_file');
-
-        if (!$file) {
-            return redirect()->back()->withErrors(['Please upload a file.']);
-        }
-
-        if (!in_array($file->getClientOriginalExtension(), ['csv', 'txt'])) {
-            return redirect()->back()->withErrors(['File must be a CSV or TXT.']);
-        }
-
-        $handle = fopen($file->getPathname(), 'r');
-
-        if (!$handle) {
-            return redirect()->back()->withErrors(['Unable to open file.']);
-        }
-
-        while (($data = fgetcsv($handle)) !== false) {
-         
-
-            BdoReceipt::create([
-                'posting_datetime' =>  $data[0],
-                'branch' => $data[1],
-                'description' => $data[2],
-                'debit' => $data[3],
-                'credit' => $data[4],
-                'running_balance' => $data[5],
-                'check_number' => $data[6],
-            ]);
-            
-        }
-
-        fclose($handle);
-
-        return redirect()->back()->with('success', 'File uploaded successfully!');
-
-    }
-
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt',    
+        ]);
     
+        // Get the uploaded file from the request
+        $file = $request->file('csv_file');
+    
+        // Open the file for reading
+        $handle = fopen($file, 'r');
+    
+        // Check if the file was successfully opened
+        if ($handle !== false) {
+            // Loop through each line of the file and parse it as a CSV row
+            while (($data = fgetcsv($handle)) !== false) {
+                // Check if the record already exists
+                $existingRecord = BdoReceipt::where('description', $data[2])->exists();
+    
+                if (!$existingRecord) {
+                    // Create a new instance of the BdoReceipt model and save the data
+                    BdoReceipt::create([
+                        'posting_datetime' => $data[0],
+                        'branch' => $data[1],
+                        'description' => $data[2],
+                        'debit' => $data[3],
+                        'credit' => $data[4],
+                        'running_balance' => $data[5],
+                        'check_number' => $data[6],
+                    ]);
+                }
+            }
+    
+            // Close the file when you're done
+            fclose($handle);
+    
+            // Redirect back to the form with a success message
+            return redirect()->back()->with('success', 'File uploaded successfully.');
+        } else {
+            // Redirect back to the form with an error message
+            return redirect()->back()->with('error', 'An error occurred while opening the file.');
+        }
+    }
 
 }

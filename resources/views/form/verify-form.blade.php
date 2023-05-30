@@ -117,7 +117,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <form action="/verify-form" method="post">
+                                <form action="/verify-form" method="post">
                                         @csrf
                                         <div class="card align-left">
                                             <div class="card-body">
@@ -125,21 +125,17 @@
                                                         <h5 class="card-title">Take note:</h5>
                                                         <p class="card-text">Ensure that all information provided are accurate and exact before proceeding to the next step.</p>
                                                         <div class="form-group">
-                                                            <input type="text" value="{{ $LoggedUserProfile['profile_key'] ?? $firstProfileKey }}" name="uploadform_key" hidden>
-                                
+                                                            
                                                             <label for="paymentFor">Payment For:</label>
-                                                            <select id="paymentFor" class="form-control" name="payment_for">
+                                                            <select id="paymentFor" class="form-control" name="payment_for" required >
                                                                 <option>Kindly check your payment for...</option>
-                                                                <option value="dropdownValue"></option>
-                                                            </select>
-                                                            <div class="checkbox-group">
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Notarial Fee"> Notarial Fee</label>
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Miscellaneous Fee"> Miscellaneous Fee</label>
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Digital System Access Fee"> Digital System Access Fee</label>
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Registration"> Registration</label>
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Initial Payment"> Initial Payment</label>
-                                                                <label><input type="checkbox" onchange="checkboxStatusChange()" value="Full Payment"> Full Payment</label>
-                                                            </div>
+                                                                <option value="Notarial Fee">Notarial Fee</option>
+                                                                <option value="Miscellaneous Fee">Miscellaneous Fee</option>
+                                                                <option value="Digital System Access Fee">Digital System Access Fee</option>
+                                                                <option value="Registration">Registration</option>
+                                                                <option value="Initial Payment">Initial Payment</option>
+                                                                <option value="Full Payment">Full Payment</option>
+                                                              </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="amount">Amount of Payment: <span class="asterisk">*</span></label>
@@ -171,6 +167,37 @@
                                         </div>
                                     </div> 
                                 </form>  
+
+                                <!-- error Modal -->
+                                <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if(Session::has('error'))
+                                                    <p>{{ Session::get('error') }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if(Session::has('error'))
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#errorModal').modal('show');
+                                        });
+                                    </script>
+                                @endif
+
                             </div>
 
                         </div>

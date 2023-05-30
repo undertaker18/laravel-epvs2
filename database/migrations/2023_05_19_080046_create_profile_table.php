@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('profile', function (Blueprint $table) {
             $table->id();
-            $table->string('profile_key');
             $table->string('fullname');
-            $table->string('email');
             $table->string('scholarshipStatus');
+            $table->string('email');
             $table->string('department'); // Corrected column name
-            $table->string('section_course');
             $table->string('grade_year');
             $table->string('student_type');
             $table->timestamps();

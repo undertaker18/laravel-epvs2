@@ -23,7 +23,7 @@ class BdoReceipt extends Model
 
     public function setPostingDatetimeAttribute($value)
     {
-        $carbon = Carbon::createFromFormat('m/d/Y H:i A', $value, 'America/New_York');
+        $carbon = Carbon::createFromFormat('m/d/Y H:i A', $value, 'Asia/Manila')->startOfDay();
         $this->attributes['posting_datetime'] = $carbon->format('Y-m-d H:i:s');
     }
     

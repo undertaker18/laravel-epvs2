@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('status')->default(0); // 0 - pending, 1 - pending
             $table->timestamp('created_at')->useCurrent();
 
+            $table->string('email')->nullable();
+            $table->string('receipt_type')->nullable();
+            $table->string('receipt_src')->nullable();
+
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }

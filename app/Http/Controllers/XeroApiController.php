@@ -433,6 +433,9 @@ class XeroApiController extends Controller
                     'description' => 'with Sync',
                     'amount' => '20',
                     'reference' => 'reference',
+                    'email' => 'laverdad.epvsystem@gmail.com',
+                    'receipt_type' => 'gcash',
+                    'receipt_src' => '/assets/sample-receipts/pesonet-gateway.jpg'
                 ];
             }
             // dev todo: to remove ; test data generator
@@ -442,6 +445,7 @@ class XeroApiController extends Controller
             // truncate table then delete
             DB::table('xero_users')->truncate();
             DB::table('xero_users')->insert($accountToSync);
+            
         } catch (Exception $e) {
             $result = [
                 'status' => false,

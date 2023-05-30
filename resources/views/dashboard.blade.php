@@ -150,114 +150,47 @@
             <!-- /.card -->
         </section>
         <!-- right col -->
-        <section class="invoice" style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
+        <!-- data tables -->
+        <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
           <!-- Title Form -->
-          <div class="row" style="margin-top:20px;">
-            <div class="col-2" style=" margin-left: 50px; margin-top:0px; color: #1266B4;">
-              <h2 class="">ALL RECEIPTS</h2>
-            </div>
-            <div class="col-6">
-              <!-- SidebarSearch Form -->
-              <form action="">
-                <div class="row">
-                  <div class="col-md-10 offset-md-1">
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group">
-                          <label>Sort Order:</label>
-                          <select class="select2 form-control" style="width: 100%;">
-                            <option selected>ASC</option>
-                            <option>DESC</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <label>Order By:</label>
-                          <select class="select2 form-control" style="width: 100%;">
-                            <option selected>Title</option>
-                            <option>Date</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="input-group input-group-lg">
-                        <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">
-                        <div class="input-group-append">
-                          <button type="submit" class="btn btn-lg btn-default">
-                            <i class="fa fa-search"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              
-            </div>
+          <div class="card" style="background-color: ; ">
+              <div class="card-body"  style="color: #000000; ">
+                  <table id="example1" class="table table-bordered  table-hover">
+                      <thead>
+                          <tr style="color: #000000;">
+                              <th>Fullname</th>
+                              <th>Grade/Course</th>
+                              <th>Date of Payment</th>
+                              <th>Time of Payment</th>
+                              <th>Payment For</th>
+                              <th>Amount</th>
+                              <th>Reference No.</th>
+                              <th>Receipt Type</th>
+                              <th>Status</th>
+                              <th>Receipt Image</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr style="color: #000000;">
+                              <td>jordan earl pascua</td>
+                              <td>BSIS-4</td>
+                              <td>06/25/2023</td>
+                              <td>09:00:00</td>
+                              <td>Notarial</td>
+                              <td>150.00</td>
+                              <td>347360483798</td>
+                              <td>Gcash</td>
+                              <td style="color: #008000;">Valid</td>
+                              <td style="color: #1266B4; text-decoration: underline;"><i class="fas fa-eye"></i>Full
+                                View</td>
+                          </tr>  
+                          
+                      </tbody>
+                  </table>
+              </div>
           </div>
-          <!-- Table row -->
-          <div class="row">
-            <div class="col-12 table-responsive">
-              <table class="table table-striped" id="example" style="width:100%; margin-left: 0px; margin-right: 0px; ">
-                <thead>
-                  <tr style="color: #1266B4;">
-                    <th>Reference No.</th>
-                    <th>Amount</th>
-                    <th>Payment For</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Receipt Image</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>09486095gvi486</td>
-                    <td>150.00</td>
-                    <td>Notarial Fee</td>
-                    <td>06/25/2023</td>
-                    <td>Pending</td>
-                    <td><a href="{{ url('/receipt-image') }}" style="color: #1266B4;">View</a></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr style="color: #1266B4;">
-                    <th>Reference No.</th>
-                    <th>Amount</th>
-                    <th>Payment For</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Receipt Image</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.col -->
-          </div>
-           <!--pagination -->
-           <nav aria-label="Page navigation example">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="dataTables_info ml-5 mt-2" id="example1_info" role="status" aria-live="polite">Showing 1 to 3 of 3 entries</div>
-                </div>
-                <div class="col-md-8">
-                    <ul class="pagination justify-content-center mb-3">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1"  style=" font-weight:bold;">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#"  style="color: #1266B4; font-weight:bold;">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" style="color: #1266B4; font-weight:bold;">Next</a>
-                        </li>
-                    </ul>
-                </div> 
-            </div>
-        </nav>
+      
         </section>
-        <!-- /.row -->
       </div><!-- /.container-fluid -->
      
       </section>

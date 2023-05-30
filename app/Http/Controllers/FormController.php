@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentSummary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,6 +13,13 @@ use App\Models\Privacy;
 use App\Models\Profile;
 use App\Models\UploadForm;
 use App\Models\Payment;
+use Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Models\XeroUsers;
+use App\Models\YearLevelElem;
+use App\Models\YearLevelJunior;
+use App\Models\YearLevelSenior;
+use App\Models\YearLevelCollege;
 
 class FormController extends Controller
 {
@@ -21,7 +29,7 @@ class FormController extends Controller
         $privacy = new Privacy();
         return view('form.privacy-notice-form', compact('privacy'));
     }
-    
+
     public function postPrivacy(Request $request)
     {
         $request->validate([
@@ -44,25 +52,34 @@ class FormController extends Controller
         return redirect('/privacy-form');
     }
 
-    
+
     //=================================================================================
 
-        // for profile
-    public function profile(Request $request )
+    public function profile(Request $request)
     {
         $counts = $request->input('counts');
-        $countForm = $request->input('counts') + 1 ; // Initial value for $count
+        $countForm = $request->input('counts') + 1; // Initial value for $count
 
-        
-        $data = ['LoggedUserPrivacy'=>Privacy::where('privacy_key','=', session('LoggedUser'))->first()];
-        return view('form.profile-form', $data)
-        ->with('countForm', $countForm)
-        ->with('counts', $counts);
-     
-    
+        $searchQuery = $request->input('search');
+        $results = []; // Initialize the $results variable as an empty array
+
+        if ($searchQuery) {
+            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+        } else {
+            $results = XeroUsers::all(['xero_account_name']);
+        }
+        // Pass the search results to the view
+        $data['results'] = $results;
+
+        $yearlevelelem = YearLevelElem::all();
+        $yearleveljunior = YearLevelJunior::all();
+        $yearlevelsenior = YearLevelSenior::all();
+        $yearlevelcollege = YearLevelCollege::all();
+
+        return view('form.profile-form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
 
     }
-
+     
     public function postProfile1(Request $request)
     {
         $validatedData = $request->validate([
@@ -70,32 +87,22 @@ class FormController extends Controller
             'email' => 'required',
             'scholarshipStatus' => 'required',
             'department' => 'required',
-            'section_course' => 'required',
             'grade_year' => 'required',
-            'student_type' => 'required',
+            'student_type' => 'required',   
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
+        
         $profile->fullname = $validatedData['fullname'];
-        $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
+        $profile->email = $validatedData['email'];
         $profile->department = $validatedData['department'];
-        $profile->section_course = $validatedData['section_course'];
         $profile->grade_year = $validatedData['grade_year'];
         $profile->student_type = $validatedData['student_type'];
         $profile->save();
 
-        try {
-            $profile->save();
-        } catch (\Exception $e) {
-           
-            // Log the error or handle it as needed
-            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
-        }
-
-        $request->session()->put('LoggedUser', $profile->profile_key);
         return redirect('/upload-form');
+
     }
 
     public function postProfile2(Request $request)
@@ -111,7 +118,7 @@ class FormController extends Controller
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
+       
         $profile->fullname = $validatedData['fullname'];
         $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
@@ -124,7 +131,7 @@ class FormController extends Controller
         try {
             $profile->save();
         } catch (\Exception $e) {
-           
+
             // Log the error or handle it as needed
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
@@ -146,7 +153,6 @@ class FormController extends Controller
         ]);
 
         $profile = new Profile();
-        $profile->profile_key = $request->profile_key;
         $profile->fullname = $validatedData['fullname'];
         $profile->email = $validatedData['email'];
         $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
@@ -159,26 +165,23 @@ class FormController extends Controller
         try {
             $profile->save();
         } catch (\Exception $e) {
-           
+
             // Log the error or handle it as needed
             return redirect('/submit-form')->with('error', 'Failed to save the profile.');
         }
 
-        $request->session()->put('LoggedUser', $profile->profile_key);
         return redirect('/upload-form');
     }
 
 
-  
-    
+
+
     //========================================================================================
-        
+
     // for upload
     public function upload(Request $request )
     {
-        
-        $data = ['LoggedUserProfile'=>Profile::where('profile_key','=', session('LoggedUser'))->first()];
-        return view('form.upload-form-2', $data);
+        return view('form.upload-form-2');
     }
 
 
@@ -187,26 +190,23 @@ class FormController extends Controller
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
-            $image->move(public_path('ASSETS/receipts/temp/'), $filename); // save to temporary folder
-        
+            $image->move(public_path('assets/receipts/temp/'), $filename); // save to temporary folder
+
             // Store data in session
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
-
+           
             $uploadform = new UploadForm();
-            $uploadform->uploadform_key = $request->uploadform_key;
+        
             $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
             $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
-            
+           
             $uploadform->save();
-            
-            // Store 'LoggedUser' in session
-            
-            $request->session()->put('LoggedUser', $uploadform->uploadform_key);
+           
             return redirect()->route('verify-form');
 
         }
-        
+       
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
@@ -214,7 +214,7 @@ class FormController extends Controller
     // =========================================================================================
         // for verify
     public function verify(Request $request )
-    {   
+    {
         // get from session
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
@@ -231,15 +231,15 @@ class FormController extends Controller
         //$api_key = '4849078385c87162e2e014c19b99383a';
         // end
 
-        $client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
-        $client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
-        $username = 'jordanearlimperialpascua20';
-        $api_key = '4f708f480170a044368643ef0929850e';
+        //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
+        //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
+        //$username = 'jordanearlimperialpascua20';
+        //$api_key = '4f708f480170a044368643ef0929850e';
 
-        //$client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
-        //$client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
-        //$username = 'angelblaze779';
-        //$api_key = '434562be5ba93a74021d918a963f43f2';
+        $client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
+        $client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
+        $username = 'angelblaze779';
+        $api_key = '434562be5ba93a74021d918a963f43f2';
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
@@ -301,49 +301,42 @@ class FormController extends Controller
 
             $details = [
                 'ocr_result' => $finalResult,
-                'receipt' => "/ASSETS/receipts/temp/". $receipt,
-                
+                'receipt' => "/assets/receipts/temp/". $receipt,
+
             ];
 
-            $privacy = Privacy::find('privacy_key');
 
-            if ($privacy !== null) {
-                $firstPrivacyKey = $privacy->first();
-                return view('form.verify-form')
-                        ->with('firstProfileKey', $firstPrivacyKey)
-                        ->with('details', $details);
-            } else {
-                dd($privacy);
-            }
-
-             
-
+            return view('form.verify-form', compact('details'));
         }
+
 
         public function postVerify(Request $request )
         {
             $request->validate ([
                 'payment_for' => 'required',
-                'reference' => 'required|unique:payment',
+                'reference' => 'required',
                 'amount' => 'required',
                 'date' => 'required',
-                
+                'time' => 'required',
             ]);
-    
-            $payment  = new Payment();
 
-            $payment->payment_key = $request->payment_key;
-           
+            $payment  = new Payment();
             $payment->payment_for = $request->payment_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
             $payment->time = $request->time;
-            
+
+
+        //     $check= Payment::where([
+        //         ['reference','=', $payment->reference ]
+        //     ]);
+        //    if($check){
+        //     $request->session()->flash('error','Reference is already used')
+        //    };
+
             $payment->save();
-            dd($payment); // Add this line for debugging
-            // Store 'LoggedUser' in session
-            $request->session()->put('LoggedUser', $payment->payment_key);
+            
             return redirect('/summary-form')
             ->with('success', ' Submitted Successfully!!!');
 
@@ -351,24 +344,42 @@ class FormController extends Controller
 
         //==============================================================================================================
 
-        
+
             // for summary
         public function summary(Request $request )
         {
-            $profile = Profile::all();
-            $uploadform = UploadForm::all();
-            $payment = Payment::all();
 
-            return view('form.summary-form', compact('profile','uploadform', 'payment'));
+            // Retrieve the upload form record
+            $uploadForm = UploadForm::first();
 
+
+            // Get the receipt filename from the upload form record
+            $receiptFilename = $uploadForm->receipt_filename;
+
+            $details = [
+                'receipt' => "/assets/receipts/temp/" . $receiptFilename,
+            ];
+
+            $profiles = Profile::latest()->get();
+            $latestProfile = $profiles->first();
+
+            $uploadforms = UploadForm::latest()->get(); // Retrieve all UploadForms ordered by the latest first
+            $latestUploadForm = $uploadforms->first(); // Get the latest UploadForm from the collection
+
+            $payments = Payment::latest()->get();
+            $latestPayment = $payments->first();
+
+            return view('form.summary-form', compact('profiles' , 'uploadforms' , 'payments' , 'latestProfile' , 'latestUploadForm','latestPayment'))
+                ->with('details', $details);
             
+
         }
 
 
         public function postSummary(Request $request )
         {
 
-            return view('form.summary-form');
+
         }
 
 
@@ -379,7 +390,58 @@ class FormController extends Controller
             return view('form.submit-form');
         }
 
-        
+
+        public function postSubmit(Request $request )
+        {
+
+            $data = [];
+            $labels = [
+                "receipt_type" => "Receipt Type",
+                "reference" => "Reference",
+                "amount" => "Receipt Amount",
+                "date" => "Receipt Date",
+                "time" => "Receipt Date",
+                "fullname" => "Full Name",
+                "email" => "Email",
+                "scholarshipStatus" => "Scholarship Status",
+                "department" => "Department",
+                "grade_year" => "Grade/Year",
+                "student_type" => "Student Type",
+                "payment_for" => "Payment For",
+            ];
+
+            foreach ($request->all() as $key => $value){
+                $explodeValue = explode('##', $key);
+                if (in_array($key, ['_token', 'receipt_source##']) === true) {
+                } else if (in_array($explodeValue[0], ['receipt_type', 'reference', 'date', 'time', 'receiptamount']) === false) {
+                    $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
+                } else {
+                    $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
+                }
+            }
+
+            foreach ($data['data']['summary']['studentsInfo'] as $key => $stud) {
+                $recipient[$key]['fullname'] = $stud['Full Name'];
+                $recipient[$key]['email'] = $stud['Email'];
+            }
+
+            $data['subject'] = 'Payment Summary';
+            $data['labels'] = $labels;
+            $data['receipt'] = $request->all()['receipt_source##'];
+
+            try {
+                foreach ($recipient as $recipientKey => $rec) {
+                    $data['name'] = $rec['fullname'];
+                    $email = $rec['email'];
+                    Mail::to($email)->send(new PaymentSummary($data));
+
+                }
+            } catch (Exception $e) {
+                dd($e->getMessage());
+            }
+            return redirect('/submit-form');
+        }
+
 
         private function getValueBetweenstrings($paragraph ,$string1, $string2) {
             $stringOnePosition = strpos($paragraph, $string1, 0);
