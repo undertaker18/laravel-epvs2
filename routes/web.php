@@ -37,6 +37,7 @@ Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-
 Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
 
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
+Route::post('/profile-form', [FormController::Class, 'postProfile' ]);
 Route::get('/profile/search', [YourController::class, 'profile'])->name('profile.search');
 
 Route::post('/profile-form1', [FormController::class, 'postProfile1'])->name('post-upload-form1');
