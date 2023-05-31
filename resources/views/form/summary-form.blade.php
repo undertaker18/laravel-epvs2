@@ -1,7 +1,7 @@
 <x-form-layout>
 
     <style>
-         .main-content {
+         .main-content1 {
             align-items: center;
             margin-left: 19%;
             margin-right: 19%;
@@ -10,7 +10,7 @@
 
 
         }
-        .main-content1 {
+        .main-content {
             align-items: center;
             margin-left: 19%;
             margin-right: 19%;
@@ -24,7 +24,7 @@
             height: 50px;
             padding: 8px;
             margin-left: 8px;
-            background-color: #1266b4;
+            background-color: green;
             color: #ffffff;
             border: none;
             border-radius: 8px;
@@ -145,9 +145,81 @@
             <form action='submit-form' method="POST">
                 @csrf
                 <div class="active tab-pane" >
-                    <div class=" main-content">
+                    <div class=" main-content1">
                         <div class="card">
-                            <div class="row">   
+                            <div class="row">
+                                <div class="col-md-12 bg-white">
+                                    <div class="box box-primary">
+                                        <div class="box-body mt-4 mb-3 text-center">
+                                            <h3>Personal Details</h3>
+                                        </div>
+                                        <div class="box-body m-3 ">
+
+                                            @foreach ($profiles as $key => $profile)
+                                                @if ($profile->id === $latestProfile->id)
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fullname">Full Name</label>
+                                                                <input type="text" class="form-control" id="fullname" name="fullname##{{$key}}"
+                                                                    value="{{ $profile->fullname }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="scholarshipStatus">Scholarship Status</label>
+                                                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus##{{$key}}"
+                                                                    value="{{ $profile->scholarshipStatus }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="email">Email</label>
+                                                                <input type="text" class="form-control" id="email" name="email##{{$key}}"
+                                                                    value="{{ $profile->email }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="department">Department</label>
+                                                                <input type="text" class="form-control" id="department" name="department##{{$key}}"
+                                                                    value="{{ $profile->department }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="grade_year">Grade&Section/Course&Level</label>
+                                                                <input type="text" class="form-control" id="grade_year" name="grade_year##{{$key}}"
+                                                                    value="{{ $profile->grade_year }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="student_type">Student Type</label>
+                                                                <input type="text" class="form-control" id="student_type" name="student_type##{{$key}}"
+                                                                    value="{{ $profile->student_type }}" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="active tab-pane" >
+                    <div class=" main-content">
+                        <div class="card ">
+                            <div class="row ">   
 
                                 <div class="col-md-6 bg-white">
                                     <div class="box box-primary">
@@ -208,78 +280,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="active tab-pane" >
-                    <div class=" main-content1">
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-md-12 bg-white">
-                                    <div class="box box-primary">
-                                        <div class="box-body mt-4 mb-3 text-center">
-                                            <h3>Personal Details</h3>
-                                        </div>
-                                        <div class="box-body m-3  mb-5 ">
-
-                                            @foreach ($profiles as $key => $profile)
-                                                @if ($profile->id === $latestProfile->id)
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="fullname">Full Name</label>
-                                                                <input type="text" class="form-control" id="fullname" name="fullname##{{$key}}"
-                                                                    value="{{ $profile->fullname }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="scholarshipStatus">Scholarship Status</label>
-                                                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus##{{$key}}"
-                                                                    value="{{ $profile->scholarshipStatus }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="email">Email</label>
-                                                                <input type="text" class="form-control" id="email" name="email##{{$key}}"
-                                                                    value="{{ $profile->email }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="department">Department</label>
-                                                                <input type="text" class="form-control" id="department" name="department##{{$key}}"
-                                                                    value="{{ $profile->department }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>  
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="grade_year">Grade&Section/Course&Level</label>
-                                                                <input type="text" class="form-control" id="grade_year" name="grade_year##{{$key}}"
-                                                                    value="{{ $profile->grade_year }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="student_type">Student Type</label>
-                                                                <input type="text" class="form-control" id="student_type" name="student_type##{{$key}}"
-                                                                    value="{{ $profile->student_type }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                         <div class="col-12" style="padding-top: 30px;">
