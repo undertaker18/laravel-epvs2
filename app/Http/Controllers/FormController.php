@@ -13,6 +13,7 @@ use App\Models\Privacy;
 use App\Models\Profile;
 use App\Models\UploadForm;
 use App\Models\Payment;
+use App\Models\XeroInvoice;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 use App\Models\XeroUsers;
