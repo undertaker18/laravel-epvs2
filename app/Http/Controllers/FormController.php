@@ -81,101 +81,39 @@ class FormController extends Controller
 
     }
      
-    public function postProfile1(Request $request)
-    {
+    public function postProfile(Request $request)
+{
+    $fullnameList = $request->input('fullname');
+    $emailList = $request->input('email');
+    $scholarshipStatusList = $request->input('scholarshipStatus');
+    $departmentList = $request->input('department');
+    $grade_yearList = $request->input('grade_year');
+    $student_typeList = $request->input('student_type');
+
+    foreach ($fullnameList as $index => $fullname) {
+
         $validatedData = $request->validate([
-            'fullname' => 'required',
-            'email' => 'required',
-            'scholarshipStatus' => 'required',
-            'department' => 'required',
-            'grade_year' => 'required',
-            'student_type' => 'required',   
+            'fullname',
+            'email',
+            'scholarshipStatus',
+            'department',
+            'grade_year',   
+            'student_type',   
         ]);
 
         $profile = new Profile();
         
-        $profile->fullname = $validatedData['fullname'];
-        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
-        $profile->email = $validatedData['email'];
-        $profile->department = $validatedData['department'];
-        $profile->grade_year = $validatedData['grade_year'];
-        $profile->student_type = $validatedData['student_type'];
+        $profile->fullname = $fullname;
+        $profile->scholarshipStatus = $scholarshipStatusList[$index];
+        $profile->email = $emailList[$index];
+        $profile->department = $departmentList[$index];
+        $profile->grade_year = $grade_yearList[$index];
+        $profile->student_type = $student_typeList[$index];
         $profile->save();
-
-        return redirect('/upload-form');
-
     }
-
-    public function postProfile2(Request $request)
-    {
-        $validatedData = $request->validate([
-            'fullname' => 'required',
-            'email' => 'required',
-            'scholarshipStatus' => 'required',
-            'department' => 'required',
-            'section_course' => 'required',
-            'grade_year' => 'required',
-            'student_type' => 'required',
-        ]);
-
-        $profile = new Profile();
-       
-        $profile->fullname = $validatedData['fullname'];
-        $profile->email = $validatedData['email'];
-        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
-        $profile->department = $validatedData['department'];
-        $profile->section_course = $validatedData['section_course'];
-        $profile->grade_year = $validatedData['grade_year'];
-        $profile->student_type = $validatedData['student_type'];
-        $profile->save();
-
-        try {
-            $profile->save();
-        } catch (\Exception $e) {
-
-            // Log the error or handle it as needed
-            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
-        }
-
-        $request->session()->put('LoggedUser', $profile->profile_key);
-        return redirect('/upload-form');
-    }
-
-    public function postProfile3(Request $request)
-    {
-        $validatedData = $request->validate([
-            'fullname' => 'required',
-            'email' => 'required',
-            'scholarshipStatus' => 'required',
-            'department' => 'required',
-            'section_course' => 'required',
-            'grade_year' => 'required',
-            'student_type' => 'required',
-        ]);
-
-        $profile = new Profile();
-        $profile->fullname = $validatedData['fullname'];
-        $profile->email = $validatedData['email'];
-        $profile->scholarshipStatus = $validatedData['scholarshipStatus'];
-        $profile->department = $validatedData['department'];
-        $profile->section_course = $validatedData['section_course'];
-        $profile->grade_year = $validatedData['grade_year'];
-        $profile->student_type = $validatedData['student_type'];
-        $profile->save();
-
-        try {
-            $profile->save();
-        } catch (\Exception $e) {
-
-            // Log the error or handle it as needed
-            return redirect('/submit-form')->with('error', 'Failed to save the profile.');
-        }
 
         return redirect('/upload-form');
     }
-
-
-
 
     //========================================================================================
 
