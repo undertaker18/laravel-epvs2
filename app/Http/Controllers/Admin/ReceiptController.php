@@ -38,7 +38,7 @@ class ReceiptController extends Controller
     {
 
 
-        $csvIds = $request->all()['csv_ids'];
+        $csvIds = $request->all()['csv_ids']; 
         $arrayIds = explode(',', $csvIds);
 
         $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
