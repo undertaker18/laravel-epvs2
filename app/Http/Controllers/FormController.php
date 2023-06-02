@@ -374,24 +374,26 @@ class FormController extends Controller
 
             $data = [];
             $labels = [
-                "receipt_type" => "Receipt Type",
-                "reference" => "Reference",
-                "amount" => "Receipt Amount",
-                "date" => "Receipt Date",
-                "time" => "Receipt Date",
-                "fullname" => "Full Name",
-                "email" => "Email",
-                "scholarshipStatus" => "Scholarship Status",
-                "department" => "Department",
-                "grade_year" => "Grade/Year",
-                "student_type" => "Student Type",
-                "payment_for" => "Payment For",
+               
+                "fullname" => "Full Name:",
+                "email" => "Email:",
+                "scholarshipStatus" => "Scholarship Status:",
+                "department" => "Department:",
+                "grade_year" => "Grade/Year:",
+                "student_type" => "Student Type:",
+
+                "payment_for" => "Payment For:",
+                "receipt_type" => "Receipt Type:",
+                "reference" => "Reference:",
+                "amount" => "Receipt Amount:",
+                "date" => "Receipt Date:",
+                "time" => "Receipt Date:",
             ];
 
             foreach ($request->all() as $key => $value){
                 $explodeValue = explode('##', $key);
                 if (in_array($key, ['_token', 'receipt_source##']) === true) {
-                } else if (in_array($explodeValue[0], ['receipt_type', 'reference', 'date', 'time', 'receiptamount']) === false) {
+                } else if (in_array($explodeValue[0], ['reference','amount','payment_for','date','time','receipt_type',]) === false) {
                     $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
                 } else {
                     $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
@@ -399,8 +401,8 @@ class FormController extends Controller
             }
 
             foreach ($data['data']['summary']['studentsInfo'] as $key => $stud) {
-                $recipient[$key]['fullname'] = $stud['Full Name'];
-                $recipient[$key]['email'] = $stud['Email'];
+                $recipient[$key]['fullname'] = $stud['Full Name:'];
+                $recipient[$key]['email'] = $stud['Email:'];
             }
 
             $data['subject'] = 'Payment Summary';
