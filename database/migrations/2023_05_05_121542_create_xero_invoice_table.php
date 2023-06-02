@@ -18,15 +18,22 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('amount')->default(0)->nullable();
             $table->string('reference')->nullable();
+
             $table->string('status')->default(0); // 0 - pending, 1 - pending
-            $table->timestamp('created_at')->useCurrent();
+            $table->enum('receiptStatus', ['1', '2', '3'])->default(1);   // 1 - pending , 2 - valid , 3 - reject 
+           
 
             $table->string('email')->nullable();
             $table->string('receipt_type')->nullable();
             $table->string('receipt_src')->nullable();
 
+            $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
+
+       
+
+
     }
 
     /**

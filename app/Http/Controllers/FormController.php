@@ -40,18 +40,20 @@ class FormController extends Controller
         $privacy = new Privacy();
 
         $counter = Privacy::count() + 1; // Get the count of existing records and increment by 1
-        $paddingLength = 9; // Generate a random padding length between 1 and 9
+        $paddingLength = 5; // Generate a random padding length between 1 and 5
 
-        $privacy->privacy_key = 'PK-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+        $privacy->privacy_key = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
         $privacy->privacy_notice = $request->privacy_notice;
 
         if ($privacy->save()) {
-            $request->session()->put('LoggedUser', $privacy->privacy_key);
             return redirect('/profile-form');
+        } else {
+            $errorMessage = 'Failed to save privacy notice. Please try again.';
+            return view('form.privacy-notice-form', compact('errorMessage'));
         }
-
-        return redirect('/privacy-form');
     }
+
+    
 
 
     //=================================================================================
@@ -82,38 +84,43 @@ class FormController extends Controller
     }
      
     public function postProfile(Request $request)
-{
-    $fullnameList = $request->input('fullname');
-    $emailList = $request->input('email');
-    $scholarshipStatusList = $request->input('scholarshipStatus');
-    $departmentList = $request->input('department');
-    $grade_yearList = $request->input('grade_year');
-    $student_typeList = $request->input('student_type');
-
-    foreach ($fullnameList as $index => $fullname) {
-
-        $validatedData = $request->validate([
-            'fullname',
-            'email',
-            'scholarshipStatus',
-            'department',
-            'grade_year',   
-            'student_type',   
-        ]);
-
-        $profile = new Profile();
-        
-        $profile->fullname = $fullname;
-        $profile->scholarshipStatus = $scholarshipStatusList[$index];
-        $profile->email = $emailList[$index];
-        $profile->department = $departmentList[$index];
-        $profile->grade_year = $grade_yearList[$index];
-        $profile->student_type = $student_typeList[$index];
-        $profile->save();
-    }
-
+    {
+        $fullnameList = $request->input('fullname');
+        $emailList = $request->input('email');
+        $scholarshipStatusList = $request->input('scholarshipStatus');
+        $departmentList = $request->input('department');
+        $grade_yearList = $request->input('grade_year');
+        $student_typeList = $request->input('student_type');
+    
+        // Generate profile_key once outside the loop
+        $counter = Profile::count() + 1;
+        $paddingLength = 5;
+        $profileKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+    
+        foreach ($fullnameList as $index => $fullname) {
+            $validatedData = $request->validate([
+                'fullname',
+                'email',
+                'scholarshipStatus',
+                'department',
+                'grade_year',
+                'student_type',
+            ]);
+    
+            $profile = new Profile();
+            $profile->profile_key = $profileKey; // Assign the same profile_key to each profile
+            $profile->fullname = $fullname;
+            $profile->scholarshipStatus = $scholarshipStatusList[$index];
+            $profile->email = $emailList[$index];
+            $profile->department = $departmentList[$index];
+            $profile->grade_year = $grade_yearList[$index];
+            $profile->student_type = $student_typeList[$index];
+            $profile->save();
+        }
+    
         return redirect('/upload-form');
     }
+    
 
     //========================================================================================
 
@@ -124,28 +131,35 @@ class FormController extends Controller
     }
 
 
-    public function postUpload(Request $request) {
-
+    public function postUpload(Request $request)
+    {
+      
+    
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
             $image->move(public_path('assets/receipts/temp/'), $filename); // save to temporary folder
-
+    
             // Store data in session
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
-           
+    
+              // Generate profile_key once outside the loop
+            $counter = Profile::count() + 1;
+            $paddingLength = 5;
+            $uploadKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+
             $uploadform = new UploadForm();
-        
+            $uploadform->upload_key = $uploadKey;
             $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
             $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
-           
+    
             $uploadform->save();
-           
-            return redirect()->route('verify-form');
 
+    
+            return redirect()->route('verify-form');
         }
-       
+    
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
@@ -251,6 +265,12 @@ class FormController extends Controller
 
         public function postVerify(Request $request )
         {
+
+               // Generate profile_key once outside the loop
+               $counter = Profile::count() + 1;
+               $paddingLength = 5;
+               $paymentKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT); 
+
             $request->validate ([
                 'payment_for' => 'required',
                 'reference' => 'required',
@@ -260,6 +280,8 @@ class FormController extends Controller
             ]);
 
             $payment  = new Payment();
+
+            $payment->payment_key =  $paymentKey;
             $payment->payment_for = $request->payment_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
@@ -287,29 +309,41 @@ class FormController extends Controller
             // for summary
         public function summary(Request $request )
         {
-
-            // Retrieve the upload form record
-            $uploadForm = UploadForm::first();
-
-
             // Get the receipt filename from the upload form record
-            $receiptFilename = $uploadForm->receipt_filename;
+            $receiptFilename =  UploadForm::latest('receipt_filename')->value('receipt_filename');
+            $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename,];
 
-            $details = [
-                'receipt' => "/assets/receipts/temp/" . $receiptFilename,
-            ];
+            // profile
+            $latestProfileKey = Profile::latest('profile_key')->value('profile_key');
+          
+            $profileDetails = DB::table('profile')
+            ->where('profile_key', '=' ,  $latestProfileKey )
+            ->get();
 
-            $profiles = Profile::latest()->get();
-            $latestProfile = $profiles->first();
+           
+            // upload
+            $latestUploadKey = UploadForm::latest('upload_key')->value('upload_key');
+          
+            $uploadDetails = DB::table('uploadform')
+            ->where('upload_key', '=' ,  $latestUploadKey )
+            ->get();
 
-            $uploadforms = UploadForm::latest()->get(); // Retrieve all UploadForms ordered by the latest first
-            $latestUploadForm = $uploadforms->first(); // Get the latest UploadForm from the collection
+            // payment
+            $latestPaymentKey = Payment::latest('payment_key')->value('payment_key');
+          
+            $paymentDetails = DB::table('payment')
+            ->where('payment_key', '=' ,  $latestPaymentKey )
+            ->get();
 
-            $payments = Payment::latest()->get();
-            $latestPayment = $payments->first();
+            // $transaction_no = Profile::latest()->get('transaction_columnname');
 
-            return view('form.summary-form', compact('profiles' , 'uploadforms' , 'payments' , 'latestProfile' , 'latestUploadForm','latestPayment'))
-                ->with('details', $details);
+            // $variable = DB::table('table_name')
+            // ->join(.....)
+            // ->where('transaction_columnname', '=', $transaction_no)
+            // ->get();
+
+                return view('form.summary-form', compact('profileDetails','uploadDetails','paymentDetails'))
+                ->with('imagedetails', $imagedetails);
             
 
         }
@@ -318,6 +352,11 @@ class FormController extends Controller
         public function postSummary(Request $request )
         {
 
+
+            // Perform the conditional update
+            // DB::table('xero_invoice')
+            // ->join('bdo_receipt', 'xero_invoice.reference', '=', 'bdo_receipt.reference2')
+            // ->update(['receiptStatus' => '2']);
 
         }
 
@@ -380,6 +419,8 @@ class FormController extends Controller
             }
             return redirect('/submit-form');
         }
+
+
 
 
         private function getValueBetweenstrings($paragraph ,$string1, $string2) {

@@ -154,9 +154,15 @@
                                             <h3>Personal Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-
-                                            @foreach ($profiles as $key => $profile)
-                                                @if ($profile->id === $latestProfile->id)
+                                            <?php
+                                            $studentNumber = 1;
+                                            ?>
+                                            @foreach ($profileDetails as $key => $profile)
+                                                @if ($profile->id === $profile->id)
+                                                <div class="box-body mt-4 mb-3 text-left">
+                                                   
+                                                <h3>Student {{ $studentNumber++ }}</h3>                                                
+                                                </div>
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <div class="form-group">
@@ -205,6 +211,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <br><br>
                                                 @endif
                                             @endforeach
 
@@ -224,7 +231,7 @@
                                 <div class="col-md-6 bg-white">
                                     <div class="box box-primary">
                                         <div class="box-body mt-3 mb-3  ">
-                                            <img src="{{ $details['receipt'] }}" alt="Image Description" title="Image Title" style="border-radius: 10px; width: 100%;"  class="image-class align_right">
+                                            <img src="{{ $imagedetails['receipt'] }}" alt="Image Description" title="Image Title" style="border-radius: 10px; width: 100%;"  class="image-class align_right">
                                         </div>
                                     </div>
                                 </div>
@@ -235,8 +242,8 @@
                                             <h3>Payment Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-                                                @foreach ($uploadforms as $uploadKey => $uploadform)
-                                                @if ($uploadform->id === $latestUploadForm->id)
+                                                @foreach ($uploadDetails as $uploadKey => $uploadform)
+                                                @if ($uploadform->id === $uploadform->id)
                                                     <div class="form-group">
                                                         <label class="form-label" for="receipt_type">Receipt Type</label>
                                                         <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
@@ -246,8 +253,8 @@
                                                 @endforeach
                                             
 
-                                                @foreach ($payments as $paymentKey => $payment)
-                                                    @if ($payment->id === $latestPayment->id)
+                                                @foreach ($paymentDetails as $paymentKey => $payment)
+                                                    @if ($payment->id === $payment->id)
                                                         <div class="form-group">
                                                             <label class="form-label" for="payment_for">Payment For</label>
                                                             <input type="text" class="form-control" id="payment_for" name="payment_for##{{$paymentKey}}"
@@ -276,7 +283,7 @@
                                                     @endif
                                                 @endforeach
                     
-                                                <input type="hidden" value="{{ $details['receipt'] }}" name="receipt_source##">  
+                                                <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
                                         </div>
                                     </div>
                                 </div>

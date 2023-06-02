@@ -162,6 +162,10 @@
                         <form action="" method="POST">
                             @csrf
 
+                           
+                            {{-- <input type="text" name="profile_key[]" value="{{   }}" hidden> --}}
+                            
+                        
                             @if ($countForm == 1)
 
                                 <div class="card-2 m-3 bg-form">
@@ -179,7 +183,7 @@
 
                                                         @foreach($results as $result)
                                                         <option value="{{ $result->xero_account_name }}">
-                                                            @endforeach
+                                                        @endforeach
 
                                                     </datalist>
 
