@@ -242,17 +242,6 @@
                                             <h3>Payment Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-                                                @foreach ($uploadDetails as $uploadKey => $uploadform)
-                                                @if ($uploadform->id === $uploadform->id)
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="receipt_type">Receipt Type</label>
-                                                        <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
-                                                            value="{{ $uploadform->receipt_type }}" readonly>
-                                                    </div>
-                                                @endif
-                                                @endforeach
-                                            
-
                                                 @foreach ($paymentDetails as $paymentKey => $payment)
                                                     @if ($payment->id === $payment->id)
                                                         <div class="form-group">
@@ -272,15 +261,26 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label  class="form-label" for="date">Date of Payment</label>
-                                                            <input type="text" class="form-control" id="date" name="date##{{$paymentKey }}" value="{{ $payment->date }}"
+                                                            <input type="text" class="form-control" id="date" name="date##{{$paymentKey }}" 
+                                                            value="{{ $payment->date }}"
                                                                 readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label  class="form-label" for="time">Time of Payment</label>
-                                                            <input type="text" class="form-control" id="time" name="time##{{$paymentKey }}" value="{{ $payment->time }}"
+                                                            <input type="text" class="form-control" id="time" name="time##{{$paymentKey }}" 
+                                                            value="{{ $payment->time }}"
                                                                 readonly>
                                                         </div>
                                                     @endif
+                                                @endforeach
+                                                @foreach ($uploadDetails as $uploadKey => $uploadform)
+                                                @if ($uploadform->id === $uploadform->id)
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="receipt_type">Receipt Type</label>
+                                                        <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
+                                                            value="{{ $uploadform->receipt_type }}" readonly>
+                                                    </div>
+                                                @endif
                                                 @endforeach
                     
                                                 <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
