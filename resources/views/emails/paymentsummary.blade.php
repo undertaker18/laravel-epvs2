@@ -19,7 +19,7 @@ height: 110%;
 width: 100%;
 }
 </style>
-<img src="{{ $message->embed(public_path('assets/data-privacy/LVCC.jpg ')) }}" class="logo">
+<img src="{{ $message->embed(public_path('assets/data-privacy/emaillogo.jpg')) }}" class="logo">
 <h1>La Verdad Christian College</h1>
 <h2>Enrollment Payment Validation System</h2>
 <hr>
