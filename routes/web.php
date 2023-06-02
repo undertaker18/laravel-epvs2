@@ -120,6 +120,10 @@ Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipts');
 
+Route::get('/bdo-xero-receipts', [XeroApiController::class, 'getXeroTransactions'])
+    ->middleware(['auth', 'verified'])
+    ->name('bdo-xero-receipts');
+
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
     ->middleware(['auth', 'verified'])
     ->name('upload');
