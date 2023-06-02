@@ -28,8 +28,8 @@ class XeroApiController extends Controller
     {
         // CHANGE THIS WHEN THERE IS NEW ACCOUNT
         $this->clientId = '65E0B44A363548B5AEB2EC886C8E7CFB';
-        $this->clientSecret = '7b6hUvIwcB-Ox3oRv8qqpM6uVXE9xPT3jDWmEC88Pt9oSk25';
-        $this->authotizarionBase64 = 'NjVFMEI0NEEzNjM1NDhCNUFFQjJFQzg4NkM4RTdDRkI6N2I2aFV2SXdjQi1PeDNvUnY4cXFwTTZ1VlhFOXhQVDNqRFdtRUM4OFB0OW9TazI1';
+        $this->clientSecret = 'kUJNi_WpmiMZBtFFjQswH2fdCHX1jDL93NpdWztuk-c17G2X';
+        $this->authotizarionBase64 = 'NjVFMEI0NEEzNjM1NDhCNUFFQjJFQzg4NkM4RTdDRkI6a1VKTmlfV3BtaU1aQnRGRmpRc3dIMmZkQ0hYMWpETDkzTnBkV3p0dWstYzE3RzJY';
         $this->tenantId = '56f717fe-5558-4932-9c1d-8be1da1264f2';
         $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
         $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';

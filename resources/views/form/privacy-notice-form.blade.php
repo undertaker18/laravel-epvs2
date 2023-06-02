@@ -1,152 +1,116 @@
 <x-form-layout>
     <style>
-        .btn {
-           width: 200px;
-           margin-top: 15px;
-           margin-bottom: 15px;
+       .btn {
+            width: 200px;
+            margin-top: 15px;
+            margin-bottom: 0px;
         }
+
+        
+
+
+
         .btn-primary2 {
             background-color: green !important;
             color: white !important;
             border-radius: 5px !important;
             padding: 9px;
         }
+
+        .btn-primary1 {
+            background-color: rgb(118, 172, 118) !important;
+            color: white !important;
+            border-radius: 5px !important;
+            padding: 9px;
+        }
+
         .btn-primary {
             background-color: #1266b4 !important;
         }
-       
-     
- 
-    a {
-    color: #879BAE;
-    list-style: none;
-    text-decoration: none;
-    }
 
-    ul li a.show {
-        color: red !important;
-    }
 
-    .nav-link:focus{
-        background-color: transparent !important;
-        color: #1266b4 !important;
-    }
 
-    .nav-link {
-        color: #879BAE !important;
-        font-size: 25px !important; /* or any other desired size */
-    }
-    .icon{
-        font-size: 70px !important; /* or any other desired size */
-    }
+        .tab-content {
+            border: none !important;
+        }
 
-    .nav-link:hover {
-        color: #1266b4 !important;
-    }
+        .card {
+            border: none !important;
+            border-radius: none !important;
+            box-shadow: none !important;
+        }
 
-    .nav-link:active{
-        /* Remove background color */
-        background-color: transparent !important;
-        color: #1266b4 !important;
-    }
+        .card-2 {
+            border-radius: 12px !important;
+            box-shadow: none !important;
+        }
 
-    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-        /* Remove background color */
-        background-color: transparent !important;
-    }
-    .card-header  {
-        border: none !important;
-    }
-    .tab-content {
-        border: none !important;
-    }
-    .card {
-        border: none !important;
-        box-shadow: none !important;
-    }
+        .form-group {
+            text-align: left !important;
+        }
 
-       .form-group{
+        .form-label {
+
+            padding-top: 5px;
+        }
+
+        /* .card-title {
+
+        font-size: 1.5rem; 
         text-align: left !important;
         }
 
-        .card-title {
+        .card-tools {
+            text-align: right !important;
+        } */
 
-        font-size: 1.5rem; /* Change the font size as per your preference */
-        font-weight: bold;
-        }
-      
-
-         .row.main-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        }
-    
         .container {
             margin-top: 30px;
             justify-content: center;
-        
-        }
-
-        ul {
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        
-
 
         }
 
-        li {
-            align-items: center;
-            font-size: 25px;
-            margin: 0 10px;
-            padding: 5px 10px;
-        }
 
-        
         .main-content {
             align-items: center;
+            margin-left: 19%;
+            margin-right: 19%;
+            color: #000000 !important;
 
         }
 
-        .privacy-content {
-            padding: 5px;
-            font-weight:normal;
-            font-size: 24px;
+        .privacy-content1 {
+            padding: 2px;
+            font-weight: normal;
+            font-size: 22px;
             text-align: left;
-            margin-left: 160px;
-            margin-right: 160px;
+
             color: #000000;
-    
-        }
-
-        .p{
-            padding-left: 10px;
-        }
-
-        .asteris {
-            color: red;
-        }
-
-        /*check box */
-        .checkbox {
-            size: 20px;
-            position: relative; /* set the position to relative */
-        /* set the z-index to a high value */    
 
         }
 
-        input[type=checkbox] {
-            height: 20px;
-            width: 20px;
-            
+        .btn {
+            width: 200px;
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
+        
 
+        .align-left {
+            text-align: left;
+            padding-top: 15px;
+            margin: 0;
+        }
 
+        .align-right {
+            text-align: right;
+            margin: 0;
+        }
+
+        .bg-form {
+            background-color: #EAF1F8;
+        }
     </style>
         <div class="card-body">
             <div class="tab-content">
@@ -159,7 +123,7 @@
 
                                         <form action="/privacy-form" method="POST">
                                             @csrf 
-                                        <div class="privacy-content">
+                                        <div class="privacy-content1">
                                             <p><b>PRIVACY NOTICE:</b> Dear student(s)/parent(s)/guardian(s), we would 
                                                 like to inform you that we are collecting your personal information(s)
                                                 for the purpose of your payment in La Verdad Christian College. This
@@ -178,13 +142,13 @@
 
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6  d-flex justify-content-start">
                                                 <button class="btn btn-lg btn-primary pl-5 pr-5" onclick="window.location.href='{{ url('/') }}'" data-toggle="tab">
                                                     <i class="fas fa-arrow-left"></i> Back
                                                 </button>
                                             </div>
-                                            <div class="col-md-6">
-                                                <button id="next-button" type="submit"  value="submit" class="btn btn-lg btn-secondary pl-5 pr-5" data-toggle="tab" disabled>
+                                            <div class="col-md-6  d-flex justify-content-end">
+                                                <button id="next-button" type="submit"  value="submit" class="btn btn-lg btn-primary1 pl-5 pr-5" data-toggle="tab" disabled>
                                                     Next <i class="fas fa-arrow-right"></i>
                                                 </button>
                                             </form>
@@ -195,12 +159,12 @@
                                                         var button = document.getElementById("next-button");
                                                         if (checkBox.checked) {
                                                             button.disabled = false;
-                                                            button.classList.remove("btn-secondary");
+                                                            button.classList.remove("btn-primary1");
                                                             button.classList.add("btn-primary2");
                                                         } else {
                                                             button.disabled = true;
                                                             button.classList.remove("btn-primary2");
-                                                            button.classList.add("btn-secondary");
+                                                            button.classList.add("btn-primary1");
                                                         }
                                                     }
                                                 </script>
@@ -215,4 +179,33 @@
                 </div>
             </div>
         </div>
+        <!-- Update the error message dynamically and trigger the modal -->
+        @if(!empty($errorMessage))
+        <script>
+            var errorMessage = "{{ $errorMessage }}";
+            $('#errorMessage').text(errorMessage);
+            $('#errorModal').modal('show');
+        </script>
+        @endif
+
+        <!-- Modal -->
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="errorMessage">Error message goes here</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </x-form-layout>
