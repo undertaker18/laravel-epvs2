@@ -383,7 +383,7 @@ class FormController extends Controller
                 "student_type" => "Student Type:",
 
                 "payment_for" => "Payment For:",
-                "receipt_type" => "Receipt Type:",
+                "receipt_type" => "Receipt Type:",  
                 "reference" => "Reference:",
                 "amount" => "Receipt Amount:",
                 "date" => "Receipt Date:",

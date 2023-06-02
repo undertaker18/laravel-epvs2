@@ -231,7 +231,7 @@
                                 <div class="col-md-6 bg-white">
                                     <div class="box box-primary">
                                         <div class="box-body mt-3 mb-3  ">
-                                            <img src="{{ $imagedetails['receipt'] }}" alt="Image Description" title="Image Title" style="border-radius: 10px; width: 100%;"  class="image-class align_right">
+                                            <img src="{{ $imagedetails['receipt'] }}" alt="{{ $imagedetails['receipt'] }}" title="Image Title" style="border-radius: 10px; width: 100%;"  class="image-class align_right">
                                         </div>
                                     </div>
                                 </div>
