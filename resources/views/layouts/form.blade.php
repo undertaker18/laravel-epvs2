@@ -18,6 +18,23 @@
         .image{
             background-color: #F7F7F7 !important;
         }
+        .image-logo {
+            width: 150px; 
+            height: 150px;
+        }
+
+        @media screen and (max-width: 761px) {
+
+            /* logo */
+            .image-logo {
+            width: 70px; 
+            height: 70px;
+        }
+            .icon-size {
+            width: 20px;
+            height: 20px;
+        }
+        }
     </style>
     <body>
         <!-- Your page content here --> 
@@ -26,7 +43,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="p-1 p-md-1 mb-4 image">
-                            <img src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" style="width: 150px; height: 150px;">
+                            <img class="image-logo" src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" >
                             @include('layouts.form-navigation')
                             <main >
                                 {{ $slot }}

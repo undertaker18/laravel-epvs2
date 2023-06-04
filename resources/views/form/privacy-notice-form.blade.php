@@ -1,27 +1,18 @@
 <x-form-layout>
     <style>
-       .btn {
-            width: 200px;
-            margin-top: 15px;
-            margin-bottom: 0px;
-        }
-
-        
-
-
-
+       
         .btn-primary2 {
             background-color: green !important;
             color: white !important;
             border-radius: 5px !important;
-            padding: 9px;
+           
         }
 
         .btn-primary1 {
             background-color: rgb(118, 172, 118) !important;
             color: white !important;
             border-radius: 5px !important;
-            padding: 9px;
+           
         }
 
         .btn-primary {
@@ -111,20 +102,76 @@
         .bg-form {
             background-color: #EAF1F8;
         }
+
+
+        @media screen and (max-width: 761px) {
+
+            /* logo */
+            .img-fluid-custom-default{
+            width: 100%;
+            height: auto;
+            }
+
+            /* font */
+            .bdo-font{
+            font-size: 11px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin: 0 0px 0 0px;
+            }
+            .payment-font{
+            font-size: 12px;
+            }
+            .container {
+            width: 100%;    
+            padding: 0px;
+            }
+
+            .main-content {
+            align-items: center;
+            margin-left: 0%;
+            margin-right: 0%;
+            color: #000000 !important;
+
+        }
+            .privacy-content1 {
+            padding: 2px;
+            font-weight: normal;
+            font-size: 14px;
+            text-align: left;
+
+            color: #000000;
+
+        }
+            
+        .btn {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            }
+
+            .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+
+            
+            }
     </style>
         <div class="card-body">
             <div class="tab-content">
                 <div class="active tab-pane" id="profile">
                     <div class=" main-content">
+                        <form action="/privacy-form" method="POST">
+                            @csrf 
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-12">
-
-                                        <form action="/privacy-form" method="POST">
-                                            @csrf 
                                         <div class="privacy-content1">
-                                            <p><b>PRIVACY NOTICE:</b> Dear student(s)/parent(s)/guardian(s), we would 
+                                            <p><b>PRIVACY NOTICE:<br>
+                                                </b> Dear student(s)/parent(s)/guardian(s), we would 
                                                 like to inform you that we are collecting your personal information(s)
                                                 for the purpose of your payment in La Verdad Christian College. This
                                                 information(s) shall be utilized for payment process only. In
@@ -139,21 +186,24 @@
                                                 <label for="checkbox" class="font"><b>I ACCEPT</b></label>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-12">
                                         <div class="row">
-                                            <div class="col-md-6  d-flex justify-content-start">
-                                                <button class="btn btn-lg btn-primary pl-5 pr-5" onclick="window.location.href='{{ url('/') }}'" data-toggle="tab">
-                                                    <i class="fas fa-arrow-left"></i> Back
-                                                </button>
+                                          <div class="col-md-5">
+                                            <div class="button-container">
+                                              <button class="btn btn-primary" onclick="window.location.href='{{ url('/') }}'" data-toggle="tab">
+                                                <i class="fas fa-arrow-left"></i> BACK
+                                              </button>
                                             </div>
-                                            <div class="col-md-6  d-flex justify-content-end">
-                                                <button id="next-button" type="submit"  value="submit" class="btn btn-lg btn-primary1 pl-5 pr-5" data-toggle="tab" disabled>
-                                                    Next <i class="fas fa-arrow-right"></i>
-                                                </button>
-                                            </form>
-
-                                                <script>
+                                          </div>
+                                          <div class="col-md-5">
+                                            <div class="button-container">
+                                              <button id="next-button" type="submit" value="submit" class="btn btn-primary1" data-toggle="tab" disabled>
+                                                NEXT <i class="fas fa-arrow-right"></i>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                            <script>
                                                     function toggleButton() {
                                                         var checkBox = document.getElementById("privacy_notice");
                                                         var button = document.getElementById("next-button");
@@ -167,14 +217,12 @@
                                                             button.classList.add("btn-primary1");
                                                         }
                                                     }
-                                                </script>
-                                                
-                                            </div>
-                                        </div>
+                                            </script>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>

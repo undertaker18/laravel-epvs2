@@ -52,6 +52,9 @@
     /* font */
     .bdo-font{
       font-size: 15px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      margin: 0 10px 0 10px;
     }
     .bg-card-bdo{
       background-color: #cce1f6; /* Adjust the alpha value (0.5 in this example) to control the transparency */
@@ -203,6 +206,9 @@
     /* font */
     .bdo-font{
       font-size: 11px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin: 0 0px 0 0px;
     }
     .payment-font{
       font-size: 12px;
@@ -216,11 +222,6 @@
         font-size: 12px;
         font-weight: 500;
     }
-
-
-
-
-
     }
 </style>
 
@@ -228,7 +229,7 @@
     <section class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')">
       <div class="header-logo">
         <div class="header-column">
-          <div class="logo">
+          <div class="logo p-3">
             <img class="img-fluid-custom-default" src="{{ asset('assets/landing/LVCC-V2.png') }}" alt="lvcc Logo">
           </div>
           <div class="container">
@@ -473,7 +474,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ asset('assets/sample-receipts/unionbank.jpg') }}" alt="EmailfromGcash" width="100%" height="auto">
+                    <img src="{{ asset('assets/sample-receipts/Unionbank.jpg') }}" alt="EmailfromGcash" width="100%" height="auto">
                 </div>
             </div>
             </div>
@@ -501,7 +502,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ asset('assets/sample-receipts/send-money-instapay.jpg') }}" alt="TextMessagefromGcash" width="100%" height="auto">
+                    <img src="{{ asset('assets/sample-receipts/Send-money-instapay.jpg') }}" alt="TextMessagefromGcash" width="100%" height="auto">
                 </div>
             </div>
             </div>

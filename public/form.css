@@ -61,116 +61,7 @@ body {
         box-shadow: none !important;
     }
 
-    @media (min-width: 375px) {
-   
-        .nav-link {
-            font-size: 15px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 40px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 16px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .drag-area {
-        height: 60%;
-        width:100%;
-        }
-        
-    }
-    @media (min-width: 400px) {
-    
-        .nav-link {
-            font-size: 15px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 40px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 18px;
-        }
-        .btn-primary {
-            font-size: 20px;
-        }
-        .drag-area {
-            height: 60%;
-            width:100%;
-        }
-        .drag-area header {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1266b4;
-        }
-        
-        .drag-area p {
-            font-size: 12px;
-            font-weight: 500;
-            color: #080808;
-        }
-       
-    }
-    @media (min-width: 600px) {
-    
-        .nav-link {
-            font-size: 15px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 40px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 20px;
-        }
-        .drag-area header {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1266b4;
-        }
-        
-        .drag-area p {
-            font-size: 12px;
-            font-weight: 500;
-            color: #080808;
-        }
-    }
-
-    @media (min-width: 800px) {
-        .nav-link {
-            font-size: 18px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 40px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 21px;
-        }
-    }
-
-    @media (min-width: 992px) {
-        .nav-link {
-            font-size: 20px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 55px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 23px;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .nav-link {
-            font-size: 24px; /* or any other desired size */
-        }
-        .icon{
-            font-size: 70px; /* or any other desired size */
-        }
-        .privacy-content{
-            font-size: 24px;
-        }
-    }
-   
+  
 
        .form-group{
         text-align: left !important;
@@ -183,34 +74,7 @@ body {
         }
       
 
-        /* Media query for small screens */
-        @media screen and (max-width: 300px) {
-        button {
-            display: inline-block;
-            float: none !important;
-            font-size: 14px;
-            padding: 8px 16px;
-            
-        }
-        }
 
-        /* Media query for medium screens */
-        @media screen and (min-width: 577px) and (max-width: 992px) {
-        button {
-            display: inline-block;
-            float: none !important;
-            font-size: 16px;
-            padding: 10px 20px;
-        }
-        }
-
-        /* Media query for large screens */
-        @media screen and (min-width: 993px) {
-        button {
-            font-size: 18px;
-            padding: 12px 24px;
-        }
-        }
          /* upload */
 
          .row.main-content {
