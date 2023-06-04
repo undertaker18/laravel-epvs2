@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPVS</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/data-privacy/lvcclogo.png') }}">
 
@@ -12,467 +12,531 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="../CSS/landingpage.css" rel="stylesheet">
 </head>
+
 <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+    .link {
+      font-size: 12px;
+    }
 
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
- 
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      
     /* image background */
     .image-bg {
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;
     }
-     /* image background */
-     .image-bg2 {
-        background-size: 100% 100%;
-        color: #1266B4;
+
+    .logo {
+        padding-top: 0px;
     }
 
-
-      /*logo */
-
-      .header-logo{
-        text-align: left; 
-      }
-
-      .header-column{ 
-        display: inline-block;
-        
-        
-      }
-      .logo{
-        padding-top: 0px;
-      }
-      .font-logo{
+    .font-logo {
         font-size: 65px;
         padding-top: 0px;
-        margin-left : 10px;
+        margin: 10px;
         color: white;
-      }
-
-       /*content */
-      .container-fluid{
-        width: 90%;
-        height: 90%;
-        padding-bottom: 20px;
-      }
-
-       /*check box */
-      .checkbox {
-        size: 20px;
-        
-      }
-      input[type=checkbox] {
-        height: 20px;
-        width: 20px;
-       
     }
-        /*button */
-      .right-button {
-        float: left;
-        width: 250px;
-        height: 70;
-        padding: 8px;
-        margin-left: 8px;
+
+    /* logo */
+    .img-fluid-custom-default{
+      width: 60%;
+      height: auto;
+      
+    }
+
+    .img-fluid-custom{
+      width: 30%;
+      height: 30%;
+    }
+
+    /* font */
+    .bdo-font{
+      font-size: 15px;
+    }
+    .bg-card-bdo{
+      background-color: #cce1f6; /* Adjust the alpha value (0.5 in this example) to control the transparency */
+      
+    }
+    /* container */
+    .card  {
+      width: 85%;
+    }
+
+    .btn-success {
+        width: 25%;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /*Checkbox and button */
+    .custom-control-input {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .custom-control-input:checked~.custom-control-label::before {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .custom-control-input:focus~.custom-control-label::before {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+        border-color: #80bdff;
+    }
+
+    .custom-control-input:not(:disabled):active~.custom-control-label::before {
+        background-color: #b3d7ff;
+        border-color: #b3d7ff;
+    }
+
+    .custom-control-input:not(:disabled):active:checked~.custom-control-label::before {
+        background-color: #004085;
+        border-color: #004085;
+    }
+
+    .custom-control-input:checked~.custom-control-label::after {
+        color: #fff;
+        content: url('checkmark-white.png');
+    }
+
+    .custom-control-label::before {
+        border: 1px solid #adb5bd;
+    }
+
+    .custom-control-label::after {
+        background-image: none;
+    }
+
+    .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .custom-control-label {
+        margin-bottom: 0;
+        vertical-align: top;
+    }
+
+    .text-color {
+        color: #6C6C6C;
+        margin-left: 2px;
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 2px;
+    }
+
+    .button-padding {
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .button-size {
+        width: 200px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* Example receipts */
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+
+    .modal-content {
+        padding: 0;
         border: none;
-        border-radius: 8px;
-        font-size: 30px;
-    }
-     /*check box align */
-    .wrapper {
-    text-align: left; /* optional - center the wrapper element */
-    padding-left: 60px;
     }
 
-    .box {
-        display: inline-block;
-        width: 49%;
-        height: 10px;
-       
-        font-size: 25px;
-       
-    }
-    
-    .font {
-      color: #12283A;
-      font-family:Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 19px;
-    }
-    .font2 {
-      color: #1266b4;
-      margin-left: 70px;
-    }
-    .font3 {
-      color: #1266b4;
-      margin-left: 10px;
+    .modal-body {
+        position: relative;
+        padding: 0;
     }
 
-    header {
-        text-align: center;
-        padding-bottom: 50px;
-      }
-
-    .link-button{
-        font-size: 25px;
+    .modal-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+        color: #000;
+        opacity: 0.6;
+        transition: opacity 0.25s ease;
     }
 
-    .column {
-        width: 30%;
-        float: center;
-        margin: 0 2% 0 0;
-      }
+    .modal-close:hover {
+        opacity: 1;
+    }
 
-      .modal-body {
+    .modal-close span {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .modal-image {
         width: 100%;
-        height: 500px;
-        max-width: 100%;
-       
-      }
+        height: auto;
+        vertical-align: middle;
+        border: 0;
+        max-height: calc(100vh - 2rem);
+    }
+        * {
+      box-sizing: border-box;
+    }
 
-      ul {
-        list-style: none;
-      }
-      .box2 {
-        display: inline-block;
-        width: 300PX;
-        height: 50PX;
-        margin-right: 1px;
-      }
-      .container{
-        text-align: center;
-      }
+   
 
-      .button {
-            width: 300px;
-      }
+    @media screen and (max-width: 761px) {
 
-      .btn {
-           width: 300px;
-           padding: 10px;
-        }
-        .btn-primary2 {
-            width: 300px !important;
-            background-color: rgb(27, 170, 27) !important;
-            color: white !important;
-            border-radius: 5px !important;
-           
+    /* logo */
+    .img-fluid-custom-default{
+      width: 100%;
+      height: auto;
+    }
 
-            
-        }
-        .btn-primary {
-            width: 300px !important;
-            background-color: #1266b4 !important;
-        }
+    /* font */
+    .bdo-font{
+      font-size: 11px;
+    }
+    .payment-font{
+      font-size: 12px;
+    }
+    .container {
+      width: 100%;
+      padding: 0px;
+    }
+    .btn-success {
+        width: 50%;
+        font-size: 12px;
+        font-weight: 500;
+    }
 
-        .logo-welcome {
 
-          margin-top: 30px !important;
-          margin-bottom: 30px !important;
-        }
-     
 
+
+
+    }
 </style>
 
 <body>
-    <!--  section  -->
-    <section  class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')"> 
-        <main class="container-fluid">
-            <div class="col-md-6">
-              <a href="{{ url('/login') }}"   target="_blank" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-                <img class="logo-welcome" src="{{ asset('assets/landing/LVCC.png') }}" alt="lvcc Logo" style=" width:908px ; height:169px;">
-              </a>
-            </div>
-            <div class="p-md-5 mb-4 rounded bg-white">
-              <img src="{{ asset('assets/landing/bdo2.png') }}" alt="bdo" style=" width:100% ; height: 100%;">
-              <div class="wrapper">
-                <div class="box row ">
-                  <div class="col-11">
-                    <input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox" onchange="toggleButton()">
+    <section class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')">
+      <div class="header-logo">
+        <div class="header-column">
+          <div class="logo">
+            <img class="img-fluid-custom-default" src="{{ asset('assets/landing/LVCC-V2.png') }}" alt="lvcc Logo">
+          </div>
+          <div class="container">
+            <div class="row justify-content-center align-items-center">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card-body  payment-font ">
+                      <h4 class="card-title"><strong>Payment Instructions</strong></h4>
+      
+                      <p>
+                        Please make sure to make a payment to the provided BDO bank account number before proceeding to the next step.
+                        <br>
+                        <i>(Bago magpatuloy sa susunod na step, tiyaking nakapagbayad muna sa ibinigay na BDO Bank account.)</i>
+                      </p>
+                      <p>
+                        Once payment is complete, please obtain a proof of payment and check the designated checkbox to confirm payment and proceed to the next step.
+                        <br>
+                        <i>(Kapag tapos na ang pagbabayad, mangyaring kumuha ng proof of payment o resibo para makumpirma na nakapagbayad na bago punan ang checkbox.)</i>
+                      </p>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="my-checkbox" name="my-checkbox" onchange="toggleButton()">
+                        <label class="form-check-label" for="paymentCheckbox">
+                          Yes, I have paid and completed the payment.
+                          <br>
+                          <i>(Oo, nagbayad na ako at natapos ko na ang pagbabayad.)</i>
+                        </label>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body bg-card-bdo rounded my-4 mx-3">
+                      <div class="text-center bdo-font">
+                        <img src="{{ asset('assets/landing/bdo-logo.png') }}" alt="BDO Logo" class="bdo-logo img-fluid-custom">
+                        <p>
+                          You may pay thru our BDO Account:
+                        </p>
+                      </div>
+                      <div class="text-left bdo-font">
+                        <p>
+                          <strong>Bank Name:</strong> BDO
+                          <br>
+                          <strong>Bank Account Name:</strong> La Verdad Christian School
+                          <br>
+                          <strong>Bank Account No:</strong> 00561 800 2114
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-12 col-md-12 text-left mb-3">
+                        <i class="fas fa-link font2"></i>
+                        <a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font3">How to Use Enrollment Payment Form</a>
+                      </div>
+                    </div>
+                   
                   </div>
                 </div>
-                <div class="box">
-                  <i class="fas fa-link font2"></i><a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font3">How to Use Enrollment Payment Form</a>
-                </div>
-              </div>
-              <div class="col-md-6 px-0">
               </div>
             </div>
-            <button id="next-button" class="btn btn-lg btn-secondary pl-5 pr-5" onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
-              Proceed <i class="fas fa-arrow-right"></i>
-            </button>
-
-            <script>
-              function toggleButton() {
-                  var checkBox = document.getElementById("my-checkbox");
-                  var button = document.getElementById("next-button");
-                  if (checkBox.checked) {
-                      button.disabled = false;
-                      button.classList.remove("btn-secondary");
-                      button.classList.add("btn-primary2");
-                  } else {
-                      button.disabled = true;
-                      button.classList.remove("btn-primary2");
-                      button.classList.add("btn-secondary");
-                  }
-              }
-          </script>
-          </main>
-        <main class="container-fluid ">
-            <div class=" p-md-5 mb-4 rounded bg-white ">
-                <header>
-                    <h1>Example of Valid Receipt</h1>
-                </header>
-                <ul class="container">
-                    <li class="box2"> 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#FromDesktopBDO">
-                           Gcash Email 
-                        </button>
-                    </li>
-                    <li class="box2">
-                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary button" style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#DepositSlipfromBDOBranch">
-                          Gcash Mobile App
-                        </button>
-                    </li>
-                    <li class="box2">
-                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#MobileBankingBDO">
-                          Gcash Mobile ScreenShot
-                        </button>   
-                    </li>
-                    <li class="box2">
-                        <!-- Button trigger modal -->
-                       <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#TransactionHistoryfromGcashApp">
-                        Metrobank
-                       </button>   
-                   </li>
-                   <li class="box2">
-                    <!-- Button trigger modal -->
-                   <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#EmailfromGcash">
-                        Unionbank
-                   </button>   
-                    </li>
-                    <li class="box2">
-                        <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary button"style=" background-color: #1266B4;" data-bs-toggle="modal" data-bs-target="#InboxofGcashApp">
-                      PNB Debit
-                    </button>   
-                    </li>
-                    <li class="box2">
-                        <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary button" style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#TextMessagefromGcash">
-                        Send via Instapay
-                    </button>   
-                    </li>
-                    <li class="box2">
-                        <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary button"  style=" background-color: #1266B4;"data-bs-toggle="modal" data-bs-target="#Metrobank">
-                        Pesonet Gateway                     
-                    </button>   
-                    </li>
-                </ul>
-               
-                
-                <!-- FromDesktopBDO -->
-                <div class="modal fade" id="FromDesktopBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Email</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/Gcash-email.png') }}" alt="fromdesktopbdo" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
+          </div>
+          <div class="container bg-default">
+            <div class="row justify-content-center align-items-center">
+              <div class="card" style="background-color: rgba(0, 0, 255, 0); ">
+                <div class="text-left my-3 ">
+                  <button id="next-button" class="btn btn-success pl-5 pr-5 " onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
+                    Proceed <i class="fas fa-arrow-right"></i>
+                  </button>
+                  <script>
+                    function toggleButton() {
+                        var checkBox = document.getElementById("my-checkbox");
+                        var button = document.getElementById("next-button");
+                        if (checkBox.checked) {
+                            button.disabled = false;
+                            button.classList.remove("btn-success");
+                            button.classList.add("btn-success");
+                        } else {
+                            button.disabled = true;
+                            button.classList.remove("btn-success");
+                            button.classList.add("btn-success");
+                        }
+                    }
+                </script>
                 </div>
-
-                <div class="modal fade" id="DepositSlipfromBDOBranch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Mobile App </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/Gcash-mobile-save.jpg') }}" alt="DepositSlipfromBDOBranch" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="MobileBankingBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Gcash Mobile ScreenShot</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/Gcash-mobile-ss.jpg') }}" alt="MobileBankingBDO" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="TransactionHistoryfromGcashApp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Metrobank</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/metrobank.jpg') }}" alt="TransactionHistoryfromGcashApp" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="EmailfromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Unionbank</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/unionbank.jpg') }}" alt="EmailfromGcash" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="InboxofGcashApp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                    <div class="modal-content"> 
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">PNB Debit</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/PNB-debit.jpg') }}" alt="InboxofGcashApp" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="TextMessagefromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Send via Instapay</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/send-money-instapay.jpg') }}" alt="TextMessagefromGcash" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="Metrobank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Pesonet Gateway</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('assets/sample-receipts/pesonet-gateway.jpg') }}" alt="Metrobank" width="100%" height="100%">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            
-            
+              </div>
             </div>
-        </main>
-    </section>
+          </div>
+          <div class="container ">
+            <div class="row justify-content-center align-items-center">
+              <div class="card">
+                      <div class="card-body rounded">
+                        <header>
+                          <h4 class="card-title"><strong>Example of Valid Receipt</strong></h4>
+                        </header>
+                        
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#FromDesktopBDO">
+                                  <i class="fas fa-link font2"></i>
+                                  Gcash Email
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;"  data-bs-toggle="modal" data-bs-target="#DepositSlipfromBDOBranch">
+                                  <i class="fas fa-link font2"></i>
+                                  Gcash Mobile App
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#MobileBankingBDO">
+                                  <i class="fas fa-link font2"></i>
+                                  Gcash Mobile Screenshot
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TransactionHistoryfromGcashApp">
+                                  <i class="fas fa-link font2"></i>
+                                  Metrobank
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#EmailfromGcash">
+                                  <i class="fas fa-link font2"></i>
+                                  Unionbank
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#InboxofGcashApp">
+                                  <i class="fas fa-link font2"></i>
+                                  PNB Debit
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TextMessagefromGcash">
+                                  <i class="fas fa-link font2"></i>
+                                  Send via Instapay
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#Metrobank">
+                                  <i class="fas fa-link font2"></i>
+                                  Pesonet Gateway
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="box">
+                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#slip">
+                                  <i class="fas fa-link font2"></i>
+                                  Bdo Transaction Slip 
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- FromDesktopBDO -->
+        <div class="modal fade" id="FromDesktopBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Email</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <img src="{{ asset('assets/sample-receipts/Gcash-email.png') }}" alt="fromdesktopbdo" width="100%" height="auto">
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="DepositSlipfromBDOBranch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Gcash Mobile App </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/Gcash-mobile-save.jpg') }}" alt="DepositSlipfromBDOBranch" width="100%" height="auto">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="MobileBankingBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"> Gcash Mobile ScreenShot</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/Gcash-mobile-ss.jpg') }}" alt="MobileBankingBDO" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>
         
+        <div class="modal fade" id="TransactionHistoryfromGcashApp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Metrobank</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/metrobank.jpg') }}" alt="TransactionHistoryfromGcashApp" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>
 
-    <!--  check box button  -->
+        <div class="modal fade" id="EmailfromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Unionbank</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/unionbank.jpg') }}" alt="EmailfromGcash" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="InboxofGcashApp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">PNB Debit</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/PNB-debit.jpg') }}" alt="InboxofGcashApp" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="TextMessagefromGcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Send via Instapay</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/send-money-instapay.jpg') }}" alt="TextMessagefromGcash" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Metrobank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"> Pesonet Gateway</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('assets/sample-receipts/pesonet-gateway.jpg') }}" alt="Metrobank" width="100%" height="auto">
+                </div>
+            </div>
+            </div>
+        </div>  
+        <div class="modal fade" id="slip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"> Bdo Transaction Slip </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <img src="{{ asset('assets/sample-receipts/bdo-slip.jpg ') }}" alt="Metrobank" width="100%" height="auto">
+              </div>
+          </div>
+          </div>
+      </div>  
+
+
+    </section>
+
     
 
     <!--  cdn for bootstrap  -->
