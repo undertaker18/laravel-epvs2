@@ -1,10 +1,24 @@
 <x-form-layout>
     <style>
+        .btn {
+            width: 200px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
         .row.main-content {
             display: flex;
-            justify-content: center;
+           
             align-items: center;
 
+        }
+        .button-set-left{
+            margin-left: 220px;
+           
+        }
+        .button-set-right{
+         
+            margin-right: 220px;
         }
 
         /* Hide the default file input button */
@@ -43,17 +57,20 @@
             /* height: 500px;
             width: 700px; */
             border-radius: 15px;
+            margin-left: auto;
+            margin-right: auto;
 
             align-items: center;
             justify-content: center;
             flex-direction: column;
         }
+
         .drag-area1 {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border: none;
             /* height: 500px;
             width: 700px; */
+            margin-left: auto;
+            margin-right: auto;
+
             align-items: center;
             justify-content: center;
             flex-direction: column;
@@ -99,8 +116,128 @@
         .drag-area img {
             height: 100%;
             width: 100%;
-            object-fit: fill;
+            object-fit: contain;
             border-radius: 5px;
+        }
+
+        .row {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .col-md-5 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .flexed {
+            display: flex;
+        }
+
+        .end {
+            justify-content: flex-end;
+        }
+
+        .start {
+            justify-content: flex-start;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+        .col-md-13 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        }
+
+        .col-sm-13 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        }
+
+
+        @media screen and (max-width: 761px) {
+
+            /* logo */
+            .img-fluid-custom-default {
+                width: 100%;
+                height: auto;
+            }
+
+            /* font */
+            .bdo-font {
+                font-size: 11px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                margin: 0 0px 0 0px;
+            }
+
+            .payment-font {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0px;
+            }
+
+            .main-content {
+                align-items: center;
+                margin-left: 12px;
+                margin-right: 12px;
+                color: #000000 !important;
+
+            }
+
+            .privacy-content1 {
+                padding: 2px;
+                font-weight: normal;
+                font-size: 14px;
+                text-align: left;
+
+                color: #000000;
+
+            }
+
+            .btn {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+           
+
+            .h4 {
+                font-size: 15px;
+            }
+
+            .drag-area {
+                width: 95%;
+            }
+            .drag-area1 {
+                width: 95%;
+            }
+
+            .drag-area header {
+                font-size: 20px;
+                font-weight: 500;
+                color: #1266b4;
+            }
+
+            .drag-area img {
+                height: 100%;
+                width: 100%;
+                object-fit: fill;
+                border-radius: 5px;
+            }
+
+            .img {
+                width: 100%;
+            }
         }
 
     </style>
@@ -110,7 +247,7 @@
             @csrf
             <div class="row">
                 <header class="h4"><b>Take Note:</b> Make sure your receipt is readable!</header>
-                
+
                 <div class="drag-area1 mx-auto col-md-7 col-sm-12">
                     <input class="form-control" name="receipt" type="file" id="receipt">
                     <select id="" name="receipt_type" class="form-select" style="" required>
@@ -123,7 +260,7 @@
                     </select>
                     <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
                 </div>
-                <div class="drag-area mx-auto col-md-7 col-sm-12">
+                <div class="drag-area col-md-7 col-sm-12">
                     @if(session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
@@ -131,41 +268,41 @@
                     @endif
                     <div class="icon my-auto"><i class="fas fa-cloud-upload-alt"></i></div>
                     <header>Proof of Payment</header>
-                    <p>Image Type: .jpg .jpeg .png</p> 
+                    <p>Image Type: .jpg .jpeg .png</p>
                 </div>
                 <script>
                     var receiptTypeSelect = document.querySelector('select[name="receipt_type"]');
-                        var receiptTypeValidationMessage = document.getElementById('receiptTypeValidationMessage');
-                      
-                        receiptTypeSelect.addEventListener('change', function () {
-                          if (receiptTypeSelect.value !== '') {
+                    var receiptTypeValidationMessage = document.getElementById('receiptTypeValidationMessage');
+
+                    receiptTypeSelect.addEventListener('change', function () {
+                        if (receiptTypeSelect.value !== '') {
                             receiptTypeSelect.classList.remove('is-invalid');
                             receiptTypeValidationMessage.textContent = '';
-                          } else {
+                        } else {
                             receiptTypeSelect.classList.add('is-invalid');
                             receiptTypeValidationMessage.textContent = 'Please select a receipt type.';
-                          }
-                          enableDisableButton();
-                        });
-                      
-                        receiptTypeSelect.addEventListener('focus', function () {
-                          receiptTypeSelect.classList.remove('is-invalid');
-                          receiptTypeValidationMessage.textContent = '';
-                        });      
+                        }
+                        enableDisableButton();
+                    });
+
+                    receiptTypeSelect.addEventListener('focus', function () {
+                        receiptTypeSelect.classList.remove('is-invalid');
+                        receiptTypeValidationMessage.textContent = '';
+                    });
+
                 </script>
-                <div class="drag-area1 mx-auto col-md-7 col-sm-12">    
-                    <div class="row mt-4">
-                        <div class="col-md-6 d-flex justify-content-start">
-                            <div>
-                                <a href="{{ url('/profile-form') }}" class="btn btn-lg btn-primary" style="width: 200px;">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-5 ">
+                            <div class="button-container flexed start">
+                                <a href="{{ url('/profile-form') }}" class="btn  btn-primary">
                                     <i class="fas fa-arrow-left"></i> Back
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-end">
-                            <div>
-                                <button id="nextBtn" class="btn btn-lg btn-success" style="width: 200px;" type="submit" name="submit"
-                                    disabled>
+                        <div class="col-md-5 ">
+                            <div class="button-container flexed end">
+                                <button id="nextBtn" class="btn  btn-success" type="submit" name="submit" disabled>
                                     Next <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -176,7 +313,7 @@
         </form>
     </div>
 
-   
+
     <script>
         function checkFormValidity() {
             var inputs = document.querySelectorAll('input[required], select[required]');
@@ -235,7 +372,7 @@
                 fileReader.onload = () => {
                     let fileURL = fileReader.result; //passing user file source in fileURL variable
                     let imgTag =
-                        `<img src="${fileURL}" alt="" style="width: 50%">`; //creating an img tag and passing user selected file source inside src attribute
+                        `<img src="${fileURL}" alt="" style="width: 100%">`; //creating an img tag and passing user selected file source inside src attribute
                     dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
                 }
                 fileReader.readAsDataURL(file);

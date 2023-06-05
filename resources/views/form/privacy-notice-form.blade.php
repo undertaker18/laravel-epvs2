@@ -102,6 +102,29 @@
         .bg-form {
             background-color: #EAF1F8;
         }
+        .col-md-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        }
+
+        .flexed {
+        display: flex;
+        }
+
+        .end {
+        justify-content: flex-end;
+        }
+        .start {
+        justify-content: flex-start;
+        }
+
+        .mb-3 {
+        margin-bottom: 1rem;
+        }
+
+        .mt-5 {
+        margin-top: 3rem;
+        }
 
 
         @media screen and (max-width: 761px) {
@@ -189,14 +212,14 @@
                                     <div class="col-12">
                                         <div class="row">
                                           <div class="col-md-5">
-                                            <div class="button-container">
+                                            <div class="button-container flexed start">
                                               <button class="btn btn-primary" onclick="window.location.href='{{ url('/') }}'" data-toggle="tab">
                                                 <i class="fas fa-arrow-left"></i> BACK
                                               </button>
                                             </div>
                                           </div>
                                           <div class="col-md-5">
-                                            <div class="button-container">
+                                            <div class="button-container flexed end">
                                               <button id="next-button" type="submit" value="submit" class="btn btn-primary1" data-toggle="tab" disabled>
                                                 NEXT <i class="fas fa-arrow-right"></i>
                                               </button>
@@ -223,7 +246,7 @@
                             </div>
                         </div>
                     </form>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>

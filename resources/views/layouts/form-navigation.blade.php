@@ -28,7 +28,7 @@ font-size: 70px; /* or any other desired size */
 
 /* logo */
 .nav-item{
-    font-size: 10px;
+    font-size: 9px;
     margin: 0;
 
 }

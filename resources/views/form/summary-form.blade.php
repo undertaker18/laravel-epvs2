@@ -17,31 +17,25 @@
             color: #000000 !important;
             margin-bottom: 10%;
         }
+        .btn-primary2 {
+            background-color: green !important;
+            color: white !important;
+            border-radius: 5px !important;
+           
+        }
 
-        .right-button {
-            float: right;
-            width: 200px;
-            height: 50px;
-            padding: 8px;
-            margin-left: 8px;
-            background-color: green;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
+        .btn-primary1 {
+            background-color: rgb(118, 172, 118) !important;
+            color: white !important;
+            border-radius: 5px !important;
+           
         }
-        .left-button {
-            float: left;
-            width: 200px;
-            height: 50px;
-            padding: 8px;
-            margin-left: 8px;
-            background-color: #1266b4;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
+
+        .btn-primary {
+            background-color: #1266b4 !important;
         }
+
+       
         .tab-content {
                 border: none !important;
             }
@@ -138,6 +132,123 @@
         .align_right {
             align-content: right;
         }
+        .col-md-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        }
+        .col-6 {
+        width: 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        }
+
+        .flexed {
+        display: flex;
+        }
+
+        .end {
+        justify-content: flex-end;
+        }
+        .start {
+        justify-content: flex-start;
+        }
+
+        .mb-3 {
+        margin-bottom: 1rem;
+        }
+
+        .mt-5 {
+        margin-top: 3rem;
+        }
+        .btn {
+        width: 200px !important;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        }
+        @media screen and (max-width: 761px) {
+
+/* logo */
+.img-fluid-custom-default{
+width: 100%;
+height: auto;
+}
+
+/* font */
+.bdo-font{
+font-size: 11px;
+padding-top: 0px;
+padding-bottom: 0px;
+margin: 0 0px 0 0px;
+}
+.payment-font{
+font-size: 12px;
+}
+.container {
+width: 100%;    
+padding: 0px;
+}
+
+.main-content {
+align-items: center;
+margin-left: 12px;
+margin-right: 12px ;
+color: #000000 !important;
+
+}
+
+.main-content1 {
+align-items: center;
+margin-left: 12px;
+margin-right: 12px ;
+color: #000000 !important;
+
+}
+.privacy-content1 {
+padding: 2px;
+font-weight: normal;
+font-size: 14px;
+text-align: left;
+
+color: #000000;
+
+}
+.btn {
+width: 100% !important;
+margin-top: 10px;
+margin-bottom: 5px;
+}
+
+
+.button-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.card-body{
+font-size: 14px;
+}
+.form-set {
+    display: flex;
+    align-items: center;
+  }
+
+  .col-5 {
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  
+}
+.col-6 {
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  
+}
+
+
+
+}
 
     </style>
     <div class="card-body">
@@ -163,7 +274,7 @@
                                                    
                                                 <h3>Student {{ $studentNumber++ }}</h3>                                                
                                                 </div>
-                                                    <div class="row">
+                                                    <div class="row form-set">
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="fullname">Full Name</label>
@@ -274,13 +385,13 @@
                                                     @endif
                                                 @endforeach
                                                 @foreach ($uploadDetails as $uploadKey => $uploadform)
-                                                @if ($uploadform->id === $uploadform->id)
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="receipt_type">Receipt Type</label>
-                                                        <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
-                                                            value="{{ $uploadform->receipt_type }}" readonly>
-                                                    </div>
-                                                @endif
+                                                    @if ($uploadform->id === $uploadform->id)
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="receipt_type">Receipt Type</label>
+                                                            <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
+                                                                value="{{ $uploadform->receipt_type }}" readonly>
+                                                        </div>
+                                                    @endif
                                                 @endforeach
                     
                                                 <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
@@ -288,17 +399,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12" style="padding-top: 30px;">
-                            <div class="buttons">
-                                <a href="">
-                                    <button class="left-button"> <i class="fas fa-arrow-left"></i> BACK</button>
-                                </a>
-                                <a href="submit-form">
-                                    <button class="right-button">SUBMIT<i class="fas fa-arrow-right"></i></button>
-                                </a>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="button-container flexed start">
+                                        <a href="{{ url('/verify-form') }}" class="btn btn-primary">
+                                            <i class="fas fa-arrow-left"></i> Back
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="">
+                                        <a href="submit-form"  class="m-0 p-0 button-container flexed end">
+                                            <button class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </form>
