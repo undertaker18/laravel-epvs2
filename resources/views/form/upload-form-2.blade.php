@@ -136,10 +136,13 @@
 
         .end {
             justify-content: flex-end;
+            margin-right: 250px;
         }
 
         .start {
             justify-content: flex-start;
+            margin-left: 250px;
+
         }
 
         .mb-3 {
@@ -207,6 +210,16 @@
                 width: 100%;
                 margin-top: 10px;
                 margin-bottom: 20px;
+            }
+            .end {
+            justify-content: center;
+            margin-right: 0px;
+            }
+
+            .start {
+                justify-content: center;
+                margin-left: 0px;
+
             }
 
            

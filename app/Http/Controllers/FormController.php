@@ -321,8 +321,10 @@ class FormController extends Controller
         public function summary(Request $request )
         {
             // Get the receipt filename from the upload form record
-            $receiptFilename =  UploadForm::latest('receipt_filename')->value('receipt_filename');
-            $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename,];
+            
+            $receiptFilename =  UploadForm::latest('upload_key')->value('receipt_filename');
+            $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
+            // dd($receiptFilename);
 
             // profile
             $latestProfileKey = Profile::latest('profile_key')->value('profile_key');
@@ -331,7 +333,6 @@ class FormController extends Controller
             ->where('profile_key', '=' ,  $latestProfileKey )
             ->get();
 
-           
             // upload
             $latestUploadKey = UploadForm::latest('upload_key')->value('upload_key');
           
@@ -398,9 +399,9 @@ class FormController extends Controller
                 "reference" => "Reference:",
                 "amount" => "Receipt Amount:",
                 "date" => "Receipt Date:",
-                "time" => "Receipt Date:",
+                "time" => "Receipt Time:",
             ];
-
+         
             foreach ($request->all() as $key => $value){
                 $explodeValue = explode('##', $key);
                 if (in_array($key, ['_token', 'receipt_source##']) === true) {
@@ -410,7 +411,7 @@ class FormController extends Controller
                     $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
                 }
             }
-
+          
             foreach ($data['data']['summary']['studentsInfo'] as $key => $stud) {
                 $recipient[$key]['fullname'] = $stud['Full Name:'];
                 $recipient[$key]['email'] = $stud['Email:'];
@@ -419,17 +420,15 @@ class FormController extends Controller
             $data['subject'] = 'Payment Summary';
             $data['labels'] = $labels;
             $data['receipt'] = $request->all()['receipt_source##'];
+            
+           
+            foreach ($recipient as $recipientKey => $rec) {
+                $data['name'] = $rec['fullname'];
+                $email = $rec['email'];
+                Mail::to($email)->send(new PaymentSummary($data));
 
-            try {
-                foreach ($recipient as $recipientKey => $rec) {
-                    $data['name'] = $rec['fullname'];
-                    $email = $rec['email'];
-                    Mail::to($email)->send(new PaymentSummary($data));
-
-                }
-            } catch (Exception $e) {
-                dd($e->getMessage());
             }
+          
             return redirect('/submit-form');
         }
 
