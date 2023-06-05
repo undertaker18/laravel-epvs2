@@ -1,4 +1,4 @@
-<x-mail::message>
+@component('mail::message')
 <style>
 /* Add any custom styles for the email here */
 /* For example: */
@@ -66,4 +66,4 @@ $id_student = 1;
 <img src="{{ $message->embed(public_path($data['receipt'])) }}">
 <p>Thanks,</p>
 <p>{{ config('app.name') }}</p>
-</x-mail::message>
+@endcomponent
