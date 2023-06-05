@@ -19,7 +19,7 @@ height: 110%;
 width: 100%;
 }
 </style>
-<img src="{{ $message->embed(public_path('assets/data-privacy/emaillogo.jpg')) }}" class="logo">
+<img src="{{ $message->embed(public_path(). '/' . 'assets/data-privacy/lvcclogo.png') }}" class="logo">
 <h1>La Verdad Christian College</h1>
 <h2>Enrollment Payment Validation System</h2>
 <hr>
@@ -63,7 +63,8 @@ $id_student = 1;
 
 <br>
 
-<img src="{{ $message->embed(public_path($data['receipt'])) }}">
+<img src="{{ $message->embed(public_path(). '/' . $data['receipt']) }}">
+
 <p>Thanks,</p>
 <p>{{ config('app.name') }}</p>
 </x-mail::message>
