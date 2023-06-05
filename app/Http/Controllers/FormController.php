@@ -178,21 +178,32 @@ class FormController extends Controller
 
         // Veryfi API Credentials
         // Change when Veryfi expires
-        //$client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
-        //$client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
-        //$username = 'jordanearlpascua1';
-        //$api_key = '4849078385c87162e2e014c19b99383a';
-        // end
+
+         //already use
+
+        // $client_id = 'vrfRNNDKzOCalsn1fMoHEPw13jYIsMDwnBbAfUJ';
+        // $client_secret = 'bbxAZXGKwh1AKTzgUhyZ8xzw2ykZJ9iH0pnNUjlnfnYJ8tjxCDNt4sHtMiPrwbWUAGkT8WZ87W7c8l4vsRLJjAKsZNX3oUze135SSE4JaCO47U7tIlEhDuAa2ELYwklb';
+        // $username = 'jordanearlpascua1';
+        // $api_key = '4849078385c87162e2e014c19b99383a';
 
         //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
         //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
         //$username = 'jordanearlimperialpascua20';
         //$api_key = '4f708f480170a044368643ef0929850e';
 
-        $client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
-        $client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
-        $username = 'angelblaze779';
-        $api_key = '434562be5ba93a74021d918a963f43f2';
+        // $client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
+        // $client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
+        // $username = 'angelblaze779';
+        // $api_key = '434562be5ba93a74021d918a963f43f2';
+
+        $client_id ='vrfN8tg7bBuu2hgOKFNMD1o6FLMlwPojtBzI2Ky';
+        $client_secret = 'wDyxbr99zb5T6DY2n3U1GbTHhgVcYb9Hv7cwcxJ2fSc9dPZGkNJr3sxXVLZ8iwuIaoEO1ytbbk4FC6FUPENjB8BssjL1ylCfv6JNHWFN9xioBk6KPCxt2t1REr6Fo7zZ';
+        $username = 'rmadelyn712';
+        $api_key = 'a55c9dae529597198dd99f00598cc332';
+
+        //Not use
+
+
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 

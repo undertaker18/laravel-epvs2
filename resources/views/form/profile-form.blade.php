@@ -97,7 +97,18 @@
             background-color: green !important;
             color: white !important;
             border-radius: 5px !important;
-            padding: 9px;
+           
+        }
+
+        .btn-primary1 {
+            background-color: rgb(118, 172, 118) !important;
+            color: white !important;
+            border-radius: 5px !important;
+           
+        }
+
+        .btn-primary {
+            background-color: #1266b4 !important;
         }
 
         .align-left {
@@ -115,6 +126,88 @@
             background-color: #EAF1F8;
         }
 
+        .col-md-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        }
+
+        .flexed {
+        display: flex;
+        }
+
+        .end {
+        justify-content: flex-end;
+        }
+        .start {
+        justify-content: flex-start;
+        }
+
+        .mb-3 {
+        margin-bottom: 1rem;
+        }
+
+        .mt-5 {
+        margin-top: 3rem;
+        }
+
+        @media screen and (max-width: 761px) {
+
+        /* logo */
+        .img-fluid-custom-default{
+        width: 100%;
+        height: auto;
+        }
+
+        /* font */
+        .bdo-font{
+        font-size: 11px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin: 0 0px 0 0px;
+        }
+        .payment-font{
+        font-size: 12px;
+        }
+        .container {
+        width: 95%;    
+        padding: 0px;
+        }
+
+        .main-content {
+        align-items: center;
+        margin-left: 12px;
+        margin-right: 12px ;
+        color: #000000 !important;
+
+        }
+        .privacy-content1 {
+        padding: 2px;
+        font-weight: normal;
+        font-size: 14px;
+        text-align: left;
+
+        color: #000000;
+
+        }
+        .btn2 {
+        width: 50% !important;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        }
+        .btn {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        }
+
+        .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+
+        }
     </style>
     <div class="card-body">
         <div class="tab-content">
@@ -129,7 +222,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title align-left">Student Information</h3>
+                                    <h4 class="card-title align-left">Student Information</h4>
                                 </div>
 
                                 <div class="col-md-6">
@@ -144,11 +237,11 @@
                                             @endif
 
                                             @if ($counts == 2 )
-                                            <button type="submit" class="btn btn-success" disabled>
+                                            <button type="submit" class="btn  btn2 btn-success" disabled>
                                                 <i class="fas fa-plus"></i> Add Student
                                             </button>
                                             @else
-                                            <button type="submit" class="btn btn-success">
+                                            <button type="submit" class="btn  btn2 btn-success">
                                                 <i class="fas fa-plus"></i> Add Student
                                             </button>
                                             @endif
@@ -162,10 +255,6 @@
                         <form action="" method="POST">
                             @csrf
 
-                           
-                            {{-- <input type="text" name="profile_key[]" value="{{   }}" hidden> --}}
-                            
-                        
                             @if ($countForm == 1)
 
                                 <div class="card-2 m-3 bg-form">
@@ -2512,25 +2601,25 @@
                                 </div>
 
                             @endif
-
+                           
                                 <div class="row">
-                                    <div class="col-md-6 d-flex justify-content-start">
-                                        <div class="">
-                                            <a href="{{ url('/privacy-form') }}" class="btn btn-lg btn-primary">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </a>
-                                        </div>
+                                  <div class="col-md-5">
+                                    <div class="button-container flexed start">
+                                        <a href="{{ url('/privacy-form') }}" class="btn  btn-primary">
+                                            <i class="fas fa-arrow-left"></i> Back
+                                        </a>
                                     </div>
-                                    <div class="col-md-6 d-flex justify-content-end">
-                                        <div class="">
-                                            <button id="nextBtn" class="btn btn-lg btn-success" type="submit" name="submit"
-                                                disabled>
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
+                                  </div>
+                                  <div class="col-md-5">
+                                    <div class="button-container flexed end">
+                                        <button id="nextBtn" class="btn  btn-success" type="submit" name="submit"
+                                        disabled>
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
                                     </div>
+                                  </div>
                                 </div>
-
+                                
                                 <script>
                                     function checkFormValidity() {
                                         var inputs = document.querySelectorAll('input[required], select[required]');
