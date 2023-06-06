@@ -117,7 +117,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/bdo-xero-receipts') }}" class="nav-link {{ Request::is('bdo-receipts') ? 'active' : '' }}">
+            <a href="{{ url('/bdo-xero-receipts') }}" class="nav-link {{ Request::is('bdo-xero-receipts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 BDO Receipts

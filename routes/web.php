@@ -116,10 +116,6 @@ Route::get('/reports', [ReportController::class, 'index'])
 // Bdo Receipts
 
 
-Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
-    ->middleware(['auth', 'verified'])
-    ->name('bdo-receipts');
-
 Route::get('/bdo-xero-receipts', [XeroApiController::class, 'getXeroTransactions'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-xero-receipts');
@@ -142,9 +138,11 @@ Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
 
 
 /* System log*/
+
 Route::get('/system-log', [SystemlogController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('system-log');
+
 
 /* user account*/
 Route::middleware('auth')->group(function () {
