@@ -536,11 +536,13 @@ class XeroApiController extends Controller
         ];
 
         try {
-
+            // API CALL: XERO Transactions
             $result['list'] = json_decode($this->getXeroApiTransactions($dateFrom, $dateTo), true)['BankTransactions'];
+
             // echo '<pre>';
             // var_dump($result['list']);
             // exit;
+
             $result['count'] = count($result['list']);
         } catch (Exception $e) {
             $result = [
@@ -549,9 +551,8 @@ class XeroApiController extends Controller
             ];
         }
 
-
         return view('bdo-receipts-2', [
-            'latestUploadTimestamp' => Carbon::now(),
+            'latestUploadTimestamp' => Carbon::now(), // Last Upload
             'bdoReceipts' => $result['list'],
             'params' => [
                 'dateFrom' => $dateFrom->format('Y-m-d'),
@@ -578,18 +579,14 @@ class XeroApiController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-        "xero-tenant-id: $tenantId",
-        "Authorization: $authorization",
-        'Accept: application/json',
-        'Content-Type: application/json',
-        'Cookie: _abck=64DAFBA79734E77CF5D24180B735F8A2~-1~YAAQD0IkFzH/46iHAQAAGsgO5gmPVeDPUk/WPPFx2xY1KLIy4DvxzmetqLEW9Ubc7jTUOB/227TALACfb4QXfjB0k+CSaBjyFo8+IVzFocljYnzKIj4eKin/7nVgdds4Otn+wsk1siuRSW4XKNLaEZqV4F99vYBqgmOd9wjCHOz6jaSR405N617zhGG2mDvfsdXzta7i0vDlE6UAo2qYllljQxtd4Su6H6Fui3b/2Iv7l/ANq0Y4SJ6ioxe2Sa340Al3g8VYkncSPPP+F0pa3gQrQ9itu0eV8VDTJtzRtEx8YRwEWz8XMIVvHaZ1wRFin++BzpB6q/E7A9gnUgR6SA6RV0fkGDZ/Df2q6BFpTNlZpwLZNbOQoz37Zw+cAoArnZG4Ukk=~-1~-1~-1; ak_bmsc=32E7BDF6ED6F5FE5FB3C2907536A21A1~000000000000000000000000000000~YAAQS2jcFw0ONayHAQAAeMoO5hPKPg70B1CNZO/q3neu+CC8x7S2GwDSPKDpQ0SADARMPPT43/QPIXNOrsW5Fcr5xaj14nktkVkiYpCTdzmN4b8OzqdesZw5zYsHQBZKqNq5aO+cmgRf3iV+0YL3Ov4Tl7zV7hO3k7nYY7C7XS/3EAs9Fi/G3CSuTC1oG8HDk/dWNdqcqBenz20/dGnNnn+vY7wEe2XybQyXANJlw7qqEiIv9QZNVoZuskzPRBCcEtJXwl5FFscfFAF944eb+zXEwZgnZlDU5sBwdiU/NXi281C/zB10rni64M/KfGICixG0czTuh6AZERvkGF4GUiEqGw3Udo22DcdZRPwrxZeGyHMESYnWwvo=; bm_sv=240373A82D3A6511CD237D28E05C0B59~YAAQFWncF7rXH+aHAQAAsGBl5hMtOdc4myxjOJOQSTDResdK6T+Tz4OxRY3cDcgAPFPOq/B2VOArD/2mKII0wLNH1ZfXgnvg8QexRi5Mby7z82YfRiQ93SCKF1mIKU5LylbIGjTrLrB4i66T9eWZ3aN7I0XSUvclPlSSPdYBdn6XjoXlspWbYRRf7+Cle91pbGGDiozeQi77Ji00A7AVud/BGwxu8VyqAAK0G1gIAGmDO1xpmTCn96uMbeaUoNQ=~1; bm_sz=517EC7602D2DC87B370B646AE3AC8A88~YAAQD0IkFzL/46iHAQAAGsgO5hPkvs/PGRUJ2attVsN7vS2RWYKOkfYzLGgjhRMvh7AQkXM0xgyn0Yp6tvOZANl536IigaIYE2lBUfTQWj6CL6Hk3PnhnbxrVWJomtxxq6vdtvybel8mWWUDSyRivyAXL3xijOZ02iR/wz7F5OnK3xjeTNOo6BjDjWgKjj73Qa9p3qpJK+KAWgG1QP5e4j5gkt7f5+MlvdKhWDkMNYwlgmIa3mJif5EszA68XUu/8HoyWsfKYbJnPX8tLXOgsi4GRRdl21CsZgU5ddEEah/y~4343353~3621955'
+            "xero-tenant-id: $tenantId",
+            "Authorization: $authorization",
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'Cookie: _abck=64DAFBA79734E77CF5D24180B735F8A2~-1~YAAQD0IkFzH/46iHAQAAGsgO5gmPVeDPUk/WPPFx2xY1KLIy4DvxzmetqLEW9Ubc7jTUOB/227TALACfb4QXfjB0k+CSaBjyFo8+IVzFocljYnzKIj4eKin/7nVgdds4Otn+wsk1siuRSW4XKNLaEZqV4F99vYBqgmOd9wjCHOz6jaSR405N617zhGG2mDvfsdXzta7i0vDlE6UAo2qYllljQxtd4Su6H6Fui3b/2Iv7l/ANq0Y4SJ6ioxe2Sa340Al3g8VYkncSPPP+F0pa3gQrQ9itu0eV8VDTJtzRtEx8YRwEWz8XMIVvHaZ1wRFin++BzpB6q/E7A9gnUgR6SA6RV0fkGDZ/Df2q6BFpTNlZpwLZNbOQoz37Zw+cAoArnZG4Ukk=~-1~-1~-1; ak_bmsc=32E7BDF6ED6F5FE5FB3C2907536A21A1~000000000000000000000000000000~YAAQS2jcFw0ONayHAQAAeMoO5hPKPg70B1CNZO/q3neu+CC8x7S2GwDSPKDpQ0SADARMPPT43/QPIXNOrsW5Fcr5xaj14nktkVkiYpCTdzmN4b8OzqdesZw5zYsHQBZKqNq5aO+cmgRf3iV+0YL3Ov4Tl7zV7hO3k7nYY7C7XS/3EAs9Fi/G3CSuTC1oG8HDk/dWNdqcqBenz20/dGnNnn+vY7wEe2XybQyXANJlw7qqEiIv9QZNVoZuskzPRBCcEtJXwl5FFscfFAF944eb+zXEwZgnZlDU5sBwdiU/NXi281C/zB10rni64M/KfGICixG0czTuh6AZERvkGF4GUiEqGw3Udo22DcdZRPwrxZeGyHMESYnWwvo=; bm_sv=240373A82D3A6511CD237D28E05C0B59~YAAQFWncF7rXH+aHAQAAsGBl5hMtOdc4myxjOJOQSTDResdK6T+Tz4OxRY3cDcgAPFPOq/B2VOArD/2mKII0wLNH1ZfXgnvg8QexRi5Mby7z82YfRiQ93SCKF1mIKU5LylbIGjTrLrB4i66T9eWZ3aN7I0XSUvclPlSSPdYBdn6XjoXlspWbYRRf7+Cle91pbGGDiozeQi77Ji00A7AVud/BGwxu8VyqAAK0G1gIAGmDO1xpmTCn96uMbeaUoNQ=~1; bm_sz=517EC7602D2DC87B370B646AE3AC8A88~YAAQD0IkFzL/46iHAQAAGsgO5hPkvs/PGRUJ2attVsN7vS2RWYKOkfYzLGgjhRMvh7AQkXM0xgyn0Yp6tvOZANl536IigaIYE2lBUfTQWj6CL6Hk3PnhnbxrVWJomtxxq6vdtvybel8mWWUDSyRivyAXL3xijOZ02iR/wz7F5OnK3xjeTNOo6BjDjWgKjj73Qa9p3qpJK+KAWgG1QP5e4j5gkt7f5+MlvdKhWDkMNYwlgmIa3mJif5EszA68XUu/8HoyWsfKYbJnPX8tLXOgsi4GRRdl21CsZgU5ddEEah/y~4343353~3621955'
         ),
         ));
-
         $response = curl_exec($curl);
-
-
         return $response;
-
     }
 }
