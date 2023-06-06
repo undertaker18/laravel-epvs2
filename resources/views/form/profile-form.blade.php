@@ -2605,7 +2605,7 @@
                                 <div class="row">
                                   <div class="col-md-5">
                                     <div class="button-container flexed start">
-                                        <a href="{{ url('/privacy-form') }}" class="btn  btn-primary">
+                                        <a href="{{ route('privacy-form') }}" class="btn  btn-primary">
                                             <i class="fas fa-arrow-left"></i> Back
                                         </a>
                                     </div>

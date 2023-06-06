@@ -264,7 +264,7 @@
                 <div class="drag-area1 mx-auto col-md-7 col-sm-12">
                     <input class="form-control" name="receipt" type="file" id="receipt">
                     <select id="" name="receipt_type" class="form-select" style="" required>
-                        <option value="" selected disabled>Receipt Type</option>
+                        <option value="" selected disabled>Choose Receipt Type...</option>
                         <option value="instapay">Instapay</option>
                         <option value="gcash">Gcash</option>
                         <option value="gcash_instapay">Gcash Powered by Instapay</option>

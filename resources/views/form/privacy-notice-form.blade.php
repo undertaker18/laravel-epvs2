@@ -213,9 +213,9 @@
                                         <div class="row">
                                           <div class="col-md-5">
                                             <div class="button-container flexed start">
-                                              <button class="btn btn-primary" onclick="window.location.href='{{ url('/') }}'" data-toggle="tab">
-                                                <i class="fas fa-arrow-left"></i> BACK
-                                              </button>
+                                                <a href="/" class="btn btn-primary">
+                                                    <i class="fas fa-arrow-left"></i> BACK
+                                                </a>
                                             </div>
                                           </div>
                                           <div class="col-md-5">

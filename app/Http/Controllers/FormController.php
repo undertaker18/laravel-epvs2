@@ -24,7 +24,8 @@ use App\Models\YearLevelCollege;
 
 class FormController extends Controller
 {
-        // for privacy
+    
+    // for privacy
     public function privacy(Request $request )
     {
         $privacy = new Privacy();
@@ -168,7 +169,10 @@ class FormController extends Controller
         // for verify
     public function verify(Request $request )
     {
+        $counts = $request->input('counts');
+        $countForm = $request->input('counts') + 1; // Initial value for $count
         // get from session
+       
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
 
@@ -203,7 +207,25 @@ class FormController extends Controller
 
         //Not use
 
+        // $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
+        // $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
+        // $username = 'madelyn0514romero';
+        // $api_key = '22e388e0df4e489f79e691c450d494d3';
 
+        // $client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
+        // $client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
+        // $username = 'lvcsepvs123';
+        // $api_key = 'd7d26429e6a799e7896ca15c2182a7d3';
+
+        // $client_id ='vrfRs45eloHmgMc02YJliDubCy0L2CSvlW5OOpL';
+        // $client_secret = 'caGOGIsX76pKdpLSxHoPhZho49ANmHr63K3f1VLbSKCs9X3HSdHHXjOh2ecl2m2EnXg2w65CRdyGmiitRl4O8VYjn4hXeV1l2sCG4Pgo62rvldtLZPBgowziAkZLFEpE';
+        // $username = 'pcapstone533';
+        // $api_key = '6221ed3571890802da2df96ad9b0ea67';
+
+        // $client_id ='vrfUHTYkRzDDZ1jmH6wydo8NVZV5oKIUge8hoS8';
+	    // $client_secret ='v1ni0juzOJE6ZOOnLzuH4Y8aAsYPfSUVjLZ1gxm40YkD8retUHcLGzVmCxIvA2BIzRbo9kVfb6STAsxfTaLV0PoRPRWxBksfforw9VkszZCzaEzwcgCgJj2TOHIFpE9w';
+	    // $username ='daneruemiri87';
+	    // $api_key ='ce90022de5d976a06da2f4b8bdc53621';
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
@@ -269,14 +291,18 @@ class FormController extends Controller
 
             ];
 
-
-            return view('form.verify-form', compact('details'));
+            return view('form.verify-form', compact('details','countForm', 'counts'));
+            // return view('form.verify-form');
         }
 
 
         public function postVerify(Request $request )
         {
-
+            $paymentForList = $request->input('payment_for');
+           
+            $payments_for = implode(', ', $paymentForList);
+          
+            
                // Generate profile_key once outside the loop
                $counter = Profile::count() + 1;
                $paddingLength = 5;
@@ -285,21 +311,21 @@ class FormController extends Controller
             $request->validate ([
                 'payment_for' => 'required',
                 'reference' => 'required',
-                'amount' => 'required',
-                'date' => 'required',
-                'time' => 'required',
+                'amount' => '',
+                'date' => '',
+                'time' => '',
             ]);
 
             $payment  = new Payment();
 
             $payment->payment_key =  $paymentKey;
-            $payment->payment_for = $request->payment_for;
+            $payment->payment_for = $payments_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
             $payment->time = $request->time;
-
-
+            
+            
         //     $check= Payment::where([
         //         ['reference','=', $payment->reference ]
         //     ]);
@@ -364,6 +390,7 @@ class FormController extends Controller
         public function postSummary(Request $request )
         {
 
+           
 
             // Perform the conditional update
             // DB::table('xero_invoice')
@@ -377,6 +404,7 @@ class FormController extends Controller
             // for submit
         public function submit(Request $request )
         {
+
             return view('form.submit-form');
         }
 
