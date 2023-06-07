@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('uploadform', function (Blueprint $table) {
             $table->id();
             $table->string('upload_key');
+            $table->text('payments_for');
+            $table->string('each_amount');
             $table->string('receipt_type');
             $table->string('receipt_filename');
             $table->timestamps();
