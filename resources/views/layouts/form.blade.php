@@ -17,6 +17,16 @@
     <style>
         .image{
             background-color: #F7F7F7 !important;
+            height: 100%;
+        }
+        .content{
+            height: 100% !important;
+        }
+        .container{
+            height: 100% !important;
+        }
+        .row{
+            height: 100% !important;
         }
         .image-logo {
             width: 150px; 
@@ -35,14 +45,17 @@
             height: 20px;
         }
         }
+        .height{
+           padding-bottom: 200px;
+        }
     </style>
-    <body>
+    <body class="height">
         <!-- Your page content here --> 
         <section class="content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="p-1 p-md-1 mb-4 image">
+                        <div class="p-1 p-md-1 image">
                             <img class="image-logo" src="{{ asset('assets/data-privacy/lvcclogo.png') }}" alt="lvcc-logo" >
                             @include('layouts.form-navigation')
                             <main >

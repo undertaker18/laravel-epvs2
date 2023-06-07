@@ -353,47 +353,53 @@ font-size: 14px;
                                             <h3>Payment Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-                                                @foreach ($paymentDetails as $paymentKey => $payment)
-                                                    @if ($payment->id === $payment->id)
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="payment_for">Payment For</label>
-                                                            <input type="text" class="form-control" id="payment_for" name="payment_for##{{$paymentKey}}"
-                                                                value="{{ $payment->payment_for }}" readonly>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="reference">Reference of Payment</label>
-                                                            <input type="text" class="form-control" id="reference" name="reference##{{$paymentKey }}"
-                                                                value="{{ $payment->reference }}" readonly>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="amount">Amount of Payment</label>
-                                                            <input type="text" class="form-control" id="amount" name="amount##{{$paymentKey }}"
-                                                                value="{{ $payment->amount}}" readonly>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label  class="form-label" for="date">Date of Payment</label>
-                                                            <input type="text" class="form-control" id="date" name="date##{{$paymentKey }}" 
-                                                            value="{{ $payment->date }}"
-                                                                readonly>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label  class="form-label" for="time">Time of Payment</label>
-                                                            <input type="text" class="form-control" id="time" name="time##{{$paymentKey }}" 
-                                                            value="{{ $payment->time }}"
-                                                                readonly>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                                @foreach ($uploadDetails as $uploadKey => $uploadform)
-                                                    @if ($uploadform->id === $uploadform->id)
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="receipt_type">Receipt Type</label>
-                                                            <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{$uploadKey}}"
-                                                                value="{{ $uploadform->receipt_type }}" readonly>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                    
+                                                <?php
+                                                $studentNumber5 = 1;
+                                                ?>
+
+                                                    @foreach ($paymentDetails as $paymentKey => $payment)
+                                                    @foreach ($uploadDetails as $uploadKey => $uploadform)
+                                                        @if ($paymentKey === $uploadKey)
+                                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3> 
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="reference">Reference of Payment</label>
+                                                                <input type="text" class="form-control" id="reference" name="reference##{{ $paymentKey }}"
+                                                                    value="{{ $payment->reference }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="amount">Amount of Payment</label>
+                                                                <input type="text" class="form-control" id="amount" name="amount##{{ $paymentKey }}"
+                                                                    value="{{ $payment->amount }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="date">Date of Payment</label>
+                                                                <input type="text" class="form-control" id="date" name="date##{{ $paymentKey }}" 
+                                                                    value="{{ $payment->date }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="time">Time of Payment</label>
+                                                                <input type="text" class="form-control" id="time" name="time##{{ $paymentKey }}" 
+                                                                    value="{{ $payment->time }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="receipt_type">Receipt Type</label>
+                                                                <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{ $uploadKey }}"
+                                                                    value="{{ $uploadform->receipt_type }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                                <input type="text" class="form-control" id="each_amount" name="each_amount##{{ $uploadKey }}"
+                                                                    value="{{ $uploadform->each_amount }}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for##{{ $uploadKey }}"
+                                                                    readonly>{{ $uploadform->payments_for }}</textarea>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                    @endforeach
+
                                                 <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
                                         </div>
                                     </div>

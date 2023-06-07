@@ -128,14 +128,18 @@ class FormController extends Controller
     // for upload
     public function upload(Request $request )
     {
-        return view('form.upload-form-2');
+        $counts = $request->input('counts');
+        $countForm = $request->input('counts') + 1; // Initial value for $count
+
+        return view('form.upload-form-2', compact('countForm', 'counts'));
     }
 
 
     public function postUpload(Request $request)
-    {
-      
-    
+    {       
+            
+           
+
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
             $filename = $image->getClientOriginalName();
@@ -149,18 +153,94 @@ class FormController extends Controller
             $counter = Profile::count() + 1;
             $paddingLength = 5;
             $uploadKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+            
+            $paymentForList = $request->input('payments_for');
 
-            $uploadform = new UploadForm();
-            $uploadform->upload_key = $uploadKey;
-            $uploadform->receipt_type = $request->input('receipt_type'); // Add the receipt type to the object
-            $uploadform->receipt_filename = $filename; // Add the receipt filename to the object
-    
-            $uploadform->save();
+            if (is_array($paymentForList)) {
+                $paymentForSeparator = implode(', ', $paymentForList);
+            } elseif (is_string($paymentForList)) {
+                $paymentForSeparator = $paymentForList;
+            } else {
+                $paymentForSeparator = "";
+            }
 
-    
+            $paymentForList1 = $request->input('payments_for1');
+
+            if (is_array($paymentForList1)) {
+                $paymentForSeparator1 = implode(', ', $paymentForList1);
+            } elseif (is_string($paymentForList1)) {
+                $paymentForSeparator1 = $paymentForList1;
+            } else {
+                $paymentForSeparator1 = "";
+            }
+
+            $paymentForList2 = $request->input('payments_for2');
+
+            if (is_array($paymentForList2)) {
+                $paymentForSeparator2 = implode(', ', $paymentForList2);
+            } elseif (is_string($paymentForList2)) {
+                $paymentForSeparator2 = $paymentForList2;
+            } else {
+                $paymentForSeparator2 = "";
+            }
+           
+            $eachForList = $request->input('each_amount');
+           
+            $eachAmountForSeparator = []; // Define as an array
+            if (is_array($eachForList)) {
+                $eachAmountForSeparator = $eachForList; // Assign the array
+            } elseif (is_string($eachForList)) {
+                $eachAmountForSeparator[] = $eachForList; // Append the string to the array
+            }
+            
+            $request->session()->put('each_amount', $eachAmountForSeparator);
+           
+            $validatedData = $request->validate([
+                'payments_for' => '',
+                'each_amount' => '',
+            ]);
+
+               
+                // Your existing code...
+
+                    $paymentForSeparatorList = [
+                        $paymentForSeparator,
+                        $paymentForSeparator1,
+                        $paymentForSeparator2
+                    ];
+
+                    $eachForList = [
+                        $eachForList[0],
+                        $eachForList[1] ?? null,
+                        $eachForList[2] ?? null
+                    ];
+
+                    if (!empty($paymentForSeparatorList) && !empty($eachForList)) {
+                        foreach ($paymentForSeparatorList as $index => $payment) {
+                            if (isset($payment)) {
+                                $filteredPaymentList[] = $payment;
+                            }
+
+                            $uploadform = new UploadForm();
+                            $uploadform->upload_key = $uploadKey;
+                            $uploadform->payments_for = $payment;
+
+                            if ($eachForList[$index] === null) {
+                                break; // Exit the loop if a null value is encountered
+                            }
+
+                            $uploadform->each_amount = $eachForList[$index];
+
+                            $uploadform->receipt_type = $request->input('receipt_type');
+                            $uploadform->receipt_filename = $filename;
+
+                            $uploadform->save(); // Save the model to the database
+                        }
+                    }
             return redirect()->route('verify-form');
         }
-    
+      
+
         return redirect()->back()->with('error', 'Please Upload your Receipt.');
     }
 
@@ -169,10 +249,9 @@ class FormController extends Controller
         // for verify
     public function verify(Request $request )
     {
-        $counts = $request->input('counts');
-        $countForm = $request->input('counts') + 1; // Initial value for $count
+        
         // get from session
-       
+        $eachamount = Session::get('each_amount');
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
 
@@ -291,17 +370,18 @@ class FormController extends Controller
 
             ];
 
-            return view('form.verify-form', compact('details','countForm', 'counts'));
+            $amountSum = 0;
+            for ($i = 0; $i < count($eachamount); $i++) {
+                $amountSum += $eachamount[$i];
+            }
+
+            return view('form.verify-form', compact('details', 'amountSum'));
             // return view('form.verify-form');
         }
 
 
         public function postVerify(Request $request )
         {
-            $paymentForList = $request->input('payment_for');
-           
-            $payments_for = implode(', ', $paymentForList);
-          
             
                // Generate profile_key once outside the loop
                $counter = Profile::count() + 1;
@@ -309,7 +389,6 @@ class FormController extends Controller
                $paymentKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT); 
 
             $request->validate ([
-                'payment_for' => 'required',
                 'reference' => 'required',
                 'amount' => '',
                 'date' => '',
@@ -319,7 +398,6 @@ class FormController extends Controller
             $payment  = new Payment();
 
             $payment->payment_key =  $paymentKey;
-            $payment->payment_for = $payments_for;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
@@ -411,7 +489,8 @@ class FormController extends Controller
 
         public function postSubmit(Request $request )
         {
-
+            
+          
             $data = [];
             $labels = [
                
@@ -422,18 +501,21 @@ class FormController extends Controller
                 "grade_year" => "Grade/Year:",
                 "student_type" => "Student Type:",
 
-                "payment_for" => "Payment For:",
+                
                 "receipt_type" => "Receipt Type:",  
                 "reference" => "Reference:",
                 "amount" => "Receipt Amount:",
                 "date" => "Receipt Date:",
                 "time" => "Receipt Time:",
+
+                "payments_for" => "Payment For:",
+                "each_amount" => "Amount Per Student :",
             ];
          
             foreach ($request->all() as $key => $value){
                 $explodeValue = explode('##', $key);
                 if (in_array($key, ['_token', 'receipt_source##']) === true) {
-                } else if (in_array($explodeValue[0], ['reference','amount','payment_for','date','time','receipt_type',]) === false) {
+                } else if (in_array($explodeValue[0], ['reference','amount','date','time','receipt_type','payments_for','each_amount',]) === false) {
                     $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
                 } else {
                     $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
