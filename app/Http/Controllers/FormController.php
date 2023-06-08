@@ -21,10 +21,66 @@ use App\Models\YearLevelElem;
 use App\Models\YearLevelJunior;
 use App\Models\YearLevelSenior;
 use App\Models\YearLevelCollege;
+use App\Models\FormEpvs;
+
 
 class FormController extends Controller
-{
+{ 
+
+    public function form(Request $request)
+    {
+        $counts = $request->input('counts');
+        $countForm = $request->input('counts') + 1; // Initial value for $count
+
+        $searchQuery = $request->input('search');
+        $results = []; // Initialize the $results variable as an empty array
+
+        if ($searchQuery) {
+            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+        } else {
+            $results = XeroUsers::all(['xero_account_name']);
+        }
+        // Pass the search results to the view
+        $data['results'] = $results;
+
+        $yearlevelelem = YearLevelElem::all();
+        $yearleveljunior = YearLevelJunior::all();
+        $yearlevelsenior = YearLevelSenior::all();
+        $yearlevelcollege = YearLevelCollege::all();
+
+        return view('form.form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
+
+    }
+    // for welcome
+    public function processForm(Request $request)
+    {
+        // Validate the form data, if needed
+        $validatedData = $request->validate([
+            // Add validation rules for other form fields, if needed
+        ]);
     
+        // Create a new instance of the FormEPVS model
+        $formEPVS = new FormEPVS();
+        
+        // Generate the form_key value based on your requirements
+        $formKey = 'EPVS-ID-' . str_pad(1, 6, '0', STR_PAD_LEFT);
+        $formEPVS->form_key = $formKey;
+        
+        // Set the foreign key value
+        $formEPVS->xero_invoice_id = $request->input('xero_invoice_id');
+        
+        // Set the checkbox value
+        $formEPVS->my_checkbox = $request->has('my-checkbox');
+        dd($formEPVS);
+        // Save the form_epvs instance
+        $formEPVS->save();
+        
+        // Perform any additional actions, if needed
+        
+        // Redirect the user to a success page or another route
+        return redirect()->route('success');
+    }
+
     // for privacy
     public function privacy(Request $request )
     {

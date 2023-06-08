@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_key');
             $table->string('reference');
             $table->string('amount');
             $table->date('date');
             $table->time('time');
-           
+
+            $table->foreignId('form_Epvs_id')->contrained()->onDelete('cascade');
+
             $table->timestamps();
         }); 
     }

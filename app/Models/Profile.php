@@ -11,4 +11,9 @@ class Profile extends Model
     
     protected $table = 'profile';
 
+    public function formEpvs()
+    {
+        return $this->belongsTo(FormEpvs::class);
+    }
+
 }

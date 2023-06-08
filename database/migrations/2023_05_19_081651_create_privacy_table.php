@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('privacy', function (Blueprint $table) {
             $table->id();
-            $table->string('privacy_key');
             $table->string('privacy_notice');
+
+            $table->foreignId('form_Epvs_id')->contrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -11,4 +11,8 @@ class Payment extends Model
 
     protected $table = 'payment';
    
+    public function formEpvs()
+    {
+        return $this->belongsTo(FormEpvs::class);
+    }
 }

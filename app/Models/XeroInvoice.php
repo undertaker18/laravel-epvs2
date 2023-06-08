@@ -16,4 +16,8 @@ class XeroInvoice extends Model
      */
     protected $table = 'xero_invoice';
 
+    public function formEpvs()
+    {
+        return $this->hasOne(FormEpvs::class);
+    }
 }

@@ -6,14 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
+    
     public function up(): void
     {
-        Schema::create('payment_for', function (Blueprint $table) {
+        Schema::create('form_epvs', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_for_list');
+            $table->string('form_key')->default('EPVS-ID-'.str_pad(1, 6, '0', STR_PAD_LEFT));
+            
+            $table->foreignId('xero_invoice_id')->contrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_for');
+        Schema::dropIfExists('form_epvs');
     }
 };

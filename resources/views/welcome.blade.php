@@ -228,186 +228,189 @@
 <body>
     <section class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')">
       <div class="header-logo">
-        <div class="header-column">
-          <div class="logo p-3">
-            <img class="img-fluid-custom-default" src="{{ asset('assets/landing/LVCC-V2.png') }}" alt="lvcc Logo">
-          </div>
-          <div class="container">
-            <div class="row justify-content-center align-items-center">
-              <div class="card">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="card-body  payment-font ">
-                      <h4 class="card-title"><strong>Payment Instructions</strong></h4>
-      
-                      <p>
-                        Please make sure to make a payment to the provided BDO bank account number before proceeding to the next step.
-                        <br>
-                        <i>(Bago magpatuloy sa susunod na step, tiyaking nakapagbayad muna sa ibinigay na BDO Bank account.)</i>
-                      </p>
-                      <p>
-                        Once payment is complete, please obtain a proof of payment and check the designated checkbox to confirm payment and proceed to the next step.
-                        <br>
-                        <i>(Kapag tapos na ang pagbabayad, mangyaring kumuha ng proof of payment o resibo para makumpirma na nakapagbayad na bago punan ang checkbox.)</i>
-                      </p>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="my-checkbox" name="my-checkbox" onchange="toggleButton()">
-                        <label class="form-check-label" for="paymentCheckbox">
-                          Yes, I have paid and completed the payment.
-                          <br>
-                          <i>(Oo, nagbayad na ako at natapos ko na ang pagbabayad.)</i>
-                        </label>
-                      </div>
-                     
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="card-body bg-card-bdo rounded my-4 mx-3">
-                      <div class="text-center bdo-font">
-                        <img src="{{ asset('assets/landing/bdo-logo.png') }}" alt="BDO Logo" class="bdo-logo img-fluid-custom">
+        <form id="my-form" action="{{ route('process.form') }}" method="POST">
+          @csrf
+          <div class="header-column">
+            <div class="logo p-3">
+              <img class="img-fluid-custom-default" src="{{ asset('assets/landing/LVCC-V2.png') }}" alt="lvcc Logo">
+            </div>
+            <div class="container">
+              <div class="row justify-content-center align-items-center">
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card-body  payment-font ">
+                        <h4 class="card-title"><strong>Payment Instructions</strong></h4>
+        
                         <p>
-                          You may pay thru our BDO Account:
+                          Please make sure to make a payment to the provided BDO bank account number before proceeding to the next step.
+                          <br>
+                          <i>(Bago magpatuloy sa susunod na step, tiyaking nakapagbayad muna sa ibinigay na BDO Bank account.)</i>
                         </p>
-                      </div>
-                      <div class="text-left bdo-font">
                         <p>
-                          <strong>Bank Name:</strong> BDO
+                          Once payment is complete, please obtain a proof of payment and check the designated checkbox to confirm payment and proceed to the next step.
                           <br>
-                          <strong>Bank Account Name:</strong> La Verdad Christian School
-                          <br>
-                          <strong>Bank Account No:</strong> 00561 800 2114
+                          <i>(Kapag tapos na ang pagbabayad, mangyaring kumuha ng proof of payment o resibo para makumpirma na nakapagbayad na bago punan ang checkbox.)</i>
                         </p>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="my-checkbox" name="my-checkbox" onchange="toggleButton()">
+                          <label class="form-check-label" for="paymentCheckbox">
+                            Yes, I have paid and completed the payment.
+                            <br>
+                            <i>(Oo, nagbayad na ako at natapos ko na ang pagbabayad.)</i>
+                          </label>
+                        </div>
+                      
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <div class="col-12 col-md-12 text-left mb-3">
-                        <i class="fas fa-link font2"></i>
-                        <a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font3">How to Use Enrollment Payment Form</a>
+                    <div class="col-md-6">
+                      <div class="card-body bg-card-bdo rounded my-4 mx-3">
+                        <div class="text-center bdo-font">
+                          <img src="{{ asset('assets/landing/bdo-logo.png') }}" alt="BDO Logo" class="bdo-logo img-fluid-custom">
+                          <p>
+                            You may pay thru our BDO Account:
+                          </p>
+                        </div>
+                        <div class="text-left bdo-font">
+                          <p>
+                            <strong>Bank Name:</strong> BDO
+                            <br>
+                            <strong>Bank Account Name:</strong> La Verdad Christian School
+                            <br>
+                            <strong>Bank Account No:</strong> 00561 800 2114
+                          </p>
+                        </div>
                       </div>
+                      <div class="row mt-4">
+                        <div class="col-12 col-md-12 text-left mb-3">
+                          <i class="fas fa-link font2"></i>
+                          <a href="https://docs.google.com/document/d/1DsumzkN6wB1zRqlAEfTHH3Lafy3ABPtfzBr5eiyOiIs/edit" class="font3">How to Use Enrollment Payment Form</a>
+                        </div>
+                      </div>
+                    
                     </div>
-                   
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="container bg-default">
-            <div class="row justify-content-center align-items-center">
-              <div class="card" style="background-color: rgba(0, 0, 255, 0); ">
-                <div class="text-left my-3 ">
-                  <button id="next-button" class="btn btn-success pl-5 pr-5 " onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
-                    Proceed <i class="fas fa-arrow-right"></i>
-                  </button>
-                  <script>
-                    function toggleButton() {
-                        var checkBox = document.getElementById("my-checkbox");
-                        var button = document.getElementById("next-button");
-                        if (checkBox.checked) {
-                            button.disabled = false;
-                            button.classList.remove("btn-success");
-                            button.classList.add("btn-success");
-                        } else {
-                            button.disabled = true;
-                            button.classList.remove("btn-success");
-                            button.classList.add("btn-success");
-                        }
-                    }
-                </script>
+            <div class="container bg-default">
+              <div class="row justify-content-center align-items-center">
+                <div class="card" style="background-color: rgba(0, 0, 255, 0); ">
+                  <div class="text-left my-3 ">
+                    <button id="next-button" class="btn btn-success pl-5 pr-5 " onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
+                      Proceed <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <script>
+                      function toggleButton() {
+                          var checkBox = document.getElementById("my-checkbox");
+                          var button = document.getElementById("next-button");
+                          if (checkBox.checked) {
+                              button.disabled = false;
+                              button.classList.remove("btn-success");
+                              button.classList.add("btn-success");
+                          } else {
+                              button.disabled = true;
+                              button.classList.remove("btn-success");
+                              button.classList.add("btn-success");
+                          }
+                      }
+                  </script>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="container ">
-            <div class="row justify-content-center align-items-center">
-              <div class="card">
-                      <div class="card-body rounded">
-                        <header>
-                          <h4 class="card-title"><strong>Example of Valid Receipt</strong></h4>
-                        </header>
-                        
-                        <div class="container">
-                          <div class="row ">
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#FromDesktopBDO">
-                                  <i class="fas fa-link font2"></i>
-                                  Gcash Email
-                                </button>
+            <div class="container ">
+              <div class="row justify-content-center align-items-center">
+                <div class="card">
+                        <div class="card-body rounded">
+                          <header>
+                            <h4 class="card-title"><strong>Example of Valid Receipt</strong></h4>
+                          </header>
+                          
+                          <div class="container">
+                            <div class="row ">
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#FromDesktopBDO">
+                                    <i class="fas fa-link font2"></i>
+                                    Gcash Email
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;"  data-bs-toggle="modal" data-bs-target="#DepositSlipfromBDOBranch">
-                                  <i class="fas fa-link font2"></i>
-                                  Gcash Mobile App
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;"  data-bs-toggle="modal" data-bs-target="#DepositSlipfromBDOBranch">
+                                    <i class="fas fa-link font2"></i>
+                                    Gcash Mobile App
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#MobileBankingBDO">
-                                  <i class="fas fa-link font2"></i>
-                                  Gcash Mobile Screenshot
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#MobileBankingBDO">
+                                    <i class="fas fa-link font2"></i>
+                                    Gcash Mobile Screenshot
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TransactionHistoryfromGcashApp">
-                                  <i class="fas fa-link font2"></i>
-                                  Metrobank
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TransactionHistoryfromGcashApp">
+                                    <i class="fas fa-link font2"></i>
+                                    Metrobank
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#EmailfromGcash">
-                                  <i class="fas fa-link font2"></i>
-                                  Unionbank
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#EmailfromGcash">
+                                    <i class="fas fa-link font2"></i>
+                                    Unionbank
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#InboxofGcashApp">
-                                  <i class="fas fa-link font2"></i>
-                                  PNB Debit
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#InboxofGcashApp">
+                                    <i class="fas fa-link font2"></i>
+                                    PNB Debit
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TextMessagefromGcash">
-                                  <i class="fas fa-link font2"></i>
-                                  Send via Instapay
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#TextMessagefromGcash">
+                                    <i class="fas fa-link font2"></i>
+                                    Send via Instapay
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#Metrobank">
-                                  <i class="fas fa-link font2"></i>
-                                  Pesonet Gateway
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#Metrobank">
+                                    <i class="fas fa-link font2"></i>
+                                    Pesonet Gateway
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="box">
-                                <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#slip">
-                                  <i class="fas fa-link font2"></i>
-                                  Bdo Transaction Slip 
-                                </button>
+                              <div class="col-md-4">
+                                <div class="box">
+                                  <button type="button" class="btn btn-default button w-100" style="text-align: left !important;" data-bs-toggle="modal" data-bs-target="#slip">
+                                    <i class="fas fa-link font2"></i>
+                                    Bdo Transaction Slip 
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          
                         </div>
-                        
                       </div>
-                    </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
 
         <!-- FromDesktopBDO -->
@@ -533,7 +536,7 @@
               </div>
           </div>
           </div>
-      </div>  
+      </div> 
 
 
     </section>
