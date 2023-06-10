@@ -8,12 +8,16 @@
               <div class="col-sm-6">
                 <h1 class="m-0">DASHBOARD</h1>
               </div><!-- /.col -->
-              <!--  <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <button type="button" class="btn btn-default mr-4 mb-3"
+                        style="background-color: #1266B4; color: #ffffff;  width: 175px; " data-toggle="modal"
+                        data-target="#myModal">AUTHENTICATE</button>
+              
+                {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li> --}}
               </ol>
-            </div> /.col -->
+              </div>
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
@@ -198,6 +202,38 @@
   
       <!-- /.content -->
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel"><b>Authentication</b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>You Need Authenticate to Xero!</p>
+              </div>
+              <div class="modal-footer">
+                  <!-- Button to open URL in new tab -->
+                  <button type="button" class="btn btn-primary"
+                      onclick="openXeroAuthInNewTab()">Go to Xero Auth</button>
+                  <button type="button" class="btn btn-primary"
+                      style="background-color: #D74747; color:"
+                      data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      function openXeroAuthInNewTab() {
+          var url = "{{ url('/v1/xero/auth') }}";
+          window.open(url, '_blank');
+      }
+
+  </script>
   
       <!-- /.content-wrapper -->
 </x-admin-layout>

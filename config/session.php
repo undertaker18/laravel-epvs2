@@ -31,10 +31,10 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 0),
 
-    'expire_on_close' => false,
-
+    'expire_on_close' => true,
+    
     /*
     |--------------------------------------------------------------------------
     | Session Encryption
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION'),
+    'connection' => env('SESSION_CONNECTION', null),
 
     /*
     |--------------------------------------------------------------------------
