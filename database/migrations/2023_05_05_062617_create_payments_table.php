@@ -11,22 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uploadform', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->text('payments_for');
-            $table->string('each_amount');
-            $table->string('receipt_type');
-            $table->string('receipt_filename');
+           
+            $table->string('reference');
+            $table->string('amount');
+            $table->date('date');
+            $table->time('time');
 
-            $table->foreignId('form_Epvs_id')->contrained()->onDelete('cascade');
+            $table->foreignId('form_epv_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
-        });
+        }); 
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('uploadform');
+        Schema::dropIfExists('payment');
     }
 };

@@ -21,103 +21,85 @@ use App\Models\YearLevelElem;
 use App\Models\YearLevelJunior;
 use App\Models\YearLevelSenior;
 use App\Models\YearLevelCollege;
-use App\Models\FormEpvs;
+use App\Models\FormEpv;
 
 
 class FormController extends Controller
 { 
-
-    public function form(Request $request)
-    {
-        $counts = $request->input('counts');
-        $countForm = $request->input('counts') + 1; // Initial value for $count
-
-        $searchQuery = $request->input('search');
-        $results = []; // Initialize the $results variable as an empty array
-
-        if ($searchQuery) {
-            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
-        } else {
-            $results = XeroUsers::all(['xero_account_name']);
-        }
-        // Pass the search results to the view
-        $data['results'] = $results;
-
-        $yearlevelelem = YearLevelElem::all();
-        $yearleveljunior = YearLevelJunior::all();
-        $yearlevelsenior = YearLevelSenior::all();
-        $yearlevelcollege = YearLevelCollege::all();
-
-        return view('form.form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
-
-    }
     // for welcome
+
+    public function index(Request $request)
+    {
+        return view('welcome');
+    }
     public function processForm(Request $request)
     {
-        // Validate the form data, if needed
-        $validatedData = $request->validate([
-            // Add validation rules for other form fields, if needed
-        ]);
+        $formEpv = new FormEpv(['box' => $request->input('box')]);
+        $formEpv->save();
     
-        // Create a new instance of the FormEPVS model
-        $formEPVS = new FormEPVS();
-        
-        // Generate the form_key value based on your requirements
-        $formKey = 'EPVS-ID-' . str_pad(1, 6, '0', STR_PAD_LEFT);
-        $formEPVS->form_key = $formKey;
-        
-        // Set the foreign key value
-        $formEPVS->xero_invoice_id = $request->input('xero_invoice_id');
-        
-        // Set the checkbox value
-        $formEPVS->my_checkbox = $request->has('my-checkbox');
-        dd($formEPVS);
-        // Save the form_epvs instance
-        $formEPVS->save();
-        
-        // Perform any additional actions, if needed
-        
-        // Redirect the user to a success page or another route
-        return redirect()->route('success');
+        // Redirect to the privacy notice page with the recently created FormEpv ID
+        return redirect()->route('privacy-form', $formEpv->id);
     }
+// -------------------------------------------------------------------------------------------------------------
 
-    // for privacy
-    public function privacy(Request $request )
+    // for privacy view
+    public function privacy($formEpvId)
     {
-        $privacy = new Privacy();
-        return view('form.privacy-notice-form', compact('privacy'));
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
+        return view('form.privacy-notice-form', compact('formEpv'));
     }
-
-    public function postPrivacy(Request $request)
+    
+ 
+    // for privacy post
+    public function postPrivacy(Request $request, $formEpvId)
     {
-        $request->validate([
-            'privacy_notice' => 'required',
-        ]);
+        $formEpv = FormEpv::findOrFail($formEpvId);
 
         $privacy = new Privacy();
+        $privacy->privacy_notice = $request->input('privacy_notice');
+        $formEpv->privacy()->save($privacy);
 
-        $counter = Privacy::count() + 1; // Get the count of existing records and increment by 1
-        $paddingLength = 5; // Generate a random padding length between 1 and 5
+       // Redirect to the profile create page
+       return redirect()->route('profile-form', $formEpvId);
+    }
 
-        $privacy->privacy_key = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
-        $privacy->privacy_notice = $request->privacy_notice;
 
-        if ($privacy->save()) {
-            return redirect('/profile-form');
+    public function editPrivacy($formEpvId)
+    {
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
+        return view('form.edit.privacy-notice-edit', compact('formEpv'));
+    }
+    
+
+    // for privacy update 
+    public function updatePrivacy(Request $request, $formEpvId)
+    {
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
+        // Check if a privacy record already exists
+        if ($formEpv->privacy) {
+            $privacy = $formEpv->privacy;
         } else {
-            $errorMessage = 'Failed to save privacy notice. Please try again.';
-            return view('form.privacy-notice-form', compact('errorMessage'));
+            $privacy = new Privacy();
         }
+
+        $privacy->privacy_notice = $request->input('privacy_notice');
+        $formEpv->privacy()->save($privacy);
+
+        // Redirect to the profile create page
+        return redirect()->route('profile-form', $formEpvId);
     }
 
-    
 
+    //=========================================================================================================
 
-    //=================================================================================
-
-    public function profile(Request $request)
+    public function profile(Request $request, $formEpvId)
     {
-        $counts = $request->input('counts');
+        
+
+        $count = 1;
         $countForm = $request->input('counts') + 1; // Initial value for $count
 
         $searchQuery = $request->input('search');
@@ -136,64 +118,70 @@ class FormController extends Controller
         $yearlevelsenior = YearLevelSenior::all();
         $yearlevelcollege = YearLevelCollege::all();
 
-        return view('form.profile-form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
+        return view('form.profile-form', compact('results', 'countForm', 'count', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege', 'formEpv', ));
 
     }
      
-    public function postProfile(Request $request)
+    public function postProfile(Request $request, $formEpvId)
     {
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
         $fullnameList = $request->input('fullname');
         $emailList = $request->input('email');
         $scholarshipStatusList = $request->input('scholarshipStatus');
         $departmentList = $request->input('department');
         $grade_yearList = $request->input('grade_year');
         $student_typeList = $request->input('student_type');
-    
-        // Generate profile_key once outside the loop
-        $counter = Profile::count() + 1;
-        $paddingLength = 5;
-        $profileKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
-    
+
         foreach ($fullnameList as $index => $fullname) {
             $validatedData = $request->validate([
-                'fullname',
-                'email',
-                'scholarshipStatus',
-                'department',
-                'grade_year',
-                'student_type',
+                'fullname' => '',
+                'email' => '',
+                'scholarshipStatus' => '',
+                'department' => '',
+                'grade_year' => '',
+                'student_type' => '',
             ]);
-    
+
             $profile = new Profile();
-            $profile->profile_key = $profileKey; // Assign the same profile_key to each profile
+
             $profile->fullname = $fullname;
             $profile->scholarshipStatus = $scholarshipStatusList[$index];
             $profile->email = $emailList[$index];
             $profile->department = $departmentList[$index];
             $profile->grade_year = $grade_yearList[$index];
             $profile->student_type = $student_typeList[$index];
+            $profile->form_epv_id = $formEpv->id; // Assign the 'form_epv_id' value
             $profile->save();
         }
-    
-        return redirect('/upload-form');
+
+        return redirect()->route('upload-form', $formEpvId);
     }
+   
+
     
 
     //========================================================================================
 
     // for upload
-    public function upload(Request $request )
+    public function upload(Request $request, $formEpvId)
     {
+       
+
         $counts = $request->input('counts');
         $countForm = $request->input('counts') + 1; // Initial value for $count
 
-        return view('form.upload-form-2', compact('countForm', 'counts'));
+        $formEpv = FormEpv::findOrFail($formEpvId);
+
+        return view('form.upload-form-2', compact('countForm', 'counts', 'formEpv'));
     }
 
 
-    public function postUpload(Request $request)
+    public function postUpload(Request $request, $formEpvId)
     {       
-            
+        $formEpv = FormEpv::findOrFail($formEpvId);
            
 
         if ($request->hasFile('receipt')) {
@@ -205,10 +193,6 @@ class FormController extends Controller
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
     
-              // Generate profile_key once outside the loop
-            $counter = Profile::count() + 1;
-            $paddingLength = 5;
-            $uploadKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
             
             $paymentForList = $request->input('payments_for');
 
@@ -278,7 +262,6 @@ class FormController extends Controller
                             }
 
                             $uploadform = new UploadForm();
-                            $uploadform->upload_key = $uploadKey;
                             $uploadform->payments_for = $payment;
 
                             if ($eachForList[$index] === null) {
@@ -288,12 +271,18 @@ class FormController extends Controller
                             $uploadform->each_amount = $eachForList[$index];
 
                             $uploadform->receipt_type = $request->input('receipt_type');
+                            
                             $uploadform->receipt_filename = $filename;
+
+                            $uploadform->form_epv_id = $formEpv->id; // Assign the 'form_epv_id' value
 
                             $uploadform->save(); // Save the model to the database
                         }
                     }
-            return redirect()->route('verify-form');
+
+           
+
+            return redirect()->route('verify-form', $formEpvId);
         }
       
 
@@ -303,9 +292,9 @@ class FormController extends Controller
 
     // =========================================================================================
         // for verify
-    public function verify(Request $request )
+    public function verify(Request $request, $formEpvId )
     {
-        
+        $formEpv = FormEpv::findOrFail($formEpvId);
         // get from session
         $eachamount = Session::get('each_amount');
         $type = Session::get('receipt_type');
@@ -431,14 +420,15 @@ class FormController extends Controller
                 $amountSum += $eachamount[$i];
             }
 
-            return view('form.verify-form', compact('details', 'amountSum'));
+            return view('form.verify-form', compact('details', 'amountSum', 'formEpv'));
             // return view('form.verify-form');
         }
 
 
-        public function postVerify(Request $request )
+        public function postVerify(Request $request, $formEpvId)
         {
-            
+            $formEpv = FormEpv::findOrFail($formEpvId);
+
                // Generate profile_key once outside the loop
                $counter = Profile::count() + 1;
                $paddingLength = 5;
@@ -453,11 +443,11 @@ class FormController extends Controller
 
             $payment  = new Payment();
 
-            $payment->payment_key =  $paymentKey;
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
             $payment->time = $request->time;
+            $payment->form_epv_id = $formEpv->id; // Assign the 'form_epv_id' value
             
             
         //     $check= Payment::where([
@@ -469,84 +459,46 @@ class FormController extends Controller
 
             $payment->save();
             
-            return redirect('/summary-form')
+            return redirect()
+            ->route('summary-form', $formEpvId)
             ->with('success', ' Submitted Successfully!!!');
 
         }
 
         //==============================================================================================================
 
-
-            // for summary
-        public function summary(Request $request )
+        // for summary
+        public function summary(Request $request, $formEpvId)
         {
-            // Get the receipt filename from the upload form record
-            
-            $receiptFilename =  UploadForm::latest('upload_key')->value('receipt_filename');
-            $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
-            // dd($receiptFilename);
+            $formEpv = FormEpv::findOrFail($formEpvId);
 
-            // profile
-            $latestProfileKey = Profile::latest('profile_key')->value('profile_key');
-          
-            $profileDetails = DB::table('profile')
-            ->where('profile_key', '=' ,  $latestProfileKey )
-            ->get();
+           // Get the receipt filename from the upload form record
+            $uploadForm = $formEpv->uploadForm()->first(); // Use the first() method instead of find()
 
-            // upload
-            $latestUploadKey = UploadForm::latest('upload_key')->value('upload_key');
-          
-            $uploadDetails = DB::table('uploadform')
-            ->where('upload_key', '=' ,  $latestUploadKey )
-            ->get();
+            if ($uploadForm) {
+                $receiptFilename = $uploadForm->receipt_filename;
+                $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
+            } else {
+                // Handle the case where the record with the given ID is not found
+                $imagedetails = null;
+            }
 
-            // payment
-            $latestPaymentKey = Payment::latest('payment_key')->value('payment_key');
-          
-            $paymentDetails = DB::table('payment')
-            ->where('payment_key', '=' ,  $latestPaymentKey )
-            ->get();
+            // Retrieve the form_epvs record with its related data
+            $formEpvs = FormEpv::with('privacy', 'profile', 'uploadForm', 'payment')->find($formEpvId);
 
-            // $transaction_no = Profile::latest()->get('transaction_columnname');
-
-            // $variable = DB::table('table_name')
-            // ->join(.....)
-            // ->where('transaction_columnname', '=', $transaction_no)
-            // ->get();
-
-                return view('form.summary-form', compact('profileDetails','uploadDetails','paymentDetails'))
+            return view('form.summary-form', compact('formEpvs', 'formEpv'))
                 ->with('imagedetails', $imagedetails);
-            
-
         }
 
 
-        public function postSummary(Request $request )
+        public function postSummary(Request $request, $formEpvId)
         {
-
-           
-
             // Perform the conditional update
             // DB::table('xero_invoice')
             // ->join('bdo_receipt', 'xero_invoice.reference', '=', 'bdo_receipt.reference2')
-            // ->update(['receiptStatus' => '2']);
+            // ->update(['receiptStatus' => '2'])
 
-        }
-
-
-        //=====================================================================================================
-            // for submit
-        public function submit(Request $request )
-        {
-
-            return view('form.submit-form');
-        }
-
-
-        public function postSubmit(Request $request )
-        {
-            
-          
+            $formEpv = FormEpv::findOrFail($formEpvId);
             $data = [];
             $labels = [
                
@@ -595,7 +547,28 @@ class FormController extends Controller
 
             }
           
-            return redirect('/submit-form');
+            return redirect()
+            ->route('submit-form', $formEpvId);
+
+        }
+
+
+        //=====================================================================================================
+            // for submit
+        public function submit(Request $request, $formEpvId)
+        {
+            $formEpv = FormEpv::findOrFail($formEpvId);
+            
+            return view('form.submit-form', compact('formEpv'));
+        }
+
+
+        public function postSubmit(Request $request, $formEpvId)
+        {
+            $formEpv = FormEpv::findOrFail($formEpvId);
+
+            return redirect()
+            ->route('submit-form', $formEpvId);
         }
 
 

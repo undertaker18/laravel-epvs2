@@ -12,9 +12,7 @@ return new class extends Migration
     {
         Schema::create('form_epvs', function (Blueprint $table) {
             $table->id();
-            $table->string('form_key')->default('EPVS-ID-'.str_pad(1, 6, '0', STR_PAD_LEFT));
-            
-            $table->foreignId('xero_invoice_id')->contrained()->onDelete('cascade');
+            $table->string('box');
             $table->timestamps();
         });
     }

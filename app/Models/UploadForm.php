@@ -9,10 +9,10 @@ class UploadForm extends Model
 {
     use HasFactory;
 
-    protected $table = 'uploadform';
+    protected $primaryKey = 'id';
 
     public function formEpvs()
     {
-        return $this->belongsTo(FormEpvs::class);
+        return $this->belongsTo(FormEpv::class, 'form_epvs_id');
     }
 }

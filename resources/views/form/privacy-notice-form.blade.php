@@ -1,18 +1,17 @@
 <x-form-layout>
     <style>
-       
         .btn-primary2 {
             background-color: green !important;
             color: white !important;
             border-radius: 5px !important;
-           
+
         }
 
         .btn-primary1 {
             background-color: rgb(118, 172, 118) !important;
             color: white !important;
             border-radius: 5px !important;
-           
+
         }
 
         .btn-primary {
@@ -86,7 +85,7 @@
             margin-bottom: 15px;
         }
 
-        
+
 
         .align-left {
             text-align: left;
@@ -102,151 +101,183 @@
         .bg-form {
             background-color: #EAF1F8;
         }
+
         .col-md-5 {
-        flex: 0 0 50%;
-        max-width: 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
         }
 
         .flexed {
-        display: flex;
+            display: flex;
         }
 
         .end {
-        justify-content: flex-end;
+            justify-content: flex-end;
         }
+
         .start {
-        justify-content: flex-start;
+            justify-content: flex-start;
         }
 
         .mb-3 {
-        margin-bottom: 1rem;
+            margin-bottom: 1rem;
         }
 
         .mt-5 {
-        margin-top: 3rem;
+            margin-top: 3rem;
         }
 
 
         @media screen and (max-width: 761px) {
 
             /* logo */
-            .img-fluid-custom-default{
-            width: 100%;
-            height: auto;
+            .img-fluid-custom-default {
+                width: 100%;
+                height: auto;
             }
 
             /* font */
-            .bdo-font{
-            font-size: 11px;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            margin: 0 0px 0 0px;
+            .bdo-font {
+                font-size: 11px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                margin: 0 0px 0 0px;
             }
-            .payment-font{
-            font-size: 12px;
+
+            .payment-font {
+                font-size: 12px;
             }
+
             .container {
-            width: 100%;    
-            padding: 0px;
+                width: 92%;
+                padding: 0px;
             }
 
             .main-content {
-            align-items: center;
-            margin-left: 0%;
-            margin-right: 0%;
-            color: #000000 !important;
+                align-items: center;
+                margin-left: 0%;
+                margin-right: 0%;
+                color: #000000 !important;
 
-        }
+            }
+
             .privacy-content1 {
-            padding: 2px;
-            font-weight: normal;
-            font-size: 14px;
-            text-align: left;
+                padding: 2px;
+                font-weight: normal;
+                font-size: 14px;
+                text-align: left;
 
-            color: #000000;
+                color: #000000;
 
-        }
-            
-        .btn {
-            width: 100%;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-top: 5px;
+                margin-bottom: 5px;
             }
 
             .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            
+            .card-body {
+                background-color: #f2f2f2;
+                font-size: 14px;
+                padding: 0px;
             }
+
+
+
+        }
+
     </style>
         <div class="card-body">
             <div class="tab-content">
                 <div class="active tab-pane" id="profile">
                     <div class=" main-content">
-                        <form action="/privacy-form" method="POST">
-                            @csrf 
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="privacy-content1">
-                                            <p><b>PRIVACY NOTICE:<br>
-                                                </b> Dear student(s)/parent(s)/guardian(s), we would 
-                                                like to inform you that we are collecting your personal information(s)
-                                                for the purpose of your payment in La Verdad Christian College. This
-                                                information(s) shall be utilized for payment process only. In
-                                                compliance to Data Privacy Act of 2012, these personal information(s)
-                                                shall not be used outside of its declared purpose. We would like to 
-                                                inform you also that personal information(s) will be stored in our LVCC 
-                                                Database. The use, storage, retention and disposal of your personal 
-                                                information(s) shall be governed by our data privacy policies. If you 
-                                                agree to this privacy notice, kindly check the box below. *I ACCEPT</p>
-                                                <input type="text" name="privacy_key" value="{{ $privacy->privacy_key }}" hidden>
-                                                <input type="checkbox" id="privacy_notice" name="privacy_notice" value="1" class="checkbox" onchange="toggleButton()">
-                                                <label for="checkbox" class="font"><b>I ACCEPT</b></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                          <div class="col-md-5">
-                                            <div class="button-container flexed start">
-                                                <a href="/" class="btn btn-primary">
-                                                    <i class="fas fa-arrow-left"></i> BACK
-                                                </a>
+                        <form action="{{ route('post-privacy-form', $formEpv->id) }}" method="POST">
+                                @csrf 
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="privacy-content1">
+                                                <p><b>PRIVACY NOTICE:<br>
+                                                    </b> Dear student(s)/parent(s)/guardian(s), we would 
+                                                    like to inform you that we are collecting your personal information(s)
+                                                    for the purpose of your payment in La Verdad Christian College. This
+                                                    information(s) shall be utilized for payment process only. In
+                                                    compliance to Data Privacy Act of 2012, these personal information(s)
+                                                    shall not be used outside of its declared purpose. We would like to 
+                                                    inform you also that personal information(s) will be stored in our LVCC 
+                                                    Database. The use, storage, retention and disposal of your personal 
+                                                    information(s) shall be governed by our data privacy policies. If you 
+                                                    agree to this privacy notice, kindly check the box below. *I ACCEPT</p>
+                                                    <input type="checkbox" id="privacy_notice" name="privacy_notice" value="I Agree"
+                                                    {{ optional($formEpv->privacy)->privacy_notice ? 'checked' : '' }} class="checkbox">
+                                                    <label for="checkbox" class="font"><b>I ACCEPT</b></label>
                                             </div>
-                                          </div>
-                                          <div class="col-md-5">
-                                            <div class="button-container flexed end">
-                                              <button id="next-button" type="submit" value="submit" class="btn btn-primary1" data-toggle="tab" disabled>
-                                                NEXT <i class="fas fa-arrow-right"></i>
-                                              </button>
-                                            </div>
-                                          </div>
                                         </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <!-- Add the Back button with data-toggle and data-target attributes -->
+                                                    <div class="button-container flexed start">
+                                                        <a href="{{ route('welcome') }}" class="btn btn-primary">
+                                                            <i class="fas fa-arrow-left"></i> Back
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="button-container flexed end">
+                                                        <button id="next-button" type="submit" value="submit" class="btn btn-primary1" disabled>
+                                                            NEXT <i class="fas fa-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <script>
-                                                    function toggleButton() {
-                                                        var checkBox = document.getElementById("privacy_notice");
-                                                        var button = document.getElementById("next-button");
-                                                        if (checkBox.checked) {
-                                                            button.disabled = false;
-                                                            button.classList.remove("btn-primary1");
-                                                            button.classList.add("btn-primary2");
-                                                        } else {
-                                                            button.disabled = true;
-                                                            button.classList.remove("btn-primary2");
-                                                            button.classList.add("btn-primary1");
-                                                        }
+                                                document.addEventListener("DOMContentLoaded", function() {
+                                                    var checkBox = document.getElementById("privacy_notice");
+                                                    var button = document.getElementById("next-button");
+                                        
+                                                    // Check if the checkbox is already checked
+                                                    if (checkBox.checked) {
+                                                        enableButton();
                                                     }
+                                        
+                                                    checkBox.addEventListener("change", function() {
+                                                        if (checkBox.checked) {
+                                                            enableButton();
+                                                        } else {
+                                                            disableButton();
+                                                        }
+                                                    });
+                                        
+                                                    function enableButton() {
+                                                        button.disabled = false;
+                                                        button.classList.remove("btn-primary1");
+                                                        button.classList.add("btn-primary2");
+                                                    }
+                                        
+                                                    function disableButton() {
+                                                        button.disabled = true;
+                                                        button.classList.remove("btn-primary2");
+                                                        button.classList.add("btn-primary1");
+                                                    }
+                                                });
                                             </script>
+
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

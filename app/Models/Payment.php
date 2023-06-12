@@ -9,10 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $table = 'payment';
-   
+    protected $primaryKey = 'id';
+
     public function formEpvs()
     {
-        return $this->belongsTo(FormEpvs::class);
+        return $this->belongsTo(FormEpv::class, 'form_epvs_id');
     }
 }

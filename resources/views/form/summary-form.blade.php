@@ -253,7 +253,7 @@ font-size: 14px;
     </style>
     <div class="card-body">
         <div class="tab-content">
-            <form action='submit-form' method="POST">
+            <form action='{{ route('post-summary-form', $formEpv->id) }}' method="POST">
                 @csrf
                 <div class="active tab-pane" >
                     <div class=" main-content1">
@@ -267,13 +267,24 @@ font-size: 14px;
                                         <div class="box-body m-3 ">
                                             <?php
                                             $studentNumber = 1;
+                                            $studentNumber2 = 1;
+                                            $studentNumber3 = 1;
+
                                             ?>
-                                            @foreach ($profileDetails as $key => $profile)
-                                                @if ($profile->id === $profile->id)
-                                                <div class="box-body mt-4 mb-3 text-left">
-                                                   
-                                                <h3>Student {{ $studentNumber++ }}</h3>                                                
-                                                </div>
+                                              <h2>Privacy Details</h2>
+                                              @if($formEpvs)
+                                              <p><strong>Form ID:</strong>  {{ $formEpvs->id }}</p>
+                                              <p><strong>Data Privacy Agreement:</strong>  {{ $formEpvs->box }}</p>
+                                              <!-- Display other relevant data from $formEpvs as needed -->
+                                              @else
+                                              <p>No form data found.</p>
+                                              @endif
+  
+                                                @if ($formEpvs->profile->count() > 0)
+                                                @foreach ($formEpvs->profile as $key => $profile)
+                                                    <div class="box-body mt-4 mb-3 text-left"> 
+                                                        <h3>Student {{ $studentNumber++ }}</h3>                                                
+                                                    </div>
                                                     <div class="row form-set">
                                                         <div class="col-6">
                                                             <div class="form-group">
@@ -290,6 +301,7 @@ font-size: 14px;
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <div class="form-group">
@@ -306,6 +318,7 @@ font-size: 14px;
                                                             </div>
                                                         </div>
                                                     </div>  
+
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <div class="form-group">
@@ -322,9 +335,48 @@ font-size: 14px;
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <br><br>
+
+                                                    <br>
+                                                @endforeach
+                                                @else
+                                                <p>No profile information available</p>
                                                 @endif
+
+                                           <!-- Display the profile details -->
+                                            {{-- <h2>Profile Details</h2>
+                                            @if ($formEpvs->profile)
+                                            @foreach ($formEpvs->payment as $payment)
+                                                <p><strong>Full Name:</strong> {{ $formEpvs->profile->fullname }}</p>
+                                                <p><strong>Scholarship Status:</strong> {{ $formEpvs->profile->scholarshipStatus }}</p>
+                                                <p><strong>Email:</strong> {{ $formEpvs->profile->email }}</p>
+                                                <p><strong>Department:</strong> {{ $formEpvs->profile->department }}</p>
+                                                <p><strong>Grade Year:</strong> {{ $formEpvs->profile->grade_year }}</p>
+                                                <p><strong>Student Type:</strong> {{ $formEpvs->profile->student_type }}</p>
                                             @endforeach
+                                            @else
+                                                <p>No profile information available</p>
+                                            @endif --}}
+
+                                            {{-- <h2>Upload Details</h2>
+                                            @if ($formEpvs->payment)
+                                                <p><strong>Payments For:</strong> {{ $formEpvs->uploadform->payments_for }}</p>
+                                                <p><strong>Each Amount:</strong> {{ $formEpvs->uploadform->each_amount }}</p>
+                                                <p><strong>Receipt Type:</strong> {{ $formEpvs->uploadform->receipt_type }}</p>
+                                                <p><strong>Receipt Filename:</strong> {{ $formEpvs->uploadform->receipt_filename }}</p>
+                                            @else
+                                                <p>No payment information available</p>
+                                            @endif
+
+                                            <!-- Display the payment details -->
+                                                <h2>Payment Details</h2>
+                                                @if ($formEpvs->payment)
+                                                    <p><strong>Reference:</strong> {{ $formEpvs->payment->reference }}</p>
+                                                    <p><strong>Amount:</strong> {{ $formEpvs->payment->amount }}</p>
+                                                    <p><strong>Date:</strong> {{ $formEpvs->payment->date }}</p>
+                                                    <p><strong>Time:</strong> {{ $formEpvs->payment->time }}</p>
+                                                @else
+                                                    <p>No payment information available</p>
+                                                @endif  --}}
 
                                         </div>
                                     </div>
@@ -353,14 +405,8 @@ font-size: 14px;
                                             <h3>Payment Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-                                                <?php
-                                                $studentNumber5 = 1;
-                                                ?>
-
-                                                    @foreach ($paymentDetails as $paymentKey => $payment)
-                                                    @foreach ($uploadDetails as $uploadKey => $uploadform)
-                                                        @if ($paymentKey === $uploadKey)
-                                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3> 
+                                                @if ($formEpvs->payment->count() > 0)
+                                                    @foreach ($formEpvs->payment as $paymentKey => $payment)
                                                             <div class="form-group">
                                                                 <label class="form-label" for="reference">Reference of Payment</label>
                                                                 <input type="text" class="form-control" id="reference" name="reference##{{ $paymentKey }}"
@@ -381,6 +427,14 @@ font-size: 14px;
                                                                 <input type="text" class="form-control" id="time" name="time##{{ $paymentKey }}" 
                                                                     value="{{ $payment->time }}" readonly>
                                                             </div>
+                                                    @endforeach
+                                                @else
+                                                <p>No payment information available</p>
+                                                @endif
+
+                                                @if ($formEpvs->uploadform->count() > 0)
+                                                    @foreach ($formEpvs->uploadform as $uploadKey => $uploadform)
+                                                        <h4 class="mt-2">Student {{ $studentNumber3++ }}</h4    >
                                                             <div class="form-group">
                                                                 <label class="form-label" for="receipt_type">Receipt Type</label>
                                                                 <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{ $uploadKey }}"
@@ -396,9 +450,10 @@ font-size: 14px;
                                                                 <textarea class="form-control" rows="3" id="payments_for" name="payments_for##{{ $uploadKey }}"
                                                                     readonly>{{ $uploadform->payments_for }}</textarea>
                                                             </div>
-                                                        @endif
                                                     @endforeach
-                                                    @endforeach
+                                                @else
+                                                <p>No payment information available</p>
+                                                @endif
 
                                                 <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
                                         </div>
@@ -415,7 +470,7 @@ font-size: 14px;
                                 </div>
                                 <div class="col-md-5">
                                     <div class="">
-                                        <a href="submit-form"  class="m-0 p-0 button-container flexed end">
+                                        <a href="{{ route('post-summary-form', $formEpv->id) }}"  class="m-0 p-0 button-container flexed end">
                                             <button class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                     </div>

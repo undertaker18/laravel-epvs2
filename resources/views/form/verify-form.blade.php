@@ -338,7 +338,7 @@
                                                 instead of reference no.. So kindly check the trace no. 
                                                 if it's scan correctly before proceeding to the next step.</p>
                                     
-                                            <form action="/verify-form" method="post">
+                                            <form action="{{ route('post-verify-form', $formEpv->id) }}" method="post">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label class="mt-3" for="amount">Amount of Payment: <span

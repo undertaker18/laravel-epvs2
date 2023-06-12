@@ -9,10 +9,10 @@ class Privacy extends Model
 {
     use HasFactory;
 
-    protected $table = 'privacy';
+    protected $fillable = ['privacy_notice'];
 
-    public function formEpvs()
+    public function formEpv()
     {
-        return $this->belongsTo(FormEpvs::class);
+        return $this->belongsTo(FormEpv::class);
     }
 }

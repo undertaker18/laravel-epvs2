@@ -264,6 +264,30 @@
         .height {
             height: 100% !important;
         }
+        label{
+        font-weight: bold !important;
+        color:#080808 !important;
+        }
+
+        .form-control {
+        background-color: #ffffff;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        /* Add more custom styles as needed */
+        }
+        input{
+        background-color: #ffffff !important;
+        }
+        .hide {
+            display: none;
+        }
+        .red-button {
+            background-color: #1266b4;
+            color: rgb(255, 255, 255);
+            border-radius: 5px; 
+            border: none;
+            padding: 10px;
+        }
     </style>
     <div class="card-body">
         <div class="tab-content ">
@@ -273,41 +297,22 @@
                         <div class="row  ">
                             <header class="h4"><b>Take Note:</b> Make sure your receipt is readable!</header>
                                 <div class="drag-area1 mx-auto col-md-7 col-sm-12">
-                                    <div class="card-tools ">
-                                        <form action="{{ route('upload-form') }}" method="get">
-                                            @if ($counts == null || $counts == 0)
-                                            <input hidden name="counts" type="text" value="1">
-                                            @elseif ($counts == 1 )
-                                            <input hidden name="counts" type="text" value="2">
-                                            @else
-                                            <input hidden name="counts" type="text" value="0">
-                                            @endif
-
-                                            @if ($counts == 2 )
-                                            <button type="submit" class="btn btn2 btn-success" disabled>
-                                                <i class="fas fa-plus"></i> ADD
-                                            </button>
-                                            @else
-                                            <button type="submit" class="btn btn2 btn-success">
-                                                <i class="fas fa-plus"></i> ADD
-                                            </button>
-                                            @endif
-
-                                        </form>
+                                    <br>    
+                                    <div class="card-tools align-right">
+                                        <button type="button" class="toggle-button red-button">Add Student</button>
                                     </div>
                                 </div>
-                                <form action="/upload-form" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('post-upload-form', $formEpv->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                        <div class="drag-area1 mx-auto col-md-7 col-sm-12">
-                                            <div class="row ">
-                                                @if ($countForm == 1)
-                                                
+                                        <div id="studentInfo" class="drag-area1 mx-auto col-md-7 col-sm-12">
+
+                                            <div  class="row student">
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Payment For Student 01:
                                                             <span class="asterisk">*</span></label>
                                                             <div class="dropdown">
-                                                                <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                <a class="form-control dropdown-toggle" href="" role="button" id="dropdownMenuLink"
                                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                     Select...
                                                                 </a>
@@ -340,14 +345,16 @@
                                                                                 var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
                                                                                 return this.value;
                                                                                 }).get();
-                                                                                $('input[name="payments_for1"]').val(selectedValues.join(', '));
+                                                                                $('input[name="payments_for[]"]').val(selectedValues.join(', '));
                                                                             });
                                                                             });
                                                                         </script>
+                                                                        
                                                                 </div>
                                                             </div>   
                                                         </div>
                                                     </div>
+
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
@@ -357,15 +364,15 @@
                                                                 value="">
                                                         </div>
                                                     </div>
+                                            </div>
 
-                                                @elseif ($countForm == 2)
-
+                                            <div  class="row student hide">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="mt-2" for="amount">Payment For Student 01:
+                                                        <label class="mt-2" for="amount">Payment For Student 02:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle" href="" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 Select...
                                                             </a>
@@ -390,94 +397,42 @@
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment">
                                                                     Full
                                                                     Payment</a>
-                                                            </div>
-                                                        </div>   
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
-                                                                class="asterisk">*</span></label>
-                                                        <input type="number" class="form-control" id="amount"
-                                                            placeholder="Type Amount..." name="each_amount[]"
-                                                            value="">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="mt-2 mb-1" for="amount">Payment For Student 02:
-                                                        <span class="asterisk">*</span></label>
-                                                            
-                                                        <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
-                                                                    Notarial
-                                                                    Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Miscellaneous Fee">
-                                                                    Miscellaneous Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Digital System Access Fee"> Digital System
-                                                                    Access Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Registration Fee">
-                                                                    Registration Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="PTA Fee">
-                                                                    PTA Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Initial Payment Fee">
-                                                                    Initial Payment Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Full Payment">
-                                                                    Full
-                                                                    Payment</a>
-                                                            </div>
-                                                        </div>   
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 01: <span
-                                                                class="asterisk">*</span></label>
-                                                                <a href="#" class="btn delete-button" data-counts="0"
-                                                                style="width: 40px;  border: none !important;">
-                                                                <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
-                                                                </a>
-                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                <script>
-                                                                    $(document).ready(function () {
-                                                                        $('.delete-button').click(function (e) {
-                                                                            e.preventDefault();
-
-                                                                            var counts = $(this).data('counts');
-                                                                            // Perform your desired action here using the 'counts' value
-
-                                                                            // Example: Redirect to another page with the 'counts' value in the URL
-                                                                            window.location.href =
-                                                                                '/upload-form?counts=' +
-                                                                                counts;
+                                                                    <script>
+                                                                        // Collect selected checkboxes into a single name
+                                                                        $(document).ready(function() {
+                                                                        $('.dropdown-item input[type="checkbox"]').on('change', function() {
+                                                                            var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
+                                                                            return this.value;
+                                                                            }).get();
+                                                                            $('input[name="payments_for[]"]').val(selectedValues.join(', '));
                                                                         });
-                                                                    });
+                                                                        });
+                                                                    </script>
+                                                                    
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                </div>
 
-                                                                </script>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
+                                                                class="asterisk">*</span></label>
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount[]"
                                                             value="">
                                                     </div>
                                                 </div>
-
-                                                @elseif ($countForm == 3)
-
+                                            </div>
+                                            
+                                            <div  class="row student hide">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="mt-2" for="amount">Payment For Student 01:
+                                                        <label class="mt-2" for="amount">Payment For Student 03:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle" href="" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 Select...
                                                             </a>
@@ -502,165 +457,36 @@
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment">
                                                                     Full
                                                                     Payment</a>
-                                                            </div>
-                                                        </div>   
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
-                                                                class="asterisk">*</span></label>
-                                                        <input type="number" class="form-control" id="amount"
-                                                            placeholder="Type Amount..." name="each_amount[]"
-                                                            value="">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="mt-2 mb-1" for="amount">Payment For Student 02:
-                                                        <span class="asterisk">*</span></label>
-                                                            
-                                                        <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
-                                                                    Notarial
-                                                                    Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Miscellaneous Fee">
-                                                                    Miscellaneous Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Digital System Access Fee"> Digital System
-                                                                    Access Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Registration Fee">
-                                                                    Registration Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="PTA Fee">
-                                                                    PTA Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
-                                                                        value="Initial Payment Fee">
-                                                                    Initial Payment Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Full Payment">
-                                                                    Full
-                                                                    Payment</a>
-                                                            </div>
-                                                        </div>   
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 02: <span
-                                                                class="asterisk">*</span></label>
-                                                                <a href="#" class="btn delete-button disabled" data-counts="0"
-                                                                style="width: 40px;  border: none !important;">
-                                                                <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
-                                                                </a>
-                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                <script>
-                                                                    $(document).ready(function () {
-                                                                        $('.delete-button').click(function (e) {
-                                                                            e.preventDefault();
 
-                                                                            var counts = $(this).data('counts');
-                                                                            // Perform your desired action here using the 'counts' value
-
-                                                                            // Example: Redirect to another page with the 'counts' value in the URL
-                                                                            window.location.href =
-                                                                                '/upload-form?counts=' +
-                                                                                counts;
+                                                                    <script>
+                                                                        // Collect selected checkboxes into a single name
+                                                                        $(document).ready(function() {
+                                                                        $('.dropdown-item input[type="checkbox"]').on('change', function() {
+                                                                            var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
+                                                                            return this.value;
+                                                                            }).get();
+                                                                            $('input[name="payments_for[]"]').val(selectedValues.join(', '));
                                                                         });
-                                                                    });
-
-                                                                </script>
-                                                        <input type="number" class="form-control" id="amount"
-                                                            placeholder="Type Amount..." name="each_amount[]"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="mt-2 mb-1" for="amount">Payment For Student 03:
-                                                        <span class="asterisk">*</span></label>
-                                                            
-                                                        <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="Notarial Fee">
-                                                                    Notarial
-                                                                    Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
-                                                                        value="Miscellaneous Fee">
-                                                                    Miscellaneous Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
-                                                                        value="Digital System Access Fee"> Digital System
-                                                                    Access Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
-                                                                        value="Registration Fee">
-                                                                    Registration Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="PTA Fee">
-                                                                    PTA Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
-                                                                        value="Initial Payment Fee">
-                                                                    Initial Payment Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="Full Payment">
-                                                                    Full
-                                                                    Payment</a>
+                                                                        });
+                                                                    </script>
+                                                                    
                                                             </div>
                                                         </div>   
                                                     </div>
                                                 </div>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 03: <span
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 03: <span
                                                                 class="asterisk">*</span></label>
-                                                                <a href="#" class="btn delete-button" data-counts="1"
-                                                                style="width: 40px;  border: none !important;">
-                                                                <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
-                                                                </a>
-                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                <script>
-                                                                    $(document).ready(function () {
-                                                                        $('.delete-button').click(function (e) {
-                                                                            e.preventDefault();
-
-                                                                            var counts = $(this).data('counts');
-                                                                            // Perform your desired action here using the 'counts' value
-
-                                                                            // Example: Redirect to another page with the 'counts' value in the URL
-                                                                            window.location.href =
-                                                                                '/upload-form?counts=' +
-                                                                                counts;
-                                                                        });
-                                                                    });
-
-                                                                </script>
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount[]"
                                                             value="">
                                                     </div>
                                                 </div>
+                                            </div>
 
-
-                                                
-
-                                                @endif
-
-                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-                                                </script>
-                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
-                                                </script>
-                                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-                                                </script>
-
-                                                
+                                                <div class="row ">
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Upload Receipt:
@@ -675,10 +501,17 @@
                                                             <select id="" name="receipt_type" class="form-select" style="" required>
                                                                 <option value="" selected disabled>Choose Receipt Type...</option>
                                                                 <option value="instapay">Instapay</option>
-                                                                <option value="gcash">Gcash</option>
-                                                                <option value="gcash_instapay">Gcash Powered by Instapay</option>
+                                                                <option value="gcash">Gcash thru App</option>
+                                                                <option value="gcash_instapay">Gcash thru App Email</option>
                                                                 <option value="bdo_mobile_banking">BDO Mobile Banking</option>
                                                                 <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
+
+                                                                <option value="Gcash Email" disabled>Gcash thru Laptop/Pc Email</option>
+                                                                <option value="MetroBank" disabled>MetroBank</option>
+                                                                <option value="UnionBank" disabled>UnionBank</option>
+                                                                <option value="Pesonet Gateway" disabled>Pesonet Gateway</option>
+                                                                <option value="PNB Debit" disabled>PNB Debit</option>
+                                                                <option value="Others" disabled>Others</option>
                                                             </select>
                                                             <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
                                                         </div>
@@ -740,6 +573,38 @@
                                             </div>
                                         </div>
                                 </form>
+                               <script>
+                                const toggleButton = document.querySelector('.toggle-button');
+                                const div1 = document.querySelector('#studentInfo .student:nth-child(1)');
+                                const div2 = document.querySelector('#studentInfo .student:nth-child(2)');
+                                const div3 = document.querySelector('#studentInfo .student:nth-child(3)');
+                                let clickCount = 0;
+
+                                toggleButton.addEventListener('click', () => {
+                                    clickCount++;
+
+                                    if (clickCount === 1) {
+                                    div2.classList.remove('hide');
+                                    div3.classList.add('hide');
+                                    toggleButton.textContent = 'Add Student';
+                                    } else if (clickCount === 2) {
+                                    div2.classList.remove('hide');
+                                    div3.classList.remove('hide');
+                                    toggleButton.textContent = 'Remove Student';
+                                    toggleButton.classList.add('red-button');
+                                    } else {
+                                    div2.classList.add('hide');
+                                    div3.classList.add('hide');
+                                    toggleButton.textContent = 'Add Student';
+                                    clickCount = 0;
+                                    }
+                                });
+
+                                div3.addEventListener('click', () => {
+                                    div3.classList.add('hide');
+                                });
+                                </script>
+
                             </div>
                         </div>
                     </div>

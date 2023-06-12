@@ -18,6 +18,9 @@ a:hover {
     margin: 0;
 
 }
+.bg-nav {
+    background-color: #ffffff !important;
+}
 .nav-link {
     font-size: 20px; /* or any other desired size */
 }
@@ -28,7 +31,7 @@ font-size: 70px; /* or any other desired size */
 
 /* logo */
 .nav-item{
-    font-size: 9px;
+    font-size: 8px;
     margin: 0;
 
 }
@@ -36,13 +39,13 @@ font-size: 70px; /* or any other desired size */
     font-size: 0px; /* or any other desired size */
 }
 .icon2{
-font-size: 22px; /* or any other desired size */
+font-size: 20px; /* or any other desired size */
 
 }
 }
 
 </style>
-                <div class="">
+                <div class="bg-nav">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item">

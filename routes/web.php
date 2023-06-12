@@ -28,34 +28,33 @@ use Illuminate\Support\Facades\Route;
 
 /* PUBLIC USER*/
 
-Route::get('/', function () {
+Route::get('/', [FormController::class, 'index'])->name('welcome');
+Route::post('/', [FormController::class, 'processForm'])->name('process-form');
 
-    return view('welcome');
-});
-Route::post('/process-form', [FormController::class, 'processForm'])->name('process.form');
+// Route::get('/form', [FormController::Class, 'form' ])->name('form');
 
-Route::get('/form', [FormController::Class, 'form' ])->name('form');
+// privacy notice form 
+Route::get('/privacy-form/{formEpvId}', [FormController::Class, 'privacy' ])->name('privacy-form');
+Route::post('/privacy-form/{formEpvId}', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
+Route::get('/privacy-form/edit/{formEpvId}', [FormController::Class, 'editPrivacy' ])->name('edit-privacy-form');
+Route::put('/privacy-form/update/{formEpvId}', [FormController::class, 'updatePrivacy'])->name('update-privacy-form');
 
-Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
-Route::post('/privacy-form', [FormController::Class, 'postPrivacy' ])->name('post-privacy-form');
-
-Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
-Route::post('/profile-form', [FormController::Class, 'postProfile' ]);
+Route::get('/profile-form/{formEpvId}', [FormController::class, 'profile'])->name('profile-form');
+Route::post('/profile-form/{formEpvId}', [FormController::Class, 'postProfile' ])->name('post-profile-form');
 Route::get('/profile/search', [YourController::class, 'profile'])->name('profile.search');
-Route::post('/profile-form1', [FormController::class, 'postProfile1'])->name('post-upload-form1');
 
 
-Route::get('/upload-form', [FormController::Class, 'upload' ])->name('upload-form');
-Route::post('/upload-form', [FormController::Class, 'postUpload' ])->name('post-upload-form');
+Route::get('/upload-form/{formEpvId}', [FormController::Class, 'upload' ])->name('upload-form');
+Route::post('/upload-form/{formEpvId}', [FormController::Class, 'postUpload' ])->name('post-upload-form');
 
-Route::get('/verify-form', [FormController::Class, 'verify' ])->name('verify-form');
-Route::post('/verify-form', [FormController::Class, 'postVerify' ])->name('verify-form');
+Route::get('/verify-form/{formEpvId}', [FormController::Class, 'verify' ])->name('verify-form');
+Route::post('/verify-form/{formEpvId}', [FormController::Class, 'postVerify' ])->name('post-verify-form');
 
-Route::get('/summary-form', [FormController::Class, 'summary' ])->name('summary-form');
-Route::post('/summary-form', [FormController::Class, 'postSummary' ])->name('post-summary-form');
+Route::get('/summary-form/{formEpvId}', [FormController::class, 'Summary'])->name('summary-form');
+Route::post('/summary-form/{formEpvId}', [FormController::class, 'postSummary'])->name('post-summary-form');
 
-Route::get('/submit-form', [FormController::Class, 'submit' ])->name('submit-form');
-Route::post('/submit-form', [FormController::Class, 'postSubmit' ])->name('submit-form');
+Route::get('/submit-form/{formEpvId}', [FormController::Class, 'submit' ])->name('submit-form');
+Route::post('/submit-form/{formEpvId}', [FormController::Class, 'postSubmit' ])->name('post-submit-form');
 
 
 

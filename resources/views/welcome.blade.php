@@ -21,9 +21,11 @@
 
     /* image background */
     .image-bg {
+      
         background-repeat: no-repeat;
         background-attachment: fixed;
-        background-size: 100% 100%;
+        background-size: cover;
+       
     }
 
     .logo {
@@ -226,9 +228,9 @@
 </style>
 
 <body>
-    <section class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')">
-      <div class="header-logo">
-        <form id="my-form" action="{{ route('process.form') }}" method="POST">
+    <section class="image-bg" style=" background-image: url('{{ asset('assets/landing/landingpage.png') }}')"  >
+      <div class="header-logo" >
+        <form id="my-form" action="{{ route('process-form') }}" method="POST">
           @csrf
           <div class="header-column">
             <div class="logo p-3">
@@ -253,7 +255,7 @@
                           <i>(Kapag tapos na ang pagbabayad, mangyaring kumuha ng proof of payment o resibo para makumpirma na nakapagbayad na bago punan ang checkbox.)</i>
                         </p>
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="my-checkbox" name="my-checkbox" onchange="toggleButton()">
+                          <input class="form-check-input" type="checkbox" id="my-checkbox" name="box" value="I Agree"  onchange="toggleButton()">
                           <label class="form-check-label" for="paymentCheckbox">
                             Yes, I have paid and completed the payment.
                             <br>
@@ -297,7 +299,7 @@
               <div class="row justify-content-center align-items-center">
                 <div class="card" style="background-color: rgba(0, 0, 255, 0); ">
                   <div class="text-left my-3 ">
-                    <button id="next-button" class="btn btn-success pl-5 pr-5 " onclick="window.location.href='{{ url('/privacy-form') }}'" data-toggle="tab" disabled>
+                    <button id="next-button" class="btn btn-success pl-5 pr-5 " type="submit" value="submit"   disabled>
                       Proceed <i class="fas fa-arrow-right"></i>
                     </button>
                     <script>
@@ -319,9 +321,9 @@
                 </div>
               </div>
             </div>
-            <div class="container ">
+            <div class="container" style=" margin-bottom: 0px;">
               <div class="row justify-content-center align-items-center">
-                <div class="card">
+                <div class="card" style=" margin-bottom: 100px;">
                         <div class="card-body rounded">
                           <header>
                             <h4 class="card-title"><strong>Example of Valid Receipt</strong></h4>

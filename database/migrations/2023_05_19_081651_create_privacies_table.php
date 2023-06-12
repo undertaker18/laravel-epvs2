@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('privacy', function (Blueprint $table) {
+        Schema::create('privacies', function (Blueprint $table) {
             $table->id();
-            $table->string('privacy_notice');
+            $table->string('privacy_notice')->nullable();
 
-            $table->foreignId('form_Epvs_id')->contrained()->onDelete('cascade');
-
+            $table->foreignId('form_epv_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('privacy');
+        Schema::dropIfExists('privacies');
     }
 };
