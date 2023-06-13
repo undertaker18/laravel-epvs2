@@ -86,6 +86,15 @@
             margin-bottom: 15px;
         }
 
+        .modal-btn-primary{
+            background-color: #1266b4 !important; width: 100px;
+            color: #ffffff !important;
+        }
+        .modal-btn-danger{
+            background-color: red !important; width: 100px;
+            color: #ffffff !important;
+        }
+
         
 
         .align-left {
@@ -211,17 +220,17 @@
                                         <div class="row">
                                           <div class="col-md-5">
                                             <div class="button-container flexed start">
-                                                <a href="/" class="btn btn-primary">
-                                                    <i class="fas fa-arrow-left"></i> BACK
+                                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#confirmModal">
+                                                    <i class="fas fa-arrow-left"></i> Back
                                                 </a>
                                             </div>
                                           </div>
                                           <div class="col-md-5">
                                             <div class="button-container flexed end">
-                                                <a href="/profile-form">
-                                                    <button id="next-button" class="btn btn-primary1" data-toggle="tab" disabled>
+                                                
+                                                <a  href="{{ route('profile-form') }}" id="next-button" class="btn btn-primary1" disabled>
                                                         NEXT <i class="fas fa-arrow-right"></i>
-                                                      </button>
                                                 </a>
                                             </div>
                                           </div>
@@ -245,8 +254,35 @@
                                 </div>
                             </div>
                         </div>
-                   
-                        </div>
+
+                     <!-- Modal -->
+                     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                     aria-labelledby="confirmModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered" role="document">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                                 <a type="button" style="font-size: 30px; margin-right: 10px;" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                 </a>
+                             </div>
+                             <div class="modal-body">
+                                 Are you sure you want to go back?<br>
+                                 Your data will be removed.
+                             </div>
+                             <div class="modal-footer">
+                                 <div class="">
+                                     <button type="button" class="btn modal-btn-primary"
+                                         data-dismiss="modal">Cancel</button>
+                                 </div>
+                                 <div class="">
+                                     <a href="{{ URL('/') }}" class="btn modal-btn-danger">Yes</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,24 +295,12 @@
         </script>
         @endif
 
-        <!-- Modal -->
-        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="errorMessage">Error message goes here</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
+
+       
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </x-form-layout>

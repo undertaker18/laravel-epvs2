@@ -133,12 +133,12 @@
         }
 
         .end {
-            justify-content: flex-end;
+            justify-content: flex-end !important;
             margin-right: 0px;
         }
 
         .start {
-            justify-content: flex-start;
+            justify-content: flex-start !important;
             margin-left: 0px;
 
         }
@@ -220,6 +220,7 @@
 
             .drag-area {
                 width: 95%;
+                height: auto !important;
             }
 
             .drag-area1 {
@@ -233,7 +234,7 @@
             }
 
             .drag-area img {
-                height: 100%;
+                height: auto;
                 width: 100%;
                 object-fit: fill;
                 border-radius: 5px;
@@ -245,6 +246,14 @@
             .col-6 {
             flex: 0 0 100%;
             max-width: 100%;
+            
+            }
+            .btn-align {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+            }
+            .flexed {
+            display: flex;
         }
 
         }
@@ -264,6 +273,13 @@
         .height {
             height: 100% !important;
         }
+         .asterisk {
+            color: red;
+         }
+         label{
+            color: #000000;
+         }
+        
     </style>
     <div class="card-body">
         <div class="tab-content ">
@@ -294,9 +310,13 @@
                                                         <label class="mt-2" for="amount">Payment For Student 01:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
+                                                                @if ($transaction->payments_for1)
+                                                                    {{ $transaction->payments_for1 }} 
+                                                                @else
+                                                                    Select...
+                                                                @endif 
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee">
@@ -320,6 +340,7 @@
                                                                     Full
                                                                     Payment</a>
                                                             </div>
+                                                             
                                                         </div>   
                                                     </div>
                                                 </div>
@@ -329,7 +350,7 @@
                                                                 class="asterisk">*</span></label>
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount1"
-                                                            value="">
+                                                            value="{{ $transaction->each_amount1 }}">
                                                     </div>
                                                 </div>
                                                 
@@ -339,9 +360,13 @@
                                                         <span class="asterisk">*</span></label>
                                                             
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
+                                                                @if ($transaction->payments_for2)
+                                                                {{ $transaction->payments_for2 }} 
+                                                                @else
+                                                                    Select...
+                                                                @endif 
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
@@ -365,16 +390,17 @@
                                                                     Full
                                                                     Payment</a>
                                                             </div>
+                                                            
                                                         </div>   
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 02: <span
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
                                                                 class="asterisk">*</span></label>
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount2"
-                                                            value="">
+                                                            value="{{ $transaction->each_amount2 }}">
                                                     </div>
                                                 </div>
 
@@ -384,9 +410,13 @@
                                                         <span class="asterisk">*</span></label>
                                                             
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
+                                                                @if ($transaction->payments_for3)
+                                                                {{ $transaction->payments_for3 }} 
+                                                                @else
+                                                                    Select...
+                                                                @endif 
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="Notarial Fee">
@@ -410,17 +440,18 @@
                                                                     Full
                                                                     Payment</a>
                                                             </div>
+                                                           
                                                         </div>   
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 03: <span
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 03: <span
                                                                 class="asterisk">*</span></label>
                                                                
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount3"
-                                                            value="">
+                                                            value="{{ $transaction->each_amount3 }}">
                                                     </div>
                                                 </div>
 
@@ -431,9 +462,13 @@
                                                         <label class="mt-2" for="amount">Payment For Student 01:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
+                                                                @if ($transaction->payments_for1)
+                                                                {{ $transaction->payments_for1 }} 
+                                                                @else
+                                                                    Select...
+                                                                @endif 
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee">
@@ -457,6 +492,7 @@
                                                                     Full
                                                                     Payment</a>
                                                             </div>
+                                                           
                                                         </div>   
                                                     </div>
                                                 </div>
@@ -466,7 +502,7 @@
                                                                 class="asterisk">*</span></label>
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount1"
-                                                            value="">
+                                                            value="{{ $transaction->each_amount1 }}">
                                                     </div>
                                                 </div>
 
@@ -476,9 +512,13 @@
                                                         <span class="asterisk">*</span></label>
                                                             
                                                         <div class="dropdown">
-                                                            <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Select...
+                                                                @if ($transaction->payments_for2)
+                                                                {{ $transaction->payments_for2 }} 
+                                                                @else
+                                                                    Select...
+                                                                @endif 
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
@@ -502,29 +542,37 @@
                                                                     Full
                                                                     Payment</a>
                                                             </div>
+                                                            
                                                         </div>   
                                                     </div>
                                                 </div>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="" for="amount">Amount of Payment for Student 02: <span
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
                                                                 class="asterisk">*</span></label>
                                                                
                                                         <input type="number" class="form-control" id="amount"
                                                             placeholder="Type Amount..." name="each_amount2"
-                                                            value="">
+                                                            value="{{ $transaction->each_amount2 }}">
                                                     </div>
                                                 </div>
 
                                                 @else
+
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Payment For Student 01:
                                                             <span class="asterisk">*</span></label>
                                                             <div class="dropdown">
-                                                                <a class="form-control dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Select...
+                                                                    @if ($transaction->payments_for1)
+                                                                    <b>{{ $transaction->payments_for1 }}</b>
+                                                                    </p>
+                                                                    @else
+                                                                        <p>Select...</p>
+                                                                    @endif 
                                                                 </a>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                     <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee">
@@ -560,6 +608,7 @@
                                                                             });
                                                                         </script>
                                                                 </div>
+                                                               
                                                             </div>   
                                                         </div>
                                                     </div>
@@ -569,7 +618,7 @@
                                                                     class="asterisk">*</span></label>
                                                             <input type="number" class="form-control" id="amount"
                                                                 placeholder="Type Amount..." name="each_amount1"
-                                                                value="">
+                                                                value="{{ $transaction->each_amount1 }}">
                                                         </div>
                                                     </div>
                                                 @endif
@@ -588,7 +637,15 @@
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Upload Receipt:
                                                                 <span class="asterisk">*</span></label>
-                                                            <input class="form-control" name="receipt" type="file" id="receipt">
+                                                                <input class="form-control" name="receipt" type="file" id="receipt">
+                                                                @if ($transaction->receipt_filename)
+                                                                    <p>Previously uploaded file:
+                                                                   <br>
+                                                                    <b>{{ $transaction->receipt_filename }}</b></p>
+                                                                   
+                                                                @else
+                                                                    <p>No file uploaded</p>
+                                                                @endif                                                                
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
@@ -596,20 +653,31 @@
                                                             <label class="mt-2" for="amount">Receipt Type:
                                                                 <span class="asterisk">*</span></label>
                                                             <select id="" name="receipt_type" class="form-select" style="" required>
-                                                                <option value="" selected disabled>Choose Receipt Type...</option>
-                                                                <option value="instapay">Instapay</option>
-                                                                <option value="gcash">Gcash</option>
-                                                                <option value="gcash_instapay">Gcash Powered by Instapay</option>
-                                                                <option value="bdo_mobile_banking">BDO Mobile Banking</option>
-                                                                <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
+    
+                                                                <option value="instapay" {{ $transaction->payment_method == 'instapay' ? 'selected' : '' }}>Instapay</option>
+                                                                <option value="gcash" {{ $transaction->payment_method == 'gcash' ? 'selected' : '' }}>Gcash</option>
+                                                                <option value="gcash_instapay" {{ $transaction->payment_method == 'gcash_instapay' ? 'selected' : '' }}>Gcash Powered by Instapay</option>
+                                                                <option value="bdo_mobile_banking" {{ $transaction->payment_method == 'bdo_mobile_banking' ? 'selected' : '' }}>BDO Mobile Banking</option>
+                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->payment_method == 'bdo_cash_transaction_slip' ? 'selected' : '' }}>BDO Cash Transaction Slip</option>
+
+                                                                <option value="Gcash Email" disabled>Gcash thru Laptop/Pc Email</option>
+                                                                <option value="MetroBank" disabled>MetroBank</option>
+                                                                <option value="UnionBank" disabled>UnionBank</option>
+                                                                <option value="Pesonet Gateway" disabled>Pesonet Gateway</option>
+                                                                <option value="PNB Debit" disabled>PNB Debit</option>
+                                                                <option value="Others" disabled>Others</option>
+
                                                             </select>
                                                             <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
                                                         </div>
                                                     </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="drag-area mx-auto col-md-7 col-sm-12">
+                                            @if ($transaction->receipt_filename)
+                                                <img src="{{ asset('assets/receipts/temp/' . $transaction->receipt_filename) }}" alt="{{ $transaction->receipt_filename }}">
+                                                
+                                            @else
                                             <div class="row ">
                                                 <div class="col-12">
                                                     @if(session('error'))
@@ -622,6 +690,7 @@
                                                     <p>Image Type: .jpg .jpeg .png</p>
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                         <script>
                                             var receiptTypeSelect = document.querySelector('select[name="receipt_type"]');
@@ -645,15 +714,15 @@
 
                                         </script>
                                         <div class="drag-area1 mx-auto col-md-7 col-sm-12">
-                                            <div class="row  ">
-                                                <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-6 btn-align">
                                                     <div class="button-container flexed start">
-                                                        <a href="{{ url('/profile-form') }}" class="btn  btn-primary">
+                                                        <a href="{{ route('show-profile-form', ['id' => $transactionId]) }}" class="btn  btn-primary">
                                                             <i class="fas fa-arrow-left"></i> Back
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 btn-align">
                                                     <div class="button-container flexed end">
                                                         <button id="nextBtn" class="btn  btn-success" type="submit" name="submit" disabled>
                                                             Next <i class="fas fa-arrow-right"></i>

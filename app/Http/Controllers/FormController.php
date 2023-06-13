@@ -153,6 +153,41 @@ class FormController extends Controller
             return redirect()->route('upload-form', ['id' => $profile->id]);
 
     }
+
+    public function showProfile(Request $request)
+    { 
+        $id =  Session::get('id');
+        $transactions = EpvsForm::where('id', '=', $id)->get();
+        $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+
+        $searchQuery = $request->input('search');
+        $results = []; // Initialize the $results variable as an empty array
+
+        if ($searchQuery) {
+            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+        } else {
+            $results = XeroUsers::all(['xero_account_name']);
+        }
+        // Pass the search results to the view
+        $data['results'] = $results;
+
+        $yearlevelelem = YearLevelElem::all();
+        $yearleveljunior = YearLevelJunior::all();
+        $yearlevelsenior = YearLevelSenior::all();
+        $yearlevelcollege = YearLevelCollege::all();
+
+        return view('form.edit.profile-upload', compact('transactions', 'transactionId','results','yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
+    }
+
+    public function updateProfile(Request $request)
+    { 
+        $id =  Session::get('id');
+        $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+        $transantion = EpvsForm::find($transactionId);
+
+
+        return redirect()->route('upload-form', ['id' => $transactionId]);
+    }
     
 
     //========================================================================================

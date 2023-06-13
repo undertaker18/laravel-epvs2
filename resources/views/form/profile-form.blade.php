@@ -263,7 +263,7 @@
                                     <div id="formsContainer" class="card-body p-3">
                                         <div class="row">
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname1" id="searchInput"
@@ -313,7 +313,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -362,7 +362,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
@@ -414,10 +419,6 @@
                                                     </script>
                                                 </div>
                                             </div>
-
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
@@ -469,7 +470,9 @@
                                                 });
 
                                             </script>
+                                        </div>
 
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
@@ -566,9 +569,7 @@
                                                 });
 
                                             </script>
-                                        </div>
 
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
@@ -619,9 +620,6 @@
                                                     </script>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -633,7 +631,7 @@
                                     <div id="formsContainer" class="card-body p-3">
                                         <div class="row">
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname1" id="searchInput"
@@ -683,7 +681,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -732,7 +730,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
@@ -785,9 +786,6 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
@@ -840,6 +838,9 @@
 
                                             </script>
 
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
@@ -936,9 +937,7 @@
                                                 });
 
                                             </script>
-                                        </div>
 
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
@@ -989,9 +988,7 @@
                                                     </script>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1032,7 +1029,7 @@
 
                                     <div id="formsContainer" class="card-body ">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname02" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname2" id="searchInput02"
@@ -1079,7 +1076,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -1132,7 +1129,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel3" class="form-label"
                                                         id="emailLabel3">Email:</label>
@@ -1186,8 +1185,6 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment03" class="form-label">Department:</label>
@@ -1238,10 +1235,10 @@
                                                 });
 
                                             </script>
+                                
+                                        </div>
 
-
-
-
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse03"
@@ -1342,9 +1339,6 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus03" class="form-label">Scholarship
@@ -1399,9 +1393,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1413,7 +1405,7 @@
                                     <div id="formsContainer" class="card-body p-3">
                                         <div class="row">
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname1" id="searchInput"
@@ -1463,7 +1455,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -1512,7 +1504,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
@@ -1564,10 +1559,6 @@
                                                     </script>
                                                 </div>
                                             </div>
-
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
@@ -1620,6 +1611,10 @@
 
                                             </script>
 
+                                          
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
@@ -1716,9 +1711,7 @@
                                                 });
 
                                             </script>
-                                        </div>
 
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
@@ -1768,9 +1761,6 @@
 
                                                     </script>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
                                             </div>
                                         </div>
                                     </div>
@@ -1812,7 +1802,7 @@
 
                                     <div id="formsContainer" class="card-body ">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname02" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname2" id="searchInput02"
@@ -1859,7 +1849,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -1912,7 +1902,11 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                           
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel3" class="form-label"
                                                         id="emailLabel3">Email:</label>
@@ -1966,8 +1960,6 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment03" class="form-label">Department:</label>
@@ -2018,10 +2010,9 @@
                                                 });
 
                                             </script>
+                                        </div>
 
-
-
-
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse03"
@@ -2122,9 +2113,7 @@
 
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus03" class="form-label">Scholarship
@@ -2179,9 +2168,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -2222,7 +2209,7 @@
 
                                     <div id="formsContainer" class="card-body ">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Fullname04" class="form-label">Full Name:</label>
                                                     <input type="text" name="fullname3" id="searchInput04"
@@ -2270,7 +2257,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
@@ -2322,8 +2309,9 @@
 
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="emailLabel304" class="form-label"
                                                         id="emailLabel304">Email:</label>
@@ -2378,8 +2366,6 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment04" class="form-label">Department:</label>
@@ -2429,12 +2415,10 @@
                                                     departmentClicked04 = false;
                                                 });
 
-                                            </script>
+                                            </script>    
+                                        </div>
 
-
-
-
-
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse04"
@@ -2536,9 +2520,6 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputScholarshipstatus04" class="form-label">Scholarship
@@ -2594,15 +2575,12 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <!-- Add any additional fields or form elements here -->
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                             @endif
-                           
+                                
                                 <div class="row">
                                   <div class="col-md-5">
                                     <div class="button-container flexed start">

@@ -46,32 +46,32 @@ font-size: 22px; /* or any other desired size */
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('privacy-form') || Request::is('profile-form/*') || Request::is('upload-form') || Request::is('verify-form') || Request::is('summary-form') || Request::is('submit-form') ? 'active' : '' }}" >
+                                <a href="#" class="{{ Request::is('privacy-form') || Request::is('profile-form')  || Request::is('profile-form/show/*') || Request::is('upload-form/*') || Request::is('verify-form/*') || Request::is('summary-form/*') || Request::is('submit-form/*') ? 'active' : '' }}" >
                                     <i class="fas fa-user-shield icon2"></i><br>PRIVACY
                                 </a>
-                            </li>
+                            </li>   
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('profile-form') || Request::is('upload-form') || Request::is('verify-form') || Request::is('summary-form') || Request::is('submit-form') ?  'active' : '' }}">
+                                <a href="#" class="{{ Request::is('profile-form') || Request::is('profile-form/show/*') ||Request::is('upload-form/*') || Request::is('verify-form/*') || Request::is('summary-form/*') || Request::is('submit-form/*') ?  'active' : '' }}">
                                     <i class="fas fa-user-alt icon2"></i><br>PROFILE 
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('upload-form') || Request::is('verify-form') || Request::is('summary-form')  || Request::is('submit-form')  ? 'active' : '' }}">
+                                <a href="#" class="{{ Request::is('upload-form/*') || Request::is('verify-form/*') || Request::is('summary-form/*')  || Request::is('submit-form/*')  ? 'active' : '' }}">
                                     <i class="fas fa-file-upload icon2"></i><br>UPLOAD
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('verify-form') || Request::is('summary-form') || Request::is('submit-form')  ? 'active' : '' }}">
+                                <a href="#" class="{{ Request::is('verify-form/*') || Request::is('summary-form/*') || Request::is('submit-form/*')  ? 'active' : '' }}">
                                     <i class="fas fa-user-check icon2"></i><br>VERIFY
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('summary-form') || Request::is('submit-form')  ? 'active' : '' }}">
+                                <a href="#" class="{{ Request::is('summary-form/*') || Request::is('submit-form/*')  ? 'active' : '' }}">
                                     <i class="fas fa-search icon2"></i><br>SUMMARY
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('submit-form') ? 'active' : '' }}">
+                                <a href="#" class="{{ Request::is('submit-form/*') ? 'active' : '' }}">
                                     <i class="fas fa-check-circle icon2"></i><br>SUBMIT
                                 </a>
                             </li>

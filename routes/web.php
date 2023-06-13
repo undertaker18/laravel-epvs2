@@ -35,9 +35,14 @@ Route::get('/', function () {
 
 Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
 
+
 Route::get('/profile-form', [FormController::Class, 'profile' ])->name('profile-form');
 Route::post('/profile-form', [FormController::Class, 'postProfile' ])->name('post-profile-form');
 Route::get('/profile/search', [YourController::class, 'profile'])->name('profile.search');
+
+Route::get('/profile-form/show/{id}', [FormController::Class, 'showProfile' ])->name('show-profile-form');
+Route::put('/profile-form/show/{id}', [FormController::Class, 'updateProfile' ])->name('update-profile-form');
+
 
 Route::get('/upload-form/{id}', [FormController::Class, 'upload' ])->name('upload-form');
 Route::put('/upload-form/{id}', [FormController::Class, 'postUpload' ])->name('update-upload-form');
