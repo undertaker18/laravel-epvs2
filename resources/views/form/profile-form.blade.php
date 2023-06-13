@@ -227,6 +227,7 @@
 
                                 <div class="col-md-6">
                                     <div class="card-tools align-right">
+                                        
                                         <form action="{{ route('profile-form') }}" method="get">
                                             @if ($counts == null || $counts == 0)
                                             <input hidden name="counts" type="text" value="1">
@@ -254,7 +255,7 @@
 
                         <form action="" method="POST">
                             @csrf
-
+                            <input type="hidden" id="privacy_notice" name="privacy_notice" value="1" class="checkbox">
                             @if ($countForm == 1)
 
                                 <div class="card-2 m-3 bg-form">
@@ -265,7 +266,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput"
+                                                    <input type="text" name="fullname1" id="searchInput"
                                                         class="form-control" list="searchOptions" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions">
@@ -316,7 +317,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput1" class="form-control" name="student_type[]"
+                                                    <select id="selectInput1" class="form-control" name="student_type1"
                                                         required onchange="updateEmailValidation1(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -366,7 +367,7 @@
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
                                                     <input type="email" class="form-control" id="email1" placeholder="Email"
-                                                        name="email[]" required>
+                                                        name="email1" required>
                                                     <div id="emailValidationMessage1" class="invalid-feedback"></div>
                                                     <script>
                                                         var emailInput1 = document.getElementById('email1');
@@ -420,7 +421,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
-                                                    <select id="selectInput2" class="form-control" name="department[]"
+                                                    <select id="selectInput2" class="form-control" name="department1"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -436,7 +437,7 @@
                                             </div>
                                             <script>
                                                 var departmentSelect = document.querySelector(
-                                                    'select[name="department[]"]');
+                                                    'select[name="department1"]');
                                                 var departmentValidationMessage = document.getElementById(
                                                     'departmentValidationMessage');
                                                 var departmentClicked = false;
@@ -473,7 +474,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" class="form-control" required>
+                                                    <select name="grade_year1" class="form-control" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
                                                         <option value="{{ $yearlevel->elementary_list }}"
@@ -501,7 +502,7 @@
                                                     <div id="yearlevelValidationMessage" class="invalid-feedback"></div>
                                                     <script>
                                                         var grade_yearSelect = document.querySelector(
-                                                            'select[name="grade_year[]"]');
+                                                            'select[name="grade_year1"]');
                                                         var grade_yearValidationMessage = document.getElementById(
                                                             'yearlevelValidationMessage');
                                                         var grade_yearClicked = false;
@@ -540,7 +541,7 @@
                                             <script>
                                                 $(document).ready(function () {
                                                     // Get the second select field element
-                                                    var yearLevelSelect = $("select[name='grade_year[]']");
+                                                    var yearLevelSelect = $("select[name='grade_year1']");
 
                                                     // Hide all options initially
                                                     yearLevelSelect.find("option").hide();
@@ -573,7 +574,7 @@
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput5" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus1" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>
@@ -582,7 +583,7 @@
                                                     </div>
                                                     <script>
                                                         var scholarshipStatusSelect = document.querySelector(
-                                                            'select[name="scholarshipStatus[]"]');
+                                                            'select[name="scholarshipStatus1"]');
                                                         var scholarshipStatusValidationMessage = document.getElementById(
                                                             'scholarshipStatusValidationMessage');
                                                         var scholarshipStatusClicked = false;
@@ -635,7 +636,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput"
+                                                    <input type="text" name="fullname1" id="searchInput"
                                                         class="form-control" list="searchOptions" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions">
@@ -686,7 +687,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput1" class="form-control" name="student_type[]"
+                                                    <select id="selectInput1" class="form-control" name="student_type1"
                                                         required onchange="updateEmailValidation1(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -736,7 +737,7 @@
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
                                                     <input type="email" class="form-control" id="email1" placeholder="Email"
-                                                        name="email[]" required>
+                                                        name="email1" required>
                                                     <div id="emailValidationMessage1" class="invalid-feedback"></div>
                                                     <script>
                                                         var emailInput1 = document.getElementById('email1');
@@ -790,7 +791,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
-                                                    <select id="selectInput2" class="form-control" name="department[]"
+                                                    <select id="selectInput2" class="form-control" name="department1"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -806,7 +807,7 @@
                                             </div>
                                             <script>
                                                 var departmentSelect = document.querySelector(
-                                                    'select[name="department[]"]');
+                                                    'select[name="department1"]');
                                                 var departmentValidationMessage = document.getElementById(
                                                     'departmentValidationMessage');
                                                 var departmentClicked = false;
@@ -843,7 +844,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" class="form-control" required>
+                                                    <select name="grade_year1" class="form-control" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
                                                         <option value="{{ $yearlevel->elementary_list }}"
@@ -871,7 +872,7 @@
                                                     <div id="yearlevelValidationMessage" class="invalid-feedback"></div>
                                                     <script>
                                                         var grade_yearSelect = document.querySelector(
-                                                            'select[name="grade_year[]"]');
+                                                            'select[name="grade_year1"]');
                                                         var grade_yearValidationMessage = document.getElementById(
                                                             'yearlevelValidationMessage');
                                                         var grade_yearClicked = false;
@@ -910,7 +911,7 @@
                                             <script>
                                                 $(document).ready(function () {
                                                     // Get the second select field element
-                                                    var yearLevelSelect = $("select[name='grade_year[]']");
+                                                    var yearLevelSelect = $("select[name='grade_year1']");
 
                                                     // Hide all options initially
                                                     yearLevelSelect.find("option").hide();
@@ -943,7 +944,7 @@
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput5" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus1" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>
@@ -952,7 +953,7 @@
                                                     </div>
                                                     <script>
                                                         var scholarshipStatusSelect = document.querySelector(
-                                                            'select[name="scholarshipStatus[]"]');
+                                                            'select[name="scholarshipStatus1"]');
                                                         var scholarshipStatusValidationMessage = document.getElementById(
                                                             'scholarshipStatusValidationMessage');
                                                         var scholarshipStatusClicked = false;
@@ -1034,7 +1035,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname02" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput02"
+                                                    <input type="text" name="fullname2" id="searchInput02"
                                                         class="form-control" list="searchOptions02" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions02">
@@ -1082,7 +1083,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput3" class="form-control" name="student_type[]"
+                                                    <select id="selectInput3" class="form-control" name="student_type2"
                                                         required onchange="updateEmailValidation3(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -1136,7 +1137,7 @@
                                                     <label for="emailLabel3" class="form-label"
                                                         id="emailLabel3">Email:</label>
                                                     <input type="email" class="form-control" id="email3" placeholder="Email"
-                                                        name="email[]" required>
+                                                        name="email2" required>
                                                     <div id="emailValidationMessage3" class="invalid-feedback"></div>
 
                                                     <script>
@@ -1190,7 +1191,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment03" class="form-label">Department:</label>
-                                                    <select id="selectInput203" class="form-control" name="department[]"
+                                                    <select id="selectInput203" class="form-control" name="department2"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -1245,7 +1246,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse03"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" id="grade-year03" class="form-control"
+                                                    <select name="grade_year2" id="grade-year03" class="form-control"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -1349,7 +1350,7 @@
                                                     <label for="inputScholarshipstatus03" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput503" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus2" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>
@@ -1415,7 +1416,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput"
+                                                    <input type="text" name="fullname1" id="searchInput"
                                                         class="form-control" list="searchOptions" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions">
@@ -1466,7 +1467,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput1" class="form-control" name="student_type[]"
+                                                    <select id="selectInput1" class="form-control" name="student_type1"
                                                         required onchange="updateEmailValidation1(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -1516,7 +1517,7 @@
                                                     <label for="emailLabel1" class="form-label"
                                                         id="emailLabel1">Email:</label>
                                                     <input type="email" class="form-control" id="email1" placeholder="Email"
-                                                        name="email[]" required>
+                                                        name="email1" required>
                                                     <div id="emailValidationMessage1" class="invalid-feedback"></div>
                                                     <script>
                                                         var emailInput1 = document.getElementById('email1');
@@ -1570,7 +1571,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment" class="form-label">Department:</label>
-                                                    <select id="selectInput2" class="form-control" name="department[]"
+                                                    <select id="selectInput2" class="form-control" name="department1"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -1586,7 +1587,7 @@
                                             </div>
                                             <script>
                                                 var departmentSelect = document.querySelector(
-                                                    'select[name="department[]"]');
+                                                    'select[name="department1"]');
                                                 var departmentValidationMessage = document.getElementById(
                                                     'departmentValidationMessage');
                                                 var departmentClicked = false;
@@ -1623,7 +1624,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" class="form-control" required>
+                                                    <select name="grade_year1" class="form-control" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
                                                         <option value="{{ $yearlevel->elementary_list }}"
@@ -1651,7 +1652,7 @@
                                                     <div id="yearlevelValidationMessage" class="invalid-feedback"></div>
                                                     <script>
                                                         var grade_yearSelect = document.querySelector(
-                                                            'select[name="grade_year[]"]');
+                                                            'select[name="grade_year1"]');
                                                         var grade_yearValidationMessage = document.getElementById(
                                                             'yearlevelValidationMessage');
                                                         var grade_yearClicked = false;
@@ -1690,7 +1691,7 @@
                                             <script>
                                                 $(document).ready(function () {
                                                     // Get the second select field element
-                                                    var yearLevelSelect = $("select[name='grade_year[]']");
+                                                    var yearLevelSelect = $("select[name='grade_year1']");
 
                                                     // Hide all options initially
                                                     yearLevelSelect.find("option").hide();
@@ -1723,7 +1724,7 @@
                                                     <label for="inputScholarshipstatus" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput5" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus1" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>
@@ -1732,7 +1733,7 @@
                                                     </div>
                                                     <script>
                                                         var scholarshipStatusSelect = document.querySelector(
-                                                            'select[name="scholarshipStatus[]"]');
+                                                            'select[name="scholarshipStatus1"]');
                                                         var scholarshipStatusValidationMessage = document.getElementById(
                                                             'scholarshipStatusValidationMessage');
                                                         var scholarshipStatusClicked = false;
@@ -1814,7 +1815,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname02" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput02"
+                                                    <input type="text" name="fullname2" id="searchInput02"
                                                         class="form-control" list="searchOptions02" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions02">
@@ -1862,7 +1863,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput3" class="form-control" name="student_type[]"
+                                                    <select id="selectInput3" class="form-control" name="student_type2"
                                                         required onchange="updateEmailValidation3(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -1916,7 +1917,7 @@
                                                     <label for="emailLabel3" class="form-label"
                                                         id="emailLabel3">Email:</label>
                                                     <input type="email" class="form-control" id="email3" placeholder="Email"
-                                                        name="email[]" required>
+                                                        name="email2" required>
                                                     <div id="emailValidationMessage3" class="invalid-feedback"></div>
 
                                                     <script>
@@ -1970,7 +1971,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment03" class="form-label">Department:</label>
-                                                    <select id="selectInput203" class="form-control" name="department[]"
+                                                    <select id="selectInput203" class="form-control" name="department2"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -2025,7 +2026,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse03"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" id="grade-year03" class="form-control"
+                                                    <select name="grade_year2" id="grade-year03" class="form-control"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -2129,7 +2130,7 @@
                                                     <label for="inputScholarshipstatus03" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput503" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus2" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>
@@ -2224,7 +2225,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Fullname04" class="form-label">Full Name:</label>
-                                                    <input type="text" name="fullname[]" id="searchInput04"
+                                                    <input type="text" name="fullname3" id="searchInput04"
                                                         class="form-control" list="searchOptions04" placeholder="Fullname"
                                                         required>
                                                     <datalist id="searchOptions04">
@@ -2273,7 +2274,7 @@
                                                 <div class="form-group">
                                                     <label for="inputScholarshipType" class="form-label">Student
                                                         Type:</label>
-                                                    <select id="selectInput304" class="form-control" name="student_type[]"
+                                                    <select id="selectInput304" class="form-control" name="student_type3"
                                                         required onchange="updateEmailValidation304(this)">
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="New Student">New Student</option>
@@ -2327,7 +2328,7 @@
                                                     <label for="emailLabel304" class="form-label"
                                                         id="emailLabel304">Email:</label>
                                                     <input type="email" class="form-control" id="email304"
-                                                        placeholder="Email" name="email[]" required>
+                                                        placeholder="Email" name="email3" required>
                                                     <div id="emailValidationMessage304" class="invalid-feedback"></div>
 
                                                     <script>
@@ -2382,7 +2383,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inputDepartment04" class="form-label">Department:</label>
-                                                    <select id="selectInput204" class="form-control" name="department[]"
+                                                    <select id="selectInput204" class="form-control" name="department3"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Elementary" data-target="Elementary">Elementary
@@ -2438,7 +2439,7 @@
                                                 <div class="form-group">
                                                     <label for="inputGradeCourse04"
                                                         class="form-label">Grade&Section/Course&Level:</label>
-                                                    <select name="grade_year[]" id="grade-year04" class="form-control"
+                                                    <select name="grade_year3" id="grade-year04" class="form-control"
                                                         required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -2543,7 +2544,7 @@
                                                     <label for="inputScholarshipstatus04" class="form-label">Scholarship
                                                         Status:</label>
                                                     <select id="selectInput504" class="form-control"
-                                                        name="scholarshipStatus[]" required>
+                                                        name="scholarshipStatus3" required>
                                                         <option value="" selected disabled>Choose...</option>
                                                         <option value="Partial Scholar">Partial Scholar</option>
                                                         <option value="Full Scholar" disabled>Full Scholar</option>

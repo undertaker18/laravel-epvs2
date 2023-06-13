@@ -46,7 +46,7 @@ font-size: 22px; /* or any other desired size */
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a href="#" class="{{ Request::is('privacy-form') || Request::is('profile-form') || Request::is('upload-form') || Request::is('verify-form') || Request::is('summary-form') || Request::is('submit-form') ? 'active' : '' }}" >
+                                <a href="#" class="{{ Request::is('privacy-form') || Request::is('profile-form/*') || Request::is('upload-form') || Request::is('verify-form') || Request::is('summary-form') || Request::is('submit-form') ? 'active' : '' }}" >
                                     <i class="fas fa-user-shield icon2"></i><br>PRIVACY
                                 </a>
                             </li>

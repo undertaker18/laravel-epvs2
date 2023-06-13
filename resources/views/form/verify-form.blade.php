@@ -311,130 +311,129 @@
 
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="card-body">
-        <div class="tab-content">
-            <div class="active tab-pane">
-                <div class=" main-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="{{ $details['receipt'] }}" alt="Image Description" title="Image Title"
-                                            style="border-radius: 10px; width: 100%;" class="image-class ">
+        <form action="{{ route('update-verify-form', ['id' => $transactionId]) }}" method="post">
+            @csrf
+            @method('PUT')
+            <div class="tab-content">
+                <div class="active tab-pane">
+                    <div class=" main-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <img src="{{ $details['receipt'] }}" alt="Image Description" title="Image Title"
+                                                style="border-radius: 10px; width: 100%;" class="image-class ">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
 
-                                    <div class="card d-flex ">
-                                        <div class="card-body ">
+                                        <div class="card d-flex ">
+                                            <div class="card-body ">
 
-                                            <h5 class="card-title" style="text-align: left;">Take note:</h5>
-                                            <p class="card-text " style="text-align: left;">Ensure that all
-                                                information provided are accurate
-                                                and exact before proceeding to the next step.</p>
-                                            <p class="card-text " style="text-align: left;">If you paid 
-                                                thru Gcash or Instapay, the LVCC BDO detect the Trace No. 
-                                                instead of reference no.. So kindly check the trace no. 
-                                                if it's scan correctly before proceeding to the next step.</p>
+                                                <h5 class="card-title" style="text-align: left;">Take note:</h5>
+                                                <p class="card-text " style="text-align: left;">Ensure that all
+                                                    information provided are accurate
+                                                    and exact before proceeding to the next step.</p>
+                                                <p class="card-text " style="text-align: left;">If you paid 
+                                                    thru Gcash or Instapay, the LVCC BDO detect the Trace No. 
+                                                    instead of reference no.. So kindly check the trace no. 
+                                                    if it's scan correctly before proceeding to the next step.</p>
                                     
-                                            <form action="/verify-form" method="post">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label class="mt-3" for="amount">Amount of Payment: <span
-                                                            class="asterisk">*</span></label>
-                                                            @php
-                                                            $inputValue = $details['ocr_result']['amount'];
-                                                            @endphp
-                                                        
-                                                    <input type="text" class="form-control" id="amount" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" >
-
-                                                           
-                                                            @if ($inputValue < $amountSum)
-                                                                <p  style="font-size: 14px; color: red;">The Amount value is less than the Total Amount value.</p>
-                                                            @elseif ($inputValue > $amountSum)
-                                                                <p  style="font-size: 14px; color: red;">The Amount value is greater than the Total Amount value.</p>
-                                                            @else
-                                                                <p  style="font-size: 14px; color: green;">The Amount value is equal to the Total Amount value.</p>
-                                                            @endif
+                                                    <div class="form-group">
+                                                        <label class="mt-3" for="amount">Amount of Payment: <span
+                                                                class="asterisk">*</span></label>
+                                                                @php
+                                                                $inputValue = $details['ocr_result']['amount'];
+                                                                @endphp
                                                             
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="mt-3" for="reference">Reference Number: <span
-                                                            class="asterisk">*</span></label>
-                                                    <input type="text" class="form-control" id="reference"
-                                                        name="reference"
-                                                        value="{{$details['ocr_result']['referenceNumber']}}"
-                                                        placeholder="Edit here...">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="mt-3" style="text-align: left;">Date of Payment:<span
-                                                            class="asterisk">*</span></label>
-                                                    <div class="col-sm-12">
-                                                        <input type="date" class="form-control"
-                                                            placeholder="Edit here..."
-                                                            value="{{$details['ocr_result']['date']}}" name="date">
+                                                        <input type="text" class="form-control" id="amount" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" > 
+                                                                {{-- @if ($inputValue < $amountSum)
+                                                                    <p  style="font-size: 14px; color: red;">The Amount value is less than the Total Amount value.</p>
+                                                                @elseif ($inputValue > $amountSum)
+                                                                    <p  style="font-size: 14px; color: red;">The Amount value is greater than the Total Amount value.</p>
+                                                                @else
+                                                                    <p  style="font-size: 14px; color: green;">The Amount value is equal to the Total Amount value.</p>
+                                                                @endif --}}
+                                                                
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="mt-3" style="text-align: left;">Time of Payment:<span
-                                                            class="asterisk">*</span></label>
-                                                    <div class="col-sm-12">
-                                                        <input type="time" class="form-control"
-                                                            placeholder="Edit here..."
-                                                            value="{{$details['ocr_result']['time']}}" name="time">
+                                                    <div class="form-group">
+                                                        <label class="mt-3" for="reference">Reference Number: <span
+                                                                class="asterisk">*</span></label>
+                                                        <input type="text" class="form-control" id="reference"
+                                                            name="reference"
+                                                            value="{{$details['ocr_result']['referenceNumber']}}"
+                                                            placeholder="Edit here...">
                                                     </div>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label class="mt-3" style="text-align: left;">Date of Payment:<span
+                                                                class="asterisk">*</span></label>
+                                                        <div class="col-sm-12">
+                                                            <input type="date" class="form-control"
+                                                                placeholder="Edit here..."
+                                                                value="{{$details['ocr_result']['date']}}" name="date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="mt-3" style="text-align: left;">Time of Payment:<span
+                                                                class="asterisk">*</span></label>
+                                                        <div class="col-sm-12">
+                                                            <input type="time" class="form-control"
+                                                                placeholder="Edit here..."
+                                                                value="{{$details['ocr_result']['time']}}" name="time">
+                                                        </div>
+                                                    </div>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5  ">
-                                    <div class="button-container flexed start">
-                                        <a href="{{ url('/upload-form') }}" class="btn btn-primary">
-                                            <i class="fas fa-arrow-left"></i> Back
-                                        </a>
+                                <div class="row">
+                                    <div class="col-md-5  ">
+                                        <div class="button-container flexed start">
+                                            <a href="{{ url('/upload-form') }}" class="btn btn-primary">
+                                                <i class="fas fa-arrow-left"></i> Back
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="button-container flexed end">
+                                            <button id="nextBtn" class="btn btn-success" type="submit" name="submit">
+                                                Next <i class="fas fa-arrow-right"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="button-container flexed end">
-                                        <button id="nextBtn" class="btn btn-success" type="submit" name="submit">
-                                            Next <i class="fas fa-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <script>
-                                function checkFormValidity() {
-                                    var inputs = document.querySelectorAll('name[payment_for[]], select[required]');
-                                    var nextBtn = document.getElementById('nextBtn');
-                                    var isValid = true;
+                                <script>
+                                    function checkFormValidity() {
+                                        var inputs = document.querySelectorAll('name[payment_for[]], select[required]');
+                                        var nextBtn = document.getElementById('nextBtn');
+                                        var isValid = true;
 
-                                    inputs.forEach(function (input) {
-                                        if (!input.value) {
-                                            isValid = false;
-                                        }
+                                        inputs.forEach(function (input) {
+                                            if (!input.value) {
+                                                isValid = false;
+                                            }
+                                        });
+
+                                        nextBtn.disabled = !isValid;
+                                    }
+
+                                    // Call the checkFormValidity function whenever an input value changes
+                                    var formInputs = document.querySelectorAll('name[payment_for[]], select[required]');
+                                    formInputs.forEach(function (input) {
+                                        input.addEventListener('input', checkFormValidity);
                                     });
 
-                                    nextBtn.disabled = !isValid;
-                                }
-
-                                // Call the checkFormValidity function whenever an input value changes
-                                var formInputs = document.querySelectorAll('name[payment_for[]], select[required]');
-                                formInputs.forEach(function (input) {
-                                    input.addEventListener('input', checkFormValidity);
-                                });
-
-                            </script>
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </form>
     </div>
     <!-- error Modal -->

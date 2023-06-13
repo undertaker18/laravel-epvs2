@@ -1,15 +1,16 @@
 <x-form-layout>
 
     <style>
-         .main-content1 {
+        .main-content1 {
             align-items: center;
             margin-left: 19%;
             margin-right: 19%;
             color: #000000 !important;
-          
+
 
 
         }
+
         .main-content {
             align-items: center;
             margin-left: 19%;
@@ -17,34 +18,36 @@
             color: #000000 !important;
             margin-bottom: 10%;
         }
+
         .btn-primary2 {
             background-color: green !important;
             color: white !important;
             border-radius: 5px !important;
-           
+
         }
 
         .btn-primary1 {
             background-color: rgb(118, 172, 118) !important;
             color: white !important;
             border-radius: 5px !important;
-           
+
         }
 
         .btn-primary {
             background-color: #1266b4 !important;
         }
 
-       
+
         .tab-content {
-                border: none !important;
-            }
+            border: none !important;
+        }
 
         .card {
-                border: none !important;
-                border-radius: none !important;
-                box-shadow: none !important;
-            }
+            border: none !important;
+            border-radius: none !important;
+            box-shadow: none !important;
+        }
+
         .row.main-content {
             display: flex;
             justify-content: center;
@@ -132,130 +135,141 @@
         .align_right {
             align-content: right;
         }
+
         .col-md-5 {
-        flex: 0 0 50%;
-        max-width: 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
         }
+
         .col-6 {
-        width: 50%;
-        flex: 0 0 50%;
-        max-width: 50%;
+            width: 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
         }
 
         .flexed {
-        display: flex;
+            display: flex;
         }
 
         .end {
-        justify-content: flex-end;
+            justify-content: flex-end;
         }
+
         .start {
-        justify-content: flex-start;
+            justify-content: flex-start;
         }
 
         .mb-3 {
-        margin-bottom: 1rem;
+            margin-bottom: 1rem;
         }
 
         .mt-5 {
-        margin-top: 3rem;
+            margin-top: 3rem;
         }
+
         .btn {
-        width: 200px !important;
-        margin-top: 10px;
-        margin-bottom: 5px;
+            width: 200px !important;
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
+
         @media screen and (max-width: 761px) {
 
-/* logo */
-.img-fluid-custom-default{
-width: 100%;
-height: auto;
-}
+            /* logo */
+            .img-fluid-custom-default {
+                width: 100%;
+                height: auto;
+            }
 
-/* font */
-.bdo-font{
-font-size: 11px;
-padding-top: 0px;
-padding-bottom: 0px;
-margin: 0 0px 0 0px;
-}
-.payment-font{
-font-size: 12px;
-}
-.container {
-width: 100%;    
-padding: 0px;
-}
+            /* font */
+            .bdo-font {
+                font-size: 11px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                margin: 0 0px 0 0px;
+            }
 
-.main-content {
-align-items: center;
-margin-left: 12px;
-margin-right: 12px ;
-color: #000000 !important;
+            .payment-font {
+                font-size: 12px;
+            }
 
-}
+            .container {
+                width: 100%;
+                padding: 0px;
+            }
 
-.main-content1 {
-align-items: center;
-margin-left: 12px;
-margin-right: 12px ;
-color: #000000 !important;
+            .main-content {
+                align-items: center;
+                margin-left: 12px;
+                margin-right: 12px;
+                color: #000000 !important;
 
-}
-.privacy-content1 {
-padding: 2px;
-font-weight: normal;
-font-size: 14px;
-text-align: left;
+            }
 
-color: #000000;
+            .main-content1 {
+                align-items: center;
+                margin-left: 12px;
+                margin-right: 12px;
+                color: #000000 !important;
 
-}
-.btn {
-width: 100% !important;
-margin-top: 10px;
-margin-bottom: 5px;
-}
+            }
 
+            .privacy-content1 {
+                padding: 2px;
+                font-weight: normal;
+                font-size: 14px;
+                text-align: left;
 
-.button-container {
-display: flex;
-justify-content: center;
-align-items: center;
-}
+                color: #000000;
 
-.card-body{
-font-size: 14px;
-}
-.form-set {
-    display: flex;
-    align-items: center;
-  }
+            }
 
-  .col-5 {
-  width: 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
-  
-}
-.col-6 {
-  width: 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
-  
-}
+            .btn {
+                width: 100% !important;
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
 
 
+            .button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-}
+            .card-body {
+                font-size: 14px;
+            }
+
+            .form-set {
+                display: flex;
+                align-items: center;
+            }
+
+            .col-5 {
+                width: 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+
+            }
+
+            .col-6 {
+                width: 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+
+            }
+
+
+
+        }
 
     </style>
     <div class="card-body">
         <div class="tab-content">
-            <form action='submit-form' method="POST">
+            <form action='{{ route('post-submit-form', ['id' => $transactionId]) }}' method="POST">
                 @csrf
-                <div class="active tab-pane" >
+                <div class="active tab-pane">
                     <div class=" main-content1">
                         <div class="card">
                             <div class="row">
@@ -268,62 +282,386 @@ font-size: 14px;
                                             <?php
                                             $studentNumber = 1;
                                             ?>
-                                            @foreach ($profileDetails as $key => $profile)
-                                                @if ($profile->id === $profile->id)
-                                                <div class="box-body mt-4 mb-3 text-left">
-                                                   
-                                                <h3>Student {{ $studentNumber++ }}</h3>                                                
+                                            @foreach ($transactions as $key => $transaction)
+                                            @if ($transaction->fullname3 != null)
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname1##{{$key}}"
+                                                            value="{{ $transaction->fullname1 }}" readonly>
+                                                    </div>
                                                 </div>
-                                                    <div class="row form-set">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="fullname">Full Name</label>
-                                                                <input type="text" class="form-control" id="fullname" name="fullname##{{$key}}"
-                                                                    value="{{ $profile->fullname }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="scholarshipStatus">Scholarship Status</label>
-                                                                <input type="text" class="form-control" id="scholarshipStatus" name="scholarshipStatus##{{$key}}"
-                                                                    value="{{ $profile->scholarshipStatus }}" readonly>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus1##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus1 }}" readonly>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="email">Email</label>
-                                                                <input type="text" class="form-control" id="email" name="email##{{$key}}"
-                                                                    value="{{ $profile->email }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="department">Department</label>
-                                                                <input type="text" class="form-control" id="department" name="department##{{$key}}"
-                                                                    value="{{ $profile->department }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>  
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="grade_year">Grade&Section/Course&Level</label>
-                                                                <input type="text" class="form-control" id="grade_year" name="grade_year##{{$key}}"
-                                                                    value="{{ $profile->grade_year }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="student_type">Student Type</label>
-                                                                <input type="text" class="form-control" id="student_type" name="student_type##{{$key}}"
-                                                                    value="{{ $profile->student_type }}" readonly>
-                                                            </div>
-                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email1##{{$key}}" value="{{ $transaction->email1 }}"
+                                                            readonly>
                                                     </div>
-                                                    <br><br>
-                                                @endif
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department1##{{$key}}"
+                                                            value="{{ $transaction->department1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year1##{{$key}}"
+                                                            value="{{ $transaction->grade_year1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type1##{{$key}}"
+                                                            value="{{ $transaction->student_type1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname2##{{$key}}"
+                                                            value="{{ $transaction->fullname2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus2##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email2##{{$key}}" value="{{ $transaction->email2 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department2##{{$key}}"
+                                                            value="{{ $transaction->department2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year2##{{$key}}"
+                                                            value="{{ $transaction->grade_year2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type2##{{$key}}"
+                                                            value="{{ $transaction->student_type2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname3##{{$key}}"
+                                                            value="{{ $transaction->fullname3 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus3##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus3 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email3##{{$key}}" value="{{ $transaction->email3 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department3##{{$key}}"
+                                                            value="{{ $transaction->department3 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year3##{{$key}}"
+                                                            value="{{ $transaction->grade_year3 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type3##{{$key}}"
+                                                            value="{{ $transaction->student_type3 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            @elseif ($transaction->fullname2 != null)
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname1##{{$key}}"
+                                                            value="{{ $transaction->fullname1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus1##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email1##{{$key}}" value="{{ $transaction->email1 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department1##{{$key}}"
+                                                            value="{{ $transaction->department1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year1##{{$key}}"
+                                                            value="{{ $transaction->grade_year1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type1##{{$key}}"
+                                                            value="{{ $transaction->student_type1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname2##{{$key}}"
+                                                            value="{{ $transaction->fullname2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus2##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email2##{{$key}}" value="{{ $transaction->email2 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department2##{{$key}}"
+                                                            value="{{ $transaction->department2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year2##{{$key}}"
+                                                            value="{{ $transaction->grade_year2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type2##{{$key}}"
+                                                            value="{{ $transaction->student_type2 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            @else
+
+                                            <div class="box-body mt-4 mb-3 text-left">
+                                                <h3>Student {{ $studentNumber++ }}</h3>
+                                            </div>
+                                            <div class="row form-set">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fullname">Full Name</label>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="fullname1##{{$key}}"
+                                                            value="{{ $transaction->fullname1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="scholarshipStatus">Scholarship
+                                                            Status</label>
+                                                        <input type="text" class="form-control" id="scholarshipStatus"
+                                                            name="scholarshipStatus1##{{$key}}"
+                                                            value="{{ $transaction->scholarshipStatus1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            name="email1##{{$key}}" value="{{ $transaction->email1 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="department">Department</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            name="department1##{{$key}}"
+                                                            value="{{ $transaction->department1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="grade_year">Grade&Section/Course&Level</label>
+                                                        <input type="text" class="form-control" id="grade_year"
+                                                            name="grade_year1##{{$key}}"
+                                                            value="{{ $transaction->grade_year1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="student_type">Student
+                                                            Type</label>
+                                                        <input type="text" class="form-control" id="student_type"
+                                                            name="student_type1##{{$key}}"
+                                                            value="{{ $transaction->student_type1 }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            @endif
                                             @endforeach
 
                                         </div>
@@ -342,68 +680,138 @@ font-size: 14px;
                                 <div class="col-md-6 bg-white">
                                     <div class="box box-primary">
                                         <div class="box-body mt-3 mb-3  ">
-                                            <img src="{{ $imagedetails['receipt'] }}" alt="{{ $imagedetails['receipt'] }}" title="Image Title" style="border-radius: 10px; width: 100%;"  class="image-class align_right">
+                                            <img src="{{ $imagedetails['receipt'] }}"
+                                                alt="{{ $imagedetails['receipt'] }}" title="Image Title" style="border-radius: 10px; width: 100%;"
+                                                class="image-class align_right">
                                         </div>
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-md-6 bg-white">
                                     <div class="box box-primary">
                                         <div class="box-body mt-4 mb-3 text-center ">
                                             <h3>Payment Details</h3>
                                         </div>
                                         <div class="box-body m-3 ">
-                                                <?php
-                                                $studentNumber5 = 1;
-                                                ?>
+                                            <?php
+                                            $studentNumber5 = 1;
+                                            ?>
 
-                                                    @foreach ($paymentDetails as $paymentKey => $payment)
-                                                    @foreach ($uploadDetails as $uploadKey => $uploadform)
-                                                        @if ($paymentKey === $uploadKey)
-                                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3> 
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="reference">Reference of Payment</label>
-                                                                <input type="text" class="form-control" id="reference" name="reference##{{ $paymentKey }}"
-                                                                    value="{{ $payment->reference }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="amount">Amount of Payment</label>
-                                                                <input type="text" class="form-control" id="amount" name="amount##{{ $paymentKey }}"
-                                                                    value="{{ $payment->amount }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="date">Date of Payment</label>
-                                                                <input type="text" class="form-control" id="date" name="date##{{ $paymentKey }}" 
-                                                                    value="{{ $payment->date }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="time">Time of Payment</label>
-                                                                <input type="text" class="form-control" id="time" name="time##{{ $paymentKey }}" 
-                                                                    value="{{ $payment->time }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="receipt_type">Receipt Type</label>
-                                                                <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{ $uploadKey }}"
-                                                                    value="{{ $uploadform->receipt_type }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="each_amount">Amount Per Student</label>
-                                                                <input type="text" class="form-control" id="each_amount" name="each_amount##{{ $uploadKey }}"
-                                                                    value="{{ $uploadform->each_amount }}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="payments_for">Payment For</label>
-                                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for##{{ $uploadKey }}"
-                                                                    readonly>{{ $uploadform->payments_for }}</textarea>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                    @endforeach
+                                            @foreach ($transactions as $paymentKey => $transaction)
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label" for="reference">Reference of Payment</label>
+                                                <input type="text" class="form-control" id="reference" name="reference##{{ $paymentKey }}"
+                                                    value="{{ $transaction->reference }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="amount">Amount of Payment</label>
+                                                <input type="text" class="form-control" id="amount" name="amount##{{ $paymentKey }}"
+                                                    value="{{ $transaction->amount }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="date">Date of Payment</label>
+                                                <input type="text" class="form-control" id="date" name="date##{{ $paymentKey }}"
+                                                    value="{{ $transaction->date }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="time">Time of Payment</label>
+                                                <input type="text" class="form-control" id="time" name="time##{{ $paymentKey }}"
+                                                    value="{{ $transaction->time }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="receipt_type">Receipt Type</label>
+                                                <input type="text" class="form-control" id="receipt_type" name="receipt_type##{{ $paymentKey }}"
+                                                    value="{{ $transaction->receipt_type }}" readonly>
+                                            </div>
+                                            
+                                            @if ($transaction->fullname3 != null)
 
-                                                <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">  
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount1 }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                            </div>
+
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount2##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount2 }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for2##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for2 }}</textarea>
+                                            </div>
+
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount3##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount3 }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for3##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for3 }}</textarea>
+                                            </div>
+
+                                            @elseif ($transaction->fullname2 != null)
+
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount1 }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                            </div>
+
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount2##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount2 }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for2##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for2 }}</textarea>
+                                            </div>
+
+                                            @else
+
+                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <div class="form-group">
+                                                <label class="form-label" for="each_amount">Amount Per Student</label>
+                                                <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
+                                                    value="{{ $transaction->each_amount1 }}" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label" for="payments_for">Payment For</label>
+                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                            </div>
+
+                                            @endif
+                                            @endforeach
+
+                                            <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
@@ -415,19 +823,16 @@ font-size: 14px;
                                 </div>
                                 <div class="col-md-5">
                                     <div class="">
-                                        <a href="submit-form"  class="m-0 p-0 button-container flexed end">
+                                        <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
                                             <button class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </form>
         </div>
     </div>
-   
-
 </x-form-layout>

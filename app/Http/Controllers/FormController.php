@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\Session;
 use veryfi\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Models\Privacy;
-use App\Models\Profile;
-use App\Models\UploadForm;
-use App\Models\Payment;
+use App\Models\EpvsForm;
 use App\Models\XeroInvoice;
 use Exception;
 use Illuminate\Support\Facades\Mail;
@@ -28,34 +25,9 @@ class FormController extends Controller
     // for privacy
     public function privacy(Request $request )
     {
-        $privacy = new Privacy();
-        return view('form.privacy-notice-form', compact('privacy'));
+        
+        return view('form.privacy-notice-form');
     }
-
-    public function postPrivacy(Request $request)
-    {
-        $request->validate([
-            'privacy_notice' => 'required',
-        ]);
-
-        $privacy = new Privacy();
-
-        $counter = Privacy::count() + 1; // Get the count of existing records and increment by 1
-        $paddingLength = 5; // Generate a random padding length between 1 and 5
-
-        $privacy->privacy_key = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
-        $privacy->privacy_notice = $request->privacy_notice;
-
-        if ($privacy->save()) {
-            return redirect('/profile-form');
-        } else {
-            $errorMessage = 'Failed to save privacy notice. Please try again.';
-            return view('form.privacy-notice-form', compact('errorMessage'));
-        }
-    }
-
-    
-
 
     //=================================================================================
 
@@ -86,40 +58,100 @@ class FormController extends Controller
      
     public function postProfile(Request $request)
     {
-        $fullnameList = $request->input('fullname');
-        $emailList = $request->input('email');
-        $scholarshipStatusList = $request->input('scholarshipStatus');
-        $departmentList = $request->input('department');
-        $grade_yearList = $request->input('grade_year');
-        $student_typeList = $request->input('student_type');
+
+     
+       
+        $privacy_notice = $request->input('privacy_notice');
+
+        $fullname1 = $request->input('fullname1');
+        $fullname2 = $request->input('fullname2');
+        $fullname3 = $request->input('fullname3');
+
+        $email1 = $request->input('email1');
+        $email2 = $request->input('email2');
+        $email3 = $request->input('email3');
+
+        $scholarshipStatus1 = $request->input('scholarshipStatus1');
+        $scholarshipStatus2 = $request->input('scholarshipStatus2');
+        $scholarshipStatus3 = $request->input('scholarshipStatus3');
+
+        $department1 = $request->input('department1');
+        $department2 = $request->input('department2');
+        $department3 = $request->input('department3');
+
+        $grade_year1 = $request->input('grade_year1');
+        $grade_year2 = $request->input('grade_year2');
+        $grade_year3 = $request->input('grade_year3');
+
+        $student_type1 = $request->input('student_type1');
+        $student_type2 = $request->input('student_type2');
+        $student_type3 = $request->input('student_type3');
     
-        // Generate profile_key once outside the loop
-        $counter = Profile::count() + 1;
-        $paddingLength = 5;
-        $profileKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
-    
-        foreach ($fullnameList as $index => $fullname) {
+       
             $validatedData = $request->validate([
-                'fullname',
-                'email',
-                'scholarshipStatus',
-                'department',
-                'grade_year',
-                'student_type',
+
+                'privacy_notice',
+               
+                'fullname1',
+                'fullname2',
+                'fullname3',
+                
+                'email1',
+                'email2',
+                'email3',
+
+                'scholarshipStatus1',
+                'scholarshipStatus2',
+                'scholarshipStatus3',
+
+                'department1',
+                'department2',
+                'department3',
+
+                'grade_year1',
+                'grade_year2',
+                'grade_year3',
+
+                'student_type1',
+                'student_type2',
+                'student_type3',
+
             ]);
     
-            $profile = new Profile();
-            $profile->profile_key = $profileKey; // Assign the same profile_key to each profile
-            $profile->fullname = $fullname;
-            $profile->scholarshipStatus = $scholarshipStatusList[$index];
-            $profile->email = $emailList[$index];
-            $profile->department = $departmentList[$index];
-            $profile->grade_year = $grade_yearList[$index];
-            $profile->student_type = $student_typeList[$index];
+            $profile = new EpvsForm();
+            $profile->privacy_notice = $privacy_notice;
+
+            $profile->fullname1 = $fullname1;
+            $profile->fullname2 = $fullname2;
+            $profile->fullname3 = $fullname3;
+
+             // Assign the same profile_key to each profile
+            $profile->scholarshipStatus1 = $scholarshipStatus1;
+            $profile->scholarshipStatus2 = $scholarshipStatus2;
+            $profile->scholarshipStatus3 = $scholarshipStatus3;
+
+            $profile->email1 = $email1;
+            $profile->email2 = $email2;
+            $profile->email3 = $email3;
+
+            $profile->department1 = $department1;
+            $profile->department2 = $department2;
+            $profile->department3 = $department3;
+
+            $profile->grade_year1 = $grade_year1;
+            $profile->grade_year2 = $grade_year2;
+            $profile->grade_year3 = $grade_year3;
+
+            $profile->student_type1 = $student_type1;
+            $profile->student_type2 = $student_type2;
+            $profile->student_type3 = $student_type3;
+          
             $profile->save();
-        }
-    
-        return redirect('/upload-form');
+
+            $request->session()->put(['id' => $profile->id ]);
+        
+            return redirect()->route('upload-form', ['id' => $profile->id]);
+
     }
     
 
@@ -128,17 +160,21 @@ class FormController extends Controller
     // for upload
     public function upload(Request $request )
     {
-        $counts = $request->input('counts');
-        $countForm = $request->input('counts') + 1; // Initial value for $count
+        $id =  Session::get('id');
+        $transactions = EpvsForm::where('id', '=', $id)->get();
+        $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+        // dd($transactionId);
 
-        return view('form.upload-form-2', compact('countForm', 'counts'));
+        return view('form.upload-form-2', compact('transactions', 'transactionId'));
     }
 
 
     public function postUpload(Request $request)
-    {       
-            
+    {        
+        $id =  Session::get('id');
+        $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
            
+        $transantion = EpvsForm::find($transactionId);
 
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
@@ -149,10 +185,7 @@ class FormController extends Controller
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
     
-              // Generate profile_key once outside the loop
-            $counter = Profile::count() + 1;
-            $paddingLength = 5;
-            $uploadKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT);
+       
             
             $paymentForList = $request->input('payments_for');
 
@@ -184,60 +217,35 @@ class FormController extends Controller
                 $paymentForSeparator2 = "";
             }
            
-            $eachForList = $request->input('each_amount');
+            $each_amount1 = $request->input('each_amount1');
+            $each_amount2 = $request->input('each_amount2');
+            $each_amount3 = $request->input('each_amount3');
            
-            $eachAmountForSeparator = []; // Define as an array
-            if (is_array($eachForList)) {
-                $eachAmountForSeparator = $eachForList; // Assign the array
-            } elseif (is_string($eachForList)) {
-                $eachAmountForSeparator[] = $eachForList; // Append the string to the array
-            }
-            
+            $eachAmountForSeparator =  $each_amount1 +  $each_amount2 +  $each_amount3;
+
             $request->session()->put('each_amount', $eachAmountForSeparator);
            
-            $validatedData = $request->validate([
-                'payments_for' => '',
-                'each_amount' => '',
+
+
+            $transantion->update([
+                'payments_for1' => $paymentForSeparator,
+                'payments_for2' => $paymentForSeparator1,
+                'payments_for3' => $paymentForSeparator2,
+
+                'each_amount1' => $each_amount1,
+                'each_amount2' => $each_amount2,
+                'each_amount3' => $each_amount3,
+
+                'receipt_type' => $request->input('receipt_type'),
+
+                'receipt_filename' => $filename,
             ]);
 
-               
-                // Your existing code...
-
-                    $paymentForSeparatorList = [
-                        $paymentForSeparator,
-                        $paymentForSeparator1,
-                        $paymentForSeparator2
-                    ];
-
-                    $eachForList = [
-                        $eachForList[0],
-                        $eachForList[1] ?? null,
-                        $eachForList[2] ?? null
-                    ];
-
-                    if (!empty($paymentForSeparatorList) && !empty($eachForList)) {
-                        foreach ($paymentForSeparatorList as $index => $payment) {
-                            if (isset($payment)) {
-                                $filteredPaymentList[] = $payment;
-                            }
-
-                            $uploadform = new UploadForm();
-                            $uploadform->upload_key = $uploadKey;
-                            $uploadform->payments_for = $payment;
-
-                            if ($eachForList[$index] === null) {
-                                break; // Exit the loop if a null value is encountered
-                            }
-
-                            $uploadform->each_amount = $eachForList[$index];
-
-                            $uploadform->receipt_type = $request->input('receipt_type');
-                            $uploadform->receipt_filename = $filename;
-
-                            $uploadform->save(); // Save the model to the database
-                        }
-                    }
-            return redirect()->route('verify-form');
+            $transantion->save(); // Save the model to the database
+                
+            $request->session()->put(['id' => $transactionId ]);
+                
+            return redirect()->route('verify-form', ['id' => $transactionId]);
         }
       
 
@@ -249,8 +257,10 @@ class FormController extends Controller
         // for verify
     public function verify(Request $request )
     {
+        $id =  Session::get('id');
+ 
+        $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
         
-        // get from session
         $eachamount = Session::get('each_amount');
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
@@ -279,17 +289,19 @@ class FormController extends Controller
         // $username = 'angelblaze779';
         // $api_key = '434562be5ba93a74021d918a963f43f2';
 
-        $client_id ='vrfN8tg7bBuu2hgOKFNMD1o6FLMlwPojtBzI2Ky';
-        $client_secret = 'wDyxbr99zb5T6DY2n3U1GbTHhgVcYb9Hv7cwcxJ2fSc9dPZGkNJr3sxXVLZ8iwuIaoEO1ytbbk4FC6FUPENjB8BssjL1ylCfv6JNHWFN9xioBk6KPCxt2t1REr6Fo7zZ';
-        $username = 'rmadelyn712';
-        $api_key = 'a55c9dae529597198dd99f00598cc332';
+        // $client_id ='vrfN8tg7bBuu2hgOKFNMD1o6FLMlwPojtBzI2Ky';
+        // $client_secret = 'wDyxbr99zb5T6DY2n3U1GbTHhgVcYb9Hv7cwcxJ2fSc9dPZGkNJr3sxXVLZ8iwuIaoEO1ytbbk4FC6FUPENjB8BssjL1ylCfv6JNHWFN9xioBk6KPCxt2t1REr6Fo7zZ';
+        // $username = 'rmadelyn712';
+        // $api_key = 'a55c9dae529597198dd99f00598cc332';
+
+        
+
+        $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
+        $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
+        $username = 'madelyn0514romero';
+        $api_key = '22e388e0df4e489f79e691c450d494d3';
 
         //Not use
-
-        // $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
-        // $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
-        // $username = 'madelyn0514romero';
-        // $api_key = '22e388e0df4e489f79e691c450d494d3';
 
         // $client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
         // $client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
@@ -370,97 +382,53 @@ class FormController extends Controller
 
             ];
 
-            $amountSum = 0;
-            for ($i = 0; $i < count($eachamount); $i++) {
-                $amountSum += $eachamount[$i];
-            }
 
-            return view('form.verify-form', compact('details', 'amountSum'));
+            return view('form.verify-form', compact('details', 'transactionId'));
             // return view('form.verify-form');
         }
 
 
         public function postVerify(Request $request )
         {
-            
-               // Generate profile_key once outside the loop
-               $counter = Profile::count() + 1;
-               $paddingLength = 5;
-               $paymentKey = 'EPVS-ID-' . str_pad($counter, $paddingLength, '0', STR_PAD_LEFT); 
+            $id =  Session::get('id');
+            $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+               
+            $transantion = EpvsForm::find($transactionId);
 
-            $request->validate ([
-                'reference' => 'required',
-                'amount' => '',
-                'date' => '',
-                'time' => '',
+            $transantion->update([
+                'reference' => $request->reference,
+                'amount' => $request->amount,
+                'date' => $request->date,
+                'time' => $request->time,
+              
             ]);
 
-            $payment  = new Payment();
-
-            $payment->payment_key =  $paymentKey;
-            $payment->reference = $request->reference;
-            $payment->amount = $request->amount;
-            $payment->date = $request->date;
-            $payment->time = $request->time;
-            
-            
-        //     $check= Payment::where([
-        //         ['reference','=', $payment->reference ]
-        //     ]);
-        //    if($check){
-        //     $request->session()->flash('error','Reference is already used')
-        //    };
-
-            $payment->save();
-            
-            return redirect('/summary-form')
-            ->with('success', ' Submitted Successfully!!!');
-
+            $transantion->save(); // Save the model to the database
+        
+            $request->session()->put(['id' => $transactionId ]);
+        
+            return redirect()->route('summary-form', ['id' => $transactionId]);
         }
 
         //==============================================================================================================
 
 
             // for summary
-        public function summary(Request $request )
+        public function summary()
         {
+            $id =  Session::get('id');
+            $transactions = EpvsForm::where('id', '=', $id)->get();
+            $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
             // Get the receipt filename from the upload form record
             
-            $receiptFilename =  UploadForm::latest('upload_key')->value('receipt_filename');
+            $receiptFilename =  EpvsForm::where('id', '=', $id)->pluck('receipt_filename')->first();
+
             $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
             // dd($receiptFilename);
 
-            // profile
-            $latestProfileKey = Profile::latest('profile_key')->value('profile_key');
-          
-            $profileDetails = DB::table('profile')
-            ->where('profile_key', '=' ,  $latestProfileKey )
-            ->get();
-
-            // upload
-            $latestUploadKey = UploadForm::latest('upload_key')->value('upload_key');
-          
-            $uploadDetails = DB::table('uploadform')
-            ->where('upload_key', '=' ,  $latestUploadKey )
-            ->get();
-
-            // payment
-            $latestPaymentKey = Payment::latest('payment_key')->value('payment_key');
-          
-            $paymentDetails = DB::table('payment')
-            ->where('payment_key', '=' ,  $latestPaymentKey )
-            ->get();
-
-            // $transaction_no = Profile::latest()->get('transaction_columnname');
-
-            // $variable = DB::table('table_name')
-            // ->join(.....)
-            // ->where('transaction_columnname', '=', $transaction_no)
-            // ->get();
-
-                return view('form.summary-form', compact('profileDetails','uploadDetails','paymentDetails'))
-                ->with('imagedetails', $imagedetails);
-            
+            return view('form.summary-form', compact('transactions', 'transactionId'))
+            ->with('imagedetails', $imagedetails);
+        
 
         }
 
@@ -468,12 +436,95 @@ class FormController extends Controller
         public function postSummary(Request $request )
         {
 
-           
+           // get
 
-            // Perform the conditional update
-            // DB::table('xero_invoice')
-            // ->join('bdo_receipt', 'xero_invoice.reference', '=', 'bdo_receipt.reference2')
-            // ->update(['receiptStatus' => '2']);
+                // //-------------------------------------------------------------------
+                // $fullname1 = $request->input('fullname1##0');
+                // $scholarshipStatus1 = $request->input('scholarshipStatus1##0');
+                // $email1 = $request->input('email1##0');
+                // $department1 = $request->input('department1##0');
+                // $grade_year1 = $request->input('grade_year1##0');
+                // $student_type1 = $request->input('student_type1##0');
+                // //-------------------------------------------------------------------
+                // $fullname2 = $request->input('fullname2##0');
+                // $scholarshipStatus2 = $request->input('scholarshipStatus2##0');
+                // $email2 = $request->input('email2##0');
+                // $department2 = $request->input('department2##0');
+                // $grade_year2 = $request->input('grade_year2##0');
+                // $student_type2 = $request->input('student_type2##0');
+                // //======================================================================
+                // $fullname3 = $request->input('fullname3##0');
+                // $scholarshipStatus3 = $request->input('scholarshipStatus3##0');
+                // $email3 = $request->input('email3##0');
+                // $department3 = $request->input('department3##0');
+                // $grade_year3 = $request->input('grade_year3##0');
+                // $student_type3 = $request->input('student_type3##0');
+                // //---------------------------------------------------------------------
+                // $reference = $request->input('reference##0');
+                // $amount = $request->input('amount##0');
+                // $date = $request->input('date##0');
+                // $time = $request->input('time##0');
+                // $receipt_type = $request->input('receipt_type##0');
+                // //====-==================================================================
+                // $each_amount1 = $request->input('each_amount1##0');
+                // $payments_for1 = $request->input('payments_for1##0');
+                // //-------------------------------------------------------
+                // $each_amount2 = $request->input('each_amount2##0');
+                // $payments_for2 = $request->input('payments_for2##0');
+                // //------------------------------------------------------------------------
+                // $each_amount3 = $request->input('each_amount3##0');
+                // $payments_for3 = $request->input('payments_for3##0');
+                
+                // // group
+                // $fullnames = array($fullname1, $fullname2, $fullname3);
+                // $scholarshipStatuses = array($scholarshipStatus1, $scholarshipStatus2, $scholarshipStatus3);
+                // $emails = array($email1, $email2, $email3);
+                // $departments = array($department1, $department2, $department3);
+                // $grade_years = array($grade_year1, $grade_year2, $grade_year3);
+                // $student_types = array($student_type1, $student_type2, $student_type3);
+
+                // $each_amounts = array($each_amount1, $each_amount2, $each_amount3);
+                // $payments_fors = array($payments_for1, $payments_for2, $payments_for3);
+
+                // //filter 
+                // $filterfullname = array_filter($fullnames, function ($fullname) {
+                //     return $fullname !== null;
+                // });
+                // $filterscholarshipStatuses = array_filter($scholarshipStatuses, function ($scholarshipStatus) {
+                //     return $scholarshipStatus !== null;
+                // });  
+                // $filteremail= array_filter( $emails, function ($email ) {
+                //     return $email !== null;
+                // });
+                // $filterdepartment = array_filter($departments, function ($department) {
+                //     return $department !== null;
+                // });
+                // $filtergrade_year = array_filter($grade_years, function ($grade_year) {
+                //     return $grade_year !== null;
+                // });
+                // $filterstudent_type = array_filter($student_types, function ($student_type) {
+                //     return $student_type !== null;
+                // });
+
+                // $filtereach_amount = array_filter($each_amounts, function ($each_amount) {
+                //     return $each_amount !== null;
+                // });
+                // $filterpayments_for = array_filter($payments_fors, function ($payments_for) {
+                //     return $payments_for !== null;
+                // });
+
+                // foreach ($filterfullname as $index => $fullname) {
+                //     $scholarshipStatus = $filterscholarshipStatuses[$index];
+                //     $email = $filteremail[$index];
+                //     $department = $filterdepartment[$index];
+                //     $grade_year = $filtergrade_year[$index];
+                //     $student_type = $filterstudent_type[$index];
+                //     $each_amount = $filtereach_amount[$index];
+                //     $payments_for = $filterpayments_for[$index];
+                
+               
+                // }
+                
 
         }
 
@@ -487,63 +538,119 @@ class FormController extends Controller
         }
 
 
-        public function postSubmit(Request $request )
-        {
-            
-          
-            $data = [];
-            $labels = [
-               
-                "fullname" => "Full Name:",
-                "email" => "Email:",
-                "scholarshipStatus" => "Scholarship Status:",
-                "department" => "Department:",
-                "grade_year" => "Grade/Year:",
-                "student_type" => "Student Type:",
-
+            public function postSubmit(Request $request )
+            {
+                //session
+                $id =  Session::get('id');
+                $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
                 
-                "receipt_type" => "Receipt Type:",  
-                "reference" => "Reference:",
-                "amount" => "Receipt Amount:",
-                "date" => "Receipt Date:",
-                "time" => "Receipt Time:",
+                // get
+                $data = [];
+                $labels = [
+                    "fullname" => "Full Name:",
+                    "email" => "Email:",
+                    "scholarshipStatus" => "Scholarship Status:",
+                    "department" => "Department:",
+                    "grade_year" => "Grade/Year:",
+                    "student_type" => "Student Type:",
+                    "receipt_type" => "Receipt Type:",
 
-                "payments_for" => "Payment For:",
-                "each_amount" => "Amount Per Student :",
-            ];
-         
-            foreach ($request->all() as $key => $value){
-                $explodeValue = explode('##', $key);
-                if (in_array($key, ['_token', 'receipt_source##']) === true) {
-                } else if (in_array($explodeValue[0], ['reference','amount','date','time','receipt_type','payments_for','each_amount',]) === false) {
-                    $data['data']['summary']['studentsInfo'][$explodeValue[1]][$labels[$explodeValue[0]]] = $value;
-                } else {
-                    $data['data']['summary']['receipt'][$labels[$explodeValue[0]]] = $value;
+                    "reference" => "Reference:",
+                    "amount" => "Receipt Amount:",
+                    "date" => "Receipt Date:",
+                    "time" => "Receipt Time:",
+                    
+                    "payments_for" => "Payment For:",
+                    "each_amount" => "Amount Per Student :",
+                ];
+                
+                $fullnames = [$request->input('fullname1##0'), $request->input('fullname2##0'), $request->input('fullname3##0')];
+                $scholarshipStatuses = [$request->input('scholarshipStatus1##0'), $request->input('scholarshipStatus2##0'), $request->input('scholarshipStatus3##0')];
+                $emails = [$request->input('email1##0'), $request->input('email2##0'), $request->input('email3##0')];
+                $departments = [$request->input('department1##0'), $request->input('department2##0'), $request->input('department3##0')];
+                $grade_years = [$request->input('grade_year1##0'), $request->input('grade_year2##0'), $request->input('grade_year3##0')];
+                $student_types = [$request->input('student_type1##0'), $request->input('student_type2##0'), $request->input('student_type3##0')];
+                
+                $each_amounts = [$request->input('each_amount1##0'), $request->input('each_amount2##0'), $request->input('each_amount3##0')];
+                $payments_fors = [$request->input('payments_for1##0'), $request->input('payments_for2##0'), $request->input('payments_for3##0')];
+                
+                $filterfullnames = array_filter($fullnames, function ($fullname) {
+                    return $fullname !== null;
+                });
+                $filterscholarshipStatuses = array_filter($scholarshipStatuses, function ($scholarshipStatus) {
+                    return $scholarshipStatus !== null;
+                });
+                $filteremails = array_filter($emails, function ($email) {
+                    return $email !== null;
+                });
+                $filterdepartments = array_filter($departments, function ($department) {
+                    return $department !== null;
+                });
+                $filtergrade_years = array_filter($grade_years, function ($grade_year) {
+                    return $grade_year !== null;
+                });
+                $filterstudent_types = array_filter($student_types, function ($student_type) {
+                    return $student_type !== null;
+                });
+                
+                $filtereach_amounts = array_filter($each_amounts, function ($each_amount) {
+                    return $each_amount !== null;
+                });
+                $filterpayments_fors = array_filter($payments_fors, function ($payments_for) {
+                    return $payments_for !== null;
+                });
+                
+                foreach ($filterfullnames as $index => $fullname) {
+                    $scholarshipStatus = $filterscholarshipStatuses[$index];
+                    $email = $filteremails[$index];
+                    $department = $filterdepartments[$index];
+                    $grade_year = $filtergrade_years[$index];
+                    $student_type = $filterstudent_types[$index];
+                    $each_amount = $filtereach_amounts[$index];
+                    $payments_for = $filterpayments_fors[$index];
+                
+                    $data['data']['summary']['studentsInfo'][$index][$labels['fullname']] = $fullname;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['email']] = $email;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['scholarshipStatus']] = $scholarshipStatus;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['department']] = $department;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['grade_year']] = $grade_year;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['student_type']] = $student_type;
+                
+                    $data['data']['summary']['studentsInfo'][$index][$labels['each_amount']] = $each_amount;
+                    $data['data']['summary']['studentsInfo'][$index][$labels['payments_for']] = $payments_for;
                 }
-            }
+                
+                $data['data']['summary']['receipt'][$labels['reference']] = $request->input('reference##0');
+                $data['data']['summary']['receipt'][$labels['amount']] = $request->input('amount##0');
+                $data['data']['summary']['receipt'][$labels['date']] = $request->input('date##0');
+                $data['data']['summary']['receipt'][$labels['time']] = $request->input('time##0');
+                $data['data']['summary']['receipt'][$labels['receipt_type']] = $request->input('receipt_type##0');
+                
+                $recipient = [];
+                foreach ($data['data']['summary']['studentsInfo'] as $stud) {
+                    $recipient[] = [
+                        'fullname' => $stud[$labels['fullname']],
+                        'email' => $stud[$labels['email']]
+                    ];
+                }
+                
+                $data['subject'] = 'Payment Summary';
+                $data['labels'] = $labels;
+                $data['receipt'] = $request->input('receipt_source##');
+                // dd( $data['receipt']);  
+                foreach ($recipient as $recipientKey => $rec) {
+                    $data['name'] = $rec['fullname'];
+                    $email = $rec['email'];
+                    Mail::to($email)->send(new PaymentSummary($data));
+                }
+                
           
-            foreach ($data['data']['summary']['studentsInfo'] as $key => $stud) {
-                $recipient[$key]['fullname'] = $stud['Full Name:'];
-                $recipient[$key]['email'] = $stud['Email:'];
-            }
-
-            $data['subject'] = 'Payment Summary';
-            $data['labels'] = $labels;
-            $data['receipt'] = $request->all()['receipt_source##'];
-            
-           
-            foreach ($recipient as $recipientKey => $rec) {
-                $data['name'] = $rec['fullname'];
-                $email = $rec['email'];
-                Mail::to($email)->send(new PaymentSummary($data));
+                return redirect()->route('submit-form', ['id' => $transactionId]);
 
             }
-          
-            return redirect('/submit-form');
-        }
 
 
-
+//====================================================================================================================================================
 
         private function getValueBetweenstrings($paragraph ,$string1, $string2) {
             $stringOnePosition = strpos($paragraph, $string1, 0);

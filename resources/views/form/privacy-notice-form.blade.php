@@ -186,8 +186,7 @@
             <div class="tab-content">
                 <div class="active tab-pane" id="profile">
                     <div class=" main-content">
-                        <form action="/privacy-form" method="POST">
-                            @csrf 
+                       
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
@@ -204,7 +203,6 @@
                                                 Database. The use, storage, retention and disposal of your personal 
                                                 information(s) shall be governed by our data privacy policies. If you 
                                                 agree to this privacy notice, kindly check the box below. *I ACCEPT</p>
-                                                <input type="text" name="privacy_key" value="{{ $privacy->privacy_key }}" hidden>
                                                 <input type="checkbox" id="privacy_notice" name="privacy_notice" value="1" class="checkbox" onchange="toggleButton()">
                                                 <label for="checkbox" class="font"><b>I ACCEPT</b></label>
                                         </div>
@@ -220,9 +218,11 @@
                                           </div>
                                           <div class="col-md-5">
                                             <div class="button-container flexed end">
-                                              <button id="next-button" type="submit" value="submit" class="btn btn-primary1" data-toggle="tab" disabled>
-                                                NEXT <i class="fas fa-arrow-right"></i>
-                                              </button>
+                                                <a href="/profile-form">
+                                                    <button id="next-button" class="btn btn-primary1" data-toggle="tab" disabled>
+                                                        NEXT <i class="fas fa-arrow-right"></i>
+                                                      </button>
+                                                </a>
                                             </div>
                                           </div>
                                         </div>
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                   
                         </div>
                 </div>
             </div>
