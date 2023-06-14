@@ -66,7 +66,7 @@
                                     style="background-color: #FFFFFF;  border: 5px solid #D74747; border-radius: 12px; color: black;">
                                     <div class="inner ml-3 ">
                                         <p class="mt-2">REJECT RECEIPTS</p>
-                                        <h1 style="color:#D74747; font-size: 60px;"><b>1000</b></h1>
+                                        <h1 style="color:#D74747; font-size: 60px;"><b>{{ $countreject }}</b></h1>
                                     </div>
 
                                     <div class="icon">

@@ -816,7 +816,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="button-container flexed start">
-                                        <a href="{{ url('/verify-form') }}" class="btn btn-primary">
+                                        <a href="{{ route('upload-form', ['id' => $transactionId]) }}" class="btn btn-primary">
                                             <i class="fas fa-arrow-left"></i> Back
                                         </a>
                                     </div>

@@ -62,7 +62,7 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3">REJECT RECEIPTS</p>
-                  <h1 style="color:#FF0000; font-size: 50px;">20</h1>
+                  <h1 style="color:#FF0000; font-size: 50px;">{{ $countreject }}</h1>
 
                 </div>
                 <div class="icon" style="color: #FF0000;">
@@ -190,6 +190,36 @@
                         </tr>  
                         
                     </tbody>
+
+                    <thead>
+                      <tr style="color: #000000;">
+                          <th>Select</th>
+                          <th>FullName</th>
+                          <th>Xero Account Id</th>
+                          <th>Payment For</th>
+                          <th>Amount</th>
+                          <th>Reference</th>
+                          <th>Created At</th>
+                          <th>Created By</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach ($xeroInvoice as $value)
+                      <tr>
+                          <td><input type="checkbox" id="my-checkbox" name="my-checkbox"
+                                  class="checkbox invoice_checkbox" data-id="{{$value->id}}"></td>
+                          <td>{{$value->xero_account_name}}</td>
+                          <td>{{$value->xero_account_id}}</td>
+                          <td>{{$value->description}}</td>
+                          <td>{{$value->amount}}</td>
+                          <td>{{$value->reference}}</td>
+                          <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
+                          <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
+                      </tr>
+
+                      @endforeach
+
+                  </tbody>
                 </table>
             </div>
         </div>

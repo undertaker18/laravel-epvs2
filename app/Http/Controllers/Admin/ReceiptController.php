@@ -14,7 +14,11 @@ class ReceiptController extends Controller
     // for view
     public function valid()
     {
-        return view('receipt-valid');
+        $countvalid = $xeroInvoiceValid->count();
+        $countpending = $xeroInvoicePending->count();
+        $countreject = $xeroInvoiceReject->count();
+
+        return view('receipt-valid',  compact('xeroInvoice', 'countsent', 'countsend'));
     }
 
     public function pending()
@@ -31,7 +35,9 @@ class ReceiptController extends Controller
             //  ->where([['status', '=', '0']])
             ->get();
 
-        return view('receipt-reject-2', compact(['xeroInvoice']));
+        $countreject = $xeroInvoice->count();
+
+        return view('receipt-reject-2', compact(['xeroInvoice'], 'countreject'));
     }
 
     public function postReject(Request $request)

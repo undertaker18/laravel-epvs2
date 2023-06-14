@@ -475,8 +475,6 @@ class FormController extends Controller
         public function summary()
         {
 
-             
-           
             $id =  Session::get('id');
             $transactions = EpvsForm::where('id', '=', $id)->get();
             $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
