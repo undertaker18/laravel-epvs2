@@ -253,7 +253,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label">Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
                                                     placeholder="Fullname" required>
@@ -295,7 +295,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput1" class="form-control" name="student_type1"
                                                     required onchange="updateEmailValidation1(this)">
@@ -351,7 +351,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel1" class="form-label"
-                                                    id="emailLabel1">Email:</label>
+                                                    id="emailLabel1"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email1" placeholder="Email"
                                                     name="email1" value="{{ $transaction->email1 }}" required>
                                                 <div id="emailValidationMessage1" class="invalid-feedback"></div>
@@ -402,7 +402,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment" class="form-label">Department:</label>
+                                                <label for="inputDepartment" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput2" class="form-control" name="department1"
                                                     required>
                                                     <option value="Elementary"
@@ -461,7 +461,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                     <select name="grade_year1" class="form-control" required>
                                             
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -567,7 +567,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput5" class="form-control" name="scholarshipStatus1"
                                                     required>
@@ -640,7 +640,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label">Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" value="{{ $transaction->fullname2 }}" placeholder="Fullname"
                                                     required>
@@ -683,7 +683,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput3" class="form-control" name="student_type2"
                                                     required onchange="updateEmailValidation3(this)">
@@ -741,7 +741,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel3" class="form-label"
-                                                    id="emailLabel3">Email:</label>
+                                                    id="emailLabel3"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email3" placeholder="Email"
                                                     name="email2"  value="{{ $transaction->email1 }}" required>
                                                 <div id="emailValidationMessage3" class="invalid-feedback"></div>
@@ -794,7 +794,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment03" class="form-label">Department:</label>
+                                                <label for="inputDepartment03" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput203" class="form-control" name="department2"
                                                     required>
                                                     <option value="Elementary"
@@ -852,7 +852,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse03"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                 <select name="grade_year2" id="grade-year03" class="form-control"
                                                     required>
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -958,7 +958,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus03" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus03" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput503" class="form-control"
                                                     name="scholarshipStatus2" required>
@@ -1037,7 +1037,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname04" class="form-label">Full Name:</label>
+                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname3" id="searchInput04"
                                                     class="form-control" value="{{ $transaction->fullname3 }}" placeholder="Fullname"
                                                      required>
@@ -1082,7 +1082,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput304" class="form-control" name="student_type3"
                                                     required onchange="updateEmailValidation304(this)">
@@ -1140,7 +1140,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel304" class="form-label"
-                                                    id="emailLabel304">Email:</label>
+                                                    id="emailLabel304"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email304"
                                                     placeholder="Email" name="email3" value="{{ $transaction->email3 }}" required>
                                                 <div id="emailValidationMessage304" class="invalid-feedback"></div>
@@ -1194,7 +1194,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment04" class="form-label">Department:</label>
+                                                <label for="inputDepartment04" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput204" class="form-control" name="department3"
                                                     required>
                                                     <option value="Elementary"
@@ -1252,7 +1252,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse04"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                 <select name="grade_year3" id="grade-year04" class="form-control"
                                                     required>
                                                     @foreach ($yearlevelelem as $yearlevel)
@@ -1358,7 +1358,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus04" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus04" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput504" class="form-control"
                                                     name="scholarshipStatus3" required>
@@ -1428,7 +1428,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label">Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
                                                     placeholder="Fullname" required>
@@ -1470,7 +1470,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput1" class="form-control" name="student_type1"
                                                     required onchange="updateEmailValidation1(this)">
@@ -1526,7 +1526,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel1" class="form-label"
-                                                    id="emailLabel1">Email:</label>
+                                                    id="emailLabel1"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email1" placeholder="Email"
                                                     name="email1" value="{{ $transaction->email1 }}" required>
                                                 <div id="emailValidationMessage1" class="invalid-feedback"></div>
@@ -1577,7 +1577,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment" class="form-label">Department:</label>
+                                                <label for="inputDepartment" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput2" class="form-control" name="department1"
                                                     required>
                                                     <option value="Elementary"
@@ -1636,7 +1636,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                     <select name="grade_year1" class="form-control" required>
                                             
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -1742,7 +1742,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput5" class="form-control" name="scholarshipStatus1"
                                                     required>
@@ -1815,7 +1815,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label">Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" value="{{ $transaction->fullname2 }}" placeholder="Fullname"
                                                     required>
@@ -1858,7 +1858,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput3" class="form-control" name="student_type2"
                                                     required onchange="updateEmailValidation3(this)">
@@ -1916,7 +1916,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel3" class="form-label"
-                                                    id="emailLabel3">Email:</label>
+                                                    id="emailLabel3"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email3" placeholder="Email"
                                                     name="email2"  value="{{ $transaction->email1 }}" required>
                                                 <div id="emailValidationMessage3" class="invalid-feedback"></div>
@@ -1969,7 +1969,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment03" class="form-label">Department:</label>
+                                                <label for="inputDepartment03" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput203" class="form-control" name="department2"
                                                     required>
                                                     <option value="Elementary"
@@ -2027,7 +2027,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse03"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                 <select name="grade_year2" id="grade-year03" class="form-control"
                                                     required>
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -2133,7 +2133,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus03" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus03" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput503" class="form-control"
                                                     name="scholarshipStatus2" required>
@@ -2203,7 +2203,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label">Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
                                                     placeholder="Fullname" required>
@@ -2245,7 +2245,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipType" class="form-label">Student
+                                                <label for="inputScholarshipType" class="form-label"><b>2</b>. Student
                                                     Type:</label>
                                                 <select id="selectInput1" class="form-control" name="student_type1"
                                                     required onchange="updateEmailValidation1(this)">
@@ -2301,7 +2301,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="emailLabel1" class="form-label"
-                                                    id="emailLabel1">Email:</label>
+                                                    id="emailLabel1"><b>3</b>. Email:</label>
                                                 <input type="email" class="form-control" id="email1" placeholder="Email"
                                                     name="email1" value="{{ $transaction->email1 }}" required>
                                                 <div id="emailValidationMessage1" class="invalid-feedback"></div>
@@ -2352,7 +2352,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputDepartment" class="form-label">Department:</label>
+                                                <label for="inputDepartment" class="form-label"><b>4</b>. Department:</label>
                                                 <select id="selectInput2" class="form-control" name="department1"
                                                     required>
                                                     <option value="Elementary"
@@ -2411,7 +2411,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputGradeCourse"
-                                                    class="form-label">Grade&Section/Course&Level:</label>
+                                                    class="form-label"><b>5</b>. Grade&Section/Course&Level:</label>
                                                     <select name="grade_year1" class="form-control" required>
                                             
                                                         @foreach ($yearlevelelem as $yearlevel)
@@ -2517,7 +2517,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputScholarshipstatus" class="form-label">Scholarship
+                                                <label for="inputScholarshipstatus" class="form-label"><b>6</b>. Scholarship
                                                     Status:</label>
                                                 <select id="selectInput5" class="form-control" name="scholarshipStatus1"
                                                     required>
@@ -2587,14 +2587,14 @@
                                 <div class="col-md-5">
                                     <div class="button-container flexed end">
                                         <button id="nextBtn" class="btn  btn-success" type="submit" name="submit"
-                                            disabled>
+                                                >
                                             Next <i class="fas fa-arrow-right"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <script>
+                            {{-- <script>
                                 function checkFormValidity() {
                                     var inputs = document.querySelectorAll('input[required], select[required]');
                                     var nextBtn = document.getElementById('nextBtn');
@@ -2615,7 +2615,7 @@
                                     input.addEventListener('input', checkFormValidity);
                                 });
 
-                            </script>
+                            </script> --}}
 
                         </form>
                     </div>

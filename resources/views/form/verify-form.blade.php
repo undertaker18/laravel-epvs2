@@ -307,6 +307,9 @@
             text-align: right;
             margin: 0;
         }
+        .asterisk{
+            color: red;
+        }
     </style>
 
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->

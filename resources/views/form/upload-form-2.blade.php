@@ -568,10 +568,9 @@
                                                                 <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                     @if ($transaction->payments_for1)
-                                                                    <b>{{ $transaction->payments_for1 }}</b>
-                                                                    </p>
+                                                                    {{ $transaction->payments_for1 }}
                                                                     @else
-                                                                        <p>Select...</p>
+                                                                        Select...
                                                                     @endif 
                                                                 </a>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -637,15 +636,7 @@
                                                         <div class="form-group">
                                                             <label class="mt-2" for="amount">Upload Receipt:
                                                                 <span class="asterisk">*</span></label>
-                                                                <input class="form-control" name="receipt" type="file" id="receipt">
-                                                                @if ($transaction->receipt_filename)
-                                                                    <p>Previously uploaded file:
-                                                                   <br>
-                                                                    <b>{{ $transaction->receipt_filename }}</b></p>
-                                                                   
-                                                                @else
-                                                                    <p>No file uploaded</p>
-                                                                @endif                                                                
+                                                                <input class="form-control" name="receipt" type="file" id="receipt">                                                    
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
@@ -654,11 +645,11 @@
                                                                 <span class="asterisk">*</span></label>
                                                             <select id="" name="receipt_type" class="form-select" style="" required>
     
-                                                                <option value="instapay" {{ $transaction->payment_method == 'instapay' ? 'selected' : '' }}>Instapay</option>
-                                                                <option value="gcash" {{ $transaction->payment_method == 'gcash' ? 'selected' : '' }}>Gcash</option>
-                                                                <option value="gcash_instapay" {{ $transaction->payment_method == 'gcash_instapay' ? 'selected' : '' }}>Gcash Powered by Instapay</option>
-                                                                <option value="bdo_mobile_banking" {{ $transaction->payment_method == 'bdo_mobile_banking' ? 'selected' : '' }}>BDO Mobile Banking</option>
-                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->payment_method == 'bdo_cash_transaction_slip' ? 'selected' : '' }}>BDO Cash Transaction Slip</option>
+                                                                <option value="instapay" {{ $transaction->receipt_type == 'instapay' ? 'selected' : '' }}>Instapay</option>
+                                                                <option value="gcash" {{ $transaction->receipt_type == 'gcash' ? 'selected' : '' }}>Gcash</option>
+                                                                <option value="gcash_instapay" {{ $transaction->receipt_type == 'gcash_instapay' ? 'selected' : '' }}>Gcash Powered by Instapay</option>
+                                                                <option value="bdo_mobile_banking" {{ $transaction->receipt_type == 'bdo_mobile_banking' ? 'selected' : '' }}>BDO Mobile Banking</option>
+                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->receipt_type == 'bdo_cash_transaction_slip' ? 'selected' : '' }}>BDO Cash Transaction Slip</option>
 
                                                                 <option value="Gcash Email" disabled>Gcash thru Laptop/Pc Email</option>
                                                                 <option value="MetroBank" disabled>MetroBank</option>
@@ -673,7 +664,23 @@
                                                     </div>
                                             </div>
                                         </div>
+                                        <br>
+                                        <br>
+                                        <div class="drag-area1 mx-auto col-md-7 col-sm-12">
+                                            <div class="">
+                                                @if($errors->any())
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div> 
                                         <div class="drag-area mx-auto col-md-7 col-sm-12">
+                                           
                                             @if ($transaction->receipt_filename)
                                                 <img src="{{ asset('assets/receipts/temp/' . $transaction->receipt_filename) }}" alt="{{ $transaction->receipt_filename }}">
                                                 

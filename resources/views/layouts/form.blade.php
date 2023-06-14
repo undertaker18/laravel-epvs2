@@ -49,9 +49,7 @@
             height: 20px;
         }
         }
-        .height{
-           padding-bottom: 200px;
-        }
+       
     </style>
     <body class="height">
         <!-- Your page content here --> 
@@ -65,11 +63,15 @@
                             <main >
                                 {{ $slot }}
                             </main>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+           
         </section>
+        
+        
         
 
         <!--  cdn for bootstrap  -->

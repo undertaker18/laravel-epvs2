@@ -352,7 +352,7 @@
             </div>
             <div class="container" style=" margin-bottom: 0px;">
               <div class="row justify-content-center align-items-center">
-                <div class="card" style=" margin-bottom: 300px;">
+                <div class="card" style=" margin-bottom: 200px;">
                         <div class="card-body rounded">
                           <header>
                             <h4 class="card-title"><strong>Example of Valid Receipt</strong></h4>
@@ -440,9 +440,26 @@
                 </div>
               </div>
             </div>
+            <div class="container" style=" margin-bottom: 0px;">
+              <div class="row justify-content-center align-items-center">
+                <div class="card" style=" margin-bottom: 20px;">
+                        <div class="card-body rounded">
+                          <div class="row">
+                            <div class="col-md-12">
+                                <div class="p-1 p-md-1 image text-center">
+                                    @include('layouts.admin-footer')
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
         
       </div>
+
 
         <!-- FromDesktopBDO -->
         <div class="modal fade" id="FromDesktopBDO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

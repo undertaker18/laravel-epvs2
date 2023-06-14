@@ -23,6 +23,10 @@
             border-radius: 8px;
             font-size: 20px;
         }
+        .right-button:hover {
+            background-color: #1d578d !important;
+            color: #ffffff !important;
+        }
 
         .tab-content {
             border: none !important;

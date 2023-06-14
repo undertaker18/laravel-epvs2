@@ -29,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 /* PUBLIC USER*/
 
 Route::get('/', function () {
-
     return view('welcome');
-});
+})->name('home');
+
 
 Route::get('/privacy-form', [FormController::Class, 'privacy' ])->name('privacy-form');
 

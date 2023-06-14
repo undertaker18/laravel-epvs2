@@ -18,6 +18,7 @@ use App\Models\YearLevelElem;
 use App\Models\YearLevelJunior;
 use App\Models\YearLevelSenior;
 use App\Models\YearLevelCollege;
+use Illuminate\Support\Facades\Redirect;
 
 class FormController extends Controller
 {
@@ -58,9 +59,6 @@ class FormController extends Controller
      
     public function postProfile(Request $request)
     {
-
-     
-       
         $privacy_notice = $request->input('privacy_notice');
 
         $fullname1 = $request->input('fullname1');
@@ -159,6 +157,11 @@ class FormController extends Controller
         $id =  Session::get('id');
         $transactions = EpvsForm::where('id', '=', $id)->get();
         $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+       
+          // Check if the 'transactionId' parameter exists
+        if (is_null($transactionId)) {
+            return redirect()->route('home');
+        } 
 
         $searchQuery = $request->input('search');
         $results = []; // Initialize the $results variable as an empty array
@@ -194,22 +197,31 @@ class FormController extends Controller
 
     // for upload
     public function upload(Request $request )
-    {
+    { 
+         
         $id =  Session::get('id');
         $transactions = EpvsForm::where('id', '=', $id)->get();
         $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
         // dd($transactionId);
+        
+          // Check if the 'transactionId' parameter exists
+        if (is_null($transactionId)) {
+            return redirect()->route('home');
+        } 
 
         return view('form.upload-form-2', compact('transactions', 'transactionId'));
     }
 
 
     public function postUpload(Request $request)
-    {        
+    {     
+      
+
         $id =  Session::get('id');
         $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
            
         $transantion = EpvsForm::find($transactionId);
+        
 
         if ($request->hasFile('receipt')) {
             $image = $request->file('receipt');
@@ -295,6 +307,11 @@ class FormController extends Controller
         $id =  Session::get('id');
  
         $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
+
+          // Check if the 'transactionId' parameter exists
+        if (is_null($transactionId)) {
+            return redirect()->route('home');
+        } 
         
         $eachamount = Session::get('each_amount');
         $type = Session::get('receipt_type');
@@ -406,10 +423,16 @@ class FormController extends Controller
             default:
                 echo 'Invalid Update';
         }
+            
 
-            $dateTime = is_null($finalResult['dateTime']) ? NULL : Carbon::createFromFormat('Y-m-d H:i:s', $finalResult['dateTime']);
-            $finalResult['date'] = is_null($dateTime) ? NULL :$dateTime->format('Y-m-d');
-            $finalResult['time'] = is_null($dateTime) ? NULL :$dateTime->format('H:i:s');
+            if (isset($finalResult['error'])) {
+                // Handle the error case
+                 return redirect()->back()->withErrors($finalResult['error']);
+            }
+            $dateTime = isset($finalResult['dateTime']) ? Carbon::createFromFormat('Y-m-d H:i:s', $finalResult['dateTime']) : null;
+
+            $finalResult['date'] = is_null($dateTime) ? null : $dateTime->format('Y-m-d');
+            $finalResult['time'] = is_null($dateTime) ? null : $dateTime->format('H:i:s');
 
             $details = [
                 'ocr_result' => $finalResult,
@@ -451,11 +474,18 @@ class FormController extends Controller
             // for summary
         public function summary()
         {
+
+             
+           
             $id =  Session::get('id');
             $transactions = EpvsForm::where('id', '=', $id)->get();
             $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
-            // Get the receipt filename from the upload form record
-            
+
+            // Check if the 'transactionId' parameter exists
+            if (is_null($transactionId)) {
+                return redirect()->route('home');
+            } 
+            // Get the receipt filename from the upload form record 
             $receiptFilename =  EpvsForm::where('id', '=', $id)->pluck('receipt_filename')->first();
 
             $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
@@ -696,20 +726,36 @@ class FormController extends Controller
 
         // create new method within this File
         private function getDataBdoMobileBanking($json_response) {
+           
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
+                return ['error' => 'Text not detected. Please try again.'];
+            }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');
             $gcashFinalResult['amount'] = floatval($json_response['total']);
             return $gcashFinalResult;
         }
 
-        private function getDataGcashInstapay($json_response) {
+         private function getDataGcashInstapay($json_response) {
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            }
+
+            // Process the data
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
             $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
+
             return $gcashFinalResult;
         }
 
+
         private function getDataGcash($json_response) {
+
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
             $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
@@ -717,6 +763,11 @@ class FormController extends Controller
         }
 
         private function getDataInstapay($json_response) {
+
+            if (empty($json_response['date']) || empty($json_response['invoice_number']) || empty($json_response['subtotal'])) {
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            }
+
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
             $gcashFinalResult['amount'] = floatval($json_response['subtotal']);
@@ -724,6 +775,12 @@ class FormController extends Controller
         }
 
         private function getDataBdoCashTransactionSlip($json_response) {
+
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['ocr_text'])) {
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            }
+
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
 
