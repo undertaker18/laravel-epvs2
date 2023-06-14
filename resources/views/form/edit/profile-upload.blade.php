@@ -302,7 +302,7 @@
                                                     <option value="New Student"
                                                         {{ $transaction['student_type1'] == 'New Student' ? 'selected' : '' }}>
                                                         New Student</option>
-                                                    <option value="Old Studwnt"
+                                                    <option value="Old Student"
                                                         {{ $transaction['student_type1'] == 'Old Student' ? 'selected' : '' }}>
                                                         Old Student</option>
                                                 </select>
@@ -365,18 +365,18 @@
                                                         var studentType1 = selectElement.value;
 
                                                         if (studentType1 === 'New Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel1.textContent = 'Email:';
-                                                        } else if (studentType1 === 'Old Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel1.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel1.innerHTML = '3. Email:';
+                                                            } else if (studentType1 === 'Old Student') {
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel1.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel1.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel1.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput1.value = '';
                                                         emailInput1.setCustomValidity('');
@@ -690,7 +690,7 @@
                                                     <option value="New Student"
                                                     {{ $transaction['student_type2'] == 'New Student' ? 'selected' : '' }}>
                                                     New Student</option>
-                                                <option value="Old Studwnt"
+                                                <option value="Old Student"
                                                     {{ $transaction['student_type2'] == 'Old Student' ? 'selected' : '' }}>
                                                     Old Student</option>
                                                 </select>
@@ -756,18 +756,18 @@
                                                         var studentType3 = selectElement.value;
 
                                                         if (studentType3 === 'New Student') {
-                                                            emailInput3.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput3.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel3.textContent = 'Email:';
-                                                        } else if (studentType3 === 'Old Student') {
-                                                            emailInput3.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput3.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel3.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput3.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput3.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel3.innerHTML = '3. Email:';
+                                                            } else if (studentType3 === 'Old Student') {
+                                                                emailInput3.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput3.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel3.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel3.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel3.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput3.value = '';
                                                         emailInput3.setCustomValidity('');
@@ -1089,7 +1089,7 @@
                                                     <option value="New Student"
                                                     {{ $transaction['student_type3'] == 'New Student' ? 'selected' : '' }}>
                                                     New Student</option>
-                                                <option value="Old Studwnt"
+                                                <option value="Old Student"
                                                     {{ $transaction['student_type3'] == 'Old Student' ? 'selected' : '' }}>
                                                     Old Student</option>
                                                 </select>
@@ -1155,18 +1155,18 @@
                                                         var studentType304 = selectElement.value;
 
                                                         if (studentType304 === 'New Student') {
-                                                            emailInput304.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput304.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel304.textContent = 'Email:';
-                                                        } else if (studentType304 === 'Old Student') {
-                                                            emailInput304.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput304.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel304.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput304.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput304.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel304.innerHTML = '3. Email:';
+                                                            } else if (studentType304 === 'Old Student') {
+                                                                emailInput304.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput304.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel304.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel304.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel304.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput304.value = '';
                                                         emailInput304.setCustomValidity('');
@@ -1477,7 +1477,7 @@
                                                     <option value="New Student"
                                                         {{ $transaction['student_type1'] == 'New Student' ? 'selected' : '' }}>
                                                         New Student</option>
-                                                    <option value="Old Studwnt"
+                                                    <option value="Old Student"
                                                         {{ $transaction['student_type1'] == 'Old Student' ? 'selected' : '' }}>
                                                         Old Student</option>
                                                 </select>
@@ -1540,18 +1540,18 @@
                                                         var studentType1 = selectElement.value;
 
                                                         if (studentType1 === 'New Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel1.textContent = 'Email:';
-                                                        } else if (studentType1 === 'Old Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel1.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel1.innerHTML = '3. Email:';
+                                                            } else if (studentType1 === 'Old Student') {
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel1.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel1.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel1.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput1.value = '';
                                                         emailInput1.setCustomValidity('');
@@ -1865,7 +1865,7 @@
                                                     <option value="New Student"
                                                     {{ $transaction['student_type2'] == 'New Student' ? 'selected' : '' }}>
                                                     New Student</option>
-                                                <option value="Old Studwnt"
+                                                <option value="Old Student"
                                                     {{ $transaction['student_type2'] == 'Old Student' ? 'selected' : '' }}>
                                                     Old Student</option>
                                                 </select>
@@ -1931,18 +1931,18 @@
                                                         var studentType3 = selectElement.value;
 
                                                         if (studentType3 === 'New Student') {
-                                                            emailInput3.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput3.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel3.textContent = 'Email:';
-                                                        } else if (studentType3 === 'Old Student') {
-                                                            emailInput3.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput3.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel3.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput3.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput3.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel3.innerHTML = '3. Email:';
+                                                            } else if (studentType3 === 'Old Student') {
+                                                                emailInput3.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput3.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel3.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel3.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel3.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput3.value = '';
                                                         emailInput3.setCustomValidity('');
@@ -2252,7 +2252,7 @@
                                                     <option value="New Student"
                                                         {{ $transaction['student_type1'] == 'New Student' ? 'selected' : '' }}>
                                                         New Student</option>
-                                                    <option value="Old Studwnt"
+                                                    <option value="Old Student"
                                                         {{ $transaction['student_type1'] == 'Old Student' ? 'selected' : '' }}>
                                                         Old Student</option>
                                                 </select>
@@ -2315,18 +2315,18 @@
                                                         var studentType1 = selectElement.value;
 
                                                         if (studentType1 === 'New Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@gmail.com');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@gmail.com)');
-                                                            emailLabel1.textContent = 'Email:';
-                                                        } else if (studentType1 === 'Old Student') {
-                                                            emailInput1.setAttribute('pattern',
-                                                                '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
-                                                            emailInput1.setAttribute('placeholder',
-                                                                'Email (@student.laverdad.edu.ph)');
-                                                            emailLabel1.textContent = 'LV Email:';
-                                                        }
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@gmail.com');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@gmail.com)');
+                                                                emailLabel1.innerHTML = '3. Email:';
+                                                            } else if (studentType1 === 'Old Student') {
+                                                                emailInput1.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@student.laverdad.edu.ph');
+                                                                emailInput1.setAttribute('placeholder', 'Email (@student.laverdad.edu.ph)');
+                                                                emailLabel1.innerHTML = '3. LV Email:';
+                                                            }
+
+                                                            var labelContent = emailLabel1.innerHTML;
+                                                            var boldNumberThree = '<strong>3.</strong>';
+                                                            emailLabel1.innerHTML = labelContent.replace('3.', boldNumberThree);
 
                                                         emailInput1.value = '';
                                                         emailInput1.setCustomValidity('');
