@@ -79,7 +79,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('xero-send', 'xero-sent') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::is('xero-send', 'xero-sent' , 'xero-sync-accounts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Xero

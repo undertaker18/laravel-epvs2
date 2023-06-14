@@ -27,24 +27,24 @@ class XeroApiController extends Controller
     public function __construct()
     {
         // CHANGE THIS WHEN THERE IS NEW ACCOUNT
-        // Laverdad Christian School
+        // DUMMY APP
+        $this->clientId = '6C3E2EA018BE484AA58B53096E34D0F6';
+        $this->clientSecret = 'gZ5TOXOHSMSKL_j6ym2S3F04RloWTAPonjHYla4x7BEI3PD7';
+        $this->authotizarionBase64 = 'NkMzRTJFQTAxOEJFNDg0QUE1OEI1MzA5NkUzNEQwRjY6Z1o1VE9YT0hTTVNLTF9qNnltMlMzRjA0UmxvV1RBUG9uakhZbGE0eDdCRUkzUEQ3';
+        $this->tenantId = '';
+        $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        //-- END
+
+
+        // // Demo Company (Global)
         // $this->clientId = '65E0B44A363548B5AEB2EC886C8E7CFB';
         // $this->clientSecret = 'kUJNi_WpmiMZBtFFjQswH2fdCHX1jDL93NpdWztuk-c17G2X';
         // $this->authotizarionBase64 = 'NjVFMEI0NEEzNjM1NDhCNUFFQjJFQzg4NkM4RTdDRkI6a1VKTmlfV3BtaU1aQnRGRmpRc3dIMmZkQ0hYMWpETDkzTnBkV3p0dWstYzE3RzJY';
-        // $this->tenantId = '56f717fe-5558-4932-9c1d-8be1da1264f2';
+        // $this->tenantId = 'd4f6e066-69ca-455e-ad54-5b69abbcbfe2';
         // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
         // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
-        // -- END
-
-
-        // Demo Company (Global)
-        $this->clientId = '65E0B44A363548B5AEB2EC886C8E7CFB';
-        $this->clientSecret = 'kUJNi_WpmiMZBtFFjQswH2fdCHX1jDL93NpdWztuk-c17G2X';
-        $this->authotizarionBase64 = 'NjVFMEI0NEEzNjM1NDhCNUFFQjJFQzg4NkM4RTdDRkI6a1VKTmlfV3BtaU1aQnRGRmpRc3dIMmZkQ0hYMWpETDkzTnBkV3p0dWstYzE3RzJY';
-        $this->tenantId = 'd4f6e066-69ca-455e-ad54-5b69abbcbfe2';
-        $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
-        $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
-        // end demo
+        // // end demo
 
         $this->scope = 'offline_access accounting.transactions openid profile email accounting.contacts accounting.settings';
         $this->state = '123';

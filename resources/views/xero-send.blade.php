@@ -1,49 +1,49 @@
 <x-admin-layout>
     <style> 
-        .lds-spinner {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-    }
+            .lds-spinner {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        }
 
-    .lds-spinner div {
-    transform-origin: 32px 32px;
-    animation: lds-spinner 1.2s linear infinite;
-    }
+        .lds-spinner div {
+        transform-origin: 32px 32px;
+        animation: lds-spinner 1.2s linear infinite;
+        }
 
-    .lds-spinner div:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 3px;
-    left: 29px;
-    width: 5px;
-    height: 14px;
-    border-radius: 20%;
-    background: #1266B4;
-    }
+        .lds-spinner div:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 3px;
+        left: 29px;
+        width: 5px;
+        height: 14px;
+        border-radius: 20%;
+        background: #1266B4;
+        }
 
-    .lds-spinner div:nth-child(1) {
-    transform: rotate(0deg);
-    animation-delay: -1.1s;
-    }
+        .lds-spinner div:nth-child(1) {
+        transform: rotate(0deg);
+        animation-delay: -1.1s;
+        }
 
-    .lds-spinner div:nth-child(2) {
-    transform: rotate(30deg);
-    animation-delay: -1s;
-    }
+        .lds-spinner div:nth-child(2) {
+        transform: rotate(30deg);
+        animation-delay: -1s;
+        }
 
-    /* ... Repeat the following styles for div:nth-child(3) to div:nth-child(12) with different animation delays ... */
+        /* ... Repeat the following styles for div:nth-child(3) to div:nth-child(12) with different animation delays ... */
 
-    @keyframes lds-spinner {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-    }
+        @keyframes lds-spinner {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+        }
     </style>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="background-color: #EAF1F8;">
