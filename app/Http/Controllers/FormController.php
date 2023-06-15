@@ -350,6 +350,9 @@ class FormController extends Controller
             case 'bdo_cash_transaction_slip':
                 $finalResult = $this->getDataBdoCashTransactionSlip($json_response);
                 break;
+            case 'Others':
+                $finalResult = $this->getDataOthers($json_response);
+                break;
 
             /**
              * New receipt Type
@@ -790,6 +793,18 @@ class FormController extends Controller
 
             $amount = rtrim(ltrim(substr($json_response['ocr_text'], $stringOnePosition + (strlen($string1)), $stringTwoPosition + 3 - $stringOnePosition - (strlen($string1)))));
             $gcashFinalResult['amount'] = (float)number_format(floatval(str_replace(",","",($amount))), 2, '.', '');
+            return $gcashFinalResult;
+        }
+
+        private function getDataOthers($json_response) {
+
+            if (empty($json_response['date']) || empty($json_response['invoice_number']) || empty($json_response['subtotal'])) {
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            }
+
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
+            $gcashFinalResult['amount'] = floatval($json_response['subtotal']);
             return $gcashFinalResult;
         }
 

@@ -279,9 +279,6 @@
          label{
             color: #000000;
          }
-         .invalid {
-        border: 1px solid red;
-        }
         
     </style>
     <div class="card-body">
@@ -313,23 +310,7 @@
                                                             <label class="mt-2" for="amount">Upload Receipt:
                                                                 <span class="asterisk">*</span></label>
                                                                 <input class="form-control" name="receipt" type="file" id="receipt">
-                                                                <script>
-                                                                    var input = document.getElementById('receipt');
-
-                                                                        input.addEventListener('blur', function() {
-                                                                        validateInput();
-                                                                        });
-
-                                                                        function validateInput() {
-                                                                        if (input.value.trim() === '') {
-                                                                            input.classList.add('invalid');
-                                                                        } else {
-                                                                            input.classList.remove('invalid');
-                                                                            // Perform further actions if the input is valid
-                                                                        }
-                                                                        }
-
-                                                                </script>                                                    
+                                                                                                                 
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
