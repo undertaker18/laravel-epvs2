@@ -261,6 +261,10 @@
                 color: #000000;
 
             }
+            .col-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            }
 
             .btn2 {
                 width: 50% !important;
