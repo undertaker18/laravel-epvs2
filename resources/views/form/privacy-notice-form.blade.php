@@ -273,7 +273,7 @@
                              <div class="modal-footer">
                                  <div class="">
                                      <button type="button" class="btn modal-btn-primary"
-                                         data-dismiss="modal">Cancel</button>
+                                         data-dismiss="modal">No</button>
                                  </div>
                                  <div class="">
                                      <a href="{{ URL('/') }}" class="btn modal-btn-danger">Yes</a>

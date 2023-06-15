@@ -608,7 +608,7 @@
                                                     required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar">Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">
                                                 </div>
@@ -1001,7 +1001,7 @@
                                                     required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar" >Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">
                                                 </div>
@@ -1429,7 +1429,7 @@
                                                     name="scholarshipStatus2" required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar" >Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage03" class="invalid-feedback">
                                                 </div>
@@ -1827,7 +1827,7 @@
                                                     required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar" >Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">
                                                 </div>
@@ -2253,7 +2253,7 @@
                                                     name="scholarshipStatus2" required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar" >Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage03" class="invalid-feedback">
                                                 </div>
@@ -2683,7 +2683,7 @@
                                                     name="scholarshipStatus3" required>
                                                     <option value="" selected disabled>Choose...</option>
                                                     <option value="Partial Scholar">Partial Scholar</option>
-                                                    <option value="Full Scholar" disabled>Full Scholar</option>
+                                                    <option value="Full Scholar" >Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage04" class="invalid-feedback">
                                                 </div>

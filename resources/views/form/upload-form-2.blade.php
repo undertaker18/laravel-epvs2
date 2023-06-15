@@ -313,35 +313,21 @@
                                                             <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 @if ($transaction->payments_for1)
-                                                                    {{ $transaction->payments_for1 }} 
+                                                                    {{ $transaction->payments_for1 }}
                                                                 @else
                                                                     Select...
-                                                                @endif 
+                                                                @endif
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee">
-                                                                    Notarial
-                                                                    Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
-                                                                        value="Miscellaneous Fee">
-                                                                    Miscellaneous Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
-                                                                        value="Digital System Access Fee"> Digital System
-                                                                    Access Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
-                                                                        value="Registration Fee">
-                                                                    Registration Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee">
-                                                                    PTA Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
-                                                                        value="Initial Payment Fee">
-                                                                    Initial Payment Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment">
-                                                                    Full
-                                                                    Payment</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Miscellaneous Fee" @if ($transaction->payments_for1 == 'Miscellaneous Fee') checked @endif>Miscellaneous Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Digital System Access Fee" @if ($transaction->payments_for1 == 'Digital System Access Fee') checked @endif>Digital System Access Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Registration Fee" @if ($transaction->payments_for1 == 'Registration Fee') checked @endif>Registration Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee" @if ($transaction->payments_for1 == 'PTA Fee') checked @endif>PTA Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Initial Payment Fee" @if ($transaction->payments_for1 == 'Initial Payment Fee') checked @endif>Initial Payment Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment" @if ($transaction->payments_for1 == 'Full Payment') checked @endif>Full Payment</a>
                                                             </div>
-                                                             
-                                                        </div>   
+                                                        </div>                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -644,18 +630,18 @@
                                                             <label class="mt-2" for="amount">Receipt Type:
                                                                 <span class="asterisk">*</span></label>
                                                             <select id="" name="receipt_type" class="form-select" style="" required>
-    
+                                                                <option value="" {{ $transaction->receipt_type == '' ? 'selected' : '' }}>Choose...</option>
                                                                 <option value="instapay" {{ $transaction->receipt_type == 'instapay' ? 'selected' : '' }}>Instapay</option>
-                                                                <option value="gcash" {{ $transaction->receipt_type == 'gcash' ? 'selected' : '' }}>Gcash thru Phone</option>
+                                                                <option value="gcash" {{ $transaction->receipt_type == 'gcash' ? 'selected' : '' }}>Gcash </option>
                                                                 <option value="gcash_instapay" {{ $transaction->receipt_type == 'gcash_instapay' ? 'selected' : '' }}>Gcash Powered by Instapay</option>
-                                                                <option value="bdo_mobile_banking" {{ $transaction->receipt_type == 'bdo_mobile_banking' ? 'selected' : '' }} disabled>BDO Mobile Banking</option>
-                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->receipt_type == 'bdo_cash_transaction_slip' ? 'selected' : '' }} disabled>BDO Cash Transaction Slip</option>
+                                                                <option value="bdo_mobile_banking" {{ $transaction->receipt_type == 'bdo_mobile_banking' ? 'selected' : '' }} disabled>BDO Mobile Banking <em>(Unavailable)</em></option>
+                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->receipt_type == 'bdo_cash_transaction_slip' ? 'selected' : '' }} disabled>BDO Cash Transaction Slip <em>(Unavailable)</em></option>
 
-                                                                <option value="Gcash Email" disabled>Gcash thru Laptop/Pc Email</option>
-                                                                <option value="MetroBank" disabled>MetroBank</option>
-                                                                <option value="UnionBank" disabled>UnionBank</option>
-                                                                <option value="Pesonet Gateway" disabled>Pesonet Gateway</option>
-                                                                <option value="PNB Debit" disabled>PNB Debit</option>
+                                                                <option value="Gcash Email" disabled>Gcash thru Email <em>(Unavailable)</em></option>
+                                                                <option value="MetroBank" disabled>MetroBank <em>(Unavailable)</em></option>
+                                                                <option value="UnionBank" disabled>UnionBank <em>(Unavailable)</em></option>
+                                                                <option value="Pesonet Gateway" disabled>Pesonet Gateway <em>(Unavailable)</em></option>
+                                                                <option value="PNB Debit" disabled>PNB Debit <em>(Unavailable)</em></option>
                                                                 <option value="Others" disabled>Others</option>
 
                                                             </select>
