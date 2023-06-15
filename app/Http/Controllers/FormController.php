@@ -234,57 +234,9 @@ class FormController extends Controller
             $request->session()->put('receipt_type', $request->input('receipt_type'));
             $request->session()->put('receipt', $filename);
     
-       
-            
-            $paymentForList = $request->input('payments_for');
-
-            if (is_array($paymentForList)) {
-                $paymentForSeparator = implode(', ', $paymentForList);
-            } elseif (is_string($paymentForList)) {
-                $paymentForSeparator = $paymentForList;
-            } else {
-                $paymentForSeparator = "";
-            }
-
-            $paymentForList1 = $request->input('payments_for1');
-
-            if (is_array($paymentForList1)) {
-                $paymentForSeparator1 = implode(', ', $paymentForList1);
-            } elseif (is_string($paymentForList1)) {
-                $paymentForSeparator1 = $paymentForList1;
-            } else {
-                $paymentForSeparator1 = "";
-            }
-
-            $paymentForList2 = $request->input('payments_for2');
-
-            if (is_array($paymentForList2)) {
-                $paymentForSeparator2 = implode(', ', $paymentForList2);
-            } elseif (is_string($paymentForList2)) {
-                $paymentForSeparator2 = $paymentForList2;
-            } else {
-                $paymentForSeparator2 = "";
-            }
-           
-            $each_amount1 = $request->input('each_amount1');
-            $each_amount2 = $request->input('each_amount2');
-            $each_amount3 = $request->input('each_amount3');
-           
-            $eachAmountForSeparator =  $each_amount1 +  $each_amount2 +  $each_amount3;
-
-            $request->session()->put('each_amount', $eachAmountForSeparator);
-           
-
 
             $transantion->update([
-                'payments_for1' => $paymentForSeparator,
-                'payments_for2' => $paymentForSeparator1,
-                'payments_for3' => $paymentForSeparator2,
-
-                'each_amount1' => $each_amount1,
-                'each_amount2' => $each_amount2,
-                'each_amount3' => $each_amount3,
-
+            
                 'receipt_type' => $request->input('receipt_type'),
 
                 'receipt_filename' => $filename,
@@ -307,15 +259,14 @@ class FormController extends Controller
     public function verify(Request $request )
     {
         $id =  Session::get('id');
- 
+        $transactions = EpvsForm::where('id', '=', $id)->get();
         $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
 
           // Check if the 'transactionId' parameter exists
         if (is_null($transactionId)) {
             return redirect()->route('home');
         } 
-        
-        $eachamount = Session::get('each_amount');
+    
         $type = Session::get('receipt_type');
         $receipt = Session::get('receipt');
 
@@ -347,8 +298,6 @@ class FormController extends Controller
         // $client_secret = 'wDyxbr99zb5T6DY2n3U1GbTHhgVcYb9Hv7cwcxJ2fSc9dPZGkNJr3sxXVLZ8iwuIaoEO1ytbbk4FC6FUPENjB8BssjL1ylCfv6JNHWFN9xioBk6KPCxt2t1REr6Fo7zZ';
         // $username = 'rmadelyn712';
         // $api_key = 'a55c9dae529597198dd99f00598cc332';
-
-        
 
         // $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
         // $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
@@ -442,8 +391,10 @@ class FormController extends Controller
 
             ];
 
+          
 
-            return view('form.verify-form', compact('details', 'transactionId'));
+
+            return view('form.verify-form', compact('details', 'transactionId', 'transactions'));
             // return view('form.verify-form');
         }
 
@@ -455,7 +406,55 @@ class FormController extends Controller
                
             $transantion = EpvsForm::find($transactionId);
 
+            $paymentForList = $request->input('payments_for');
+
+            if (is_array($paymentForList)) {
+                $paymentForSeparator = implode(', ', $paymentForList);
+            } elseif (is_string($paymentForList)) {
+                $paymentForSeparator = $paymentForList;
+            } else {
+                $paymentForSeparator = "";
+            }
+
+            $paymentForList1 = $request->input('payments_for1');
+
+            if (is_array($paymentForList1)) {
+                $paymentForSeparator1 = implode(', ', $paymentForList1);
+            } elseif (is_string($paymentForList1)) {
+                $paymentForSeparator1 = $paymentForList1;
+            } else {
+                $paymentForSeparator1 = "";
+            }
+
+            $paymentForList2 = $request->input('payments_for2');
+
+            if (is_array($paymentForList2)) {
+                $paymentForSeparator2 = implode(', ', $paymentForList2);
+            } elseif (is_string($paymentForList2)) {
+                $paymentForSeparator2 = $paymentForList2;
+            } else {
+                $paymentForSeparator2 = "";
+            }
+           
+            $each_amount1 = $request->input('each_amount1');
+            $each_amount2 = $request->input('each_amount2');
+            $each_amount3 = $request->input('each_amount3');
+           
+            $eachAmountForSeparator =  $each_amount1 +  $each_amount2 +  $each_amount3;
+
+
+
             $transantion->update([
+
+                'payments_for1' => $paymentForSeparator,
+                'payments_for2' => $paymentForSeparator1,
+                'payments_for3' => $paymentForSeparator2,
+
+                'each_amount1' => $each_amount1,
+                'each_amount2' => $each_amount2,
+                'each_amount3' => $each_amount3,
+
+
                 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'date' => $request->date,

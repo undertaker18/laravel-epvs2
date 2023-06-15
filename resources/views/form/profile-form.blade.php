@@ -272,7 +272,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput" class="form-control" list="searchOptions"
                                                     placeholder="Fullname" required>
                                                 <datalist id="searchOptions">
@@ -294,7 +294,7 @@
                                                             var nameComponents = fullName.split(',');
 
                                                             if (nameComponents.length !== 2) {
-                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
                                                                 var firstNameMiddleInitial = nameComponents[1].trim();
@@ -304,7 +304,7 @@
                                                                 var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
 
                                                                 if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
-                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage();
                                                                 }
@@ -663,7 +663,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" list="searchOptions" placeholder="Fullname"
                                                     required>
@@ -688,7 +688,7 @@
                                                             var nameComponents = fullName.split(',');
 
                                                             if (nameComponents.length !== 2) {
-                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
                                                                 var firstNameMiddleInitial = nameComponents[1].trim();
@@ -698,7 +698,7 @@
                                                                 var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
 
                                                                 if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
-                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage();
                                                                 }
@@ -1085,7 +1085,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
@@ -1106,7 +1106,7 @@
                                                             var nameComponents02 = fullName02.split(',');
                                                 
                                                             if (nameComponents02.length !== 2) {
-                                                                showErrorMessage02('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage02('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName02 = nameComponents02[0].trim();
                                                                 var firstNameMiddleInitial02 = nameComponents02[1].trim();
@@ -1116,7 +1116,7 @@
                                                                 var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
                                                 
                                                                 if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
-                                                                    showErrorMessage02('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage02('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage02();
                                                                 }
@@ -1489,7 +1489,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" list="searchOptions" placeholder="Fullname"
                                                     required>
@@ -1514,7 +1514,7 @@
                                                             var nameComponents = fullName.split(',');
 
                                                             if (nameComponents.length !== 2) {
-                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
                                                                 var firstNameMiddleInitial = nameComponents[1].trim();
@@ -1524,7 +1524,7 @@
                                                                 var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
 
                                                                 if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
-                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage();
                                                                 }
@@ -1911,7 +1911,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
@@ -1932,7 +1932,7 @@
                                                             var nameComponents02 = fullName02.split(',');
                                                 
                                                             if (nameComponents02.length !== 2) {
-                                                                showErrorMessage02('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage02('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName02 = nameComponents02[0].trim();
                                                                 var firstNameMiddleInitial02 = nameComponents02[1].trim();
@@ -1942,7 +1942,7 @@
                                                                 var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
                                                 
                                                                 if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
-                                                                    showErrorMessage02('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage02('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage02();
                                                                 }
@@ -2341,7 +2341,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname3" id="searchInput04"
                                                     class="form-control" list="searchOptions04" placeholder="Fullname"
                                                     required>
@@ -2362,7 +2362,7 @@
                                                             var nameComponents04 = fullName04.split(',');
                                                 
                                                             if (nameComponents04.length !== 2) {
-                                                                showErrorMessage04('Should have a Comma(,) and Dot(.)');
+                                                                showErrorMessage04('Invalid Naming Format.');
                                                             } else {
                                                                 var lastName04 = nameComponents04[0].trim();
                                                                 var firstNameMiddleInitial04 = nameComponents04[1].trim();
@@ -2372,7 +2372,7 @@
                                                                 var middleInitial04 = names04.length > 1 ? names04[names04.length - 1].trim() : '';
                                                 
                                                                 if (!isPascalCaseWithDot04(lastName04) || !isPascalCase04(firstName04) || !isUpperCaseInitialWithDot04(middleInitial04)) {
-                                                                    showErrorMessage04('Naming Format: "Delacruz, Juan ."');
+                                                                    showErrorMessage04('Invalid Naming Format.');
                                                                 } else {
                                                                     hideErrorMessage04();
                                                                 }

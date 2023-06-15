@@ -150,6 +150,16 @@
         .mt-5 {
             margin-top: 3rem;
         }
+        
+        .modal-btn-primary{
+            background-color: #1266b4 !important; width: 100px;
+            color: #ffffff !important;
+        }
+
+        .modal-btn-danger{
+            background-color: red !important; width: 100px;
+            color: #ffffff !important;
+        }
 
         @media screen and (max-width: 761px) {
 
@@ -211,10 +221,7 @@
                 justify-content: center;
                 align-items: center;
             }
-
-
         }
-
     </style>
     <div class="card-body">
         <div class="tab-content">
@@ -253,10 +260,10 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
-                                                    placeholder="Fullname" required>
+                                                    placeholder="Fullname" readonly required>
                                             </div>
                                         </div>
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
@@ -640,7 +647,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" value="{{ $transaction->fullname2 }}" placeholder="Fullname"
                                                     required>
@@ -1037,7 +1044,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname3" id="searchInput04"
                                                     class="form-control" value="{{ $transaction->fullname3 }}" placeholder="Fullname"
                                                      required>
@@ -1428,10 +1435,10 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
-                                                    placeholder="Fullname" required>
+                                                    placeholder="Fullname" readonly required>
                                             </div>
                                         </div>
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
@@ -1815,7 +1822,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" value="{{ $transaction->fullname2 }}" placeholder="Fullname"
                                                     required>
@@ -2203,10 +2210,10 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
-                                                    placeholder="Fullname" required>
+                                                    placeholder="Fullname" readonly required>
                                             </div>
                                         </div>
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
@@ -2575,12 +2582,14 @@
 
                             @endif
                             @endforeach
+                            
 
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="button-container flexed start">
-                                        <a href="{{ route('privacy-form') }}" class="btn  btn-primary">
-                                            <i class="fas fa-arrow-left"></i> Back
+                                        <a href="#" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#confirmModal">
+                                                    <i class="fas fa-arrow-left"></i> Back
                                         </a>
                                     </div>
                                 </div>
@@ -2623,5 +2632,35 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+                            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                            aria-labelledby="confirmModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                                        <a type="button" style="font-size: 30px; margin-right: 10px;" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </a>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to go back?<br>
+                                        Your data will be deleted.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="">
+                                            <button type="button" class="btn modal-btn-primary"
+                                                data-dismiss="modal">No</button>
+                                        </div>
+                                        <div class="">
+                                            <a href="{{ route('privacy-form') }}" class="btn modal-btn-danger">Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </x-form-layout>

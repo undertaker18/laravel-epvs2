@@ -322,6 +322,314 @@
                     <div class=" main-content">
                         <div class="card">
                             <div class="card-header">
+                                <div class="card d-flex ">
+                                    <div class="card-body ">
+                                        <div class="row ">
+                                    
+                                            @foreach ($transactions as $transaction)
+        
+                                            @if ($transaction->fullname3 != null)
+                                            
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Payment For Student 01:
+                                                    <span class="asterisk">*</span></label>
+                                                    <div class="dropdown">
+                                                        <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @if ($transaction->payments_for1)
+                                                                {{ $transaction->payments_for1 }}
+                                                            @else
+                                                                Select...
+                                                            @endif
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Miscellaneous Fee" @if ($transaction->payments_for1 == 'Miscellaneous Fee') checked @endif>Miscellaneous Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Digital System Access Fee" @if ($transaction->payments_for1 == 'Digital System Access Fee') checked @endif>Digital System Access Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Registration Fee" @if ($transaction->payments_for1 == 'Registration Fee') checked @endif>Registration Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee" @if ($transaction->payments_for1 == 'PTA Fee') checked @endif>PTA Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Initial Payment Fee" @if ($transaction->payments_for1 == 'Initial Payment Fee') checked @endif>Initial Payment Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment" @if ($transaction->payments_for1 == 'Full Payment') checked @endif>Full Payment</a>
+                                                        </div>
+                                                    </div>                                                        
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
+                                                            class="asterisk">*</span></label>
+                                                    <input type="number" class="form-control" id="amount1"
+                                                        placeholder="Type Amount..." name="each_amount1"
+                                                        value="{{ $transaction->each_amount1 }}">
+                                                </div>
+                                            </div>                                               
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2 mb-1" for="amount">Payment For Student 02:
+                                                    <span class="asterisk">*</span></label>
+                                                        
+                                                    <div class="dropdown">
+                                                        <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @if ($transaction->payments_for2)
+                                                            {{ $transaction->payments_for2 }} 
+                                                            @else
+                                                                Select...
+                                                            @endif 
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
+                                                                Notarial
+                                                                Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Miscellaneous Fee">
+                                                                Miscellaneous Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Digital System Access Fee"> Digital System
+                                                                Access Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Registration Fee">
+                                                                Registration Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="PTA Fee">
+                                                                PTA Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Initial Payment Fee">
+                                                                Initial Payment Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Full Payment">
+                                                                Full
+                                                                Payment</a>
+                                                        </div>
+                                                        
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
+                                                            class="asterisk">*</span></label>
+                                                    <input type="number" class="form-control" id="amount2"
+                                                        placeholder="Type Amount..." name="each_amount2"
+                                                        value="{{ $transaction->each_amount2 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2 mb-1" for="amount">Payment For Student 03:
+                                                    <span class="asterisk">*</span></label>
+                                                        
+                                                    <div class="dropdown">
+                                                        <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @if ($transaction->payments_for3)
+                                                            {{ $transaction->payments_for3 }} 
+                                                            @else
+                                                                Select...
+                                                            @endif 
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="Notarial Fee">
+                                                                Notarial
+                                                                Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
+                                                                    value="Miscellaneous Fee">
+                                                                Miscellaneous Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
+                                                                    value="Digital System Access Fee"> Digital System
+                                                                Access Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
+                                                                    value="Registration Fee">
+                                                                Registration Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="PTA Fee">
+                                                                PTA Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]"
+                                                                    value="Initial Payment Fee">
+                                                                Initial Payment Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for2[]" value="Full Payment">
+                                                                Full
+                                                                Payment</a>
+                                                        </div>
+                                                       
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Amount of Payment for Student 03: <span
+                                                            class="asterisk">*</span></label>
+                                                           
+                                                    <input type="number" class="form-control" id="amount3"
+                                                        placeholder="Type Amount..." name="each_amount3"
+                                                        value="{{ $transaction->each_amount3 }}">
+                                                </div>
+                                            </div>
+        
+                                            @elseif ($transaction->fullname2 != null)
+        
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Payment For Student 01:
+                                                    <span class="asterisk">*</span></label>
+                                                    <div class="dropdown">
+                                                        <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @if ($transaction->payments_for1)
+                                                            {{ $transaction->payments_for1 }} 
+                                                            @else
+                                                                Select...
+                                                            @endif 
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee">
+                                                                Notarial
+                                                                Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
+                                                                    value="Miscellaneous Fee">
+                                                                Miscellaneous Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
+                                                                    value="Digital System Access Fee"> Digital System
+                                                                Access Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
+                                                                    value="Registration Fee">
+                                                                Registration Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee">
+                                                                PTA Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]"
+                                                                    value="Initial Payment Fee">
+                                                                Initial Payment Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment">
+                                                                Full
+                                                                Payment</a>
+                                                        </div>
+                                                       
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
+                                                            class="asterisk">*</span></label>
+                                                    <input type="number" class="form-control" id="amount1"
+                                                        placeholder="Type Amount..." name="each_amount1"
+                                                        value="{{ $transaction->each_amount1 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2 mb-1" for="amount">Payment For Student 02:
+                                                    <span class="asterisk">*</span></label>
+                                                        
+                                                    <div class="dropdown">
+                                                        <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            @if ($transaction->payments_for2)
+                                                            {{ $transaction->payments_for2 }} 
+                                                            @else
+                                                                Select...
+                                                            @endif 
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Notarial Fee">
+                                                                Notarial
+                                                                Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Miscellaneous Fee">
+                                                                Miscellaneous Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Digital System Access Fee"> Digital System
+                                                                Access Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Registration Fee">
+                                                                Registration Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="PTA Fee">
+                                                                PTA Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
+                                                                    value="Initial Payment Fee">
+                                                                Initial Payment Fee</a>
+                                                            <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Full Payment">
+                                                                Full
+                                                                Payment</a>
+                                                        </div>
+                                                        
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
+                                                            class="asterisk">*</span></label>
+                                                           
+                                                    <input type="number" class="form-control" id="amount2"
+                                                        placeholder="Type Amount..." name="each_amount2"
+                                                        value="{{ $transaction->each_amount2 }}">
+                                                </div>
+                                            </div>
+        
+                                            @else
+        
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="mt-2" for="amount">Payment For Student 01:
+                                                        <span class="asterisk">*</span></label>
+                                                        <div class="dropdown">
+                                                            <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                @if ($transaction->payments_for1)
+                                                                    {{ $transaction->payments_for1 }}
+                                                                @else
+                                                                    Select...
+                                                                @endif
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Miscellaneous Fee" @if ($transaction->payments_for1 == 'Miscellaneous Fee') checked @endif>Miscellaneous Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Digital System Access Fee" @if ($transaction->payments_for1 == 'Digital System Access Fee') checked @endif>Digital System Access Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Registration Fee" @if ($transaction->payments_for1 == 'Registration Fee') checked @endif>Registration Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee" @if ($transaction->payments_for1 == 'PTA Fee') checked @endif>PTA Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Initial Payment Fee" @if ($transaction->payments_for1 == 'Initial Payment Fee') checked @endif>Initial Payment Fee</a>
+                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment" @if ($transaction->payments_for1 == 'Full Payment') checked @endif>Full Payment</a>
+                                                            </div>
+                                                        </div>      
+        
+                                                                    <script>
+                                                                        // Collect selected checkboxes into a single name
+                                                                        $(document).ready(function() {
+                                                                        $('.dropdown-item input[type="checkbox"]').on('change', function() {
+                                                                            var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
+                                                                            return this.value;
+                                                                            }).get();
+                                                                            $('input[name="payments_for1"]').val(selectedValues.join(', '));
+                                                                        });
+                                                                        });
+                                                                    </script>
+                                                           
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
+                                                                class="asterisk">*</span></label>
+                                                        <input type="number" class="form-control" id="amount1"
+                                                            placeholder="Type Amount..." name="each_amount1"
+                                                            value="{{ $transaction->each_amount1 }}">
+                                                    </div>
+                                                </div>
+                                            @endif
+        
+                                            @endforeach
+        
+                                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+                                            </script>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+                                            </script>
+                                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card">
@@ -329,9 +637,7 @@
                                                 style="border-radius: 10px; width: 100%;" class="image-class ">
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
-
                                         <div class="card d-flex ">
                                             <div class="card-body ">
 
@@ -349,17 +655,41 @@
                                                                 class="asterisk">*</span></label>
                                                                 @php
                                                                 $inputValue = $details['ocr_result']['amount'];
-                                                                @endphp
+                                                                @endphp 
                                                             
-                                                        <input type="text" class="form-control" id="amount" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" > 
-                                                                {{-- @if ($inputValue < $amountSum)
-                                                                    <p  style="font-size: 14px; color: red;">The Amount value is less than the Total Amount value.</p>
-                                                                @elseif ($inputValue > $amountSum)
-                                                                    <p  style="font-size: 14px; color: red;">The Amount value is greater than the Total Amount value.</p>
+                                                        <input type="text" class="form-control" id="amountorc" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" > 
+                                                                <!-- JavaScript/jQuery -->
+
+                                                                <script>
+                                                                    function validateInput() {
+                                                                    var amount1 = parseFloat(document.getElementById('amount1').value);
+                                                                    var amount2 = parseFloat(document.getElementById('amount2').value);
+                                                                    var amount3 = parseFloat(document.getElementById('amount3').value);
+                                                                    var amountorc = parseFloat(document.getElementById('amountorc').value);
+                                                                    
+                                                                    var sum = amount1 + amount2 + amount3;
+                                                                    
+                                                                    if (sum !== amountorc) {
+                                                                        alert('Error: The sum of amounts is not equal to input4.');
+                                                                    } else {
+                                                                        alert('Success: The sum of amounts is equal to input4.');
+                                                                        // Perform further actions if the sum is correct
+                                                                    }
+                                                                    }
+                                                                </script>
+
+                                                                                {{-- 
+                                                                @if ($inputValue < $eachAmount)
+                                                                    <p  style="font-size: 14px; color: red;">
+                                                                        Please divide the amount correctly. It should match the in your receipt. The Total Amount is <b>{{ $eachAmount }}</b>.</p>
+                                                                @elseif ($inputValue > $eachAmount)
+                                                                    <p  style="font-size: 14px; color: red;">
+                                                                        Please divide the amount correctly. It should match the in your receipt. The Total Amount is <b>{{ $eachAmount }}</b>.</p>
                                                                 @else
-                                                                    <p  style="font-size: 14px; color: green;">The Amount value is equal to the Total Amount value.</p>
+                                                                    
                                                                 @endif --}}
-                                                                
+                                                               
+                                                                                                                                
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="mt-3" for="reference">Reference Number: <span
@@ -439,34 +769,5 @@
             </div>
         </form>
     </div>
-    <!-- error Modal -->
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if(Session::has('error'))
-                    <p>{{ Session::get('error') }}</p>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @if(Session::has('error'))
-    <script>
-        $(document).ready(function () {
-            $('#errorModal').modal('show');
-        });
-
-    </script>
-    @endif
+  
 </x-form-layout>

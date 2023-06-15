@@ -158,7 +158,7 @@ class FormController extends Controller
                 $paymentForSeparator2 = "";
             }
            
-            $eachForList = $request->input('each_amount');
+            $eachForList = $request->input('each_amount1');
            
             $eachAmountForSeparator = []; // Define as an array
             if (is_array($eachForList)) {
