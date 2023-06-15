@@ -576,7 +576,7 @@
                                                         Partial Scholar</option>
 
                                                     <option value="Full Scholar"
-                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }}>
                                                         Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">
@@ -967,7 +967,7 @@
                                                     Partial Scholar</option>
 
                                                 <option value="Full Scholar"
-                                                    {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                    {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }}>
                                                     Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage03" class="invalid-feedback">
@@ -1367,7 +1367,7 @@
                                                         Partial Scholar</option>
 
                                                     <option value="Full Scholar"
-                                                        {{ $transaction['department3'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                        {{ $transaction['department3'] == 'Full Scholar' ? 'selected' : '' }}>
                                                         Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage04" class="invalid-feedback">
@@ -1751,7 +1751,7 @@
                                                         Partial Scholar</option>
 
                                                     <option value="Full Scholar"
-                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }}>
                                                         Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">
@@ -2142,7 +2142,7 @@
                                                     Partial Scholar</option>
 
                                                 <option value="Full Scholar"
-                                                    {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                    {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }}>
                                                     Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage03" class="invalid-feedback">
@@ -2526,7 +2526,7 @@
                                                         Partial Scholar</option>
 
                                                     <option value="Full Scholar"
-                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }} disabled>
+                                                        {{ $transaction['department1'] == 'Full Scholar' ? 'selected' : '' }}>
                                                         Full Scholar</option>
                                                 </select>
                                                 <div id="scholarshipStatusValidationMessage" class="invalid-feedback">

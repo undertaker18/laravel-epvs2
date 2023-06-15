@@ -646,10 +646,10 @@
                                                             <select id="" name="receipt_type" class="form-select" style="" required>
     
                                                                 <option value="instapay" {{ $transaction->receipt_type == 'instapay' ? 'selected' : '' }}>Instapay</option>
-                                                                <option value="gcash" {{ $transaction->receipt_type == 'gcash' ? 'selected' : '' }}>Gcash</option>
+                                                                <option value="gcash" {{ $transaction->receipt_type == 'gcash' ? 'selected' : '' }}>Gcash thru Phone</option>
                                                                 <option value="gcash_instapay" {{ $transaction->receipt_type == 'gcash_instapay' ? 'selected' : '' }}>Gcash Powered by Instapay</option>
-                                                                <option value="bdo_mobile_banking" {{ $transaction->receipt_type == 'bdo_mobile_banking' ? 'selected' : '' }}>BDO Mobile Banking</option>
-                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->receipt_type == 'bdo_cash_transaction_slip' ? 'selected' : '' }}>BDO Cash Transaction Slip</option>
+                                                                <option value="bdo_mobile_banking" {{ $transaction->receipt_type == 'bdo_mobile_banking' ? 'selected' : '' }} disabled>BDO Mobile Banking</option>
+                                                                <option value="bdo_cash_transaction_slip" {{ $transaction->receipt_type == 'bdo_cash_transaction_slip' ? 'selected' : '' }} disabled>BDO Cash Transaction Slip</option>
 
                                                                 <option value="Gcash Email" disabled>Gcash thru Laptop/Pc Email</option>
                                                                 <option value="MetroBank" disabled>MetroBank</option>

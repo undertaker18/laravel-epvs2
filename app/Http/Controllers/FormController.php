@@ -39,13 +39,15 @@ class FormController extends Controller
 
         $searchQuery = $request->input('search');
         $results = []; // Initialize the $results variable as an empty array
-
+        
         if ($searchQuery) {
             $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
         } else {
             $results = XeroUsers::all(['xero_account_name']);
         }
-        // Pass the search results to the view
+        
+        // Pass the search query and results to the view
+        $data['searchQuery'] = $searchQuery;
         $data['results'] = $results;
 
         $yearlevelelem = YearLevelElem::all();
@@ -348,17 +350,17 @@ class FormController extends Controller
 
         
 
-        $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
-        $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
-        $username = 'madelyn0514romero';
-        $api_key = '22e388e0df4e489f79e691c450d494d3';
+        // $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
+        // $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
+        // $username = 'madelyn0514romero';
+        // $api_key = '22e388e0df4e489f79e691c450d494d3';
 
         //Not use
 
-        // $client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
-        // $client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
-        // $username = 'lvcsepvs123';
-        // $api_key = 'd7d26429e6a799e7896ca15c2182a7d3';
+        $client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
+        $client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
+        $username = 'lvcsepvs123';
+        $api_key = 'd7d26429e6a799e7896ca15c2182a7d3';
 
         // $client_id ='vrfRs45eloHmgMc02YJliDubCy0L2CSvlW5OOpL';
         // $client_secret = 'caGOGIsX76pKdpLSxHoPhZho49ANmHr63K3f1VLbSKCs9X3HSdHHXjOh2ecl2m2EnXg2w65CRdyGmiitRl4O8VYjn4hXeV1l2sCG4Pgo62rvldtLZPBgowziAkZLFEpE';
@@ -726,7 +728,7 @@ class FormController extends Controller
         private function getDataBdoMobileBanking($json_response) {
            
             if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
-                return ['error' => 'Text not detected. Please try again.'];
+                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
             }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');

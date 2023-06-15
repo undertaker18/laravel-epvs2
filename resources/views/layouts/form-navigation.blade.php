@@ -6,11 +6,11 @@ a {
 }
 
 a:hover {
-  color: #1266b4;
-}
+  color: #879BAE !important;
+}   
 
 .active {
-  color: #1266b4  ;
+  color: #1266b4 ;
 }
 /* logo */
 .nav-item{
@@ -78,4 +78,7 @@ font-size: 22px; /* or any other desired size */
                             
                         </ul>
                     </div><!-- /.card-header -->
+                    <div class="card-header p-2">
+                        <h6 class="text-danger" >FOR DEMO PURPOSES ONLY!</h6>
+                    </div>
                 </div>

@@ -273,50 +273,70 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname" class="form-label"><b>1</b>. Full Name:</label>
-                                                <input type="text" name="fullname1" id="searchInput"
-                                                    class="form-control" list="searchOptions" placeholder="Fullname"
-                                                    required>
+                                                <input type="text" name="fullname1" id="searchInput" class="form-control" list="searchOptions"
+                                                    placeholder="Fullname" required>
                                                 <datalist id="searchOptions">
-
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}">
-                                                        @endforeach
-
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value="">
+                                                        {{-- @endforeach --}}
                                                 </datalist>
 
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
-                                                    var fullnameInput = document.getElementById('searchInput');
-                                                    var fullnameValidationMessage = document.getElementById(
-                                                        'fullnameValidationMessage');
+                                                    var fullNameInput = document.getElementById('searchInput');
+                                                    var validationMessage = document.getElementById('fullnameValidationMessage');
 
-                                                    fullnameInput.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput.value;
+                                                    fullNameInput.addEventListener('blur', function() {
+                                                        var fullName = fullNameInput.value.trim();
 
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                        if (fullName.length > 0) {
+                                                            var nameComponents = fullName.split(',');
+
+                                                            if (nameComponents.length !== 2) {
+                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName = nameComponents[0].trim();
+                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+
+                                                                var names = firstNameMiddleInitial.split(' ');
+                                                                var firstName = names[0].trim();
+                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
+
+                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput.classList.remove('is-invalid');
-                                                            fullnameValidationMessage.textContent = '';
                                                         } else {
-                                                            fullnameInput.classList.add('is-invalid');
-                                                            fullnameValidationMessage.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage();
                                                         }
-                                                        enableDisableButton();
                                                     });
 
+                                                    function isPascalCaseWithDot(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isPascalCase(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isUpperCaseInitialWithDot(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+
+                                                    function showErrorMessage(message) {
+                                                        validationMessage.innerText = message;
+                                                        validationMessage.style.display = 'block';
+                                                    }
+
+                                                    function hideErrorMessage() {
+                                                        validationMessage.style.display = 'none';
+                                                    }
+
                                                 </script>
+
                                             </div>
                                         </div>
 
@@ -649,45 +669,68 @@
                                                     required>
                                                 <datalist id="searchOptions">
 
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}">
-                                                        @endforeach
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value="">
+                                                        {{-- @endforeach --}}
 
                                                 </datalist>
 
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
-                                                    var fullnameInput = document.getElementById('searchInput');
-                                                    var fullnameValidationMessage = document.getElementById(
-                                                        'fullnameValidationMessage');
+                                                    var fullNameInput = document.getElementById('searchInput');
+                                                    var validationMessage = document.getElementById('fullnameValidationMessage');
 
-                                                    fullnameInput.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput.value;
+                                                    fullNameInput.addEventListener('blur', function() {
+                                                        var fullName = fullNameInput.value.trim();
 
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                        if (fullName.length > 0) {
+                                                            var nameComponents = fullName.split(',');
+
+                                                            if (nameComponents.length !== 2) {
+                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName = nameComponents[0].trim();
+                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+
+                                                                var names = firstNameMiddleInitial.split(' ');
+                                                                var firstName = names[0].trim();
+                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
+
+                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput.classList.remove('is-invalid');
-                                                            fullnameValidationMessage.textContent = '';
                                                         } else {
-                                                            fullnameInput.classList.add('is-invalid');
-                                                            fullnameValidationMessage.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage();
                                                         }
-                                                        enableDisableButton();
                                                     });
 
+                                                    function isPascalCaseWithDot(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isPascalCase(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isUpperCaseInitialWithDot(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+
+                                                    function showErrorMessage(message) {
+                                                        validationMessage.innerText = message;
+                                                        validationMessage.style.display = 'block';
+                                                    }
+
+                                                    function hideErrorMessage() {
+                                                        validationMessage.style.display = 'none';
+                                                    }
+
                                                 </script>
+
                                             </div>
                                         </div>
 
@@ -1047,42 +1090,66 @@
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
                                                 <datalist id="searchOptions02">
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}"></option>
-                                                    @endforeach
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value=""></option>
+                                                    {{-- @endforeach --}}
                                                 </datalist>
                                                 <div id="fullnameValidationMessage02" class="invalid-feedback"></div>
                                                 <script>
-                                                    var fullnameInput02 = document.getElementById('searchInput02');
-                                                    var fullnameValidationMessage02 = document.getElementById(
-                                                        'fullnameValidationMessage02');
-
-                                                    fullnameInput02.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput02.value;
-
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions02')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                    var fullNameInput02 = document.getElementById('searchInput02');
+                                                    var validationMessage02 = document.getElementById('fullnameValidationMessage02');
+                                                
+                                                    fullNameInput02.addEventListener('blur', function() {
+                                                        var fullName02 = fullNameInput02.value.trim();
+                                                
+                                                        if (fullName02.length > 0) {
+                                                            var nameComponents02 = fullName02.split(',');
+                                                
+                                                            if (nameComponents02.length !== 2) {
+                                                                showErrorMessage02('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName02 = nameComponents02[0].trim();
+                                                                var firstNameMiddleInitial02 = nameComponents02[1].trim();
+                                                
+                                                                var names02 = firstNameMiddleInitial02.split(' ');
+                                                                var firstName02 = names02[0].trim();
+                                                                var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
+                                                
+                                                                if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
+                                                                    showErrorMessage02('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage02();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput02.classList.remove('is-invalid');
-                                                            fullnameValidationMessage02.textContent = '';
                                                         } else {
-                                                            fullnameInput02.classList.add('is-invalid');
-                                                            fullnameValidationMessage02.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage02();
                                                         }
-                                                        enableDisableButton();
                                                     });
-
+                                                
+                                                    function isPascalCaseWithDot02(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isPascalCase02(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isUpperCaseInitialWithDot02(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+                                                
+                                                    function showErrorMessage02(message) {
+                                                        validationMessage02.innerText = message;
+                                                        validationMessage02.style.display = 'block';
+                                                    }
+                                                
+                                                    function hideErrorMessage02() {
+                                                        validationMessage02.style.display = 'none';
+                                                    }
+                                                
                                                 </script>
+                                                
+
 
                                             </div>
                                         </div>
@@ -1428,45 +1495,68 @@
                                                     required>
                                                 <datalist id="searchOptions">
 
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}">
-                                                        @endforeach
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value="">
+                                                        {{-- @endforeach --}}
 
                                                 </datalist>
 
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
-                                                    var fullnameInput = document.getElementById('searchInput');
-                                                    var fullnameValidationMessage = document.getElementById(
-                                                        'fullnameValidationMessage');
+                                                    var fullNameInput = document.getElementById('searchInput');
+                                                    var validationMessage = document.getElementById('fullnameValidationMessage');
 
-                                                    fullnameInput.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput.value;
+                                                    fullNameInput.addEventListener('blur', function() {
+                                                        var fullName = fullNameInput.value.trim();
 
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                        if (fullName.length > 0) {
+                                                            var nameComponents = fullName.split(',');
+
+                                                            if (nameComponents.length !== 2) {
+                                                                showErrorMessage('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName = nameComponents[0].trim();
+                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+
+                                                                var names = firstNameMiddleInitial.split(' ');
+                                                                var firstName = names[0].trim();
+                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
+
+                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                    showErrorMessage('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput.classList.remove('is-invalid');
-                                                            fullnameValidationMessage.textContent = '';
                                                         } else {
-                                                            fullnameInput.classList.add('is-invalid');
-                                                            fullnameValidationMessage.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage();
                                                         }
-                                                        enableDisableButton();
                                                     });
 
+                                                    function isPascalCaseWithDot(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isPascalCase(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+
+                                                    function isUpperCaseInitialWithDot(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+
+                                                    function showErrorMessage(message) {
+                                                        validationMessage.innerText = message;
+                                                        validationMessage.style.display = 'block';
+                                                    }
+
+                                                    function hideErrorMessage() {
+                                                        validationMessage.style.display = 'none';
+                                                    }
+
                                                 </script>
+
                                             </div>
                                         </div>
 
@@ -1826,41 +1916,63 @@
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
                                                 <datalist id="searchOptions02">
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}"></option>
-                                                    @endforeach
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value=""></option>
+                                                    {{-- @endforeach --}}
                                                 </datalist>
                                                 <div id="fullnameValidationMessage02" class="invalid-feedback"></div>
                                                 <script>
-                                                    var fullnameInput02 = document.getElementById('searchInput02');
-                                                    var fullnameValidationMessage02 = document.getElementById(
-                                                        'fullnameValidationMessage02');
-
-                                                    fullnameInput02.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput02.value;
-
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions02')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                    var fullNameInput02 = document.getElementById('searchInput02');
+                                                    var validationMessage02 = document.getElementById('fullnameValidationMessage02');
+                                                
+                                                    fullNameInput02.addEventListener('blur', function() {
+                                                        var fullName02 = fullNameInput02.value.trim();
+                                                
+                                                        if (fullName02.length > 0) {
+                                                            var nameComponents02 = fullName02.split(',');
+                                                
+                                                            if (nameComponents02.length !== 2) {
+                                                                showErrorMessage02('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName02 = nameComponents02[0].trim();
+                                                                var firstNameMiddleInitial02 = nameComponents02[1].trim();
+                                                
+                                                                var names02 = firstNameMiddleInitial02.split(' ');
+                                                                var firstName02 = names02[0].trim();
+                                                                var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
+                                                
+                                                                if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
+                                                                    showErrorMessage02('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage02();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput02.classList.remove('is-invalid');
-                                                            fullnameValidationMessage02.textContent = '';
                                                         } else {
-                                                            fullnameInput02.classList.add('is-invalid');
-                                                            fullnameValidationMessage02.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage02();
                                                         }
-                                                        enableDisableButton();
                                                     });
-
+                                                
+                                                    function isPascalCaseWithDot02(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isPascalCase02(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isUpperCaseInitialWithDot02(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+                                                
+                                                    function showErrorMessage02(message) {
+                                                        validationMessage02.innerText = message;
+                                                        validationMessage02.style.display = 'block';
+                                                    }
+                                                
+                                                    function hideErrorMessage02() {
+                                                        validationMessage02.style.display = 'none';
+                                                    }
+                                                
                                                 </script>
 
                                             </div>
@@ -2220,7 +2332,6 @@
                                                             counts;
                                                     });
                                                 });
-
                                             </script>
                                         </div>
                                     </div>
@@ -2235,42 +2346,65 @@
                                                     class="form-control" list="searchOptions04" placeholder="Fullname"
                                                     required>
                                                 <datalist id="searchOptions04">
-                                                    @foreach($results as $result)
-                                                    <option value="{{ $result->xero_account_name }}"></option>
-                                                    @endforeach
+                                                    {{-- @foreach($results as $result) --}}
+                                                    <option value=""></option>
+                                                    {{-- @endforeach --}}
                                                 </datalist>
                                                 <div id="fullnameValidationMessage04" class="invalid-feedback"></div>
                                                 <script>
-                                                    var fullnameInput04 = document.getElementById('searchInput04');
-                                                    var fullnameValidationMessage04 = document.getElementById(
-                                                        'fullnameValidationMessage04');
-
-                                                    fullnameInput04.addEventListener('input', function () {
-                                                        var selectedOption = false;
-                                                        var inputText = fullnameInput04.value;
-
-                                                        // Check if the input matches any of the available options
-                                                        var options = document.getElementById('searchOptions04')
-                                                            .options;
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            if (options[i].value === inputText) {
-                                                                selectedOption = true;
-                                                                break;
+                                                    var fullNameInput04 = document.getElementById('searchInput04');
+                                                    var validationMessage04 = document.getElementById('fullnameValidationMessage04');
+                                                
+                                                    fullNameInput04.addEventListener('blur', function() {
+                                                        var fullName04 = fullNameInput04.value.trim();
+                                                
+                                                        if (fullName04.length > 0) {
+                                                            var nameComponents04 = fullName04.split(',');
+                                                
+                                                            if (nameComponents04.length !== 2) {
+                                                                showErrorMessage04('Should have a Comma(,) and Dot(.)');
+                                                            } else {
+                                                                var lastName04 = nameComponents04[0].trim();
+                                                                var firstNameMiddleInitial04 = nameComponents04[1].trim();
+                                                
+                                                                var names04 = firstNameMiddleInitial04.split(' ');
+                                                                var firstName04 = names04[0].trim();
+                                                                var middleInitial04 = names04.length > 1 ? names04[names04.length - 1].trim() : '';
+                                                
+                                                                if (!isPascalCaseWithDot04(lastName04) || !isPascalCase04(firstName04) || !isUpperCaseInitialWithDot04(middleInitial04)) {
+                                                                    showErrorMessage04('Naming Format: "Delacruz, Juan ."');
+                                                                } else {
+                                                                    hideErrorMessage04();
+                                                                }
                                                             }
-                                                        }
-
-                                                        if (selectedOption) {
-                                                            fullnameInput04.classList.remove('is-invalid');
-                                                            fullnameValidationMessage04.textContent = '';
                                                         } else {
-                                                            fullnameInput04.classList.add('is-invalid');
-                                                            fullnameValidationMessage04.textContent =
-                                                                'Select a valid option from the list.';
+                                                            hideErrorMessage04();
                                                         }
-                                                        enableDisableButton();
                                                     });
-
+                                                
+                                                    function isPascalCaseWithDot04(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isPascalCase04(name) {
+                                                        return /^[A-Z][a-z]*$/.test(name);
+                                                    }
+                                                
+                                                    function isUpperCaseInitialWithDot04(name) {
+                                                        return /^[A-Z]\.$/.test(name);
+                                                    }
+                                                
+                                                    function showErrorMessage04(message) {
+                                                        validationMessage04.innerText = message;
+                                                        validationMessage04.style.display = 'block';
+                                                    }
+                                                
+                                                    function hideErrorMessage04() {
+                                                        validationMessage04.style.display = 'none';
+                                                    }
+                                                
                                                 </script>
+                                                
 
 
                                             </div>
