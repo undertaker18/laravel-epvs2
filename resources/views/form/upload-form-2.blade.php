@@ -1,5 +1,11 @@
 <x-form-layout>
     <style>
+          .image {
+        
+        height: auto !important; 
+        margin bottom: 30px !important;  
+        
+        }
         .btn {
             width: 200px;
         }
@@ -338,8 +344,7 @@
                                                     </div>
                                             </div>
                                         </div>
-                                        <br>
-                                        <br>
+                                      
                                         <div class="drag-area1 mx-auto col-md-7 col-sm-12">
                                             <div class="">
                                                 @if($errors->any())
@@ -394,7 +399,7 @@
                                             });
 
                                         </script>
-                                        <div class="drag-area1 mx-auto col-md-7 col-sm-12">
+                                        <div class="drag-area1 mx-auto col-md-7 col-sm-12 mb-5">
                                             <div class="row">
                                                 <div class="col-6 btn-align">
                                                     <div class="button-container flexed start">

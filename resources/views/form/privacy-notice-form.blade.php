@@ -14,11 +14,17 @@
             border-radius: 5px !important;
            
         }
+        .btn-primary1:hover {          
+            color: white !important;
+        }
 
         .btn-primary {
             background-color: #1266b4 !important;
         }
 
+        /* a:hover {
+            color: white !important;
+        } */
 
 
         .tab-content {
@@ -29,6 +35,7 @@
             border: none !important;
             border-radius: none !important;
             box-shadow: none !important;
+            background-color: #fefefe;
         }
 
         .card-2 {
@@ -73,8 +80,8 @@
         .privacy-content1 {
             padding: 2px;
             font-weight: normal;
-            font-size: 22px;
-            text-align: left;
+            font-size: 19px;
+            text-align: justify;
 
             color: #000000;
 
@@ -109,7 +116,8 @@
         }
 
         .bg-form {
-            background-color: #EAF1F8;
+            background-color: #000000;
+            height: 100vh !important;
         }
         .col-md-5 {
         flex: 0 0 50%;
@@ -169,8 +177,8 @@
             .privacy-content1 {
             padding: 2px;
             font-weight: normal;
-            font-size: 14px;
-            text-align: left;
+            font-size: 12px;
+            text-align: justify;
 
             color: #000000;
 
@@ -201,8 +209,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="privacy-content1">
-                                            <p><b>PRIVACY NOTICE:<br>
-                                                </b> Dear student(s)/parent(s)/guardian(s), we would 
+                                            <h4 class="mt-3">PRIVACY NOTICE:</h4>
+                                            <p>
+                                                Dear student(s)/parent(s)/guardian(s), we would 
                                                 like to inform you that we are collecting your personal information(s)
                                                 for the purpose of your payment in La Verdad Christian College. This
                                                 information(s) shall be utilized for payment process only. In

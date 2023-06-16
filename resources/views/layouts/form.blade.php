@@ -19,10 +19,10 @@
       
     </head>
     <style>
-        .image{
+        /* .image{
             background-color: #F7F7F7 !important;
-            height: 100%;
-        }
+            height: 70vh;
+        } */
         .content{
             height: 100% !important;
         }
@@ -33,8 +33,8 @@
             height: 100% !important;
         }
         .image-logo {
-            width: 150px; 
-            height: 150px;
+            width: 200px; 
+            height: 200px;
         }
 
         @media screen and (max-width: 761px) {

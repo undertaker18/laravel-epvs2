@@ -1,5 +1,11 @@
 <x-form-layout>
     <style>
+          .image {
+        
+        height: auto !important; 
+        margin bottom: 30px !important;  
+        
+        }
         .btn {
             width: 200px;
             margin-top: 15px;
@@ -399,7 +405,7 @@
                                                                 PTA Fee</a>
                                                             <a class="dropdown-item"><input type="checkbox" name="payments_for1[]"
                                                                     value="Initial Payment Fee">
-                                                                Initial Payment Fee</a>
+                                                                Initial Payment Fee</a> 
                                                             <a class="dropdown-item"><input type="checkbox" name="payments_for1[]" value="Full Payment">
                                                                 Full
                                                                 Payment</a>
@@ -571,9 +577,24 @@
         
                                             @else
         
-                                                <div class="col-6">
+                                                <div class="col-12">
+                                                    {{-- <div class="form-group">
+                                                        <label class="mt-2" for="amount">Payment For:<span class="asterisk">*</span></label>
+                                                        <div class="dropdown">
+                                                            <select class="form-control" multiple name="payments_for[]">
+                                                                <option value="Notarial Fee" >Notarial Fee</option>
+                                                                <option value="Miscellaneous Fee" >Miscellaneous Fee</option>
+                                                                <option value="Digital System Access Fee">Digital System Access Fee</option>
+                                                                <option value="Registration Fee">Registration Fee</option>
+                                                                <option value="PTA Fee">PTA Fee</option>
+                                                                <option value="Initial Payment Fee">Initial Payment Fee</option>
+                                                                <option value="Full Payment">Full Payment</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> --}}
+                                                    
                                                     <div class="form-group">
-                                                        <label class="mt-2" for="amount">Payment For Student 01:
+                                                        <label class="mt-2" for="amount">Payment For:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
                                                             <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
@@ -585,7 +606,8 @@
                                                                 @endif
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</a>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</label>
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Miscellaneous Fee" @if ($transaction->payments_for1 == 'Miscellaneous Fee') checked @endif>Miscellaneous Fee</a>
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Digital System Access Fee" @if ($transaction->payments_for1 == 'Digital System Access Fee') checked @endif>Digital System Access Fee</a>
                                                                 <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Registration Fee" @if ($transaction->payments_for1 == 'Registration Fee') checked @endif>Registration Fee</a>
@@ -609,13 +631,17 @@
                                                            
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="">
                                                     <div class="form-group">
-                                                        <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
-                                                                class="asterisk">*</span></label>
-                                                        <input type="number" class="form-control" id="amount1"
+                                                        {{-- i ha hide --}}
+                                                        {{-- <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
+                                                                class="asterisk">*</span></label> --}}
+                                                                @php
+                                                                $inputValue = $details['ocr_result']['amount'];
+                                                                @endphp 
+                                                        <input type="hidden" class="form-control" id="amount1"
                                                             placeholder="Type Amount..." name="each_amount1"
-                                                            value="{{ $transaction->each_amount1 }}">
+                                                            value="{{ $inputValue }}" >
                                                     </div>
                                                 </div>
                                             @endif
@@ -657,9 +683,7 @@
                                                     <div class="form-group">
                                                         <label class="mt-3" for="amount">Amount of Payment: <span
                                                                 class="asterisk">*</span></label>
-                                                                @php
-                                                                $inputValue = $details['ocr_result']['amount'];
-                                                                @endphp 
+                                                               
                                                             
                                                         <input type="text" class="form-control" id="amountorc" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" > 
                                                                 <!-- JavaScript/jQuery -->
@@ -737,7 +761,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="button-container flexed end">
-                                            <button id="nextBtn" class="btn btn-success" type="submit" name="submit">
+                                            <button id="nextBtn" class="btn btn-success" type="submit" name="submit" disabled>
                                                 Next <i class="fas fa-arrow-right"></i>
                                             </button>
                                         </div>
@@ -746,26 +770,54 @@
 
                                 <script>
                                     function checkFormValidity() {
-                                        var inputs = document.querySelectorAll('name[payment_for[]], select[required]');
+                                        var paymentsForCheckboxes = document.querySelectorAll('input[name="payments_for[]"]');
+                                        var paymentsFor1Checkboxes = document.querySelectorAll('input[name="payments_for1[]"]');
+                                        var paymentsFor2Checkboxes = document.querySelectorAll('input[name="payments_for2[]"]');
                                         var nextBtn = document.getElementById('nextBtn');
-                                        var isValid = true;
-
-                                        inputs.forEach(function (input) {
-                                            if (!input.value) {
-                                                isValid = false;
+                                        var isValid = false;
+                                
+                                        paymentsForCheckboxes.forEach(function (checkbox) {
+                                            if (checkbox.checked) {
+                                                isValid = true;
                                             }
                                         });
 
+                                        paymentsFor1Checkboxes.forEach(function (checkbox) {
+                                            if (checkbox.checked) {
+                                                isValid = true;
+                                            }
+                                        });
+                                
+                                        paymentsFor2Checkboxes.forEach(function (checkbox) {
+                                            if (checkbox.checked) {
+                                                isValid = true;
+                                            }
+                                        });
+                                
                                         nextBtn.disabled = !isValid;
                                     }
+                                
+                                    // Call the checkFormValidity function whenever a checkbox is clicked
+                                    var paymentsForCheckboxes = document.querySelectorAll('input[name="payments_for[]"]');
+                                    paymentsForCheckboxes.forEach(function (checkbox) {
+                                        checkbox.addEventListener('click', checkFormValidity);
+                                    }); 
 
-                                    // Call the checkFormValidity function whenever an input value changes
-                                    var formInputs = document.querySelectorAll('name[payment_for[]], select[required]');
-                                    formInputs.forEach(function (input) {
-                                        input.addEventListener('input', checkFormValidity);
+                                    var paymentsFor1Checkboxes = document.querySelectorAll('input[name="payments_for1[]"]');
+                                    paymentsFor1Checkboxes.forEach(function (checkbox) {
+                                        checkbox.addEventListener('click', checkFormValidity);
                                     });
-
+                                
+                                    var paymentsFor2Checkboxes = document.querySelectorAll('input[name="payments_for2[]"]');
+                                    paymentsFor2Checkboxes.forEach(function (checkbox) {
+                                        checkbox.addEventListener('click', checkFormValidity);
+                                    });
+                                
+                                    // Trigger the checkFormValidity function initially to set the initial state of the button
+                                    checkFormValidity();
                                 </script>
+                                
+                                
                             </div>
                         </div>
                     </div>

@@ -727,7 +727,7 @@
                                             
                                             @if ($transaction->fullname3 != null)
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
@@ -735,11 +735,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for1 }}">
                                             </div>
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount2##{{ $paymentKey }}"
@@ -747,11 +747,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for2##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for2 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for2##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for2 }}">
                                             </div>
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount3##{{ $paymentKey }}"
@@ -759,13 +759,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for3##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for3 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for3##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for3 }}">
                                             </div>
 
                                             @elseif ($transaction->fullname2 != null)
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
@@ -773,11 +773,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for1 }}">
                                             </div>
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount2##{{ $paymentKey }}"
@@ -785,13 +785,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for2##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for2 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for2##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for2 }}">
                                             </div>
 
                                             @else
 
-                                            <h3 class="mt-2">Student {{ $studentNumber5++ }}</h3>
+                                            <h5 class="mt-2">Student {{ $studentNumber5++ }}</h5>
                                             <div class="form-group">
                                                 <label class="form-label" for="each_amount">Amount Per Student</label>
                                                 <input type="text" class="form-control" id="each_amount" name="each_amount1##{{ $paymentKey }}"
@@ -800,8 +800,8 @@
 
                                             <div class="form-group">
                                                 <label class="form-label" for="payments_for">Payment For</label>
-                                                <textarea class="form-control" rows="3" id="payments_for" name="payments_for1##{{ $paymentKey }}"
-                                                    readonly>{{ $transaction->payments_for1 }}</textarea>
+                                                <input type="text" class="form-control text-wrap" id="payments_for" name="payments_for1##{{ $paymentKey }}"
+                                                    readonly value="{{ $transaction->payments_for1 }}">
                                             </div>
 
                                             @endif
@@ -824,8 +824,9 @@
                                 <div class="col-md-5">
                                     <div class="">
                                         <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
-                                            <button class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
+                                            <button id="submitButton" class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
+                                        
                                     </div>
                                 </div>
                             </div>

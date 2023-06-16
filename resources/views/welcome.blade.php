@@ -254,7 +254,20 @@
       text-decoration: none;
       cursor: pointer;
     }
-
+        .small-button {
+      padding: 4px 8px; /* Adjust the padding values as needed */
+      font-size: 12px; /* Adjust the font size as needed */
+      border: none ;
+      border-radius: 10px;
+      background-color: #cce1f6;
+    }
+    .small-button:hover {
+    background-color: #007bff;
+    color:#fff;
+    }
+    .btn-default:hover{
+      color:#004085;
+    }
 </style>
 
 <body>
@@ -271,31 +284,76 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="card-body  payment-font ">
-                        <h4 class="card-title"><strong>Payment Instructions</strong></h4>
-        
-                        <p>
-                          Please make sure to make a payment to the provided BDO bank account number before proceeding to the next step.
-                          <br>
-                          <i>(Bago magpatuloy sa susunod na step, tiyaking nakapagbayad muna sa ibinigay na BDO Bank account.)</i>
+                        <h4 class="card-title"><strong>Payment Instructions</strong> <button class="small-button" onclick="toggleTagalogText()">Translate in Filipino</button></h4>
+                        <br>
+                        
+                        <p id="englishText1">
+                          Before moving to the next step, please make sure to pay to the LVCS BDO bank account number.
                         </p>
-                        <p>
-                          Once payment is complete, please obtain a proof of payment and check the designated checkbox to confirm payment and proceed to the next step.
-                          <br>
-                          <i>(Kapag tapos na ang pagbabayad, mangyaring kumuha ng proof of payment o resibo para makumpirma na nakapagbayad na bago punan ang checkbox.)</i>
+                        <p id="tagalogText1" style="display: none;">
+                          Tiyaking nakapagbayad muna sa LVCS BDO Bank account number bago magpatuloy sa susunod na step.
                         </p>
+
+                        <p id="englishText2">
+                          Once you have completed the payment, please provide a proof of payment or take a screenshot of the receipt. Then, tick the checkbox and click on "proceed."
+                        </p>
+                        <p id="tagalogText2" style="display: none;">
+                          Kapag nakapagbayad na, magbigay ng proof of payment o screenshot ng resibo. Sunod ay pindutin ang checkbox at i-click ang proceed.
+                        </p>
+
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="my-checkbox" name="box" value="I Agree"  onchange="toggleButton()">
-                          <label class="form-check-label" for="paymentCheckbox">
+                          <input class="form-check-input" type="checkbox" id="my-checkbox" name="box" value="I Agree" onchange="toggleButton()">
+
+                          <label class="form-check-label" for="my-checkbox" id="englishText3">
                             Yes, I have paid and completed the payment.
-                            <br>
-                            <i>(Oo, nagbayad na ako at natapos ko na ang pagbabayad.)</i>
+                          </label>
+                          <label class="form-check-label" for="my-checkbox" id="tagalogText3" style="display: none;"> 
+                            Oo, nakapagbayad na ako .
                           </label>
                         </div>
+
+                        <script>
+                          // Function to toggle between English and Tagalog translations
+                          function toggleTagalogText() {
+
+                            var englishText1 = document.getElementById('englishText1');
+                            var englishText2 = document.getElementById('englishText2');
+                            var englishText3 = document.getElementById('englishText3');
+
+                            var tagalogText1 = document.getElementById('tagalogText1');
+                            var tagalogText2 = document.getElementById('tagalogText2');
+                            var tagalogText3 = document.getElementById('tagalogText3');
+
+                            if (englishText1.style.display === 'block') {
+
+                              englishText1.style.display = 'none';
+                              englishText2.style.display = 'none';
+                              englishText3.style.display = 'none';
+
+                              tagalogText1.style.display = 'block';
+                              tagalogText2.style.display = 'block';
+                              tagalogText3.style.display = 'block';
+
+                            } else {
+                              englishText1.style.display = 'block';
+                              englishText2.style.display = 'block';
+                              englishText3.style.display = 'block';
+
+                              tagalogText1.style.display = 'none';
+                              tagalogText2.style.display = 'none';
+                              tagalogText3.style.display = 'none';
+                            }
+                          }
+
+                         
+                        </script>
+
+
                       
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="card-body bg-card-bdo rounded my-4 mx-3">
+                      <div class="card-body bg-card-bdo rounded my-3 mx-2">
                         <div class="text-center bdo-font">
                           <img src="{{ asset('assets/landing/bdo-logo.png') }}" alt="BDO Logo" class="bdo-logo img-fluid-custom">
                           <p>

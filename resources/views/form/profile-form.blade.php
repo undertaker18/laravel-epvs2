@@ -1,5 +1,12 @@
 <x-form-layout>
     <style>
+        .image {
+        
+        height: auto !important; 
+        margin bottom: 30px !important;  
+        
+        }
+
         .btn {
             width: 200px;
             margin-top: 15px;
@@ -52,15 +59,19 @@
             padding-top: 5px;
         }
 
-        /* .card-title {
+         .card-title1 {
+            text-align: left;
+            margin-left: 20px;
+            margin-top: 20px;
+         }
 
-        font-size: 1.5rem; 
+        /* font-size: 1.5rem; 
         text-align: left !important;
-        }
-
-        .card-tools {
-            text-align: right !important;
         } */
+
+        /* .card-tools {
+            text-align: right !important;
+        }  */
 
         .container {
             margin-top: 30px;
@@ -150,6 +161,9 @@
         .mt-5 {
             margin-top: 3rem;
         }
+        .card-header {
+            background-color: white !important;
+        }
 
         @media screen and (max-width: 761px) {
 
@@ -211,6 +225,10 @@
                 justify-content: center;
                 align-items: center;
             }
+            .card-title1 {
+            text-align: center;
+            margin-left: 0px;
+            }
 
 
         }
@@ -229,7 +247,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title align-left">Student Information</h4>
+                                    <h4 class="card-title1">Student Information</h4>
                                 </div>
 
                                 <div class="col-md-6">
