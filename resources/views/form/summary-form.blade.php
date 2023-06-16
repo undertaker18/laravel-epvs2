@@ -1,13 +1,18 @@
 <x-form-layout>
 
     <style>
+
+        .image {
+        
+        height: auto !important; 
+        margin bottom: 30px !important;  
+        
+        }
         .main-content1 {
             align-items: center;
             margin-left: 19%;
             margin-right: 19%;
             color: #000000 !important;
-
-
 
         }
 
