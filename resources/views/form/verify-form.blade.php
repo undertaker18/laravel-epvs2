@@ -335,7 +335,10 @@
                                 <div class="card d-flex ">
                                     <div class="card-body ">
                                         <div class="row ">
-                                    
+                                            @php
+                                            $inputValue = $details['ocr_result']['amount'];
+                                            @endphp 
+                                            
                                             @foreach ($transactions as $transaction)
         
                                             @if ($transaction->fullname3 != null)
@@ -636,9 +639,7 @@
                                                         {{-- i ha hide --}}
                                                         {{-- <label class="mt-2" for="amount">Amount of Payment for Student 01: <span
                                                                 class="asterisk">*</span></label> --}}
-                                                                @php
-                                                                $inputValue = $details['ocr_result']['amount'];
-                                                                @endphp 
+                                                              
                                                         <input type="hidden" class="form-control" id="amount1"
                                                             placeholder="Type Amount..." name="each_amount1"
                                                             value="{{ $inputValue }}" >

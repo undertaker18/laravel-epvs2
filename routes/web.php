@@ -126,7 +126,6 @@ Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
     ->name('bdo-receipt.upload');
 
 
-
 /*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/
 ->middleware(['auth', 'verified'])
 ->name('bdo-receipts.store'); */

@@ -326,6 +326,18 @@ class FormController extends Controller
         $username = 'madelyn05romero14';
         $api_key = 'ea013a433919679d98b6f59d6eb17dec';
 
+        // $client_id ='vrfYcKS1mltDJTS8E7o9e5J8zYrd6pnfUI7Pf2P';
+        // $client_secret = 'X1P96oIP5MbWgNouMSOJlDSlB5dElEomeADAhzUGV6LbU6zI5BnFafOgxeepu134odhGG5RGInU3fP8WvRgdltezsPBBUHICmdxRkzdrp1juiiefLbj5Mi75sYOLlOJ1';
+        // $username = 'candinatoaaron';   
+        // $api_key = 'ff1c3e18acfd4c63b3e72a20f41595e5';
+
+        // $client_id ='vrfXzad78JD6mldXUL5241huPdFBmYM8PsnchRj';
+        // $client_secret = 'MpLyTGlKTwHJObVZ4DUlvU9JRDNugemOX6JjpCY8w73Uu8ErRycN04zMXJ2Hrx9tPXylnf31hxSeaM8HaHxjGNiYmDNFhwo29p0hi3pkVg67jt8JWr8w3fgbokbGfEj6';
+        // $username = 'dinacandinato';
+        // $api_key = 'b4f8fcce5b3a6998b1d7496b3f7d4305';
+
+
+
 
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 

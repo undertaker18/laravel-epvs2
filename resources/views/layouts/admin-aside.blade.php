@@ -44,7 +44,7 @@
             <a href="{{ url('/users') }}" class="nav-link {{ Request::is('users') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Users
+                Staffs
               </p>
             </a>
           </li>
@@ -118,15 +118,15 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/bdo-xero-receipts') }}" class="nav-link {{ Request::is('bdo-xero-receipts') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-money-bill"></i>
               <p>
-                BDO Receipts
+                BDO Transactions
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('/system-log') }}" class="nav-link {{ Request::is('system-log') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 System Log
               </p>
