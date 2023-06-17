@@ -45,6 +45,7 @@ return new class extends Migration
             $table->enum('receiptStatus', ['1', '2', '3'])->default(1);   // 1 - pending , 2 - valid , 3 - reject 
             
             $table->timestamp('created_at')->useCurrent();
+            
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
