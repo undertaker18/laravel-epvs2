@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\receiptrejected;
 use App\Models\XeroInvoice;
+use Illuminate\Support\Facades\DB;
+
 
 class DashboardController extends Controller
 {
@@ -13,13 +15,64 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-        ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
-        //  ->where([['status', '=', '0']])
-        ->get();
+        $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
-    $countreject = $xeroInvoice->count();
+        $totalCountPending = $pendingInvoices->count();
 
-        return view('dashboard', compact(['xeroInvoice'], 'countreject'));
+
+        $validInvoices = DB::table('xero_invoice')->where('receiptStatus', 2)->get();
+
+        $totalCountvalid = $validInvoices->count();
+
+
+        $rejectInvoices = DB::table('xero_invoice')->where('receiptStatus', 3)->get();
+
+        $totalCountreject = $rejectInvoices->count();
+
+        $invoices = DB::table('xero_invoice')->get(); 
+        $totalCount = $invoices->count();
+
+        $validReceipts = XeroInvoice::where('receiptStatus', 2)
+        ->pluck('amount')
+        ->toArray();
+
+        $pendingReceipts = XeroInvoice::where('receiptStatus', 1)
+        ->pluck('amount')
+        ->toArray();
+
+        $rejectReceipts = XeroInvoice::where('receiptStatus', 3)
+        ->pluck('amount')
+        ->toArray();
+
+        $months = XeroInvoice::distinct()
+        ->orderBy('created_at')
+        ->pluck('created_at')
+        ->map(function ($date) {
+            return $date->format('F');
+        })
+        ->toArray();
+
+        // $salesChartData = [
+        //     'labels' => $months,
+        //     'datasets' => [
+        //         // Dataset configurations here
+        //     ]
+        // ];
+
+        // return view('dashboard', compact(['xeroInvoice'], 'countreject'));
+        return view('dashboard', [
+            'invoices' => $invoices, 
+            'totalCountPending' => $totalCountPending, 
+            'totalCountvalid' => $totalCountvalid, 
+            'totalCountreject' => $totalCountreject, 
+            'totalCount' => $totalCount,
+            
+            'validReceipts' => $validReceipts,
+            'pendingReceipts' => $pendingReceipts,
+            'rejectReceipts' => $rejectReceipts,
+            // 'salesChartData' => $salesChartData,
+            
+        
+        ]);
     }
-}
+}   

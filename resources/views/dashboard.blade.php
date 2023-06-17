@@ -34,7 +34,7 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3" >VALID RECEIPTS</p>
-                  <h1 style="color:#008000; font-size: 50px;">1000</h1>
+                  <h1 style="color:#008000; font-size: 50px;">{{ $totalCountvalid }}</h1>
 
                 </div>
                 <div class="icon" style="color:#008000; ">
@@ -48,7 +48,7 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3">PENDING RECEIPTS</p>
-                  <h1 style="color:#EC7100; font-size: 50px;" >542</h1>
+                  <h1 style="color:#EC7100; font-size: 50px;" >{{ $totalCountPending }}</h1>
 
                 </div>
                 <div class="icon" style="color: #EC7100;">
@@ -62,7 +62,7 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3">REJECT RECEIPTS</p>
-                  <h1 style="color:#FF0000; font-size: 50px;">{{ $countreject }}</h1>
+                  <h1 style="color:#FF0000; font-size: 50px;">{{ $totalCountreject }}</h1>
 
                 </div>
                 <div class="icon" style="color: #FF0000;">
@@ -76,7 +76,7 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3" >TOTAL RECEIPTS</p>
-                  <h1 style="font-size: 50px;">1562</h1>
+                  <h1 style="font-size: 50px;">{{ $totalCount }}</h1>
 
                 </div>
                 <div class="icon" style="color: black;">
@@ -117,9 +117,7 @@
                     <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
                       <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
                     </div>
-                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                      <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
+                  
                   </div>
                 </div><!-- /.card-body -->
               </div>
@@ -160,7 +158,7 @@
         <div class="card" style="background-color: ; ">
             <div class="card-body"  style="color: #000000; ">
                 <table id="example1" class="table table-bordered  table-hover">
-                    <thead>
+                    {{-- <thead>
                         <tr style="color: #000000;">
                             <th>Fullname</th>
                             <th>Grade/Course</th>
@@ -189,36 +187,83 @@
                               View</td>
                         </tr>  
                         
-                    </tbody>
+                    </tbody> --}}
 
                     <thead>
-                      <tr style="color: #000000;">
-                          <th>Select</th>
-                          <th>FullName</th>
-                          <th>Xero Account Id</th>
-                          <th>Payment For</th>
+                      <tr>
+                          <th>Invoice ID</th>
+                         
+                          <th>Description</th>
                           <th>Amount</th>
                           <th>Reference</th>
-                          <th>Created At</th>
-                          <th>Created By</th>
+                          <th>Email</th>
+                          <th>Receipt Type</th>
+                          <th>Receipt Source</th>
+                          <th>Receipt Status</th>
                       </tr>
                   </thead>
                   <tbody>
-                      @foreach ($xeroInvoice as $value)
+                      @foreach ($invoices as $invoice)
                       <tr>
-                          <td><input type="checkbox" id="my-checkbox" name="my-checkbox"
-                                  class="checkbox invoice_checkbox" data-id="{{$value->id}}"></td>
-                          <td>{{$value->xero_account_name}}</td>
-                          <td>{{$value->xero_account_id}}</td>
-                          <td>{{$value->description}}</td>
-                          <td>{{$value->amount}}</td>
-                          <td>{{$value->reference}}</td>
-                          <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
-                          <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
+                          <td>{{ $invoice->id }}</td>
+
+                          <td>{{ $invoice->description }}</td>
+                          <td>{{ $invoice->amount }}</td>
+                          <td>{{ $invoice->reference }}</td>                                   
+                          <td>{{ $invoice->email }}</td>
+                          <td>{{ $invoice->receipt_type }}</td>
+                          <td>
+                              @if ($invoice->receipt_src)
+                                  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">
+                                      <i class="fas fa-eye"></i> View Image
+                                  </button>
+                                  
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="receiptModal{{ $invoice->id }}" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel{{ $invoice->id }}" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h5 class="modal-title" id="receiptModalLabel{{ $invoice->id }}">Receipt Image</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <img src="{{ $invoice->receipt_src }}" alt="Receipt Image" style="width: 100%;">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              @else
+                                  No Image Available
+                              @endif
+                          </td>
+                          
+
+                          <td style="color: 
+                          @if ($invoice->receiptStatus === '1')
+                              orange
+                          @elseif ($invoice->receiptStatus === '2')
+                              green
+                          @elseif ($invoice->receiptStatus === '3')
+                              red
+                          @else
+                              black
+                          @endif
+                      ">
+                          @if ($invoice->receiptStatus === '1')
+                              Pending
+                          @elseif ($invoice->receiptStatus === '2')
+                              Valid
+                          @elseif ($invoice->receiptStatus === '3')
+                              Reject
+                          @else
+                              Unknown
+                          @endif
+                      </td>
+                          
                       </tr>
-
                       @endforeach
-
                   </tbody>
                 </table>
             </div>
@@ -262,6 +307,132 @@
         var url = "{{ url('/v1/xero/auth') }}";
         window.open(url, '_blank');
     }
+
+</script>
+<script>
+  
+$(function () {
+  
+
+  /* Chart.js Charts */
+  // Sales chart
+  var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d');
+  // $('#revenue-chart').get(0).getContext('2d');
+    var validReceipts = @json($validReceipts);
+    var pendingReceipts = @json($pendingReceipts);
+    var rejectReceipts = @json($rejectReceipts);
+
+  var salesChartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'VALID RECEIPTS',
+        backgroundColor: "#008000",
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: validReceipts
+      },
+      {
+        label: 'PENDING RECEIPTS',
+        backgroundColor:"#EC7100",
+        borderColor: 'rgba(210, 214, 222, 1)',
+        pointRadius: false,
+        pointColor: 'rgba(210, 214, 222, 1)',
+        pointStrokeColor: '#c1c7d1',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)',
+        data: pendingReceipts
+      } 
+      ,
+      {
+        label: 'REJECT RECEIPTS',
+        backgroundColor: "#FF0000",
+        borderColor: 'rgba(210, 214, 222, 1)',
+        pointRadius: false,
+        pointColor: 'rgba(210, 214, 222, 1)',
+        pointStrokeColor: '#c1c7d1',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)',
+        data: rejectReceipts
+      }
+    ]
+  };
+
+  var salesChartOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          display: false
+        }
+      }]
+    }
+  }
+
+  // This will get the first returned node in the jQuery collection.
+  // eslint-disable-next-line no-unused-vars
+  var salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'bar',
+    data: salesChartData,
+    options: salesChartOptions
+  });
+
+
+  // all dapartment
+  const data = {
+    labels: ['Elementary', 'Junior High', 'Senior High', 'College'],
+    datasets: [{
+      label: 'ALL',
+      data: [12, 19, 3, 5],
+      backgroundColor: [
+        '#8B96B4',
+        '#1266B4',
+        '#B7E4FD',
+        '#879BAE'
+       
+      ],
+      hoverOffset: 10
+    }]
+  }
+
+  const config = {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          color: 'black',
+        },
+        tooltip: {
+          enabled: true
+        }
+      }
+    }
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+
+  
+})
 
 </script>
 

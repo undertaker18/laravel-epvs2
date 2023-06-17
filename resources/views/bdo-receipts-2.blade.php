@@ -129,6 +129,12 @@
 
         </section>
         <!-- right col -->
+        <div class="modal">
+            <div class="modal-content">
+                <h2>Error</h2>
+                <p>{{ $errorMessage }}</p>
+            </div>
+        </div>
 
     </div><!-- /.container-fluid -->
     <!-- Example of including jQuery and Bootstrap JS files, adjust the paths according to your setup -->

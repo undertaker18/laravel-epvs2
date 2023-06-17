@@ -123,8 +123,8 @@
             <script>
                $(function () {
                     $("#example1").DataTable({
-                        "responsive": false,
-                        "lengthChange": false,
+                        "responsive": true,
+                        "lengthChange": true,
                         "autoWidth": true,
                         "buttons": [
                             {

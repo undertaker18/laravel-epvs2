@@ -8,40 +8,81 @@ use App\Models\XeroInvoice;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ReceiptController extends Controller
 {
     // for view
     public function valid()
     {
-        $countvalid = $xeroInvoiceValid->count();
-        $countpending = $xeroInvoicePending->count();
-        $countreject = $xeroInvoiceReject->count();
+        $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
-        return view('receipt-valid',  compact('xeroInvoice', 'countsent', 'countsend'));
+        $totalCountPending = $pendingInvoices->count();
+
+
+        $validInvoices = DB::table('xero_invoice')->where('receiptStatus', 2)->get();
+
+        $totalCountvalid = $validInvoices->count();
+
+
+        $rejectInvoices = DB::table('xero_invoice')->where('receiptStatus', 3)->get();
+
+        $totalCountreject = $rejectInvoices->count();
+
+        return view('receipt-valid', ['invoices' => $validInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
     }
-
+//=================================================================================================================================
     public function pending()
     {
-        return view('receipt-pending');
+        $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
+
+        $totalCountPending = $pendingInvoices->count();
+
+
+        $validInvoices = DB::table('xero_invoice')->where('receiptStatus', 2)->get();
+
+        $totalCountvalid = $validInvoices->count();
+
+
+        $rejectInvoices = DB::table('xero_invoice')->where('receiptStatus', 3)->get();
+
+        $totalCountreject = $rejectInvoices->count();
+
+        return view('receipt-pending', ['invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
     }
+//=================================================================================================================================
 
     public function reject()
     {
 
-        // todo: May 28, receipt type and user email
-        $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-            ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
-            //  ->where([['status', '=', '0']])
-            ->get();
+        $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
-        $countreject = $xeroInvoice->count();
+        $totalCountPending = $pendingInvoices->count();
 
-        return view('receipt-reject-2', compact(['xeroInvoice'], 'countreject'));
+
+        $validInvoices = DB::table('xero_invoice')->where('receiptStatus', 2)->get();
+
+        $totalCountvalid = $validInvoices->count();
+
+
+        $rejectInvoices = DB::table('xero_invoice')->where('receiptStatus', 3)->get();
+
+        $totalCountreject = $rejectInvoices->count();
+
+        // // todo: May 28, receipt type and user email
+        // $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
+        //     ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
+        //     //  ->where([['status', '=', '0']])
+        //     ->get();
+
+        // $countreject = $xeroInvoice->count();
+
+        // return view('receipt-reject-2', compact(['xeroInvoice'], 'countreject'));
+        return view('receipt-reject-2', ['invoices' => $rejectInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
     }
 
     public function postReject(Request $request)
-    {
+    {   
 
 
         $csvIds = $request->all()['csv_ids']; 
@@ -93,6 +134,7 @@ class ReceiptController extends Controller
         }
         return redirect('/receipt-reject');
     }
+//=================================================================================================================================
 
     public function image()
     {

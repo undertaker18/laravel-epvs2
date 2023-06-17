@@ -246,7 +246,7 @@
             }
 
             .container {
-                width: 100%;
+                width: 95%;
                 padding: 0px;
             }
 
@@ -338,7 +338,7 @@
                                             @php
                                             $inputValue = $details['ocr_result']['amount'];
                                             @endphp 
-                                            
+
                                             @foreach ($transactions as $transaction)
         
                                             @if ($transaction->fullname3 != null)
@@ -527,11 +527,11 @@
                                                         value="{{ $transaction->each_amount1 }}">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 mt-2">
                                                 <div class="form-group">
                                                     <label class="mt-2 mb-1" for="amount">Payment For Student 02:
                                                     <span class="asterisk">*</span></label>
-                                                        
+                                                       
                                                     <div class="dropdown">
                                                         <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -565,9 +565,9 @@
                                                         </div>
                                                         
                                                     </div>   
-                                                </div>
+                                                </div>  
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 mt-2">
                                                 <div class="form-group">
                                                     <label class="mt-2" for="amount">Amount of Payment for Student 02: <span
                                                             class="asterisk">*</span></label>
@@ -581,56 +581,94 @@
                                             @else
         
                                                 <div class="col-12">
-                                                    {{-- <div class="form-group">
-                                                        <label class="mt-2" for="amount">Payment For:<span class="asterisk">*</span></label>
-                                                        <div class="dropdown">
-                                                            <select class="form-control" multiple name="payments_for[]">
-                                                                <option value="Notarial Fee" >Notarial Fee</option>
-                                                                <option value="Miscellaneous Fee" >Miscellaneous Fee</option>
-                                                                <option value="Digital System Access Fee">Digital System Access Fee</option>
-                                                                <option value="Registration Fee">Registration Fee</option>
-                                                                <option value="PTA Fee">PTA Fee</option>
-                                                                <option value="Initial Payment Fee">Initial Payment Fee</option>
-                                                                <option value="Full Payment">Full Payment</option>
-                                                            </select>
-                                                        </div>
-                                                    </div> --}}
-                                                    
                                                     <div class="form-group">
+
+                                                        <label class="mt-2">Payment For:<span class="asterisk">*</span></label>
+                                                        <div>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Notarial Fee"> 1. Notarial Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Miscellaneous Fee"> 2. Miscellaneous Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Digital System Access Fee"> 3. Digital System Access Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Registration Fee"> 4. Registration Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="PTA Fee"> 5. PTA Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Initial Payment Fee"> 6. Initial Payment Fee
+                                                            </label>
+                                                            <br>
+                                                            <label>
+                                                                <input type="checkbox" name="payments_for[]" value="Full Payment"> 7. Full Payment
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                                                                 
+                                                    
+                                                    {{-- <div class="form-group">
                                                         <label class="mt-2" for="amount">Payment For:
                                                         <span class="asterisk">*</span></label>
                                                         <div class="dropdown">
+
                                                             <a class="form-control dropdown-toggle text-wrap" href="#" role="button" id="dropdownMenuLink"
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                @if ($transaction->payments_for1)
-                                                                    {{ $transaction->payments_for1 }}
-                                                                @else
-                                                                    Select...
-                                                                @endif
+                                                                select...
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <label class="dropdown-item">
-                                                                    <input type="checkbox" name="payments_for[]" value="Notarial Fee" @if ($transaction->payments_for1 == 'Notarial Fee') checked @endif>Notarial Fee</label>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Miscellaneous Fee" @if ($transaction->payments_for1 == 'Miscellaneous Fee') checked @endif>Miscellaneous Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Digital System Access Fee" @if ($transaction->payments_for1 == 'Digital System Access Fee') checked @endif>Digital System Access Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Registration Fee" @if ($transaction->payments_for1 == 'Registration Fee') checked @endif>Registration Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="PTA Fee" @if ($transaction->payments_for1 == 'PTA Fee') checked @endif>PTA Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Initial Payment Fee" @if ($transaction->payments_for1 == 'Initial Payment Fee') checked @endif>Initial Payment Fee</a>
-                                                                <a class="dropdown-item"><input type="checkbox" name="payments_for[]" value="Full Payment" @if ($transaction->payments_for1 == 'Full Payment') checked @endif>Full Payment</a>
+                                                                    <input type="checkbox" name="payments_for[]" value="Notarial Fee">Notarial Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Miscellaneous Fee">Miscellaneous Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Digital System Access Fee">Digital System Access Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Registration Fee">Registration Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="PTA Fee">PTA Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Initial Payment Fee">Initial Payment Fee
+                                                                </label>
+                                                                <label class="dropdown-item">
+                                                                    <input type="checkbox" name="payments_for[]" value="Full Payment">Full Payment
+                                                                </label>
                                                             </div>
                                                         </div>      
         
-                                                                    <script>
-                                                                        // Collect selected checkboxes into a single name
-                                                                        $(document).ready(function() {
-                                                                        $('.dropdown-item input[type="checkbox"]').on('change', function() {
-                                                                            var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
-                                                                            return this.value;
-                                                                            }).get();
-                                                                            $('input[name="payments_for1"]').val(selectedValues.join(', '));
-                                                                        });
-                                                                        });
-                                                                    </script>
+                                                        <script>
+                                                            // Collect selected checkboxes into a single name
+                                                            $(document).ready(function() {
+                                                                $('.dropdown-item input[type="checkbox"]').on('change', function() {
+                                                                    var selectedValues = $('.dropdown-item input[type="checkbox"]:checked').map(function() {
+                                                                        return this.value;
+                                                                    }).get();
+                                                        
+                                                                    var dropdownMenuLink = $('#dropdownMenuLink');
+                                                                    if (selectedValues.length > 0) {
+                                                                        dropdownMenuLink.text(selectedValues.join(', '));
+                                                                    } else {
+                                                                        dropdownMenuLink.text('Select...');
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script> --}}
+                                                        
                                                            
                                                     </div>
                                                 </div>

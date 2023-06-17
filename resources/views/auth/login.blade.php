@@ -35,7 +35,9 @@
      .display-1  {
       font-size: 7rem; /* Change this value to resize the text */
      }   
-    
+    .qoute {
+        font-size: 25px;
+    }
      @media (max-width: 575.98px) { 
       .display-1  {
       font-size: 1rem; /* Change this value to resize the text */
@@ -112,12 +114,14 @@
        </div>
  
        <div class="col-lg-7 mb-5 mb-lg-0 position-relative">
-           <h1 class="my-5 display-1    fw-bold ls-tight" style="color: #1A2E63)">
+           <h1 class="my-5 display-1 fw-bold ls-tight" style="color: #1A2E63)">
                Payment  <br />
                <span style="color: #1266b4">Validation System</span>
              </h1>
-             <p class="mb-4 opacity-70" style="color: #1A2E63">
-               Thank you for considering our Payment Validation System. We are confident that our system will meet your business needs and help you streamline your payment processing while minimizing the risk of errors or fraud.
+             <p class="mb-4 opacity-70 qoute" style="color: #1A2E63">
+               Thank you for considering our Payment Validation System. 
+               We are confident that our system will meet your business needs 
+               and help you streamline your payment processing while minimizing the risk of errors and time.
              </p>
        </div>
      </div>

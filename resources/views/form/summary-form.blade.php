@@ -199,7 +199,7 @@
             }
 
             .container {
-                width: 100%;
+                width: 90%;
                 padding: 0px;
             }
 
@@ -233,6 +233,10 @@
                 width: 100% !important;
                 margin-top: 10px;
                 margin-bottom: 5px;
+            }
+            .btn2 {
+                width: 50% !important;
+               
             }
 
 
@@ -270,6 +274,9 @@
         }
 
     </style>
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <div class="card-body">
         <div class="tab-content">
             <form action='{{ route('post-submit-form', ['id' => $transactionId]) }}' method="POST">
@@ -818,6 +825,9 @@
                                 </div>
 
                             </div>
+                             <!-- Add this element at the top of your summary -->
+                            <div id="errorText" style="display: none; color: red; font-weight: bold; " class="text-center"></div>
+
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="button-container flexed start">
@@ -829,7 +839,7 @@
                                 <div class="col-md-5">
                                     <div class="">
                                         <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
-                                            <button id="submitButton" class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
+                                            <button id="submitButton" class="btn btn-success" disabled>Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                         
                                     </div>
@@ -841,4 +851,66 @@
             </form>
         </div>
     </div>
+<!-- Add the error modal HTML -->
+<div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white" id="errorModalLabel">Error</h5>
+               
+            </div>
+            <br>
+            <div class="modal-body"></div>
+            <br>
+            <div class="modal-footer">  
+                <a href="{{ route('upload-form', ['id' => $transactionId]) }}" class="btn btn2 btn-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function showErrorModal(message) {
+        var modal = $('#errorModal');
+        var modalBody = modal.find('.modal-body');
+        modalBody.text(message);
+        modal.modal('show');
+    }
+
+    function hideErrorModal() {
+        var modal = $('#errorModal');
+        modal.modal('hide');
+    }
+
+    function checkFormValidity() {
+        var paymentsForInputs = $('input[name^="payments_for"]');
+        var nextBtn = $('#submitButton');
+        var isValid = true;
+
+        paymentsForInputs.each(function() {
+            if ($(this).is(':visible') && $(this).val() === '') {
+                isValid = false;
+                return false; // Exit the loop if any input is empty
+            }
+        });
+
+        nextBtn.prop('disabled', !isValid);
+
+        if (!isValid) {
+            var errorMessage = '"Please fill in all payment details."';
+            showErrorModal(errorMessage);
+        } else {
+            hideErrorModal();
+        }
+    }
+
+    // Call the checkFormValidity function whenever a checkbox value changes
+    $('input[name^="payments_for"]').on('change', checkFormValidity);
+
+    // Trigger the checkFormValidity function initially to set the initial state of the button
+    checkFormValidity();
+</script>
 </x-form-layout>
