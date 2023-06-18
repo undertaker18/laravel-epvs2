@@ -290,7 +290,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput" class="form-control" list="searchOptions"
                                                     placeholder="Fullname" required>
                                                 <datalist id="searchOptions">
@@ -313,35 +313,27 @@
 
                                                             if (nameComponents.length !== 2) {
                                                                 showErrorMessage('Invalid Naming Format.');
+                                                                fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
-                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+                                                                var firstName = nameComponents[1].trim();
 
-                                                                var names = firstNameMiddleInitial.split(' ');
-                                                                var firstName = names[0].trim();
-                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
-
-                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                if (!isNameValid(lastName) || !isNameValid(firstName)) {
                                                                     showErrorMessage('Invalid Naming Format.');
+                                                                    fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage();
+                                                                    fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage();
+                                                            fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
 
-                                                    function isPascalCaseWithDot(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isPascalCase(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isUpperCaseInitialWithDot(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
 
                                                     function showErrorMessage(message) {
@@ -382,7 +374,7 @@
                                                         } else {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -396,7 +388,7 @@
                                                             '') {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked1 = false;
@@ -675,13 +667,14 @@
                             @elseif ($countForm == 2)
 
                             <div class="card-2 m-3 bg-form">
+                                
                                 <h2 class="card-title pt-3 ">Student 01</h2>
                                 <div id="formsContainer" class="card-body p-3">
                                     <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" list="searchOptions" placeholder="Fullname"
                                                     required>
@@ -707,35 +700,27 @@
 
                                                             if (nameComponents.length !== 2) {
                                                                 showErrorMessage('Invalid Naming Format.');
+                                                                fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
-                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+                                                                var firstName = nameComponents[1].trim();
 
-                                                                var names = firstNameMiddleInitial.split(' ');
-                                                                var firstName = names[0].trim();
-                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
-
-                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                if (!isNameValid(lastName) || !isNameValid(firstName)) {
                                                                     showErrorMessage('Invalid Naming Format.');
+                                                                    fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage();
+                                                                    fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage();
+                                                            fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
 
-                                                    function isPascalCaseWithDot(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isPascalCase(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isUpperCaseInitialWithDot(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
 
                                                     function showErrorMessage(message) {
@@ -776,7 +761,7 @@
                                                         } else {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -790,7 +775,7 @@
                                                             '') {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked1 = false;
@@ -1103,7 +1088,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
@@ -1125,35 +1110,27 @@
                                                 
                                                             if (nameComponents02.length !== 2) {
                                                                 showErrorMessage02('Invalid Naming Format.');
+                                                                fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName02 = nameComponents02[0].trim();
-                                                                var firstNameMiddleInitial02 = nameComponents02[1].trim();
+                                                                var firstName02 = nameComponents02[1].trim();
                                                 
-                                                                var names02 = firstNameMiddleInitial02.split(' ');
-                                                                var firstName02 = names02[0].trim();
-                                                                var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
-                                                
-                                                                if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
+                                                                if (!isNameValid02(lastName02) || !isNameValid02(firstName02)) {
                                                                     showErrorMessage02('Invalid Naming Format.');
+                                                                    fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage02();
+                                                                    fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage02();
+                                                            fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
                                                 
-                                                    function isPascalCaseWithDot02(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isPascalCase02(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isUpperCaseInitialWithDot02(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid02(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
                                                 
                                                     function showErrorMessage02(message) {
@@ -1164,8 +1141,8 @@
                                                     function hideErrorMessage02() {
                                                         validationMessage02.style.display = 'none';
                                                     }
-                                                
                                                 </script>
+                                                
                                                 
 
 
@@ -1199,7 +1176,7 @@
                                                         } else {
                                                             studentTypeSelect3.classList.add('is-invalid');
                                                             studentTypeValidationMessage3.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -1214,7 +1191,7 @@
                                                             '') {
                                                             studentTypeSelect3.classList.add('is-invalid');
                                                             studentTypeValidationMessage3.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked3 = false;
@@ -1507,7 +1484,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" list="searchOptions" placeholder="Fullname"
                                                     required>
@@ -1533,35 +1510,27 @@
 
                                                             if (nameComponents.length !== 2) {
                                                                 showErrorMessage('Invalid Naming Format.');
+                                                                fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName = nameComponents[0].trim();
-                                                                var firstNameMiddleInitial = nameComponents[1].trim();
+                                                                var firstName = nameComponents[1].trim();
 
-                                                                var names = firstNameMiddleInitial.split(' ');
-                                                                var firstName = names[0].trim();
-                                                                var middleInitial = names.length > 1 ? names[names.length - 1].trim() : '';
-
-                                                                if (!isPascalCaseWithDot(lastName) || !isPascalCase(firstName) || !isUpperCaseInitialWithDot(middleInitial)) {
+                                                                if (!isNameValid(lastName) || !isNameValid(firstName)) {
                                                                     showErrorMessage('Invalid Naming Format.');
+                                                                    fullNameInput.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage();
+                                                                    fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage();
+                                                            fullNameInput.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
 
-                                                    function isPascalCaseWithDot(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isPascalCase(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-
-                                                    function isUpperCaseInitialWithDot(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
 
                                                     function showErrorMessage(message) {
@@ -1602,7 +1571,7 @@
                                                         } else {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -1616,7 +1585,7 @@
                                                             '') {
                                                             studentTypeSelect1.classList.add('is-invalid');
                                                             studentTypeValidationMessage1.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked1 = false;
@@ -1929,7 +1898,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname2" id="searchInput02"
                                                     class="form-control" list="searchOptions02" placeholder="Fullname"
                                                     required>
@@ -1951,35 +1920,27 @@
                                                 
                                                             if (nameComponents02.length !== 2) {
                                                                 showErrorMessage02('Invalid Naming Format.');
+                                                                fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName02 = nameComponents02[0].trim();
-                                                                var firstNameMiddleInitial02 = nameComponents02[1].trim();
+                                                                var firstName02 = nameComponents02[1].trim();
                                                 
-                                                                var names02 = firstNameMiddleInitial02.split(' ');
-                                                                var firstName02 = names02[0].trim();
-                                                                var middleInitial02 = names02.length > 1 ? names02[names02.length - 1].trim() : '';
-                                                
-                                                                if (!isPascalCaseWithDot02(lastName02) || !isPascalCase02(firstName02) || !isUpperCaseInitialWithDot02(middleInitial02)) {
+                                                                if (!isNameValid02(lastName02) || !isNameValid02(firstName02)) {
                                                                     showErrorMessage02('Invalid Naming Format.');
+                                                                    fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage02();
+                                                                    fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage02();
+                                                            fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
                                                 
-                                                    function isPascalCaseWithDot02(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isPascalCase02(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isUpperCaseInitialWithDot02(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid02(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
                                                 
                                                     function showErrorMessage02(message) {
@@ -1990,8 +1951,8 @@
                                                     function hideErrorMessage02() {
                                                         validationMessage02.style.display = 'none';
                                                     }
-                                                
                                                 </script>
+                                                
 
                                             </div>
                                         </div>
@@ -2023,7 +1984,7 @@
                                                         } else {
                                                             studentTypeSelect3.classList.add('is-invalid');
                                                             studentTypeValidationMessage3.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -2038,7 +1999,7 @@
                                                             '') {
                                                             studentTypeSelect3.classList.add('is-invalid');
                                                             studentTypeValidationMessage3.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked3 = false;
@@ -2359,7 +2320,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
+                                                <label for="Fullname04" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
                                                 <input type="text" name="fullname3" id="searchInput04"
                                                     class="form-control" list="searchOptions04" placeholder="Fullname"
                                                     required>
@@ -2381,35 +2342,27 @@
                                                 
                                                             if (nameComponents04.length !== 2) {
                                                                 showErrorMessage04('Invalid Naming Format.');
+                                                                fullNameInput04.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
                                                                 var lastName04 = nameComponents04[0].trim();
-                                                                var firstNameMiddleInitial04 = nameComponents04[1].trim();
+                                                                var firstName04 = nameComponents04[1].trim();
                                                 
-                                                                var names04 = firstNameMiddleInitial04.split(' ');
-                                                                var firstName04 = names04[0].trim();
-                                                                var middleInitial04 = names04.length > 1 ? names04[names04.length - 1].trim() : '';
-                                                
-                                                                if (!isPascalCaseWithDot04(lastName04) || !isPascalCase04(firstName04) || !isUpperCaseInitialWithDot04(middleInitial04)) {
+                                                                if (!isNameValid04(lastName04) || !isNameValid04(firstName04)) {
                                                                     showErrorMessage04('Invalid Naming Format.');
+                                                                    fullNameInput04.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
                                                                     hideErrorMessage04();
+                                                                    fullNameInput04.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
                                                             hideErrorMessage04();
+                                                            fullNameInput04.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
                                                 
-                                                    function isPascalCaseWithDot04(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isPascalCase04(name) {
-                                                        return /^[A-Z][a-z]*$/.test(name);
-                                                    }
-                                                
-                                                    function isUpperCaseInitialWithDot04(name) {
-                                                        return /^[A-Z]\.$/.test(name);
+                                                    function isNameValid04(name) {
+                                                        return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
                                                 
                                                     function showErrorMessage04(message) {
@@ -2420,8 +2373,8 @@
                                                     function hideErrorMessage04() {
                                                         validationMessage04.style.display = 'none';
                                                     }
-                                                
                                                 </script>
+                                                
                                                 
 
 
@@ -2455,7 +2408,7 @@
                                                         } else {
                                                             studentTypeSelect304.classList.add('is-invalid');
                                                             studentTypeValidationMessage304.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
                                                         enableDisableButton();
                                                     });
@@ -2469,7 +2422,7 @@
                                                             .value === '') {
                                                             studentTypeSelect304.classList.add('is-invalid');
                                                             studentTypeValidationMessage304.textContent =
-                                                                'Please select a student type.';
+                                                                'Please select the student type.';
                                                         }
 
                                                         studentTypeClicked304 = false;
