@@ -526,10 +526,10 @@ class XeroApiController extends Controller
 
     public function getXeroTransactions(Request $request) {
 
-        $dateStart = $request->dateStart ?? Carbon::create(2023, 1, 1)->format('Y-m-d');
+        $dateStart = $request->dateStart ?? Carbon::now()->format('Y-m-d');
         $dateTo = $request->dateTo ?? Carbon::now()->format('Y-m-d');
 
-        $dateFrom = Carbon::createFromFormat('Y-m-d', $dateStart);  
+        $dateFrom = Carbon::createFromFormat('Y-m-d', $dateStart);
         $dateTo = Carbon::createFromFormat('Y-m-d', $dateTo);
 
         $result = [
@@ -569,7 +569,7 @@ class XeroApiController extends Controller
         $authorization = Session::get('xero_access_token_final');
 
         $tenantId = $this->tenantId;
-        $where = urlencode("IsReconciled=False AND Date >= DateTime(". $dateFrom->format('Y') .", ".$dateFrom->format('m').", ".$dateFrom->format('d').") && Date < DateTime(".$dateTo->format('Y').", ".$dateTo->format('m').", ".$dateTo->format('d').")");
+        $where = urlencode("IsReconciled=True AND Date >= DateTime(". $dateFrom->format('Y') .", ".$dateFrom->format('m').", ".$dateFrom->format('d').") && Date < DateTime(".$dateTo->format('Y').", ".$dateTo->format('m').", ".$dateTo->format('d').")");
         $curl = curl_init();
         curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.xero.com/api.xro/2.0/BankTransactions?order=date&where=$where",
