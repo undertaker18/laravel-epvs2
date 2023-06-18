@@ -703,6 +703,33 @@ class FormController extends Controller
                 
                     $data['data']['summary']['studentsInfo'][$index][$labels['each_amount']] = $each_amount;
                     $data['data']['summary']['studentsInfo'][$index][$labels['payments_for']] = $payments_for;
+
+                      // Create a new instance of the Payment model
+                    $xeroInvoice = new XeroInvoice();
+
+                     // student info
+                    $xeroInvoice->fullname = $fullname;
+                    $xeroInvoice->email = $email;
+                    $xeroInvoice->scholarshipStatus = $scholarshipStatus;
+                    $xeroInvoice->department = $department;
+                    $xeroInvoice->grade_year = $grade_year;
+                    $xeroInvoice->student_type = $student_type;
+                    
+                    $xeroInvoice->each_amount = $each_amount;
+                    $xeroInvoice->description = $payments_for;
+
+                    // receipts info
+                    $xeroInvoice->amount = $request->input('amount##0');
+                    $xeroInvoice->reference = $request->input('reference##0');
+                    $xeroInvoice->date = $request->input('date##0');
+                    $xeroInvoice->time = $request->input('time##0');
+
+                    // receipts image source
+                    $xeroInvoice->receipt_type = $request->input('receipt_type##0');
+                    $xeroInvoice->receipt_src =  $request->input('receipt_source##');
+                    // dd($xeroInvoice);
+                    // Save the payment to the database
+                    $xeroInvoice->save();
                 }
                 
                 $data['data']['summary']['receipt'][$labels['reference']] = $request->input('reference##0');

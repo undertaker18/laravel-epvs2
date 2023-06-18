@@ -839,7 +839,7 @@
                                 <div class="col-md-5">
                                     <div class="">
                                         <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
-                                            <button id="submitButton" class="btn btn-success" disabled>Submit <i class="fas fa-arrow-right"></i></button>
+                                            <button type="submit" name="submit" id="submitButton" class="btn btn-success" disabled>Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                         
                                     </div>

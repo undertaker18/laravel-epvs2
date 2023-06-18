@@ -123,9 +123,9 @@
             <script>
                $(function () {
                     $("#example1").DataTable({
-                        "responsive": true,
+                        "responsive": false,
                         "lengthChange": true,
-                        "autoWidth": true,
+                        "autoWidth": false,
                         "buttons": [
                             {
                                 extend: 'copy',

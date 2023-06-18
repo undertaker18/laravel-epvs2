@@ -32,10 +32,10 @@ class XeroApiController extends Controller
         $this->clientSecret = 'gZ5TOXOHSMSKL_j6ym2S3F04RloWTAPonjHYla4x7BEI3PD7';
         $this->authotizarionBase64 = 'NkMzRTJFQTAxOEJFNDg0QUE1OEI1MzA5NkUzNEQwRjY6Z1o1VE9YT0hTTVNLTF9qNnltMlMzRjA0UmxvV1RBUG9uakhZbGE0eDdCRUkzUEQ3';
         $this->tenantId = 'd4f6e066-69ca-455e-ad54-5b69abbcbfe2';
-        $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
-        $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
-        // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
-        // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
+        // $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        // $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
+        $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
         //-- END
 
 

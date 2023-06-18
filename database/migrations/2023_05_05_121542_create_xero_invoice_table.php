@@ -24,9 +24,12 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('department')->nullable();
             $table->string('grade_year')->nullable();
+            $table->string('student_type')->nullable();
             
             // receipts info
             $table->string('description')->nullable(); //payment for
+            $table->string('each_amount')->nullable(); //payment for
+            
             $table->string('amount')->default(0)->nullable(); //in ocr scan
             $table->string('reference')->nullable(); //in ocr scan
             $table->date('date')->nullable();  //in ocr scan
