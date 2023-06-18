@@ -72,7 +72,7 @@
                             <div class="inner ml-3 ">
                                 <p class="mt-2"><b>LAST SYNC</b></p>
                                 <h1 class="mb-3" style="color:#1266B4; font-size: 50px;">
-                                    <b>{{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : ''}}</b>
+                                    <b>{{ isset($xeroAccount[0]) ? \Carbon\Carbon::parse($xeroAccount[0]->created_at)->format('M d, Y h:i:s A') : 'No Sync Until Now'}}</b>
                                 </h1>
                             </div>
 

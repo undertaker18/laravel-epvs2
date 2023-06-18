@@ -27,13 +27,13 @@ class XeroApiController extends Controller
     public function __construct()
     {
         // CHANGE THIS WHEN THERE IS NEW ACCOUNT
-        // DUMMY APP
-        $this->clientId = '6C3E2EA018BE484AA58B53096E34D0F6';
-        $this->clientSecret = 'gZ5TOXOHSMSKL_j6ym2S3F04RloWTAPonjHYla4x7BEI3PD7';
-        $this->authotizarionBase64 = 'NkMzRTJFQTAxOEJFNDg0QUE1OEI1MzA5NkUzNEQwRjY6Z1o1VE9YT0hTTVNLTF9qNnltMlMzRjA0UmxvV1RBUG9uakhZbGE0eDdCRUkzUEQ3';
-        $this->tenantId = 'd4f6e066-69ca-455e-ad54-5b69abbcbfe2';
+        // EPVS APP
+        $this->clientId = '7F688CDD3AB24199AEF10B04B9F85A60';
+        $this->clientSecret = 'FyzsLVLfdzGD5KKXiIY8fPxiy_7XBHx1tAbLmNd3y-BX-qIx';
+        $this->authotizarionBase64 = 'N0Y2ODhDREQzQUIyNDE5OUFFRjEwQjA0QjlGODVBNjA6Rnl6c0xWTGZkekdENUtLWGlJWThmUHhpeV83WEJIeDF0QWJMbU5kM3ktQlgtcUl4';
+        $this->tenantId = '1d80534e-ce2a-413c-8799-7c96dddfeaea';
         $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
-        $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';    
         // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
         // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
         //-- END
@@ -526,7 +526,7 @@ class XeroApiController extends Controller
 
     public function getXeroTransactions(Request $request) {
 
-        $dateStart = $request->dateStart ?? Carbon::now()->format('Y-m-d');
+        $dateStart = $request->dateStart ?? '2023-01-01';
         $dateTo = $request->dateTo ?? Carbon::now()->format('Y-m-d');
 
         $dateFrom = Carbon::createFromFormat('Y-m-d', $dateStart);
@@ -570,6 +570,7 @@ class XeroApiController extends Controller
 
         $tenantId = $this->tenantId;
         $where = urlencode("IsReconciled=True AND Date >= DateTime(". $dateFrom->format('Y') .", ".$dateFrom->format('m').", ".$dateFrom->format('d').") && Date < DateTime(".$dateTo->format('Y').", ".$dateTo->format('m').", ".$dateTo->format('d').")");
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.xero.com/api.xro/2.0/BankTransactions?order=date&where=$where",

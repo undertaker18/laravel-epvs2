@@ -103,8 +103,10 @@
                           @php
                             $id = 0;
                             $sourceLib = [
-                                'SPEND' => 'Spend Money'
-                            ];
+                            'SPEND' => 'Spend Money',
+                          
+                        ];
+
                           @endphp
 
                             @foreach($bdoReceipts as $bdoReceipt)
@@ -117,11 +119,11 @@
                                 <td>{{ \Carbon\Carbon::parse($bdoReceipt['DateString'])->format('M d, Y') }}</td>
                                 <td>{{ $bdoReceipt['Reference'] ?? '' }}</td>
                                 <td>{{ $bdoReceipt['Total'] }}</td>
-                                <td>{{ isset($bdoReceipt['Type']) ? $sourceLib[$bdoReceipt['Type']] : ''}}</td>
+                                <td>{{ isset($bdoReceipt['Type']) && isset($sourceLib[$bdoReceipt['Type']]) ? $sourceLib[$bdoReceipt['Type']] : $bdoReceipt['Type'] }}</td>
                                 <td>{{ $bdoReceipt['Contact']['Name'] }}</td>
                                 <td>{{ $bdoReceipt['BankAccount']['Name'] }}</td>
                             </tr>
-                            @endforeach
+                            @endforeach 
                         </tbody>
                     </table>
                 </div>
