@@ -540,7 +540,7 @@ class XeroApiController extends Controller
         try {
             // API CALL: XERO Transactions
             $result['list'] = json_decode($this->getXeroApiTransactions($dateFrom, $dateTo), true)['BankTransactions'];
-
+            
             // echo '<pre>';
             // var_dump($result['list']);
             // exit;
