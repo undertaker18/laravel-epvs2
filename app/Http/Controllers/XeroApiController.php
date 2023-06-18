@@ -526,7 +526,7 @@ class XeroApiController extends Controller
 
     public function getXeroTransactions(Request $request) {
 
-        $dateStart = $request->dateStart ?? Carbon::now()->format('Y-m-d');
+        $dateStart = $request->dateStart ?? Carbon::create(2023, 1, 1)->format('Y-m-d');
         $dateTo = $request->dateTo ?? Carbon::now()->format('Y-m-d');
 
         $dateFrom = Carbon::createFromFormat('Y-m-d', $dateStart);
