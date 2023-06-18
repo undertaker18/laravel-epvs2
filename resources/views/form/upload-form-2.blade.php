@@ -330,13 +330,13 @@
                                                                 <option value="gcash_instapay">Gcash Powered by Instapay</option>
                                                                 <option value="bdo_mobile_banking"disabled>BDO Mobile Banking <em>(Unavailable)</em></option>
                                                                 <option value="bdo_cash_transaction_slip"disabled>BDO Cash Transaction Slip <em>(Unavailable)</em></option>
-
+                                                                <option value="Others" >Others</option>
                                                                 <option value="Gcash Email" disabled>Gcash thru Email <em>(Unavailable)</em></option>
                                                                 <option value="MetroBank" disabled>MetroBank <em>(Unavailable)</em></option>
                                                                 <option value="UnionBank" disabled>UnionBank <em>(Unavailable)</em></option>
                                                                 <option value="Pesonet Gateway" disabled>Pesonet Gateway <em>(Unavailable)</em></option>
                                                                 <option value="PNB Debit" disabled>PNB Debit <em>(Unavailable)</em></option>
-                                                                <option value="Others" disabled>Others</option>
+                                                                
 
                                                             </select>
                                                             <div id="receiptTypeValidationMessage" class="invalid-feedback"></div>
