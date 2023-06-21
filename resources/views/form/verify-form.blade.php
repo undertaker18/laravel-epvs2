@@ -712,7 +712,7 @@
                                             </div>
                                             <br><br><!-- Add a target element in your HTML -->
                                             {{-- <p id="totalAmount"></p> --}}
-                                            <p style="font-weight: bold; margin-top: 20px;">Total Amount of 3 Student: <span id="totalAmount"></span></p>
+                                            <p style="font-weight: bold; margin-top: 20px;">Total Amount of 2 Student: <span id="totalAmount"></span></p>
                                             <p style="font-weight: bold">Receipt Amount: {{ $inputValue }}</p>
 
                                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
