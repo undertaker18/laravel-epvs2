@@ -140,4 +140,25 @@ class ReceiptController extends Controller
     {
         return view('receipt-image');
     }
+
+  //=================================================================================================================================
+
+    public function archive()
+    {
+        $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
+
+        $totalCountPending = $pendingInvoices->count();
+
+
+        $validInvoices = DB::table('xero_invoice')->where('receiptStatus', 2)->get();
+
+        $totalCountvalid = $validInvoices->count();
+
+
+        $rejectInvoices = DB::table('xero_invoice')->where('receiptStatus', 3)->get();
+
+        $totalCountreject = $rejectInvoices->count();
+
+        return view('receipt-archive', ['invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+    }
 }

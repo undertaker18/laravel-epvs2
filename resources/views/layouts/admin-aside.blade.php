@@ -49,8 +49,8 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a  class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject') ? 'active' : '' }}">
+          <li class="nav-item menu-open">
+            <a  class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject', 'receipt-archive') ? 'active' : '' }}">
               <i class="nav-icon fas fa-receipt"></i>
               <p>
                 Receipts
@@ -60,25 +60,31 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ url('/receipt-valid') }}" class="nav-link {{ Request::is('receipt-valid') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-check-circle nav-icon"></i>
                   <p>Valid</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url('/receipt-pending') }}" class="nav-link {{ Request::is('receipt-pending') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-clock nav-icon"></i>
                   <p>Pending</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url('/receipt-reject') }}" class="nav-link {{ Request::is('receipt-reject') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-times-circle nav-icon"></i>
                   <p>Reject</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/receipt-archive') }}" class="nav-link {{ Request::is('receipt-archive') ? 'active' : '' }}">
+                  <i class="far fa-file-archive nav-icon"></i>
+                  <p>Archive</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <a class="nav-link {{ Request::is('xero-send', 'xero-sent' , 'xero-sync-accounts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -89,19 +95,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ url('/xero-send') }}" class="nav-link {{ Request::is('xero-send') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-paper-plane nav-icon"></i>
                   <p>Send</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url('/xero-sent') }}" class="nav-link {{ Request::is('xero-sent') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-check-circle nav-icon"></i>
                   <p>Sent</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url('/xero-sync-accounts') }}" class="nav-link {{ Request::is('xero-sync-accounts') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-save nav-icon"></i>
                   <p>Sync Account</p>
                 </a>
               </li>

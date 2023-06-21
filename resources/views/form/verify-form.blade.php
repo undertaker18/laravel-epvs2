@@ -324,6 +324,10 @@
         .asterisk{
             color: red;
         }
+        .error {
+        border: 1px solid red;
+        background-color: #ffe6e6;
+        }
     </style>
 
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
@@ -502,9 +506,103 @@
                                                    
                                                 </div>  
                                             </div>
+                                            <br><br><!-- Add a target element in your HTML -->
+                                            {{-- <p id="totalAmount"></p> --}}
+                                            <p style="font-weight: bold; margin-top: 20px;">Total Amount of 3 Student: <span id="totalAmount"></span></p>
+                                            <p style="font-weight: bold">Receipt Amount: {{ $inputValue }}</p>
+
+                                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                            <script>
+                                              $(document).ready(function() {
+                                                // Function to check if any checkbox is selected
+                                                function isAnyCheckboxSelected(checkboxes) {
+                                                    for (var i = 0; i < checkboxes.length; i++) {
+                                                    if (checkboxes[i].checked) {
+                                                        return true;
+                                                    }
+                                                    }
+                                                    return false;
+                                                }
+            
+                                                // Function to validate the form
+                                                function validateForm() {
+                                                    // Get the checkbox groups
+                                                    var checkboxes1 = $("input[name='payments_for[]']");
+                                                    var checkboxes2 = $("input[name='payments_for1[]']");
+                                                    var checkboxes3 = $("input[name='payments_for2[]']");
+
+                                                    var amount1 = $("input[name='each_amount1']").val();
+                                                    var amount2 = $("input[name='each_amount2']").val();
+                                                    var amount3 = $("input[name='each_amount3']").val();
+
+                                                    // Check if at least one checkbox is selected in each group
+                                                    var isCheckboxGroup1Valid = isAnyCheckboxSelected(checkboxes1);
+                                                    var isCheckboxGroup2Valid = isAnyCheckboxSelected(checkboxes2);
+                                                    var isCheckboxGroup3Valid = isAnyCheckboxSelected(checkboxes3);
+
+                                                    // Convert the input values to numbers
+                                                    amount1 = parseFloat(amount1);
+                                                    amount2 = parseFloat(amount2);
+                                                    amount3 = parseFloat(amount3);
+
+                                                    // Check if amount inputs have values
+                                                    var isAmount1Valid = !isNaN(amount1) && amount1 !== "";
+                                                    var isAmount2Valid = !isNaN(amount2) && amount2 !== "";
+                                                    var isAmount3Valid = !isNaN(amount3) && amount3 !== "";
+
+                                                    // Require all input amounts to have a value
+                                                    var areAllAmountsValid = isAmount1Valid && isAmount2Valid && isAmount3Valid && isCheckboxGroup1Valid && isCheckboxGroup2Valid && isCheckboxGroup3Valid;
+
+                                                    // Enable/disable the submit button based on form validation
+                                                    $("#nextBtn").prop("disabled", !areAllAmountsValid);
+            
+                                                    // Return the validation status
+                                                    return isValid;
+                                                }
+
+                                                var inputValue = parseInt("{{ $inputValue }}");
+
+                                                function calculateTotalAmount() {
+                                                // Get the values from the input fields
+                                                var amount1 = parseInt($("input[name='each_amount1']").val());
+                                                var amount2 = parseInt($("input[name='each_amount2']").val());
+                                                var amount3 = parseInt($("input[name='each_amount3']").val());
+                                                var totalAmount = amount1 + amount2 + amount3;
+
+                                                // Update the total amount in the #totalAmount span element
+                                                $("#totalAmount").text(totalAmount);
+
+                                                // Check if the total amount matches the input value
+                                                if (totalAmount !== inputValue) {
+                                                $("#nextBtn").prop("disabled", true);
+                                                } else {
+                                                $("#nextBtn").prop("disabled", false);
+                                                }
+                                                // Display the total amount in the target element
+                                                $("#totalAmount").text(totalAmount);
+                                                }
+
+                                                // Call calculateTotalAmount() on input field blur event (when leaving the input fields)
+                                                $("input[name='each_amount1'], input[name='each_amount2'], input[name='each_amount3']").on("blur", calculateTotalAmount);
+            
+                                                // Call the validateForm function on checkbox change
+                                                $("input[type='checkbox']").on("change", function() {
+                                                    validateForm();
+                                                });
+            
+                                                // Call the validateForm function on amount input change
+                                                $("input[type='number']").on("input", function() {
+                                                    validateForm();
+                                                });
+                                                });
+            
+                                            </script>
+                                            
                                             
         
                                             @elseif ($transaction->fullname2 != null)
+
+                                          
 
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -513,6 +611,7 @@
                                                     <input type="number" class="form-control" id="amount1"
                                                         placeholder="Type Amount..." name="each_amount1"
                                                         value="{{ $transaction->each_amount1 }}">
+
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -564,6 +663,8 @@
                                                     <input type="number" class="form-control" id="amount2"
                                                         placeholder="Type Amount..." name="each_amount2"
                                                         value="{{ $transaction->each_amount2 }}">
+                                                  
+
                                                 </div>
                                             </div>
 
@@ -609,7 +710,92 @@
                                                    
                                                 </div>  
                                             </div>
-                                            
+                                            <br><br><!-- Add a target element in your HTML -->
+                                            {{-- <p id="totalAmount"></p> --}}
+                                            <p style="font-weight: bold; margin-top: 20px;">Total Amount of 3 Student: <span id="totalAmount"></span></p>
+                                            <p style="font-weight: bold">Receipt Amount: {{ $inputValue }}</p>
+
+                                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                            <script>
+                                              $(document).ready(function() {
+                                                // Function to check if any checkbox is selected
+                                                function isAnyCheckboxSelected(checkboxes) {
+                                                    for (var i = 0; i < checkboxes.length; i++) {
+                                                    if (checkboxes[i].checked) {
+                                                        return true;
+                                                    }
+                                                    }
+                                                    return false;
+                                                }
+            
+                                                // Function to validate the form
+                                                function validateForm() {
+                                                    // Get the checkbox groups
+                                                    var checkboxes1 = $("input[name='payments_for[]']");
+                                                    var checkboxes2 = $("input[name='payments_for1[]']");
+                                                 
+                                                    var amount1 = $("input[name='each_amount1']").val();
+                                                    var amount2 = $("input[name='each_amount2']").val();
+
+                                                    // Check if at least one checkbox is selected in each group
+                                                    var isCheckboxGroup1Valid = isAnyCheckboxSelected(checkboxes1);
+                                                    var isCheckboxGroup2Valid = isAnyCheckboxSelected(checkboxes2);
+                                                    
+
+                                                    // Convert the input values to numbers
+                                                    amount1 = parseFloat(amount1);
+                                                    amount2 = parseFloat(amount2);
+                                                  
+                                                    // Check if amount inputs have values
+                                                    var isAmount1Valid = !isNaN(amount1) && amount1 !== "";
+                                                    var isAmount2Valid = !isNaN(amount2) && amount2 !== "";
+
+                                                    // Require all input amounts to have a value
+                                                    var areAllAmountsValid = isAmount1Valid && isAmount2Valid && isCheckboxGroup1Valid && isCheckboxGroup2Valid;
+
+                                                    // Enable/disable the submit button based on form validation
+                                                    $("#nextBtn").prop("disabled", !areAllAmountsValid);
+            
+                                                    // Return the validation status
+                                                    return isValid;
+                                                }
+                                                
+                                                var inputValue = parseInt("{{ $inputValue }}");
+
+                                                function calculateTotalAmount() {
+                                                // Get the values from the input fields
+                                                var amount1 = parseInt($("input[name='each_amount1']").val());
+                                                var amount2 = parseInt($("input[name='each_amount2']").val());
+                                                var totalAmount = amount1 + amount2 ;
+
+                                                // Update the total amount in the #totalAmount span element
+                                                $("#totalAmount").text(totalAmount);
+
+                                                // Check if the total amount matches the input value
+                                                if (totalAmount !== inputValue) {
+                                                $("#nextBtn").prop("disabled", true);
+                                                } else {
+                                                $("#nextBtn").prop("disabled", false);
+                                                }
+                                                // Display the total amount in the target element
+                                                $("#totalAmount").text(totalAmount);
+                                                }
+
+                                                // Call calculateTotalAmount() on input field blur event (when leaving the input fields)
+                                                $("input[name='each_amount1'], input[name='each_amount2']").on("blur", calculateTotalAmount);
+            
+                                                // Call the validateForm function on checkbox change
+                                                $("input[type='checkbox']").on("change", function() {
+                                                    validateForm();
+                                                });
+            
+                                                // Call the validateForm function on amount input change
+                                                $("input[type='number']").on("input", function() {
+                                                    validateForm();
+                                                });
+                                                });
+            
+                                            </script>
         
                                             @else
         
@@ -662,6 +848,60 @@
                                                             value="{{ $inputValue }}" >
                                                     </div>
                                                 </div>
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                                <script>
+                                                  $(document).ready(function() {
+                                                    // Function to check if any checkbox is selected
+                                                    function isAnyCheckboxSelected(checkboxes) {
+                                                        for (var i = 0; i < checkboxes.length; i++) {
+                                                        if (checkboxes[i].checked) {
+                                                            return true;
+                                                        }
+                                                        }
+                                                        return false;
+                                                    }
+                
+                                                    // Function to validate the form
+                                                    function validateForm() {
+                                                        // Get the checkbox groups
+                                                        var checkboxes1 = $("input[name='payments_for[]']");
+  
+                                                        var amount1 = $("input[name='each_amount1']").val();
+
+                                                        // Check if at least one checkbox is selected in each group
+                                                        var isCheckboxGroup1Valid = isAnyCheckboxSelected(checkboxes1);
+                                                    
+                                                        // Convert the input values to numbers
+                                                        amount1 = parseFloat(amount1);
+
+                                                        // Check if amount inputs have values
+                                                        var isAmount1Valid = !isNaN(amount1) && amount1 !== "";
+                                                   
+                                                        // Require all input amounts to have a value
+                                                        var areAllAmountsValid = isAmount1Valid && isCheckboxGroup1Valid;
+    
+                                                        // Calculate the sum of all amounts
+                                                        var totalAmount = amount1;
+    
+                                                        // Enable/disable the submit button based on form validation
+                                                        $("#nextBtn").prop("disabled", !areAllAmountsValid);
+                
+                                                        // Return the validation status
+                                                        return isValid;
+                                                    }
+                
+                                                    // Call the validateForm function on checkbox change
+                                                    $("input[type='checkbox']").on("change", function() {
+                                                        validateForm();
+                                                    });
+                
+                                                    // Call the validateForm function on amount input change
+                                                    $("input[type='number']").on("input", function() {
+                                                        validateForm();
+                                                    });
+                                                    });
+                
+                                                </script>
                                             @endif
         
                                             @endforeach
@@ -699,42 +939,9 @@
                                                 </p>
                                                     <div class="form-group">
                                                         <label class="mt-3" for="amount">Amount of Payment: <span
-                                                                class="asterisk">*</span></label>
-                                                               
-                                                            
-                                                        <input type="text" class="form-control" id="amountorc" placeholder="Edit here..." name="amount" value="{{ $inputValue }}" > 
-                                                                <!-- JavaScript/jQuery -->
-
-                                                                <script>
-                                                                    function validateInput() {
-                                                                    var amount1 = parseFloat(document.getElementById('amount1').value);
-                                                                    var amount2 = parseFloat(document.getElementById('amount2').value);
-                                                                    var amount3 = parseFloat(document.getElementById('amount3').value);
-                                                                    var amountorc = parseFloat(document.getElementById('amountorc').value);
-                                                                    
-                                                                    var sum = amount1 + amount2 + amount3;
-                                                                    
-                                                                    if (sum !== amountorc) {
-                                                                        alert('Error: The sum of amounts is not equal to amount');
-                                                                    } else {
-                                                                        alert('Success: The sum of amounts is equal to amount.');
-                                                                        // Perform further actions if the sum is correct
-                                                                    }
-                                                                    }
-                                                                </script>
-
-                                                                                {{-- 
-                                                                @if ($inputValue < $eachAmount)
-                                                                    <p  style="font-size: 14px; color: red;">
-                                                                        Please divide the amount correctly. It should match the in your receipt. The Total Amount is <b>{{ $eachAmount }}</b>.</p>
-                                                                @elseif ($inputValue > $eachAmount)
-                                                                    <p  style="font-size: 14px; color: red;">
-                                                                        Please divide the amount correctly. It should match the in your receipt. The Total Amount is <b>{{ $eachAmount }}</b>.</p>
-                                                                @else
-                                                                    
-                                                                @endif --}}
-                                                               
-                                                                                                                                
+                                                                class="asterisk">*</span></label>                           
+                                                        <input type="text" class="form-control" id="amountorc" placeholder="Edit here..." name="amount" value="{{ $inputValue }}">
+                                                        
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="mt-3" for="reference">Reference Number: <span
@@ -762,6 +969,8 @@
                                                                 value="{{$details['ocr_result']['time']}}" name="time">
                                                         </div>
                                                     </div>
+
+                                                
                                             </div>
 
                                         </div>
@@ -783,57 +992,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-
-                                <script>
-                                    function checkFormValidity() {
-                                        var paymentsForCheckboxes = document.querySelectorAll('input[name="payments_for[]"]');
-                                        var paymentsFor1Checkboxes = document.querySelectorAll('input[name="payments_for1[]"]');
-                                        var paymentsFor2Checkboxes = document.querySelectorAll('input[name="payments_for2[]"]');
-                                        var nextBtn = document.getElementById('nextBtn');
-                                        var isValid = false;
-                                
-                                        paymentsForCheckboxes.forEach(function (checkbox) {
-                                            if (checkbox.checked) {
-                                                isValid = true;
-                                            }
-                                        });
-
-                                        paymentsFor1Checkboxes.forEach(function (checkbox) {
-                                            if (checkbox.checked) {
-                                                isValid = true;
-                                            }
-                                        });
-                                
-                                        paymentsFor2Checkboxes.forEach(function (checkbox) {
-                                            if (checkbox.checked) {
-                                                isValid = true;
-                                            }
-                                        });
-                                
-                                        nextBtn.disabled = !isValid;
-                                    }
-                                
-                                    // Call the checkFormValidity function whenever a checkbox is clicked
-                                    var paymentsForCheckboxes = document.querySelectorAll('input[name="payments_for[]"]');
-                                    paymentsForCheckboxes.forEach(function (checkbox) {
-                                        checkbox.addEventListener('click', checkFormValidity);
-                                    }); 
-
-                                    var paymentsFor1Checkboxes = document.querySelectorAll('input[name="payments_for1[]"]');
-                                    paymentsFor1Checkboxes.forEach(function (checkbox) {
-                                        checkbox.addEventListener('click', checkFormValidity);
-                                    });
-                                
-                                    var paymentsFor2Checkboxes = document.querySelectorAll('input[name="payments_for2[]"]');
-                                    paymentsFor2Checkboxes.forEach(function (checkbox) {
-                                        checkbox.addEventListener('click', checkFormValidity);
-                                    });
-                                
-                                    // Trigger the checkFormValidity function initially to set the initial state of the button
-                                    checkFormValidity();
-                                </script>
-                                
+                                </div>  
                                 
                             </div>
                         </div>

@@ -192,6 +192,7 @@ class FormController extends Controller
 
 
         return redirect()->route('upload-form', ['id' => $transactionId]);
+
     }
     
 
@@ -326,15 +327,20 @@ class FormController extends Controller
         // $username = 'madelyn05romero14';
         // $api_key = 'ea013a433919679d98b6f59d6eb17dec';
 
-        $client_id ='vrfYcKS1mltDJTS8E7o9e5J8zYrd6pnfUI7Pf2P';
-        $client_secret = 'X1P96oIP5MbWgNouMSOJlDSlB5dElEomeADAhzUGV6LbU6zI5BnFafOgxeepu134odhGG5RGInU3fP8WvRgdltezsPBBUHICmdxRkzdrp1juiiefLbj5Mi75sYOLlOJ1';
-        $username = 'candinatoaaron';   
-        $api_key = 'ff1c3e18acfd4c63b3e72a20f41595e5';
+        // $client_id ='vrfYcKS1mltDJTS8E7o9e5J8zYrd6pnfUI7Pf2P';
+        // $client_secret = 'X1P96oIP5MbWgNouMSOJlDSlB5dElEomeADAhzUGV6LbU6zI5BnFafOgxeepu134odhGG5RGInU3fP8WvRgdltezsPBBUHICmdxRkzdrp1juiiefLbj5Mi75sYOLlOJ1';
+        // $username = 'candinatoaaron';   
+        // $api_key = 'ff1c3e18acfd4c63b3e72a20f41595e5';
 
         // $client_id ='vrfXzad78JD6mldXUL5241huPdFBmYM8PsnchRj';
         // $client_secret = 'MpLyTGlKTwHJObVZ4DUlvU9JRDNugemOX6JjpCY8w73Uu8ErRycN04zMXJ2Hrx9tPXylnf31hxSeaM8HaHxjGNiYmDNFhwo29p0hi3pkVg67jt8JWr8w3fgbokbGfEj6';
         // $username = 'dinacandinato';
         // $api_key = 'b4f8fcce5b3a6998b1d7496b3f7d4305';
+
+        $client_id = 'vrf8NTvFrwzuwEfXK3JGyp6BMRgmSley7JXoNzD';
+        $client_secret = 'N6egfj5HvcsTgm6ela8wpFiKGstjsI1nZxaiUAumsdae0XuWXbyJ6sbsAC3EOaI7i1ZSbcFcYimL1ryfWE6npeYvvNRpPyeEzAi4gjVoTvNRLaPCt6LGfb3KrBbbbjlf';
+        $username = 'evalynoliva15';
+        $api_key = 'b436038632c51af02d8667da3dc692c9';
 
 
 
@@ -775,7 +781,7 @@ class FormController extends Controller
         private function getDataBdoMobileBanking($json_response) {
            
             if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference No.', 'Send Money Type');
@@ -786,7 +792,7 @@ class FormController extends Controller
          private function getDataGcashInstapay($json_response) {
             // Check if any text is not detected
             if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             // Process the data
@@ -801,7 +807,7 @@ class FormController extends Controller
         private function getDataGcash($json_response) {
 
             if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
@@ -811,13 +817,13 @@ class FormController extends Controller
 
         private function getDataInstapay($json_response) {
 
-            if (empty($json_response['date']) || empty($json_response['invoice_number']) || empty($json_response['subtotal'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+            if (empty($json_response['date']) || empty($json_response['invoice_number']) ) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
-            $gcashFinalResult['amount'] = floatval($json_response['subtotal']);
+            $gcashFinalResult['amount'] = floatval($json_response['total']);
             return $gcashFinalResult;
         }
 
@@ -825,7 +831,7 @@ class FormController extends Controller
 
             // Check if any text is not detected
             if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['ocr_text'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             $gcashFinalResult['dateTime'] = $json_response['date'];
@@ -844,7 +850,7 @@ class FormController extends Controller
         private function getDataOthers($json_response) {
 
             if (empty($json_response['date']) || empty($json_response['invoice_number']) || empty($json_response['subtotal'])) {
-                return ['error' => 'The uploaded file is not a receipt. Please try again.'];
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             $gcashFinalResult['dateTime'] = $json_response['date'];

@@ -76,10 +76,10 @@
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
                   <p class="mt-3" >TOTAL RECEIPTS</p>
-                  <h1 style="font-size: 50px;">{{ $totalCount }}</h1>
+                  <h1 style="color:#1266B4; font-size: 50px;">{{ $totalCount }}</h1>
 
                 </div>
-                <div class="icon" style="color: black;">
+                <div class="icon" style="color: #1266B4;">
                   <i class="ion ion-card mr-2 mt-2"></i>
                 </div>
                 <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->

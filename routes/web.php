@@ -90,6 +90,10 @@ Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-image');
 
+Route::get('/receipt-archive', [ReceiptController::class, 'archive'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-archive');
+
 /* For Xero intergration */
 
 Route::get('/xero-send', [XeroController::class, 'send'])

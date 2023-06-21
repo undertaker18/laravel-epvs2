@@ -44,8 +44,9 @@ return new class extends Migration
             
            
             // for status
-            $table->string('status')->default(0); // 0 - pending, 1 - pending
-            $table->enum('receiptStatus', ['1', '2', '3'])->default(1);   // 1 - pending , 2 - valid , 3 - reject 
+            $table->string('status')->default(0); // 0 - send, 1 - sent and see the registrar staff
+            
+            $table->enum('receiptStatus', ['1', '2', '3', '4'])->default(1);   // 1 - pending , 2 - valid  and see the registrar staff, 3 - reject  4 - archive 
             
             $table->timestamp('created_at')->useCurrent();
             

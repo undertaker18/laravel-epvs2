@@ -285,6 +285,9 @@
          label{
             color: #000000;
          }
+         .font-error{
+            font-size: 10px !important;
+         }
         
     </style>
     <div class="card-body">
@@ -344,11 +347,11 @@
                                                     </div>
                                             </div>
                                         </div>
-                                      
+                                        <br>
                                         <div class="drag-area1 mx-auto col-md-7 col-sm-12">
                                             <div class="">
                                                 @if($errors->any())
-                                                    <div class="alert alert-danger">
+                                                    <div class="alert alert-danger" style="font-size: 10px" >
                                                         <ul>
                                                             @foreach ($errors->all() as $error)
                                                                 <li>{{ $error }}</li>

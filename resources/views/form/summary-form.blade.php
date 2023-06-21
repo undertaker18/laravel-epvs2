@@ -887,6 +887,7 @@
 
     function checkFormValidity() {
         var paymentsForInputs = $('input[name^="payments_for"]');
+        var eachAmountInputs = $('input[name^="each_amount"]');
         var nextBtn = $('#submitButton');
         var isValid = true;
 
@@ -897,10 +898,17 @@
             }
         });
 
+        eachAmountInputs.each(function() {
+            if ($(this).is(':visible') && $(this).val() === '') {
+                isValid = false;
+                return false; // Exit the loop if any input is empty
+            }
+        });
+
         nextBtn.prop('disabled', !isValid);
 
         if (!isValid) {
-            var errorMessage = '"Please fill in all payment details."';
+            var errorMessage = '"Please go back and fill in all payment details."';
             showErrorModal(errorMessage);
         } else {
             hideErrorModal();
@@ -909,6 +917,7 @@
 
     // Call the checkFormValidity function whenever a checkbox value changes
     $('input[name^="payments_for"]').on('change', checkFormValidity);
+    $('input[name^="each_amount"]').on('change', checkFormValidity);
 
     // Trigger the checkFormValidity function initially to set the initial state of the button
     checkFormValidity();
