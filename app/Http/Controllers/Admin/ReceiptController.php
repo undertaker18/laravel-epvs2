@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\receiptrejected;
 use App\Models\XeroInvoice;
+use App\Models\BdoReceipt;
+use App\Models\Receipt;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReceiptArchived;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
 class ReceiptController extends Controller
@@ -34,6 +37,11 @@ class ReceiptController extends Controller
 //=================================================================================================================================
     public function pending()
     {
+
+        $update_status = XeroInvoice::all();
+
+        // dd($update_status);
+
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
         $totalCountPending = $pendingInvoices->count();
@@ -48,7 +56,7 @@ class ReceiptController extends Controller
 
         $totalCountreject = $rejectInvoices->count();
 
-        return view('receipt-pending', ['invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+        return view('receipt-pending', ['update_status' => $update_status,'invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
     }
 //=================================================================================================================================
 
@@ -161,4 +169,63 @@ class ReceiptController extends Controller
 
         return view('receipt-archive', ['invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
     }
+
+    //=========================================================================================================================================
+
+    // elseif ($update_status->receiptStatus == 2) {
+            
+    //     // Get the Xero invoice
+    //     $xeroInvoice = XeroInvoice::where('reference', $update_status->xero_invoice)->first();
+
+    //     // Send email for archive
+    //     Mail::to($update_status->email)->send(new ReceiptArchived($update_status, $xeroInvoice));
+
+    //     $update_status->receiptStatus = 4; // Update to "archive"
+
+    public function updateReceiptStatus()
+    {
+        // Get all the receipts
+        $receipts = XeroInvoice::all();
+        
+        // $lastUploadDate = DB::table('bdo_receipt')
+        //     ->max('created_at');
+        $lastUploadDate = Carbon::create(2023, 6, 30);
+
+        foreach ($receipts as $receipt) {
+            $reference = $receipt->reference;
+            
+            $bdo_receipt = DB::table('bdo_receipt')
+                ->where('description', $reference)
+                ->first();
+            
+            // Check if a matching bdo_receipt record exists
+            if ($bdo_receipt) {
+                $receipt->receiptStatus = 2; // Update to "valid and see the registrar staff"
+            } else {
+                // Check if the reference date is greater than the last upload date
+                if ($receipt->date <= $lastUploadDate) {
+                    $receipt->receiptStatus = 1; // No match, keep the original status
+                } else {
+                    $receipt->receiptStatus = 3; // Update to "reject" for no match within the date span
+                }
+            }
+        // dd($bdo_receipt)  ;  
+            // Save the changes for each receipt
+            $receipt->save();
+        }
+        
+        return redirect()->back()->with('status', 'Receipts updated successfully!');
+    }
+    
+    //     xero_invoices
+    // +----+----------------+------------------+------------------+---------------------+
+    // | id | receiptStatus  | xero_invoice     | bdo_transaction  | date                |
+    // +----+----------------+------------------+------------------+---------------------+
+    // | 1  | 1              | INV-2021-001     | INV-2021-001     | 2021-05-15 10:00:00 |
+    // | 2  | 1              | INV-2021-002     | INV-2021-003     | 2022-01-10 14:30:00 |
+    // | 3  | 2              | INV-2021-003     | INV-2021-003     | 2023-03-20 09:45:00 |
+    // | 4  | 1              | INV-2021-004     | INV-2021-004     | 2022-11-05 16:20:00 |
+    // +----+----------------+------------------+------------------+---------------------+
+
+
 }

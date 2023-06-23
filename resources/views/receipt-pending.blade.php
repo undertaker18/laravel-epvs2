@@ -1,19 +1,43 @@
 <x-admin-layout>
+   
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper" style="background-color: #EAF1F8;">
+
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">ENROLLMENT RECEIPT</h1>
+                      
                     </div><!-- /.col -->
-                    <!--  <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </div> /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">
+                                @if (session('status'))
+                                    <div class="text-success mr-5">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                            </li>
+                            
+                                <form action="{{ route('receipts.updateStatus') }}" method="POST">
+                                    @csrf
+                                    
+                                    <button type="submit" class="btn btn-default mr-4 mb-3" style="background-color: #1266B4; color: #ffffff; width: 220px;">
+                                        Update Receipt Validation
+                                    </button>
+                                </form> 
+                           
+                                                       
+                        {{-- <button type="button" class="btn btn-default mr-4 mb-3"
+                                style="background-color: #1266B4; color: #ffffff;  width: 175px; " data-toggle="modal"
+                                data-target="#myModal">AUTHENTICATE</button> --}}
+                      
+                       
+                      </ol>
+                      </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

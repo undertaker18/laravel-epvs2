@@ -37,11 +37,6 @@ return new class extends Migration
 
             $table->string('receipt_type')->nullable();
             $table->string('receipt_src')->nullable();
-
-          
-           
-            
-            
            
             // for status
             $table->string('status')->default(0); // 0 - send, 1 - sent and see the registrar staff

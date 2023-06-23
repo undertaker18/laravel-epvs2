@@ -75,11 +75,70 @@
               <!-- small box -->
               <div class="small-box" style="background-color: #FFFFFF;">
                 <div class="inner ml-3 ">
-                  <p class="mt-3" >TOTAL RECEIPTS</p>
-                  <h1 style="color:#1266B4; font-size: 50px;">{{ $totalCount }}</h1>
+                  <p class="mt-3" >ARCHIVE RECEIPTS</p>
+                  <h1 style="color:gray; font-size: 50px;">{{ $totalCountarchive }}</h1>
+
+                </div>
+                <div class="icon" style="color: gray;">
+                  <i class="ion ion-card mr-2 mt-2"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box" style="background-color: #FFFFFF;">
+                <div class="inner ml-3 ">
+                  <p class="mt-3">SENT TO XERO</p>
+                  <h1 style="color:#1266B4; font-size: 50px;" >{{  $totalCountsent }}</h1>
 
                 </div>
                 <div class="icon" style="color: #1266B4;">
+                  <i class="ion ion-card mr-2 mt-2"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-8">
+              <!-- small box -->
+              <div class="small-box" style="background-color: #FFFFFF;">
+                <div class="inner ml-3 ">
+                  <p class="mt-3" >SEND TO XERO</p>
+                  <h1 style="color:#1266B4; font-size: 50px;">{{ $totalCountsend }}</h1>
+
+                </div>
+                <div class="icon" style="color:#1266B4; ">
+                  <i class="ion ion-card mr-2 mt-2"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </div>
+            
+
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box" style="background-color: #FFFFFF;">
+                <div class="inner ml-3 ">
+                  <p class="mt-3">SYNCED CONTACTS TO XERO</p>
+                  <h1 style="color:#1266B4; font-size: 50px;">{{ $totalCountsync }}</h1>
+
+                </div>
+                <div class="icon" style="color: #1266B4;">
+                  <i class="fas fa-sync-alt mr-2 mt-2"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box" style="background-color: #FFFFFF;">
+                <div class="inner ml-3 ">
+                  <p class="mt-3" >TOTAL RECEIPTS</p>
+                  <h1 style="color:#000000; font-size: 50px;">{{ $totalCount }}</h1>
+
+                </div>
+                <div class="icon" style="color: #000000;">
                   <i class="ion ion-card mr-2 mt-2"></i>
                 </div>
                 <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
@@ -257,6 +316,8 @@
                               Valid
                           @elseif ($invoice->receiptStatus === '3')
                               Reject
+                          @elseif ($invoice->receiptStatus === '4')
+                              Archive
                           @else
                               Unknown
                           @endif
@@ -309,59 +370,61 @@
     }
 
 </script>
+
+
+
 <script>
-  
-$(function () {
-  
+  $(function () {
+    // Get the dynamic data from the controller
+    var monthLabels = {!! json_encode($monthLabels) !!};
+    var validReceipts = {!! json_encode($validReceipts) !!};
+    var pendingReceipts = {!! json_encode($pendingReceipts) !!};
+    var rejectReceipts = {!! json_encode($rejectReceipts) !!};
 
-  /* Chart.js Charts */
-  // Sales chart
-  var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d');
-  // $('#revenue-chart').get(0).getContext('2d');
-    var validReceipts = @json($validReceipts);
-    var pendingReceipts = @json($pendingReceipts);
-    var rejectReceipts = @json($rejectReceipts);
+    /* Chart.js Charts */
+    // Sales chart
+    var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d');
 
-  var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'VALID RECEIPTS',
-        backgroundColor: "#008000",
-        borderColor: 'rgba(60,141,188,0.8)',
-        pointRadius: false,
-        pointColor: '#3b8bba',
-        pointStrokeColor: 'rgba(60,141,188,1)',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: validReceipts
-      },
-      {
-        label: 'PENDING RECEIPTS',
-        backgroundColor:"#EC7100",
-        borderColor: 'rgba(210, 214, 222, 1)',
-        pointRadius: false,
-        pointColor: 'rgba(210, 214, 222, 1)',
-        pointStrokeColor: '#c1c7d1',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: pendingReceipts
-      } 
-      ,
-      {
-        label: 'REJECT RECEIPTS',
-        backgroundColor: "#FF0000",
-        borderColor: 'rgba(210, 214, 222, 1)',
-        pointRadius: false,
-        pointColor: 'rgba(210, 214, 222, 1)',
-        pointStrokeColor: '#c1c7d1',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: rejectReceipts
-      }
-    ]
-  };
-
+    var salesChartData = {
+      labels: monthLabels,
+      datasets: [
+        {
+          label: 'VALID RECEIPTS',
+          backgroundColor: "#008000",
+          borderColor: 'rgba(60,141,188,0.8)',
+          pointRadius: false,
+          pointColor: '#3b8bba',
+          pointStrokeColor: 'rgba(60,141,188,1)',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data: validReceipts
+        },
+        {
+          label: 'PENDING RECEIPTS',
+          backgroundColor:"#EC7100",
+          borderColor: 'rgba(210, 214, 222, 1)',
+          pointRadius: false,
+          pointColor: 'rgba(210, 214, 222, 1)',
+          pointStrokeColor: '#c1c7d1',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: pendingReceipts
+        },
+       
+        {
+          label: 'REJECT RECEIPTS',
+          backgroundColor: "#FF0000",
+          borderColor: 'rgba(210, 214, 222, 1)',
+          pointRadius: false,
+          pointColor: 'rgba(210, 214, 222, 1)',
+          pointStrokeColor: '#c1c7d1',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: rejectReceipts
+        }
+      ]
+    };
+    
   var salesChartOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -396,7 +459,7 @@ $(function () {
     labels: ['Elementary', 'Junior High', 'Senior High', 'College'],
     datasets: [{
       label: 'ALL',
-      data: [12, 19, 3, 5],
+      data: @json($data),
       backgroundColor: [
         '#8B96B4',
         '#1266B4',

@@ -78,6 +78,12 @@ Route::get('/receipt-pending', [ReceiptController::class, 'pending'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-pending');
 
+Route::post('/receipts/update-status', [ReceiptController::class, 'updateReceiptStatus'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipts.updateStatus');
+
+
+
 Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-reject');
@@ -114,12 +120,18 @@ Route::get('/reports', [ReportController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('reports');
 
-// Bdo Receipts
 
+// Bdo Receipts
 
 Route::get('/bdo-xero-receipts', [XeroApiController::class, 'getXeroTransactions'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-xero-receipts');
+
+// Bdo Receipts
+
+Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
+->middleware(['auth', 'verified'])
+->name('bdo-receipts');
 
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
     ->middleware(['auth', 'verified'])

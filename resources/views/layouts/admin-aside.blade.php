@@ -101,7 +101,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{ url('/xero-sent') }}" class="nav-link {{ Request::is('xero-sent') ? 'active' : '' }}">
-                  <i class="far fa-check-circle nav-icon"></i>
+                  <i class="fas fa-envelope-open-text nav-icon"></i>
                   <p>Sent</p>
                 </a>
               </li>
@@ -122,23 +122,42 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ url('/bdo-xero-receipts') }}" class="nav-link {{ Request::is('bdo-xero-receipts') ? 'active' : '' }}">
+
+          <li class="nav-item menu-open">
+            <a  class="nav-link {{ Request::is('bdo-xero-receipts', 'bdo-receipts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-money-bill"></i>
               <p>
                 BDO Transactions
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('/bdo-xero-receipts') }}" class="nav-link {{ Request::is('bdo-xero-receipts') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-exchange-alt"></i>
+                  <p>
+                    Xero Transactions
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/bdo-receipts') }}" class="nav-link {{ Request::is('bdo-receipts') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-upload"></i>
+                  <p>
+                   Upload Transactions
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="{{ url('/system-log') }}" class="nav-link {{ Request::is('system-log') ? 'active' : '' }}">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                System Log
+                Activity Log
               </p>
             </a>
           </li>
-        </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
