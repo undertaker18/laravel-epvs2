@@ -188,9 +188,9 @@ class ReceiptController extends Controller
         // Get all the receipts
         $receipts = XeroInvoice::all();
         
-        // $lastUploadDate = DB::table('bdo_receipt')
-        //     ->max('created_at');
-        $lastUploadDate = Carbon::create(2023, 6, 30);
+        $lastUploadDate = DB::table('bdo_receipt')
+            ->max('created_at');
+        // $lastUploadDate = Carbon::create(2023, 6, 22);
 
         foreach ($receipts as $receipt) {
             $reference = $receipt->reference;
@@ -204,7 +204,7 @@ class ReceiptController extends Controller
                 $receipt->receiptStatus = 2; // Update to "valid and see the registrar staff"
             } else {
                 // Check if the reference date is greater than the last upload date
-                if ($receipt->date <= $lastUploadDate) {
+                if ($receipt->date >= $lastUploadDate) {
                     $receipt->receiptStatus = 1; // No match, keep the original status
                 } else {
                     $receipt->receiptStatus = 3; // Update to "reject" for no match within the date span
@@ -215,7 +215,7 @@ class ReceiptController extends Controller
             $receipt->save();
         }
         
-        return redirect()->back()->with('status', 'Receipts updated successfully!');
+        return redirect()->back()->with('status', 'Receipts validated successfully!');
     }
     
     //     xero_invoices
