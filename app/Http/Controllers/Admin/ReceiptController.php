@@ -12,6 +12,7 @@ use App\Mail\ReceiptArchived;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ReceiptController extends Controller
 {
@@ -226,6 +227,4 @@ class ReceiptController extends Controller
     // | 3  | 2              | INV-2021-003     | INV-2021-003     | 2023-03-20 09:45:00 |
     // | 4  | 1              | INV-2021-004     | INV-2021-004     | 2022-11-05 16:20:00 |
     // +----+----------------+------------------+------------------+---------------------+
-
-
 }
