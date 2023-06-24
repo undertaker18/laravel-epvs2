@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,16 +11,11 @@ class SystemlogController extends Controller
 {
     public function index()
     {
-        $sessions = Session::all();
+        $logs = DB::table('activity_log')->get(); // Retrieve all records from the table
         
-        array_walk_recursive($sessions, function (&$value) {
-            if (is_string($value)) {
-                $value = htmlspecialchars($value);
-            }
-        });
-
-        return view('system-log', compact('sessions'));
+        return view('system-log', compact('logs'));
     }
+    
 
 //     xero_invoices
 // +----+----------------+------------------+------------------+---------------------+

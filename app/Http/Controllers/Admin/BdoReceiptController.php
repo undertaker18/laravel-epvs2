@@ -13,6 +13,8 @@ class BdoReceiptController extends Controller
 {
     public function timestamp()
     {
+        activity()->log('Viewed BDO Transactions');
+
         $bdoReceipts = BdoReceipt::orderBy('posting_datetime', 'desc')->paginate(100);
         $latestUploadTimestamp = BdoReceipt::latest('created_at')->value('created_at');
         
@@ -24,6 +26,8 @@ class BdoReceiptController extends Controller
     
     public function upload(Request $request)
 {
+    activity()->log('Upload BDO Transactions');
+
     $file = $request->file('csv_file');
 
     if (!$file) {

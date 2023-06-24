@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">SYSTEM LOG</h1>
+                        <h1 class="m-0">ACTIVITY LOG</h1>
                     </div><!-- /.col -->
                     <!--  <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -25,48 +25,32 @@
             <div class="card" style="background-color: ; ">
                 <div class="card-body"  style="color: #000000; ">
                     <table id="example1" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Key</th>
-                                <th>Value</th>
-                                <th>Exists</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($sessions as $key => $value)
+                            <thead>
                                 <tr>
-                                    <td>{{ $key }}</td>
-                                    <td>
-                                        @if(is_array($value))
-                                            <ul>
-                                                @foreach($value as $item)
-                                                    <li>
-                                                        @if(is_string($item))
-                                                            {{ htmlspecialchars($item) }}
-                                                        @else
-                                                            {{ var_dump($item) }}
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            @if(is_string($value))
-                                                {{ htmlspecialchars($value) }}
-                                            @else
-                                                {{ var_dump($value) }}
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(session()->has($key))
-                                            Yes
-                                        @else
-                                            No
-                                        @endif
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Log Name</th>
+                                    <th>Description</th>
+                                    <th>Subject</th>
+                                    <th>Causer</th>
+                                    <th>Properties</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach($logs as $log)
+                                <tr>
+                                    <td>{{ $log->id }}</td>
+                                    <td>{{ $log->log_name }}</td>
+                                    <td>{{ $log->description }}</td>
+                                    <td>{{ $log->subject_type }} ({{ $log->subject_id }})</td>
+                                    <td>{{ $log->causer_type }} ({{ $log->causer_id }})</td>
+                                    <td>{{ $log->properties }}</td>
+                                    <td>{{ $log->created_at }}</td>
+                                    <td>{{ $log->updated_at }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>               
                     </table>
                     {{-- <table id="example1" class="table table-bordered  table-hover">
                         <thead>

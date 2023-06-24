@@ -83,7 +83,7 @@
                                     style="background-color: #FFFFFF;  border: 5px solid black; border-radius: 12px; color: black;">
                                     <div class="inner ml-3 ">
                                         <p class="mt-2">ARCHIVE RECEIPTS</p>
-                                        <h1 style="color: black; font-size: 60px;"><b>{{ $totalCountreject }}</b></h1>
+                                        <h1 style="color: black; font-size: 60px;"><b>{{ $totalCountarchive }}</b></h1>
                                     </div>
 
                                     <div class="icon">
@@ -99,14 +99,18 @@
                     <!-- /.row -->
             </section>
             <!-- right col -->
-            <form method="POST" action="/receipt-reject">
-            <div style="text-align: right;  ">
-                @csrf
-                <input type="hidden" name="csv_ids" id="csv_ids">
-                <button type="submit" id="myButton" class="btn btn-default mr-4 mb-3" style="background-color: #D74747; color: #ffffff; width: 170px;">
-                <i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;SEND TO EMAIL</button>
-            </div>
+            <form method="POST" action="{{ route('receipt-archive-delete') }}">
+                <div style="text-align: right;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="delete_ids" id="delete_ids">
+                    <button type="submit" id="" class="btn btn-default mr-4 mb-3 delete-button" style="background-color: #D74747; color: #ffffff; width: 170px;">
+                        <i class="fas fa-trash-alt"></i>&nbsp;&nbsp;&nbsp;Delete
+                    </button>
+                </div>
             </form>
+            
+            
             <!-- data tables -->
             <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
                 <!-- Title Form -->
@@ -147,72 +151,57 @@
                             <thead>
                                 <tr> 
                                     <th>Select</th>
-                                    <th>Invoice ID</th>
-                                
+                                    <th hidden>Invoice ID</th>
+                                    <th>Full Name</th>
                                     <th>Description</th>
                                     <th>Amount</th>
                                     <th>Reference</th>
                                     <th>Email</th>
                                     <th>Receipt Type</th>
                                     <th>Receipt Source</th>
-                                    <th>Receipt Status</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($invoices as $invoice)
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="my-checkbox" name="my-checkbox"
-                                            class="checkbox invoice_checkbox" data-id="{{$invoice->id}}">
-                                    </td>
-                                    <td>{{ $invoice->id }}</td>
+                                @foreach ($archiveInvoices as $invoice)
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="invoice_checkbox" class="checkbox invoice_checkbox" data-id="{{$invoice->id}}">
 
-                                    <td>{{ $invoice->description }}</td>
-                                    <td>{{ $invoice->amount }}</td>
-                                    <td>{{ $invoice->reference }}</td>                                   
-                                    <td>{{ $invoice->email }}</td>
-                                    <td>{{ $invoice->receipt_type }}</td>
-                                    <td>
-                                        @if ($invoice->receipt_src)
-                                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">
-                                                <i class="fas fa-eye"></i> View Image
-                                            </button>
-                                            
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="receiptModal{{ $invoice->id }}" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel{{ $invoice->id }}" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="receiptModalLabel{{ $invoice->id }}">Receipt Image</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img src="{{ $invoice->receipt_src }}" alt="Receipt Image" style="width: 100%;">
+                                        </td>
+                                        <td hidden>{{ $invoice->id }}</td>
+                                        <td>{{ $invoice->fullname }}</td>
+                                        <td>{{ $invoice->description }}</td>
+                                        <td>{{ $invoice->amount }}</td>
+                                        <td>{{ $invoice->reference }}</td>                                   
+                                        <td>{{ $invoice->email }}</td>
+                                        <td>{{ $invoice->receipt_type }}</td>
+                                        <td>
+                                            @if ($invoice->receipt_src)
+                                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">
+                                                    <i class="fas fa-eye"></i> View Image
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="receiptModal{{ $invoice->id }}" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel{{ $invoice->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="receiptModalLabel{{ $invoice->id }}">Receipt Image</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="{{ $invoice->receipt_src }}" alt="Receipt Image" style="width: 100%;">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @else
-                                            No Image Available
-                                        @endif
-                                    </td>
-                                    
-
-                                    <td style="color: orange;">
-                                        @if ($invoice->receiptStatus === '1')
-                                            Pending
-                                        @elseif ($invoice->receiptStatus === '2')
-                                            Valid
-                                        @elseif ($invoice->receiptStatus === '3')
-                                            Reject
-                                        @else
-                                            Unknown
-                                        @endif
-                                    </td>
-                                    
-                                </tr>
+                                            @else
+                                                No Image Available
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -225,27 +214,55 @@
 
             <!-- /.row -->
         </div><!-- /.container-fluid -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-        $(document).ready(function () {
-            let invoice_obj = {};
-
-            $(".invoice_checkbox").change(function (e) {
-                let id = this.getAttribute('data-id');
-                if (this.checked == true) {
-                    // add to list
-                    invoice_obj[id] = id
-                } else {
-                    // remove from list
-                    delete invoice_obj[id]
-                }
-                let csv = Object.keys(invoice_obj).map(function (key, index) {
-                    return invoice_obj[key]
-                }).join(',')
-
-                $('#csv_ids').val(csv);
-                console.log(csv);
+            $(document).ready(function () {
+                let invoice_obj = {};
+        
+                $(".invoice_checkbox").change(function (e) {
+                    let id = this.getAttribute('data-id');
+                    if (this.checked == true) {
+                        // add to list
+                        invoice_obj[id] = id;
+                    } else {
+                        // remove from list
+                        delete invoice_obj[id];
+                    }
+                    let csv = Object.keys(invoice_obj).map(function (key, index) {
+                        return invoice_obj[key];
+                    }).join(',');
+        
+                    $('#delete_ids').val(csv);
+                    console.log(csv);
+                });
+        
+                $("#myButton").click(function (e) {
+                    e.preventDefault(); // Prevent default form submission
+        
+                    let delete_ids = $('#delete_ids').val();
+                    if (delete_ids !== '') {
+                        $.ajax({
+                            url: "{{ route('receipt-archive-delete') }}", // Replace with your delete route URL
+                            type: 'DELETE',
+                            data: {
+                                delete_ids: delete_ids
+                            },
+                            success: function (response) {
+                                // Handle success response
+                                console.log(response);
+                                // Perform any additional actions as needed
+                            },
+                            error: function (xhr, status, error) {
+                                // Handle error response
+                                console.log(xhr.responseText);
+                                // Perform any additional error handling as needed
+                            }
+                        });
+                    }
+                });
             });
+        </script>
+        
 
-        });
-            </script>
+        
 </x-admin-layout>

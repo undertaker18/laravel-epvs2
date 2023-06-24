@@ -8,6 +8,7 @@ use App\Mail\receiptrejected;
 use App\Models\XeroInvoice;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 
 class DashboardController extends Controller
@@ -15,7 +16,13 @@ class DashboardController extends Controller
     // for view 
     public function index()
     {
+
         // FOR COUNTS
+
+        activity()->log('Viewed Dashboard');
+
+    
+
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
         $totalCountPending = $pendingInvoices->count();

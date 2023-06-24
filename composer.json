@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/scout": "^10.2",
         "laravel/tinker": "^2.8",
+        "spatie/laravel-activitylog": "^4.7",
         "veryfi/veryfi-php": "^1.0"
     },
     "require-dev": {

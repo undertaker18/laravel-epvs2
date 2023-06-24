@@ -330,15 +330,15 @@
                                                                 <option value="" {{ $transaction->receipt_type == '' ? 'selected' : '' }}>Choose...</option>
                                                                 <option value="instapay">Instapay</option>
                                                                 <option value="gcash">Gcash </option>
-                                                                <option value="gcash_instapay">Gcash Powered by Instapay</option>
-                                                                <option value="bdo_mobile_banking"disabled>BDO Mobile Banking <em>(Unavailable)</em></option>
-                                                                <option value="bdo_cash_transaction_slip"disabled>BDO Cash Transaction Slip <em>(Unavailable)</em></option>
+                                                                <option value="Gcash_Email">Gcash-Email</option>
+                                                                <option value="MetroBank">MetroBank</option>
+                                                                <option value="MAYA">Maya</option>
+                                                                <option value="UnionBank">UnionBank</option>
+                                                                <option value="PNB">PNB</option>
+                                                                {{-- <option value="gcash_instapay">Gcash Powered by Instapay</option> --}}
+                                                                {{-- <option value="bdo_mobile_banking"disabled>BDO Mobile Banking </option> --}}
+                                                                <option value="bdo_cash_transaction_slip">BDO Cash Transaction Slip</option>
                                                                 <option value="Others" >Others</option>
-                                                                <option value="Gcash Email" disabled>Gcash thru Email <em>(Unavailable)</em></option>
-                                                                <option value="MetroBank" disabled>MetroBank <em>(Unavailable)</em></option>
-                                                                <option value="UnionBank" disabled>UnionBank <em>(Unavailable)</em></option>
-                                                                <option value="Pesonet Gateway" disabled>Pesonet Gateway <em>(Unavailable)</em></option>
-                                                                <option value="PNB Debit" disabled>PNB Debit <em>(Unavailable)</em></option>
                                                                 
 
                                                             </select>

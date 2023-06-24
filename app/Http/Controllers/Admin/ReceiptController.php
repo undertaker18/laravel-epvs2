@@ -19,6 +19,8 @@ class ReceiptController extends Controller
     // for view
     public function valid()
     {
+        activity()->log('Viewed Valid Receipt');
+
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
         $totalCountPending = $pendingInvoices->count();
@@ -33,11 +35,18 @@ class ReceiptController extends Controller
 
         $totalCountreject = $rejectInvoices->count();
 
-        return view('receipt-valid', ['invoices' => $validInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+
+        $archiveInvoices = DB::table('xero_invoice')->where('receiptStatus', 4)->get();
+
+        $totalCountarchive = $archiveInvoices->count();
+
+
+        return view('receipt-valid', ['invoices' => $validInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject, 'totalCountarchive' => $totalCountarchive]);
     }
 //=================================================================================================================================
     public function pending()
     {
+        activity()->log('Viewed Pending Receipt');
 
         $update_status = XeroInvoice::all();
 
@@ -57,12 +66,20 @@ class ReceiptController extends Controller
 
         $totalCountreject = $rejectInvoices->count();
 
-        return view('receipt-pending', ['update_status' => $update_status,'invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+
+        $archiveInvoices = DB::table('xero_invoice')->where('receiptStatus', 4)->get();
+
+        $totalCountarchive = $archiveInvoices->count();
+
+
+        return view('receipt-pending', ['update_status' => $update_status,'invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject, 'totalCountarchive' => $totalCountarchive]);
     }
 //=================================================================================================================================
 
     public function reject()
     {
+
+        activity()->log('Viewed Perect Receipt');
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
@@ -78,6 +95,12 @@ class ReceiptController extends Controller
 
         $totalCountreject = $rejectInvoices->count();
 
+
+        $archiveInvoices = DB::table('xero_invoice')->where('receiptStatus', 4)->get();
+
+        $totalCountarchive = $archiveInvoices->count();
+
+
         // // todo: May 28, receipt type and user email
         // $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
         //     ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
@@ -87,19 +110,19 @@ class ReceiptController extends Controller
         // $countreject = $xeroInvoice->count();
 
         // return view('receipt-reject-2', compact(['xeroInvoice'], 'countreject'));
-        return view('receipt-reject-2', ['invoices' => $rejectInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+        return view('receipt-reject-2', ['invoices' => $rejectInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject, 'totalCountarchive' => $totalCountarchive]);
     }
 
     public function postReject(Request $request)
-    {   
-
+    {
+        activity()->log('Viewed Valid Receipt');
 
         $csvIds = $request->all()['csv_ids']; 
         $arrayIds = explode(',', $csvIds);
 
         $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-            ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at',
-                'xero_invoice.email', 'xero_invoice.receipt_type', 'xero_invoice.receipt_src')
+            ->select('xero_invoice.id as id', 'xero_invoice.fullname', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at',
+                'xero_invoice.email', 'xero_invoice.receipt_type', 'xero_invoice.receipt_src', 'xero_invoice.receiptStatus')
             ->whereIn('xero_invoice.id', $arrayIds)
             ->get();
 
@@ -114,22 +137,19 @@ class ReceiptController extends Controller
             'pesonet-gateway' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
         ];
 
-
         try {
-
             foreach ($xeroInvoice as $key => $value) {
-
                 // todo: May 28, this is for testing - Change the following
                 // if from table: $value->xero_account_name ($value->[column_name])
                 $receiptType = $value->receipt_type;
-                $sampleReceipt =  $sampleReceiptType[$receiptType]; // should match with $samepleReceiptType key
+                $sampleReceipt =  $sampleReceiptType[$receiptType]; // should match with $sampleReceiptType key
                 $receipt =   public_path() . $value->receipt_src;// change: get value from database
                 $recipient = $value->email; // change: get value from database
                 //end
 
                 $data = [
                     'data' => [
-                        'name' => $value->xero_account_name,
+                        'name' => $value->fullname,
                         'receipt' => $receipt,
                         'sampleReceipt' => $sampleReceipt
                     ],
@@ -137,16 +157,25 @@ class ReceiptController extends Controller
                     'recipient' => $recipient
                 ];
                 Mail::to($data['recipient'])->send(new receiptrejected($data));
+
+                // Update the receipt status to 4 (indicating it was sent)
+                $value->receiptStatus = 4;
+                $value->save();
             }
         } catch (Exception $e) {
             dd($e->getMessage());
         }
+        
         return redirect('/receipt-reject');
     }
+
 //=================================================================================================================================
 
     public function image()
     {
+
+        activity()->log('Viewed Image Receipt');
+
         return view('receipt-image');
     }
 
@@ -154,6 +183,10 @@ class ReceiptController extends Controller
 
     public function archive()
     {
+
+        activity()->log('Viewed Archive');
+
+
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
         $totalCountPending = $pendingInvoices->count();
@@ -168,8 +201,29 @@ class ReceiptController extends Controller
 
         $totalCountreject = $rejectInvoices->count();
 
-        return view('receipt-archive', ['invoices' => $pendingInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject]);
+
+        $archiveInvoices = DB::table('xero_invoice')->where('receiptStatus', 4)->get();
+
+        $totalCountarchive = $archiveInvoices->count();
+
+
+        return view('receipt-archive', ['archiveInvoices' => $archiveInvoices, 'totalCountPending' => $totalCountPending, 'totalCountvalid' => $totalCountvalid, 'totalCountreject' => $totalCountreject, 'totalCountarchive' => $totalCountarchive]);
     }
+
+        public function deleteReceipts(Request $request)
+        {
+
+            activity()->log('Viewed Receiptt');
+            
+            $deleteIds = $request->input('delete_ids');
+            $arrayIds = explode(',', $deleteIds);
+            
+            // Delete the records from the database
+            DB::table('xero_invoice')->whereIn('id', $arrayIds)->delete();
+            // dd($deleteIds);
+            return redirect('/receipt-archive');
+        }
+        
 
     //=========================================================================================================================================
 

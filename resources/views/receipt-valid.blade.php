@@ -24,7 +24,7 @@
                     <div class="container-fluid">
                         <!-- Small boxes (Stat box) -->
                         <div class="row">
-                            <div class="col-lg-4 col-8">
+                            <div class="col-lg-3 col-4">
                                 <!-- small box -->
                                 <a href="{{ url('/receipt-valid') }}">
                                     <div class="small-box"
@@ -41,7 +41,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-6">
+                            <div class="col-lg-3 col-4">
                                 <!-- small box -->
                                 <a href="{{ url('/receipt-pending') }}">
                                     <div class="small-box"
@@ -58,7 +58,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-6">
+                            <div class="col-lg-3 col-4">
                                 <!-- small box -->
                                 <a href="{{ url('/receipt-reject') }}">
                                     <div class="small-box"
@@ -75,6 +75,24 @@
                                     </div>
                                 </a>
                             </div>
+                            <div class="col-lg-3 col-4">
+                                <!-- small box -->
+                                <a href="{{ url('/receipt-archive') }}">
+                                    <div class="small-box"
+                                        style="background-color: #FFFFFF;  border: 0px solid black; border-radius: 12px; color: black;">
+                                        <div class="inner ml-3 ">
+                                            <p class="mt-2">ARCHIVE RECEIPTS</p>
+                                            <h1 style="color: black; font-size: 60px;"><b>{{ $totalCountarchive }}</b></h1>
+                                        </div>
+    
+                                        <div class="icon">
+                                            <i class="ion ion-card mr-3 mt-3" style="color:black;"></i>
+                                        </div>
+                                        <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                    </div>
+                                </a>
+                            </div>
+    
     
                         </div>
                         <!-- /.row -->

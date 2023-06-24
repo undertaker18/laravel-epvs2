@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
      // for view 
      public function index()
      {
-         return view('users');
+
+        $Account = User::all();
+
+        return view('users', compact(['Account']));
      }
 
     

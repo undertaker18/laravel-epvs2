@@ -337,15 +337,15 @@ class FormController extends Controller
         // $username = 'dinacandinato';
         // $api_key = 'b4f8fcce5b3a6998b1d7496b3f7d4305';
 
-        $client_id = 'vrf8NTvFrwzuwEfXK3JGyp6BMRgmSley7JXoNzD';
-        $client_secret = 'N6egfj5HvcsTgm6ela8wpFiKGstjsI1nZxaiUAumsdae0XuWXbyJ6sbsAC3EOaI7i1ZSbcFcYimL1ryfWE6npeYvvNRpPyeEzAi4gjVoTvNRLaPCt6LGfb3KrBbbbjlf';
-        $username = 'evalynoliva15';
-        $api_key = 'b436038632c51af02d8667da3dc692c9';
+        // $client_id = 'vrf8NTvFrwzuwEfXK3JGyp6BMRgmSley7JXoNzD';
+        // $client_secret = 'N6egfj5HvcsTgm6ela8wpFiKGstjsI1nZxaiUAumsdae0XuWXbyJ6sbsAC3EOaI7i1ZSbcFcYimL1ryfWE6npeYvvNRpPyeEzAi4gjVoTvNRLaPCt6LGfb3KrBbbbjlf';
+        // $username = 'evalynoliva15';
+        // $api_key = 'b436038632c51af02d8667da3dc692c9';
 
-        // $client_id = 'vrft4gpzThBv0scs3125A3tmhFfpDcrWJgzkpWp';
-        // $client_secret = 'aHkbYcp82t7y4Yu7VaJpziJedb8TKYnOjvMapfKBlPKmiDbc9RIZAFoxUVzvCgpjEjzKHb4Fbt0D6exl5yhaRbtjiRSZAd3zXUF8RmVb6AYm9ChVz7yggv6L9I0AOVmy';
-        // $username = 'madzromero4';
-        // $api_key = '6a23bfd84d14edd871008bdcf690a11c';
+        $client_id = 'vrft4gpzThBv0scs3125A3tmhFfpDcrWJgzkpWp';
+        $client_secret = 'aHkbYcp82t7y4Yu7VaJpziJedb8TKYnOjvMapfKBlPKmiDbc9RIZAFoxUVzvCgpjEjzKHb4Fbt0D6exl5yhaRbtjiRSZAd3zXUF8RmVb6AYm9ChVz7yggv6L9I0AOVmy';
+        $username = 'madzromero4';
+        $api_key = '6a23bfd84d14edd871008bdcf690a11c';
 
 
 
@@ -368,22 +368,39 @@ class FormController extends Controller
             case 'gcash':
                 $finalResult = $this->getDataGcash($json_response);
                 break;
+
+            case 'Gcash_Email':
+                $finalResult = $this->getDataGcashEmail($json_response);
+                break;
+    
             case 'instapay':
                 $finalResult = $this->getDataInstapay($json_response);
                 break;
-            case 'gcash_instapay':
-                $finalResult = $this->getDataGcashInstapay($json_response);
+            case 'MetroBank':
+                $finalResult = $this->getDataMetroBank($json_response);
                 break;
-            case 'bdo_mobile_banking':
-                $finalResult = $this->getDataBdoMobileBanking($json_response);
+            case 'MAYA':
+                $finalResult = $this->getDataMaya($json_response);
                 break;
+            case 'UnionBank':
+                $finalResult = $this->getDataUnionBank($json_response);
+                break;
+            case 'PNB':
+                $finalResult = $this->getDataPNB($json_response);
+                break;
+            // case 'gcash_instapay':
+            //     $finalResult = $this->getDataGcashInstapay($json_response);
+            //     break;
+            // case 'bdo_mobile_banking':
+            //     $finalResult = $this->getDataBdoMobileBanking($json_response);
+            //     break;
             case 'bdo_cash_transaction_slip':
                 $finalResult = $this->getDataBdoCashTransactionSlip($json_response);
                 break;
             case 'Others':
                 $finalResult = $this->getDataOthers($json_response);
                 break;
-
+           
             /**
              * New receipt Type
              *  case 'new_receipt type':
@@ -836,34 +853,123 @@ class FormController extends Controller
         }
 
         private function getDataBdoCashTransactionSlip($json_response) {
-
+//  dd($json_response);
             // Check if any text is not detected
-            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['ocr_text'])) {
+            if (empty($json_response['date'])  || empty($json_response['ocr_text'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             $gcashFinalResult['dateTime'] = $json_response['date'];
-            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Date: 25 Apr 2023 25-04-23 12:56:46', 'Till Cash In');
+            // Ref#:
+            // Date: 25 Apr 2023 25-04-23 12:56:46\t0111 767\t602 70 55049\tTill Cash In
+            // \tDevice Cash In :
 
-            $string1 = 'Cash In:';
+            $string1 = 'ne Validation Acct, Cash Only Deposit';
             $string2 = '.';
             $stringOnePosition = strpos($json_response['ocr_text'], $string1, 0);
             $stringTwoPosition =  strpos($json_response['ocr_text'], $string2, $stringOnePosition);
 
             $amount = rtrim(ltrim(substr($json_response['ocr_text'], $stringOnePosition + (strlen($string1)), $stringTwoPosition + 3 - $stringOnePosition - (strlen($string1)))));
             $gcashFinalResult['amount'] = (float)number_format(floatval(str_replace(",","",($amount))), 2, '.', '');
+            // 
             return $gcashFinalResult;
         }
 
         private function getDataOthers($json_response) {
-
-            if (empty($json_response['date']) ) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
-            
+
+            // Process the data
             $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
+            $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
+
             return $gcashFinalResult;
         }
+
+        private function getDataGcashEmail($json_response) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
+            }
+
+            // Process the data
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.:', 'InstaPay Invoice No.:');
+            $gcashFinalResult['amount'] =  floatval($json_response['total']);
+
+            return $gcashFinalResult;
+        }
+
+        private function getDataMetroBank($json_response) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['total'])) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
+            }
+
+            // Process the data
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+
+            $gcashFinalResult['amount'] =  floatval($json_response['total']);
+
+            return $gcashFinalResult;
+        }
+
+        private function getDataMaya($json_response) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['total'])) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
+            }
+
+            // Process the data
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+
+            $gcashFinalResult['amount'] =  floatval($json_response['total']);
+
+            return $gcashFinalResult;
+        }
+
+        private function getDataUnionBank($json_response) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['total'])) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
+            }
+
+            // Process the data
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+
+            $gcashFinalResult['amount'] =  floatval($json_response['total']);
+
+            return $gcashFinalResult;
+        }
+
+        private function getDataPNB($json_response) {
+            // dd($json_response);
+            // Check if any text is not detected
+            if (empty($json_response['date']) || empty($json_response['invoice_number']) || empty($json_response['subtotal'])) {
+                return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
+            }
+
+            // Process the data
+            $gcashFinalResult['dateTime'] = $json_response['date'];
+            $gcashFinalResult['referenceNumber'] = $json_response['invoice_number'];
+
+            $gcashFinalResult['amount'] =  floatval($json_response['subtotal']);
+
+            return $gcashFinalResult;
+        }
+
 
 
 }

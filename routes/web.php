@@ -100,6 +100,11 @@ Route::get('/receipt-archive', [ReceiptController::class, 'archive'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-archive');
 
+    Route::delete('/receipt-archive/delete', [ReceiptController::class, 'deleteReceipts'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-archive-delete');
+    
+
 /* For Xero intergration */
 
 Route::get('/xero-send', [XeroController::class, 'send'])
@@ -140,6 +145,8 @@ Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
 Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
     ->middleware(['auth', 'verified'])
     ->name('bdo-receipt.upload');
+
+
 
 
 /*Route::post('/bdo-receipts', [BdoReceiptController::class, 'store'])/

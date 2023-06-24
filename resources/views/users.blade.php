@@ -9,12 +9,7 @@
                     <h1 class="m-0">USERS
                     </h1>
                   </div><!-- /.col -->
-                  <!--  <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                  </ol>
-                </div> /.col -->
+                 
                 </div><!-- /.row -->
               </div><!-- /.container-fluid -->
             </div>
@@ -37,23 +32,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="color: #000000;">
-                                    <td>jordan earl pascua</td>
-                                    <td>jordanearlpascua@student.laverdad.edu.ph</td>
-                                    <td>Admin</td>
-                                    <td>update bdo receipts</td>
-                                    <td > <a  href="#"  style=" color: #1266B4"><i class="fas fa-edit"></i>Edit </a> <a href="#"  style=" color: #D74747"><i class="fas fa-user-slash"></i>Disable</a> </td>
-                                </tr>  
-                            </tbody>
+                              @foreach ($Account as $value)
+                              <tr style="color: #000000;">
+                                  <td>{{$value->name}}</td>
+                                  <td>{{$value->email}}</td>
+                                  <td>roles_dummy</td>
+                                  
+                                  <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
+                                  <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
+                              </tr>
+                              @endforeach
+                      </tbody>
                         </table>
                     </div>
                 </div>
             
             </section>
-             
 
-           
-              <!-- /.row -->
         </div><!-- /.container-fluid -->
         </section>  
 </x-admin-layout>
