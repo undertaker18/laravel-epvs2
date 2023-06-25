@@ -19,7 +19,7 @@ class ReceiptController extends Controller
     // for view
     public function valid()
     {
-        // activity()->log('Viewed Valid Receipt');
+        activity()->log('Viewed Valid Receipt');
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
@@ -46,7 +46,7 @@ class ReceiptController extends Controller
 //=================================================================================================================================
     public function pending()
     {
-        // activity()->log('Viewed Pending Receipt');
+        activity()->log('Viewed Pending Receipt');
 
         $update_status = XeroInvoice::all();
 
@@ -79,7 +79,7 @@ class ReceiptController extends Controller
     public function reject()
     {
 
-        // activity()->log('Viewed Perect Receipt');
+        activity()->log('Viewed Perect Receipt');
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
 
@@ -115,7 +115,7 @@ class ReceiptController extends Controller
 
     public function postReject(Request $request)
     {
-        // activity()->log('Viewed Valid Receipt');
+        activity()->log('Viewed Valid Receipt');
 
         $csvIds = $request->all()['csv_ids']; 
         $arrayIds = explode(',', $csvIds);
@@ -174,7 +174,7 @@ class ReceiptController extends Controller
     public function image()
     {
 
-        // activity()->log('Viewed Image Receipt');
+        activity()->log('Viewed Image Receipt');
 
         return view('receipt-image');
     }
@@ -184,7 +184,7 @@ class ReceiptController extends Controller
     public function archive()
     {
 
-        // activity()->log('Viewed Archive');
+        activity()->log('Viewed Archive');
 
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
@@ -213,7 +213,7 @@ class ReceiptController extends Controller
         public function deleteReceipts(Request $request)
         {
 
-            // activity()->log('Viewed Receiptt');
+            activity()->log('Viewed Receiptt');
             
             $deleteIds = $request->input('delete_ids');
             $arrayIds = explode(',', $deleteIds);
