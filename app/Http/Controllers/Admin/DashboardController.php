@@ -19,7 +19,7 @@ class DashboardController extends Controller
 
         // FOR COUNTS
 
-        activity()->log('Viewed Dashboard');
+        // activity()->log('Viewed Dashboard');
 
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
