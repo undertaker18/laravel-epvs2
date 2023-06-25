@@ -61,12 +61,12 @@ Route::post('/submit-form/{id}', [FormController::Class, 'postSubmit' ])->name('
 /************** ADMIN USER ****************/
     /* For Dashboard*/
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin', 'role:Accounting Staff'])
     ->name('dashboard');
 
     /* for USER*/
 Route::get('/users', [UserController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('users');
 
    /* For Receipts*/
@@ -97,11 +97,11 @@ Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->name('receipt-image');
 
 Route::get('/receipt-archive', [ReceiptController::class, 'archive'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('receipt-archive');
 
     Route::delete('/receipt-archive/delete', [ReceiptController::class, 'deleteReceipts'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('receipt-archive-delete');
     
 
@@ -122,7 +122,7 @@ Route::get('/xero-sync-accounts', [XeroController::class, 'syncAccount'])
 
 /* Reports*/
 Route::get('/reports', [ReportController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('reports');
 
 
@@ -159,7 +159,7 @@ Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
 /* System log*/
 
 Route::get('/system-log', [SystemlogController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('system-log');
 
 

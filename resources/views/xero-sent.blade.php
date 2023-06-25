@@ -23,6 +23,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
+                @can('update')
                     <div class="col-lg-6 col-8">
                         <!-- small box -->
                         <a href="{{ url('/xero-send') }}">
@@ -57,6 +58,25 @@
                             </div>
                         </a>
                     </div>
+                @elseif('read')
+                    <div class="col-lg-12 col-6">
+                        <!-- small box -->
+                        <a href="{{ url('/xero-sent') }}">
+                            <div class="small-box"
+                                style="background-color: #FFFFFF;  border: 5px solid #008000; border-radius: 12px; color: black;">
+                                <div class="inner ml-3 ">
+                                    <p class="mt-2">SENT RECEIPTS</p>
+                                    <h1 style="color:#008000; font-size: 60px;"><b>{{ $countsent }}</b></h1>
+                                </div>
+
+                                <div class="icon">
+                                    <i class="ion ion-card mr-3 mt-3" style="color:#008000;"></i>
+                                </div>
+                                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                            </div>
+                        </a>
+                    </div>
+                @endcan
 
                 </div>
                 <!-- /.row -->

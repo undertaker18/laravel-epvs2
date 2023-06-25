@@ -31,6 +31,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+        @hasanyrole('Super Admin|Accounting Staff')
           <li class="nav-item menu-open">
             <a href="{{ url('/dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -39,7 +40,9 @@
               </p>
             </a>
           </li>
-
+        @endhasanyrole
+        
+        @hasrole('Super Admin')
           <li class="nav-item">
             <a href="{{ url('/users') }}" class="nav-link {{ Request::is('users') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
@@ -48,9 +51,11 @@
               </p>
             </a>
           </li>
+        @endhasrole
 
+        @hasanyrole('Super Admin|Accounting Staff')
           <li class="nav-item menu-open">
-            <a  class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject', 'receipt-archive') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject', 'receipt-archive') ? 'active' : '' }}">
               <i class="nav-icon fas fa-receipt"></i>
               <p>
                 Receipts
@@ -84,6 +89,7 @@
               </li>
             </ul>
           </li>
+        @endhasanyrole
           <li class="nav-item menu-open">
             <a class="nav-link {{ Request::is('xero-send', 'xero-sent' , 'xero-sync-accounts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
@@ -93,27 +99,38 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            @hasanyrole('Super Admin|Accounting Staff')
               <li class="nav-item">
                 <a href="{{ url('/xero-send') }}" class="nav-link {{ Request::is('xero-send') ? 'active' : '' }}">
                   <i class="far fa-paper-plane nav-icon"></i>
                   <p>Send</p>
                 </a>
               </li>
+            @endhasanyrole
+
+            @hasanyrole('Super Admin|Accounting Staff|Registrar')
               <li class="nav-item">
                 <a href="{{ url('/xero-sent') }}" class="nav-link {{ Request::is('xero-sent') ? 'active' : '' }}">
                   <i class="fas fa-envelope-open-text nav-icon"></i>
                   <p>Sent</p>
                 </a>
               </li>
+            @endhasanyrole
+
+            @hasanyrole('Super Admin|Accounting Staff')
               <li class="nav-item">
                 <a href="{{ url('/xero-sync-accounts') }}" class="nav-link {{ Request::is('xero-sync-accounts') ? 'active' : '' }}">
                   <i class="far fa-save nav-icon"></i>
                   <p>Sync Account</p>
                 </a>
               </li>
+            @endhasanyrole
             </ul>
 
           </li>
+
+
+        @hasrole('Super Admin')
           <li class="nav-item">
             <a href="{{ url('/reports') }}" class="nav-link {{ Request::is('reports') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
@@ -122,7 +139,9 @@
               </p>
             </a>
           </li>
+        @endhasrole
 
+        @hasanyrole('Super Admin|Accounting Staff')
           <li class="nav-item menu-open">
             <a  class="nav-link {{ Request::is('bdo-xero-receipts', 'bdo-receipts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-money-bill"></i>
@@ -150,6 +169,9 @@
               </li>
             </ul>
           </li>
+        @endhasanyrole
+
+        @hasrole('Super Admin')
           <li class="nav-item">
             <a href="{{ url('/system-log') }}" class="nav-link {{ Request::is('system-log') ? 'active' : '' }}">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -158,6 +180,7 @@
               </p>
             </a>
           </li>
+        @endhasrole
       </nav>
       <!-- /.sidebar-menu -->
     </div>

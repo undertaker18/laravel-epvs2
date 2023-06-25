@@ -12,7 +12,7 @@
         <ul class="navbar-nav ml-auto">
           <!-- Notifications Dropdown Menu -->
           <li class="nav-item d-flex ">
-            <a  class="nav-link mt-1 text-dark">{{ Auth::user()->name }} | Roles</a>
+            <a  class="nav-link mt-1 text-dark">{{ Auth::user()->name }} | <span class="text-primary">{{ Auth::user()->roles->pluck('name')->implode(', ') }}</span></a>
           </li>
           <li class="nav-item dropdown">
 

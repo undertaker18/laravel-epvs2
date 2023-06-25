@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 
 class UserController extends Controller
 {
@@ -12,10 +14,15 @@ class UserController extends Controller
      public function index()
      {
 
-        $Account = User::all();
+      $Account = User::with('roles')
 
-        return view('users', compact(['Account']));
-     }
+      ->orderBy('created_at', 'desc')
+      ->get();
+
+      $roles = Role::get();
+
+      return view('users', compact(['Account', 'roles']));
+   }
 
     
 }
