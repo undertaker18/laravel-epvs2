@@ -61,7 +61,7 @@ Route::post('/submit-form/{id}', [FormController::Class, 'postSubmit' ])->name('
 /************** ADMIN USER ****************/
     /* For Dashboard*/
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified', 'role:Super Admin', 'role:Accounting Staff'])
+    ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
     /* for USER*/

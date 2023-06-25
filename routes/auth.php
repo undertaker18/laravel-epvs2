@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
+    ->middleware(['role:Super Admin'])
                 ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);

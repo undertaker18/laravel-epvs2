@@ -21,8 +21,6 @@ class DashboardController extends Controller
 
         activity()->log('Viewed Dashboard');
 
-    
-
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
         $totalCountPending = $pendingInvoices->count();
@@ -158,6 +156,12 @@ class DashboardController extends Controller
        
         $data = [ $totalCountelementary, $totalCountseniorHighSchool,  $totalCountjuniorHighSchool, $totalCountcollege ];
         
+
+        if (auth()->user()->hasRole('Super Admin', 'Accounting Staff')) {
+            return redirect()->route('dashboard');
+        } elseif (auth()->user()->hasRole('Registrar')) {
+            return redirect()->route('xero-sent');
+        }
         // return view('dashboard', compact(['xeroInvoice'], 'countreject'));
         return view('dashboard')->with(compact('data','monthLabels', 'validReceipts', 'pendingReceipts', 'rejectReceipts','invoices', 'totalCountPending', 'totalCountvalid', 'totalCountreject', 'totalCountarchive', 'totalCount', 'totalCountsend', 'totalCountsent', 'totalCountsync'));
     }
