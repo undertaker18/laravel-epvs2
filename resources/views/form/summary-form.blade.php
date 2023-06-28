@@ -820,6 +820,10 @@
                                             @endforeach
 
                                             <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">
+                                            
+                                            <input type="hidden" value="{{ $xero_account_users_ids }}" name="users_id">
+                                            <input type="hidden" value="{{ $xero_account_ids }}" name="xero_account_id">
+
                                         </div>
                                     </div>
                                 </div>

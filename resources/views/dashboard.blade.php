@@ -27,6 +27,12 @@
       <!-- 01 -->
       <section class="content">
         <div class="container-fluid">
+          @if (session('success'))
+              <div class="alert alert-success">
+                  {{ session('success') }}
+              </div>
+          @endif
+
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-3 col-8">
@@ -349,28 +355,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>You Need Authenticate to Xero!</p>
+                <p>You Need to Authenticate with Xero!</p>
             </div>
             <div class="modal-footer">
-                <!-- Button to open URL in new tab -->
-                <button type="button" class="btn btn-primary"
-                    onclick="openXeroAuthInNewTab()">Go to Xero Auth</button>
-                <button type="button" class="btn btn-primary"
-                    style="background-color: #D74747; color:"
-                    data-dismiss="modal">Close</button>
+                <!-- Button to trigger Xero authentication -->
+                <button type="button" class="btn btn-primary" onclick="authenticateWithXero()">Go to Xero Auth</button>
+                <button type="button" class="btn btn-primary" style="background-color: #D74747; color:" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
+  </div>
 
-<script>
-    function openXeroAuthInNewTab() {
-        var url = "{{ url('/v1/xero/auth') }}";
-        window.open(url, '_blank');
+  <script>
+    function authenticateWithXero() {
+        window.location.href = "{{ url('/v1/xero/auth') }}";
     }
-
-</script>
-
+  </script>
 
 
 <script>

@@ -31,19 +31,18 @@ class XeroApiController extends Controller
         $this->clientId = '7F688CDD3AB24199AEF10B04B9F85A60';
         $this->clientSecret = 'FyzsLVLfdzGD5KKXiIY8fPxiy_7XBHx1tAbLmNd3y-BX-qIx';
         $this->authotizarionBase64 = 'N0Y2ODhDREQzQUIyNDE5OUFFRjEwQjA0QjlGODVBNjA6Rnl6c0xWTGZkekdENUtLWGlJWThmUHhpeV83WEJIeDF0QWJMbU5kM3ktQlgtcUl4';
-        $this->tenantId = '1d80534e-ce2a-413c-8799-7c96dddfeaea';
+        // $this->tenantId = '1d80534e-ce2a-413c-8799-7c96dddfeaea'; // global
+        $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; //epvs
         $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
         $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';    
-        // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
-        // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
         //-- END
 
 
-        // // Demo Company (Global)
-        // $this->clientId = '65E0B44A363548B5AEB2EC886C8E7CFB';
-        // $this->clientSecret = 'kUJNi_WpmiMZBtFFjQswH2fdCHX1jDL93NpdWztuk-c17G2X';
-        // $this->authotizarionBase64 = 'NjVFMEI0NEEzNjM1NDhCNUFFQjJFQzg4NkM4RTdDRkI6a1VKTmlfV3BtaU1aQnRGRmpRc3dIMmZkQ0hYMWpETDkzTnBkV3p0dWstYzE3RzJY';
-        // $this->tenantId = 'd4f6e066-69ca-455e-ad54-5b69abbcbfe2';
+        // // LOCAL
+        // $this->clientId = '7D0A80F1A55D4A3BA32E0767143A4C84';
+        // $this->clientSecret = 'MKxoqv8wvuWic58Ym7YwyjhsxCUzhCwT8fxCQtzftCl5X2Ch';
+        // $this->authotizarionBase64 = 'N0QwQTgwRjFBNTVENEEzQkEzMkUwNzY3MTQzQTRDODQ6TUt4b3F2OHd2dVdpYzU4WW03WXd5amhzeENVemhDd1Q4ZnhDUXR6ZnRDbDVYMkNo';
+        // $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; /epvs
         // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
         // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
         // // end demo
@@ -102,7 +101,9 @@ class XeroApiController extends Controller
         Session::put('xero_code', $code);
         Session::put('xero_expires_datetime', strtotime('+1800 seconds'));
         Session::put('xero_refresh_token', $responseArray['refresh_token']);
-        return $response;
+
+        // return $response;
+        return redirect()->route('dashboard')->with('success', 'Authenticated successfully!');
     }
 
     public function tokenRefresh()
@@ -483,13 +484,13 @@ class XeroApiController extends Controller
         $invoiceXeroData = XeroInvoice::whereIn('id', $invoiceIdsArray)->get();
         foreach($invoiceXeroData as $value) {
             $invoiceParams = [];
-            $invoiceParams['contactId'] = $value->xero_account_id;
-            $invoiceParams['description'] = $value->description;
-            $invoiceParams['amount'] = $value->amount;
-            $invoiceParams['lineAmount'] = $value->amount;
-            $invoiceParams['date'] = Carbon::now()->format('Y-m-d');
+            $invoiceParams['contactId'] = $value->xero_account_id;// look like this '8f3dffed-7590-43c8-8b50-7a09c25f9641'
+            $invoiceParams['description'] = $value->description;// payment for
+            $invoiceParams['amount'] = $value->amount;// amount
+            $invoiceParams['lineAmount'] = $value->amount;// amount
+            $invoiceParams['date'] = Carbon::now()->format('Y-m-d'); // date
             $invoiceParams['dueDate'] = Carbon::now()->addDay('1')->format('Y-m-d');
-            $invoiceParams['reference'] = $value->reference;
+            $invoiceParams['reference'] = $value->reference;// reference || invoice no.
 
             try {
                 $invoiceResult = $this->postInvoice($invoiceParams);
@@ -523,6 +524,7 @@ class XeroApiController extends Controller
         }
         return json_encode($result);
     }
+//------------------------------------------------------------------------------------------------------------------------
 
     public function getXeroTransactions(Request $request) {
 

@@ -305,7 +305,7 @@ class FormController extends Controller
         // $username = 'madelyn0514romero';
         // $api_key = '22e388e0df4e489f79e691c450d494d3';
 
-        //Not use
+      
 
         //$client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
         //$client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
@@ -346,6 +346,44 @@ class FormController extends Controller
         $client_secret = 'aHkbYcp82t7y4Yu7VaJpziJedb8TKYnOjvMapfKBlPKmiDbc9RIZAFoxUVzvCgpjEjzKHb4Fbt0D6exl5yhaRbtjiRSZAd3zXUF8RmVb6AYm9ChVz7yggv6L9I0AOVmy';
         $username = 'madzromero4';
         $api_key = '6a23bfd84d14edd871008bdcf690a11c';
+
+        //Not use
+
+        // $client_id = 'vrfaT0noL4rfyaib4B2UgJpChKCVO8ppSNIJ6mc';
+        // $client_secret = 'SAXwfKwPBIx2jgzeY9fjGS5uLyZeI7YhcYGo8WCWSggOS7JIJIEbrUjaij0wtwsMdHBgvYKbDytuSsjNHUC3BLjgvPN2sYiaGnouOfFcD8aW1Wa2phBO9cWrmF2DL2j8';
+        // $username = 'angelcandinatofiles1';
+        // $api_key = '3e6d87407da2d580d66b9fa905656891';
+
+        // $client_id = 'vrfJY7FLVwLBILw2xrrc5HaEt3J3B4EO2PCDzb3';
+        // $client_secret = 'oUFoz23Nc9R939BZpnGiA9ZRKc6PKGhahz5TkVfzHK2KR7lN9ksUCHJuMbnlP3syyBPPoZEfWVEoArzMivUwKeiCdmvJJfHyJMhNO1BxtRy8Ih0s85vjbiNiNub2eaKp';
+        // $username = 'angelcandinatofiles2';
+        // $api_key = 'ad472242ed564545b73762c11b49a250';
+
+        // $client_id = 'vrfDJ3MNkO30ITn0AWu4FX1NWkjXYKSZ8DC7SsK';
+        // $client_secret = '92WeaOym5JJZNkRWf0wvFrLPGCiZsuPSANT3Jyr8oOSbThW1NkvITSWZuRG8tTKhEygit6PHORBYTHLhtzZ1xB3n4skgn3N4Wu9ellVk35TP9FtDxiHgkXXzsvNpeBrF';
+        // $username = 'madzrmr';
+        // $api_key = '2a81e3bcf51ee086d549d756ad96be8e';
+
+        // $client_id = 'vrfJANzRsIzgKfuJxnz15ziO0Ak90XOKUwL2i0C';
+        // $client_secret = 'H009sLgsk2RGcM5MjXcuFvNsYWSZdp7xNMwCjhH7FggUdDwGJhh7lMuNkp7783tbZ9piVf10fM8U8Bah63GgaTyceR3TDuylsFuCpkzwNi1jsX9A7v6IHCVFKHzg4BuJ';
+        // $username = 'romemadelyn55';
+        // $api_key = 'e6cc116bfcece2f768d34de245c7ccb7’;
+
+        // $client_id = 'vrfIm2mWcRRTmu5IuBOXE5AsvDUv72OVjGXodYK';
+        // $client_secret = '5OaULNTppzVNhGAeURCVKXmcUnnJPbmn27ikt5nhPv7hKohyjJCwOlvwK111OEe6wtbiFRd7VTuYBg6NnkLC9gDcacxAvWjHaWaB8VfsdcWOWefgLYRwchWgUVYNHmpm';
+        // $username = 'jeromealmoguera';
+        // $api_key = 'a9b158b9415d5e931a8e27e380bfe5d9';
+
+        // $client_id ='vrfnCrYCXtwZy4beLRGt4riWfiaNpjz1MWe2dCj';
+        // $client_secret = '3HAx1d1EvgOv0C4Z4P6OUDOywshHonm6ntgmrvUUIFofbamhJo3XYbtFrX8HN7SlL9CWf6S5ag095DtC4tyK7fuaDW1DCY4EDbVsE3JYhp3b83HtYomkhiXyRrwGDAu2';
+        // $username = 'michaelmaglente29';
+        // $api_key = '219278715bf8ef74f5824663f1966fce';
+
+
+
+
+
+
 
 
 
@@ -540,7 +578,22 @@ class FormController extends Controller
             $imagedetails = ['receipt' => "/assets/receipts/temp/" . $receiptFilename];
             // dd($receiptFilename);
 
-            return view('form.summary-form', compact('transactions', 'transactionId'))
+
+            // if ($searchQuery) {
+            //     $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+            // } else {
+            //     $results = XeroUsers::all(['xero_account_name']);
+            // }
+
+            $name = EpvsForm::find('fullname1');
+
+            $xero_account_users_ids =  XeroUsers::where('xero_account_name', '=', $name)->pluck('id')->first();
+            
+            $xero_account_ids =  XeroUsers::where('xero_account_name', '=',  $name)->pluck('xero_account_id')->first();
+
+            dd( $xero_account_users_ids,  $xero_account_ids);
+
+            return view('form.summary-form', compact('transactions', 'transactionId', 'xero_account_users_ids', 'xero_account_ids' ))
             ->with('imagedetails', $imagedetails);
         
 
@@ -737,6 +790,9 @@ class FormController extends Controller
                     $xeroInvoice = new XeroInvoice();
 
                      // student info
+                    $xeroInvoice->users_id =  $request->input('xero_account_users_ids');
+                    $xeroInvoice->xero_account_id = $request->input('$xero_account_id'); 
+
                     $xeroInvoice->fullname = $fullname;
                     $xeroInvoice->email = $email;
                     $xeroInvoice->scholarshipStatus = $scholarshipStatus;

@@ -250,7 +250,7 @@ class ReceiptController extends Controller
             $reference = $receipt->reference;
             
             $bdo_receipt = DB::table('bdo_receipt')
-                ->where('description', $reference)
+                ->where('description','=', $reference)
                 ->first();
             
             // Check if a matching bdo_receipt record exists
