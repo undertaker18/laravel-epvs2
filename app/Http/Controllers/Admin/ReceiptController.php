@@ -255,13 +255,13 @@ class ReceiptController extends Controller
             
             // Check if a matching bdo_receipt record exists
             if ($bdo_receipt) {
-                $receipt->receiptStatus = 2; // Update to "valid and see the registrar staff"
+                $receipt->receiptStatus = 1; // Update to "valid and see the registrar staff"
             } else {
                 // Check if the reference date is greater than the last upload date
                 if ($receipt->date >= $lastUploadDate) {
                     $receipt->receiptStatus = 1; // No match, keep the original status
                 } else {
-                    $receipt->receiptStatus = 3; // Update to "reject" for no match within the date span
+                    $receipt->receiptStatus = 1; // Update to "reject" for no match within the date span
                 }
             }
         // dd($bdo_receipt)  ;  
