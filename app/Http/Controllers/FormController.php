@@ -36,36 +36,42 @@ class FormController extends Controller
     {
         $counts = $request->input('counts');
         $countForm = $request->input('counts') + 1; // Initial value for $count
-
+    
         $searchQuery = $request->input('search');
         $results = []; // Initialize the $results variable as an empty array
-        
+    
         if ($searchQuery) {
-            $results = XeroUsers::search($searchQuery)->get(['xero_account_name']);
+            $results = XeroUsers::search($searchQuery)->get(['xero_account_name', 'xero_account_id']);
         } else {
-            $results = XeroUsers::all(['xero_account_name']);
+            $results = XeroUsers::all(['xero_account_name', 'xero_account_id']);
         }
-        
+    
         // Pass the search query and results to the view
         $data['searchQuery'] = $searchQuery;
         $data['results'] = $results;
-
+    
         $yearlevelelem = YearLevelElem::all();
         $yearleveljunior = YearLevelJunior::all();
         $yearlevelsenior = YearLevelSenior::all();
         $yearlevelcollege = YearLevelCollege::all();
-
-        return view('form.profile-form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior','yearlevelcollege'));
-
+    
+        return view('form.profile-form', compact('results', 'countForm', 'counts', 'yearlevelelem', 'yearleveljunior', 'yearlevelsenior', 'yearlevelcollege'))
+            ->with('data', $data);
     }
+    
      
     public function postProfile(Request $request)
     {
         $privacy_notice = $request->input('privacy_notice');
 
         $fullname1 = $request->input('fullname1');
+        $xero_account_id1 = $request->input('xero_account_id1');
+
         $fullname2 = $request->input('fullname2');
+        $xero_account_id2 = $request->input('xero_account_id2');
+
         $fullname3 = $request->input('fullname3');
+        $xero_account_id3 = $request->input('xero_account_id3');
 
         $email1 = $request->input('email1');
         $email2 = $request->input('email2');
@@ -93,8 +99,11 @@ class FormController extends Controller
                 'privacy_notice',
                
                 'fullname1',
+                'xero_account_id1',
                 'fullname2',
+                'xero_account_id2',
                 'fullname3',
+                'xero_account_id3',
                 
                 'email1',
                 'email2',
@@ -122,8 +131,14 @@ class FormController extends Controller
             $profile->privacy_notice = $privacy_notice;
 
             $profile->fullname1 = $fullname1;
+            $profile->xero_account_id1 =  $xero_account_id1;
+
             $profile->fullname2 = $fullname2;
+            $profile->xero_account_id2 =  $xero_account_id2;
+
             $profile->fullname3 = $fullname3;
+            $profile->xero_account_id3 =  $xero_account_id3;
+
 
              // Assign the same profile_key to each profile
             $profile->scholarshipStatus1 = $scholarshipStatus1;
@@ -145,6 +160,8 @@ class FormController extends Controller
             $profile->student_type1 = $student_type1;
             $profile->student_type2 = $student_type2;
             $profile->student_type3 = $student_type3;
+
+            // DD($profile);
           
             $profile->save();
 
@@ -585,15 +602,15 @@ class FormController extends Controller
             //     $results = XeroUsers::all(['xero_account_name']);
             // }
 
-            $name = EpvsForm::find('fullname1');
+            // $name = EpvsForm::find('fullname1');
 
-            $xero_account_users_ids =  XeroUsers::where('xero_account_name', '=', $name)->pluck('id')->first();
+            // $xero_account_users_ids =  XeroUsers::where('xero_account_name', '=', $name)->pluck('id')->first();
             
-            $xero_account_ids =  XeroUsers::where('xero_account_name', '=',  $name)->pluck('xero_account_id')->first();
+            // $xero_account_ids =  XeroUsers::where('xero_account_name', '=',  $name)->pluck('xero_account_id')->first();
 
-            // dd( $xero_account_users_ids,  $xero_account_ids);
+            // // dd( $xero_account_users_ids,  $xero_account_ids);
 
-            return view('form.summary-form', compact('transactions', 'transactionId', 'xero_account_users_ids', 'xero_account_ids' ))
+            return view('form.summary-form', compact('transactions', 'transactionId' ))
             ->with('imagedetails', $imagedetails);
         
 
@@ -733,6 +750,8 @@ class FormController extends Controller
                 ];
                 
                 $fullnames = [$request->input('fullname1##0'), $request->input('fullname2##0'), $request->input('fullname3##0')];
+                $xero_account_ids = [$request->input('xero_account_id1##0'), $request->input('xero_account_id2##0'), $request->input('xero_account_id3##0')];
+              
                 $scholarshipStatuses = [$request->input('scholarshipStatus1##0'), $request->input('scholarshipStatus2##0'), $request->input('scholarshipStatus3##0')];
                 $emails = [$request->input('email1##0'), $request->input('email2##0'), $request->input('email3##0')];
                 $departments = [$request->input('department1##0'), $request->input('department2##0'), $request->input('department3##0')];
@@ -745,6 +764,10 @@ class FormController extends Controller
                 $filterfullnames = array_filter($fullnames, function ($fullname) {
                     return $fullname !== null;
                 });
+                $filterxero_account_ids = array_filter($xero_account_ids, function ($xero_account_id) {
+                    return $xero_account_id !== null;
+                });
+              
                 $filterscholarshipStatuses = array_filter($scholarshipStatuses, function ($scholarshipStatus) {
                     return $scholarshipStatus !== null;
                 });
@@ -769,6 +792,7 @@ class FormController extends Controller
                 });
                 
                 foreach ($filterfullnames as $index => $fullname) {
+                    $xero_account_ids = $filterxero_account_ids[$index];
                     $scholarshipStatus = $filterscholarshipStatuses[$index];
                     $email = $filteremails[$index];
                     $department = $filterdepartments[$index];
@@ -778,6 +802,7 @@ class FormController extends Controller
                     $payments_for = $filterpayments_fors[$index];
                 
                     $data['data']['summary']['studentsInfo'][$index][$labels['fullname']] = $fullname;
+                    // $data['data']['summary']['studentsInfo'][$index][$labels['xero_account_id']] = $xero_account_id;
                     $data['data']['summary']['studentsInfo'][$index][$labels['email']] = $email;
                     $data['data']['summary']['studentsInfo'][$index][$labels['scholarshipStatus']] = $scholarshipStatus;
                     $data['data']['summary']['studentsInfo'][$index][$labels['department']] = $department;
@@ -786,14 +811,13 @@ class FormController extends Controller
                 
                     $data['data']['summary']['studentsInfo'][$index][$labels['each_amount']] = $each_amount;
                     $data['data']['summary']['studentsInfo'][$index][$labels['payments_for']] = $payments_for;
-
+                
                       // Create a new instance of the Payment model
                     $xeroInvoice = new XeroInvoice();
 
                      // student info
-                    $xeroInvoice->users_id =  $request->input('xero_account_users_ids');
-                    $xeroInvoice->xero_account_id = $request->input('$xero_account_id'); 
-
+                    $xeroInvoice->xero_account_id = $xero_account_ids; 
+                   
                     $xeroInvoice->fullname = $fullname;
                     $xeroInvoice->email = $email;
                     $xeroInvoice->scholarshipStatus = $scholarshipStatus;
@@ -815,6 +839,7 @@ class FormController extends Controller
                     $xeroInvoice->receipt_src =  $request->input('receipt_source##');
                     // dd($xeroInvoice);
                     // Save the payment to the database
+                    // dd($xeroInvoice);
                     $xeroInvoice->save();
                 }
                 

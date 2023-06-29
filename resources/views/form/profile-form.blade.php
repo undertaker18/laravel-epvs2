@@ -291,15 +291,33 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname1" id="searchInput" class="form-control" list="searchOptions"
-                                                    placeholder="Fullname" required>
+                                                <input type="text" name="fullname1" id="searchInput" class="form-control" list="searchOptions" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id1" id="xeroAccountIdInput">
+
                                                 <datalist id="searchOptions">
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value="">
-                                                        {{-- @endforeach --}}
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
 
+                                                <script>
+                                                    var input = document.getElementById('searchInput');
+                                                    var xeroAccountIdInput = document.getElementById('xeroAccountIdInput');
+
+                                                    input.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions option[value="' + input.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput.value = xeroAccountId;
+                                                        } else {
+                                                            xeroAccountIdInput.value = '';
+                                                        }
+                                                    });
+                                                </script>
+                                                
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
+                                                
+                                             
 
                                                 <script>
                                                     var fullNameInput = document.getElementById('searchInput');
@@ -675,21 +693,34 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname1" id="searchInput"
-                                                    class="form-control" list="searchOptions" placeholder="Fullname"
-                                                    required>
-                                                <datalist id="searchOptions">
+                                                <input type="text" name="fullname1" id="searchInput01" class="form-control" list="searchOptions01" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id1" id="xeroAccountIdInput01">
 
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value="">
-                                                        {{-- @endforeach --}}
-
+                                                <datalist id="searchOptions01">
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
+
+                                                <script>
+                                                    var input01 = document.getElementById('searchInput01');
+                                                    var xeroAccountIdInput01 = document.getElementById('xeroAccountIdInput01');
+
+                                                    input01.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions01 option[value="' + input01.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId01 = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput01.value = xeroAccountId01;
+                                                        } else {
+                                                            xeroAccountIdInput01.value = '';
+                                                        }
+                                                    });
+                                                </script>
 
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
-                                                    var fullNameInput = document.getElementById('searchInput');
+                                                    var fullNameInput = document.getElementById('searchInput01');
                                                     var validationMessage = document.getElementById('fullnameValidationMessage');
 
                                                     fullNameInput.addEventListener('blur', function() {
@@ -1089,14 +1120,29 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname2" id="searchInput02"
-                                                    class="form-control" list="searchOptions02" placeholder="Fullname"
-                                                    required>
+                                                <input type="text" name="fullname2" id="searchInput02" class="form-control" list="searchOptions02" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id2" id="xeroAccountIdInput02">
+
                                                 <datalist id="searchOptions02">
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value=""></option>
-                                                    {{-- @endforeach --}}
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
+
+                                                <script>
+                                                    var input = document.getElementById('searchInput02');
+                                                    var xeroAccountIdInput02 = document.getElementById('xeroAccountIdInput02');
+
+                                                    input.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions02 option[value="' + input.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput02.value = xeroAccountId;
+                                                        } else {
+                                                            xeroAccountIdInput02.value = '';
+                                                        }
+                                                    });
+                                                </script>
                                                 <div id="fullnameValidationMessage02" class="invalid-feedback"></div>
                                                 <script>
                                                     var fullNameInput02 = document.getElementById('searchInput02');
@@ -1485,21 +1531,34 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname1" id="searchInput"
-                                                    class="form-control" list="searchOptions" placeholder="Fullname"
-                                                    required>
-                                                <datalist id="searchOptions">
+                                                <input type="text" name="fullname1" id="searchInput13" class="form-control" list="searchOptions13" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id1" id="xeroAccountIdInput13">
 
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value="">
-                                                        {{-- @endforeach --}}
-
+                                                <datalist id="searchOptions13">
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
+
+                                                <script>
+                                                    var input13 = document.getElementById('searchInput13');
+                                                    var xeroAccountIdInput13 = document.getElementById('xeroAccountIdInput13');
+
+                                                    input13.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions13 option[value="' + input13.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId13 = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput13.value = xeroAccountId13;
+                                                        } else {
+                                                            xeroAccountIdInput13.value = '';
+                                                        }
+                                                    });
+                                                </script>
 
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
-                                                    var fullNameInput = document.getElementById('searchInput');
+                                                    var fullNameInput = document.getElementById('searchInput1');
                                                     var validationMessage = document.getElementById('fullnameValidationMessage');
 
                                                     fullNameInput.addEventListener('blur', function() {
@@ -1899,57 +1958,72 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname02" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname2" id="searchInput02"
-                                                    class="form-control" list="searchOptions02" placeholder="Fullname"
-                                                    required>
-                                                <datalist id="searchOptions02">
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value=""></option>
-                                                    {{-- @endforeach --}}
+                                                <input type="text" name="fullname2" id="searchInput09" class="form-control" list="searchOptions09" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id2" id="xeroAccountIdInput09">
+
+                                                <datalist id="searchOptions09">
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
-                                                <div id="fullnameValidationMessage02" class="invalid-feedback"></div>
+
                                                 <script>
-                                                    var fullNameInput02 = document.getElementById('searchInput02');
-                                                    var validationMessage02 = document.getElementById('fullnameValidationMessage02');
+                                                    var input09 = document.getElementById('searchInput09');
+                                                    var xeroAccountIdInput09 = document.getElementById('xeroAccountIdInput09');
+
+                                                    input09.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions09 option[value="' + input09.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId09 = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput09.value = xeroAccountId09;
+                                                        } else {
+                                                            xeroAccountIdInput09.value = '';
+                                                        }
+                                                    });
+                                                </script>
+                                                <div id="fullnameValidationMessage09" class="invalid-feedback"></div>
+                                                <script>
+                                                    var fullNameInput09 = document.getElementById('searchInput09');
+                                                    var validationMessage09 = document.getElementById('fullnameValidationMessage09');
                                                 
-                                                    fullNameInput02.addEventListener('blur', function() {
-                                                        var fullName02 = fullNameInput02.value.trim();
+                                                    fullNameInput09.addEventListener('blur', function() {
+                                                        var fullName09 = fullNameInput09.value.trim();
                                                 
-                                                        if (fullName02.length > 0) {
-                                                            var nameComponents02 = fullName02.split(',');
+                                                        if (fullName09.length > 0) {
+                                                            var nameComponents09 = fullName09.split(',');
                                                 
-                                                            if (nameComponents02.length !== 2) {
-                                                                showErrorMessage02('Invalid Naming Format.');
-                                                                fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
+                                                            if (nameComponents09.length !== 2) {
+                                                                showErrorMessage09('Invalid Naming Format.');
+                                                                fullNameInput09.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                             } else {
-                                                                var lastName02 = nameComponents02[0].trim();
-                                                                var firstName02 = nameComponents02[1].trim();
+                                                                var lastName09 = nameComponents09[0].trim();
+                                                                var firstName09 = nameComponents09[1].trim();
                                                 
-                                                                if (!isNameValid02(lastName02) || !isNameValid02(firstName02)) {
-                                                                    showErrorMessage02('Invalid Naming Format.');
-                                                                    fullNameInput02.classList.add('is-invalid'); // Add the 'is-invalid' class
+                                                                if (!isNameValid09(lastName09) || !isNameValid09(firstName09)) {
+                                                                    showErrorMessage09('Invalid Naming Format.');
+                                                                    fullNameInput09.classList.add('is-invalid'); // Add the 'is-invalid' class
                                                                 } else {
-                                                                    hideErrorMessage02();
-                                                                    fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
+                                                                    hideErrorMessage09();
+                                                                    fullNameInput09.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                                 }
                                                             }
                                                         } else {
-                                                            hideErrorMessage02();
-                                                            fullNameInput02.classList.remove('is-invalid'); // Remove the 'is-invalid' class
+                                                            hideErrorMessage09();
+                                                            fullNameInput09.classList.remove('is-invalid'); // Remove the 'is-invalid' class
                                                         }
                                                     });
                                                 
-                                                    function isNameValid02(name) {
+                                                    function isNameValid09(name) {
                                                         return /^([A-Z][a-zA-Z]*(\s[A-Z][a-zA-Z]*)*(\s[A-Z]\.)?(\sJr\.)?)$/.test(name);
                                                     }
                                                 
-                                                    function showErrorMessage02(message) {
-                                                        validationMessage02.innerText = message;
-                                                        validationMessage02.style.display = 'block';
+                                                    function showErrorMessage09(message) {
+                                                        validationMessage09.innerText = message;
+                                                        validationMessage09.style.display = 'block';
                                                     }
                                                 
-                                                    function hideErrorMessage02() {
-                                                        validationMessage02.style.display = 'none';
+                                                    function hideErrorMessage09() {
+                                                        validationMessage09.style.display = 'none';
                                                     }
                                                 </script>
                                                 
@@ -2321,14 +2395,30 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Fullname04" class="form-label"><b>1</b>. Full Name (Dela Cruz, Juan A.):</label>
-                                                <input type="text" name="fullname3" id="searchInput04"
-                                                    class="form-control" list="searchOptions04" placeholder="Fullname"
-                                                    required>
+
+                                                <input type="text" name="fullname3" id="searchInput04" class="form-control" list="searchOptions04" placeholder="Fullname" required>
+                                                <input type="hidden" name="xero_account_id3" id="xeroAccountIdInput04">
+
                                                 <datalist id="searchOptions04">
-                                                    {{-- @foreach($results as $result) --}}
-                                                    <option value=""></option>
-                                                    {{-- @endforeach --}}
+                                                    @foreach($results as $result)
+                                                    <option value="{{ $result->xero_account_name }}" data-xero-account-id="{{ $result->xero_account_id }}">
+                                                    @endforeach
                                                 </datalist>
+
+                                                <script>
+                                                    var input04 = document.getElementById('searchInput04');
+                                                    var xeroAccountIdInput04 = document.getElementById('xeroAccountIdInput04');
+
+                                                    input04.addEventListener('input', function() {
+                                                        var selectedOption = document.querySelector('#searchOptions04 option[value="' + input04.value + '"]');
+                                                        if (selectedOption) {
+                                                            var xeroAccountId04 = selectedOption.getAttribute('data-xero-account-id');
+                                                            xeroAccountIdInput04.value = xeroAccountId04;
+                                                        } else {
+                                                            xeroAccountIdInput04.value = '';
+                                                        }
+                                                    });
+                                                </script>
                                                 <div id="fullnameValidationMessage04" class="invalid-feedback"></div>
                                                 <script>
                                                     var fullNameInput04 = document.getElementById('searchInput04');

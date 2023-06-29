@@ -141,7 +141,7 @@
                                 <td>{{$value->xero_account_name}}</td>
                                 <td>{{$value->xero_account_id}}</td>
                                 <td>{{$value->description}}</td>
-                                <td>{{$value->amount}}</td>
+                                <td>{{$value->each_amount}}</td>
                                 <td>{{$value->reference}}</td>
                                 <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>

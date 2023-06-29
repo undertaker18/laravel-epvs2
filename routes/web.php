@@ -92,6 +92,10 @@ Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-post-reject');
 
+    Route::post('/receipt-reject', [ReceiptController::class, 'revertReceiptStatus'])
+    ->middleware(['auth', 'verified'])
+    ->name('receipt-revert');
+
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-image');

@@ -14,13 +14,13 @@ class XeroController extends Controller
      public function send()
      {
          $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-         ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
+         ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'each_amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
          ->where('receiptStatus', 2)
          ->where([['status', '=', '0']]) // 0 - di pa nasesend, 1 - sent
          ->get();
 
          $xeroInvoiceSend = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-         ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
+         ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'each_amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
          ->where('receiptStatus', 2)
          ->where('status', '=', '1')
          ->get();
@@ -35,13 +35,13 @@ class XeroController extends Controller
      public function sent()
      {
         $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-             ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
+             ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'each_amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
              ->where('receiptStatus', 2)
              ->where('status', '=', '1')
              ->get();
         
         $xeroInvoiceSent = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-             ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
+             ->select('xero_invoice.id as id', 'xero_users.xero_account_name', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'each_amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at')
              ->where('receiptStatus', 2)
              ->where('status', '=', '0')
              ->get();

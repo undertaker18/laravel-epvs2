@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('privacy_notice');
 
             $table->string('fullname1');
+            $table->string('xero_account_id1')->nullable();
             $table->string('fullname2')->nullable();
+            $table->string('xero_account_id2')->nullable();
             $table->string('fullname3')->nullable();
+            $table->string('xero_account_id3')->nullable();
 
             $table->string('scholarshipStatus1');
             $table->string('scholarshipStatus2')->nullable();

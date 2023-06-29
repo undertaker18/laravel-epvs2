@@ -972,8 +972,6 @@
                                                                 value="{{$details['ocr_result']['time']}}" name="time">
                                                         </div>
                                                     </div>
-
-                                                
                                             </div>
 
                                         </div>
@@ -981,7 +979,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-5  ">
+                                    <div class="col-md-5 ">
                                         <div class="button-container flexed start">
                                             <a href="{{ route('upload-form', ['id' => $transactionId]) }}" class="btn btn-primary">
                                                 <i class="fas fa-arrow-left"></i> Back
@@ -1004,6 +1002,7 @@
             </div>
         </form>
     </div>
+
     <!-- Modal -->
     <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('xero_account_id')->nullable();
 
             // student info
+            $table->string('receipt_id')->nullable();
             $table->string('privacy_notice')->nullable();
             $table->string('fullname')->nullable();
             $table->string('scholarshipStatus')->nullable();

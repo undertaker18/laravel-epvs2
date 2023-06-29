@@ -19,11 +19,17 @@ img.logo {
 height: 110%;
 width: 100%;
 }
+h6 {
+text-align: center;
+color: red;
+}
 </style>
 <img src="{{ $message->embed('assets/data-privacy/emaillogo.jpg') }}" class="logo">
 <h1>La Verdad Christian College</h1>
 <h2>Enrollment Payment Validation System</h2>
+<h6 >FOR DEMO PURPOSES ONLY!</h6>
 <hr>
+
 <p>Hi {{ $data['name'] }},</p>
 <p>Thanks for filling out the Enrollment Payment Form. Here's what we received:</p>
 <table>

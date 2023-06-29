@@ -153,15 +153,15 @@
         }
 
         .flexed {
-            display: flex;
+            display: flex !important;
         }
 
         .end {
-            justify-content: flex-end;
+            justify-content: flex-end !important;
         }
 
         .start {
-            justify-content: flex-start;
+            justify-content: flex-start !important;
         }
 
         .mb-3 {
@@ -307,6 +307,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname1##{{$key}}"
                                                             value="{{ $transaction->fullname1 }}" readonly>
+                                                        <input type="hidden" class="form-control" id="fullname"
+                                                            name="xero_account_id1##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id1 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -369,6 +372,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname2##{{$key}}"
                                                             value="{{ $transaction->fullname2 }}" readonly>
+                                                        <input type="hidden" class="form-control" id="xero_account_id2"
+                                                            name="xero_account_id2##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id2 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -431,6 +437,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname3##{{$key}}"
                                                             value="{{ $transaction->fullname3 }}" readonly>
+                                                        <input type="hidden" class="form-control" id="xero_account_id3"
+                                                            name="xero_account_id3##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id3 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -495,6 +504,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname1##{{$key}}"
                                                             value="{{ $transaction->fullname1 }}" readonly>
+                                                        <input type="hidden" class="form-control" id="fullname"
+                                                            name="xero_account_id1##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id1 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -557,6 +569,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname2##{{$key}}"
                                                             value="{{ $transaction->fullname2 }}" readonly>
+                                                        <input type="hidden" class="form-control" id="xero_account_id2"
+                                                            name="xero_account_id2##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id2 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -621,6 +636,9 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname1##{{$key}}"
                                                             value="{{ $transaction->fullname1 }}" readonly>
+                                                        <input type="text" class="form-control" id="fullname"
+                                                            name="xero_account_id1##{{$key}}"
+                                                            value="{{ $transaction->xero_account_id1 }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -821,8 +839,8 @@
 
                                             <input type="hidden" value="{{ $imagedetails['receipt'] }}" name="receipt_source##">
                                             
-                                            <input type="hidden" value="{{ $xero_account_users_ids }}" name="users_id">
-                                            <input type="hidden" value="{{ $xero_account_ids }}" name="xero_account_id">
+                                            {{-- <input type="hidden" value="{{ $xero_account_users_ids }}" name="users_id">
+                                            <input type="hidden" value="{{ $xero_account_ids }}" name="xero_account_id"> --}}
 
                                         </div>
                                     </div>
@@ -846,8 +864,8 @@
                                             <button type="submit" name="submit" id="submitButton" class="btn btn-success" disabled>Submit <i class="fas fa-arrow-right"></i></button>
                                           </a> --}}
                                           
-                                        <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
-                                            <button type="submit" name="submit" id="submitButton" class="btn btn-success" data-toggle="modal" data-target="#loadingModal" disabled>Submit <i class="fas fa-arrow-right"></i></button>
+                                        <a  class="m-0 p-0 button-container flexed end">
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                         
                                     </div>
@@ -856,20 +874,47 @@
                         </div>
                     </div>
                 </div>
+                    <!-- Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                Are you sure you want to submit?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a  class=" p-0 button-container ">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width: 100px !important">No</button>
+                            </a>
+                            <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
+                                <button type="submit" name="submit" id="submitButton" class="btn btn-success" data-toggle="modal" data-target="#loadingModal" disabled style="width: 100px !important">Yes</button>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal -->
+
+
+     <!-- Modal -->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="loadingModalLabel">Loading...</h5>
         </div>
         <div class="modal-body">
-          <div class="text-center">
+          <div class="text-center" style="font-size: 30px !important">
+            <div><br></div>       
             <i class="fas fa-spinner fa-spin fa-3x"></i>
+            <div><br></div>
           </div>
         </div>
       </div>

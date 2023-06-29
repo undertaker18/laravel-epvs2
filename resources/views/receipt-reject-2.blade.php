@@ -157,6 +157,7 @@
                                     <th>Date</th>
                                     {{-- <th>Receipt Type</th> --}}
                                     <th>Receipt Source</th>
+                                    <th>Action</th>
 
                                     {{-- <th>Receipt Status</th> --}}
                                 </tr>
@@ -202,20 +203,39 @@
                                             No Image Available
                                         @endif
                                     </td>
-                                    
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#revertreceiptModal{{ $invoice->id }}">
+                                             Move To Pending
+                                        </button>
 
-                                    {{-- <td style="color: orange;">
-                                        @if ($invoice->receiptStatus === '1')
-                                            Pending
-                                        @elseif ($invoice->receiptStatus === '2')
-                                            Valid
-                                        @elseif ($invoice->receiptStatus === '3')
-                                            Reject
-                                        @else
-                                            Unknown
-                                        @endif
-                                    </td> --}}
-                                    
+                                         <!-- Modal -->
+                                         <div class="modal fade" id="revertreceiptModal{{ $invoice->id }}" tabindex="-1" role="dialog" aria-labelledby="revertreceiptModalLabel{{ $invoice->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="revertreceiptModalLabel{{ $invoice->id }}">This is the receipt of  <strong>{{ $invoice->fullname }}</strong></h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to move this on pending?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form method="POST" action="/receipt-reject">
+                                                            @csrf
+                                                            <input type="hidden" name="invoiceId" value="{{ $invoice->id }}">
+                                                            <input type="hidden" name="receiptStatus" value="1">
+                                                            <button type="submit" id="myButton" class="btn btn-default" style="background-color: #D74747; color: #ffffff; width: 150px;">
+                                                                <i class="fas fa-arrow-left"></i>
+                                                                &nbsp;&nbsp;MOVE</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </td>                                                    
                                 </tr>
                                 @endforeach
                             </tbody>

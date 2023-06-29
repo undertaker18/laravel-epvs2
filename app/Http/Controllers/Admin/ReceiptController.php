@@ -169,6 +169,28 @@ class ReceiptController extends Controller
         return redirect('/receipt-reject');
     }
 
+    public function revertReceiptStatus(Request $request)
+    {
+
+        $invoiceId = $request->input('invoiceId');
+        $receiptStatus = $request->input('receiptStatus');
+
+        // Find the invoice by ID
+        $invoice = XeroInvoice::find($invoiceId);
+
+        if ($invoice) {
+            // Update the receipt status
+            $invoice->receiptStatus = $receiptStatus;
+            $invoice->save();
+
+            // Additional logic or redirect if needed
+        }
+
+    // Redirect to the previous page or a specific route
+    return redirect()->back();
+    }
+
+
 //=================================================================================================================================
 
     public function image()
