@@ -591,7 +591,7 @@ class FormController extends Controller
             
             $xero_account_ids =  XeroUsers::where('xero_account_name', '=',  $name)->pluck('xero_account_id')->first();
 
-            dd( $xero_account_users_ids,  $xero_account_ids);
+            // dd( $xero_account_users_ids,  $xero_account_ids);
 
             return view('form.summary-form', compact('transactions', 'transactionId', 'xero_account_users_ids', 'xero_account_ids' ))
             ->with('imagedetails', $imagedetails);
@@ -707,6 +707,7 @@ class FormController extends Controller
 
             public function postSubmit(Request $request )
             {
+                
                 //session
                 $id =  Session::get('id');
                 $transactionId = EpvsForm::where('id', '=', $id)->pluck('id')->first();
@@ -840,6 +841,8 @@ class FormController extends Controller
                     $email = $rec['email'];
                     Mail::to($email)->send(new PaymentSummary($data));
                 }
+
+                
                 
           
                 return redirect()->route('submit-form', ['id' => $transactionId]);

@@ -331,6 +331,9 @@
     </style>
 
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <div class="card-body">
         <form action="{{ route('update-verify-form', ['id' => $transactionId]) }}" method="post">
             @csrf
@@ -987,7 +990,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="button-container flexed end">
-                                            <button id="nextBtn" class="btn btn-success" type="submit" name="submit" disabled>
+                                            <button id="nextBtn" class="btn btn-success" type="submit" name="submit" data-toggle="modal" data-target="#loadingModal" disabled>
                                                 Next <i class="fas fa-arrow-right"></i>
                                             </button>
                                         </div>
@@ -1001,5 +1004,20 @@
             </div>
         </form>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loadingModalLabel">Loading...</h5>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <i class="fas fa-spinner fa-spin fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   
 </x-form-layout>

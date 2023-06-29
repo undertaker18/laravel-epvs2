@@ -250,7 +250,7 @@ class ReceiptController extends Controller
             $reference = $receipt->reference;
             
             $bdo_receipt = DB::table('bdo_receipt')
-                ->where('description','=', $reference)
+                ->where('description', '=', $reference)
                 ->first();
             
             // Check if a matching bdo_receipt record exists
@@ -264,7 +264,7 @@ class ReceiptController extends Controller
                     $receipt->receiptStatus = 3; // Update to "reject" for no match within the date span
                 }
             }
-        // dd($bdo_receipt)  ;  
+            
             // Save the changes for each receipt
             $receipt->save();
         }

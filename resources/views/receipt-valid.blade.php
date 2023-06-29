@@ -105,27 +105,27 @@
                             <table id="example1" class="table table-bordered  table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Invoice ID</th>
-                                       
+                                        <th>Name</th>
+                                        <th>Email</th>
                                         <th>Description</th>
                                         <th>Amount</th>
                                         <th>Reference</th>
-                                        <th>Email</th>
-                                        <th>Receipt Type</th>
+                                       
+                                        <th>Date</th>
                                         <th>Receipt Source</th>
-                                        <th>Receipt Status</th>
+                                        {{-- <th>Receipt Status</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoices as $invoice)
                                     <tr>
-                                        <td>{{ $invoice->id }}</td>
-
+                                        <td>{{ $invoice->fullname }}</td>
+                                        <td>{{ $invoice->email }}</td>
                                         <td>{{ $invoice->description }}</td>
                                         <td>{{ $invoice->amount }}</td>
                                         <td>{{ $invoice->reference }}</td>                                   
-                                        <td>{{ $invoice->email }}</td>
-                                        <td>{{ $invoice->receipt_type }}</td>
+                                        <td>{{ $invoice->date }}</td>
+                                        {{-- <td>{{ $invoice->receipt_type }}</td> --}}
                                         <td>
                                             @if ($invoice->receipt_src)
                                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">
@@ -137,7 +137,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="receiptModalLabel{{ $invoice->id }}">Receipt Image</h5>
+                                                                <h5 class="modal-title" id="receiptModalLabel{{ $invoice->id }}">{{ $invoice->receipt_type }}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -154,7 +154,7 @@
                                         </td>
                                         
 
-                                        <td style="color: orange;">
+                                        {{-- <td style="color: orange;">
                                             @if ($invoice->receiptStatus === '1')
                                                 Pending
                                             @elseif ($invoice->receiptStatus === '2')
@@ -164,7 +164,7 @@
                                             @else
                                                 Unknown
                                             @endif
-                                        </td>
+                                        </td> --}}
                                         
                                     </tr>
                                     @endforeach

@@ -28,23 +28,23 @@ class XeroApiController extends Controller
     {
         // CHANGE THIS WHEN THERE IS NEW ACCOUNT
         // EPVS APP
-        $this->clientId = '7F688CDD3AB24199AEF10B04B9F85A60';
-        $this->clientSecret = 'FyzsLVLfdzGD5KKXiIY8fPxiy_7XBHx1tAbLmNd3y-BX-qIx';
-        $this->authotizarionBase64 = 'N0Y2ODhDREQzQUIyNDE5OUFFRjEwQjA0QjlGODVBNjA6Rnl6c0xWTGZkekdENUtLWGlJWThmUHhpeV83WEJIeDF0QWJMbU5kM3ktQlgtcUl4';
-        // $this->tenantId = '1d80534e-ce2a-413c-8799-7c96dddfeaea'; // global
-        $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; //epvs
-        $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
-        $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';    
+        // $this->clientId = '7F688CDD3AB24199AEF10B04B9F85A60';
+        // $this->clientSecret = 'FyzsLVLfdzGD5KKXiIY8fPxiy_7XBHx1tAbLmNd3y-BX-qIx';
+        // $this->authotizarionBase64 = 'N0Y2ODhDREQzQUIyNDE5OUFFRjEwQjA0QjlGODVBNjA6Rnl6c0xWTGZkekdENUtLWGlJWThmUHhpeV83WEJIeDF0QWJMbU5kM3ktQlgtcUl4';
+        // // $this->tenantId = '1d80534e-ce2a-413c-8799-7c96dddfeaea'; // global
+        // $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; //epvs
+        // $this->authRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';
+        // $this->tokenRedirectUri = 'https://lvcc-epvsystem.com/v1/xero/token';    
         //-- END
 
 
         // // LOCAL
-        // $this->clientId = '7D0A80F1A55D4A3BA32E0767143A4C84';
-        // $this->clientSecret = 'MKxoqv8wvuWic58Ym7YwyjhsxCUzhCwT8fxCQtzftCl5X2Ch';
-        // $this->authotizarionBase64 = 'N0QwQTgwRjFBNTVENEEzQkEzMkUwNzY3MTQzQTRDODQ6TUt4b3F2OHd2dVdpYzU4WW03WXd5amhzeENVemhDd1Q4ZnhDUXR6ZnRDbDVYMkNo';
-        // $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; /epvs
-        // $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
-        // $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
+        $this->clientId = '7D0A80F1A55D4A3BA32E0767143A4C84';
+        $this->clientSecret = 'MKxoqv8wvuWic58Ym7YwyjhsxCUzhCwT8fxCQtzftCl5X2Ch';
+        $this->authotizarionBase64 = 'N0QwQTgwRjFBNTVENEEzQkEzMkUwNzY3MTQzQTRDODQ6TUt4b3F2OHd2dVdpYzU4WW03WXd5amhzeENVemhDd1Q4ZnhDUXR6ZnRDbDVYMkNo';
+        $this->tenantId = 'cb82b720-b382-4820-9291-7be8670d3348'; //epvs
+        $this->authRedirectUri = 'http://localhost:8000/v1/xero/token';
+        $this->tokenRedirectUri = 'http://localhost:8000/v1/xero/token';
         // // end demo
 
         $this->scope = 'offline_access accounting.transactions openid profile email accounting.contacts accounting.settings';

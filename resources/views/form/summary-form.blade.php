@@ -842,8 +842,12 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="">
-                                        <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
+                                        {{-- <a href="post-submit-form" class="m-0 p-0 button-container flexed end" >
                                             <button type="submit" name="submit" id="submitButton" class="btn btn-success" disabled>Submit <i class="fas fa-arrow-right"></i></button>
+                                          </a> --}}
+                                          
+                                        <a href="post-submit-form" class="m-0 p-0 button-container flexed end">
+                                            <button type="submit" name="submit" id="submitButton" class="btn btn-success" data-toggle="modal" data-target="#loadingModal" disabled>Submit <i class="fas fa-arrow-right"></i></button>
                                         </a>
                                         
                                     </div>
@@ -855,6 +859,23 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loadingModalLabel">Loading...</h5>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="fas fa-spinner fa-spin fa-3x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- Add the error modal HTML -->
 <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -889,6 +910,7 @@
         modal.modal('hide');
     }
 
+   
     function checkFormValidity() {
         var paymentsForInputs = $('input[name^="payments_for"]');
         var eachAmountInputs = $('input[name^="each_amount"]');
