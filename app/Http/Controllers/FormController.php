@@ -302,62 +302,6 @@ class FormController extends Controller
         // $username = 'jordanearlpascua1';
         // $api_key = '4849078385c87162e2e014c19b99383a';
 
-        //$client_id = 'vrfxpWEN0irTTKozo7eP8wjymtcdnFwv9y1Mg4n';
-        //$client_secret = '7xIvhgX41I5Urdk3gX9Z8s0basM0U0a42LW2i2EGhtuGw5oBakfIhK6cfO2eJXbid1Oz0tca1dEpAbYuNOM4tMvOnnFRvx724RlASKDgW3eKDmmAx3ujR5H2FhdyM4cA';
-        //$username = 'jordanearlimperialpascua20';
-        //$api_key = '4f708f480170a044368643ef0929850e';
-
-        // $client_id ='vrfRD2cIa2muApJCPIAycxAIBhsWdRdWZGU2AmK';
-        // $client_secret = 'umiz9E1iS679UlxgGT754RpcguZex6JNki1offGwnwOjalbDICrFV27xANaswNCw8mOl2zNBcMogcupHJD3CEGhIJsruhZdvjWJOwFeji9fRXIIzsm9ELUPJpU328bH4';
-        // $username = 'angelblaze779';
-        // $api_key = '434562be5ba93a74021d918a963f43f2';
-
-        // $client_id ='vrfN8tg7bBuu2hgOKFNMD1o6FLMlwPojtBzI2Ky';
-        // $client_secret = 'wDyxbr99zb5T6DY2n3U1GbTHhgVcYb9Hv7cwcxJ2fSc9dPZGkNJr3sxXVLZ8iwuIaoEO1ytbbk4FC6FUPENjB8BssjL1ylCfv6JNHWFN9xioBk6KPCxt2t1REr6Fo7zZ';
-        // $username = 'rmadelyn712';
-        // $api_key = 'a55c9dae529597198dd99f00598cc332';
-
-        // $client_id ='vrf0yw1K3D2cWxVe3XhlCBZgPvsjhUU9sFGcjPD';
-        // $client_secret = 'U4YES3dVP5ijlMGDHOWsMdxmV8T6hEY7oIvFR6erKAyY7WGTeCLex7LAYO8T8wmVWD8nKBJ0DKE1kKDUZpdSZ4miDxYEFoImIbzvWZoOm604unlE35ULcZ1n7OfBb1C8';
-        // $username = 'madelyn0514romero';
-        // $api_key = '22e388e0df4e489f79e691c450d494d3';
-
-      
-
-        //$client_id ='vrfyoMT6xIpolCzVA4MWyJEYtf1IAEXmU4xgkal';
-        //$client_secret = 'okc0I90wfw1aj4KTYrHGUD20hu4GLCAGLS2Xr81U4mjcBMUAnKVjLZl7jCEfWA2zCdGdVdheucHa2WBzWDkmuRxd23VaemihnKZJh1S6JpioCInt0gcMrG3dNPUCH8zH';
-        //$username = 'lvcsepvs123';
-        //$api_key = 'd7d26429e6a799e7896ca15c2182a7d3';
-
-        //$client_id ='vrfRs45eloHmgMc02YJliDubCy0L2CSvlW5OOpL';
-        //$client_secret = 'caGOGIsX76pKdpLSxHoPhZho49ANmHr63K3f1VLbSKCs9X3HSdHHXjOh2ecl2m2EnXg2w65CRdyGmiitRl4O8VYjn4hXeV1l2sCG4Pgo62rvldtLZPBgowziAkZLFEpE';
-        //$username = 'pcapstone533';
-        //$api_key = '6221ed3571890802da2df96ad9b0ea67';
-
-        // $client_id ='vrfUHTYkRzDDZ1jmH6wydo8NVZV5oKIUge8hoS8';
-	    // $client_secret ='v1ni0juzOJE6ZOOnLzuH4Y8aAsYPfSUVjLZ1gxm40YkD8retUHcLGzVmCxIvA2BIzRbo9kVfb6STAsxfTaLV0PoRPRWxBksfforw9VkszZCzaEzwcgCgJj2TOHIFpE9w';
-	    // $username ='daneruemiri87';
-	    // $api_key ='ce90022de5d976a06da2f4b8bdc53621';
-
-        // $client_id = 'vrfaYua0DjWfR2CiTT9t5djup7K3x2JpKz0y1nO';
-        // $client_secret = '8zWuEWj3dutlH5LGiagllbJmyVH6aKz41uzTzhkRhGC8ReZ8oGRZDk0BnFpWDYhzt0uLs478SLCwSoKpVRkzTwurDN1gxKPcfwWnMEZVW1bT4E05wApST3YSi4GxPl8i';
-        // $username = 'madelyn05romero14';
-        // $api_key = 'ea013a433919679d98b6f59d6eb17dec';
-
-        // $client_id ='vrfYcKS1mltDJTS8E7o9e5J8zYrd6pnfUI7Pf2P';
-        // $client_secret = 'X1P96oIP5MbWgNouMSOJlDSlB5dElEomeADAhzUGV6LbU6zI5BnFafOgxeepu134odhGG5RGInU3fP8WvRgdltezsPBBUHICmdxRkzdrp1juiiefLbj5Mi75sYOLlOJ1';
-        // $username = 'candinatoaaron';   
-        // $api_key = 'ff1c3e18acfd4c63b3e72a20f41595e5';
-
-        // $client_id ='vrfXzad78JD6mldXUL5241huPdFBmYM8PsnchRj';
-        // $client_secret = 'MpLyTGlKTwHJObVZ4DUlvU9JRDNugemOX6JjpCY8w73Uu8ErRycN04zMXJ2Hrx9tPXylnf31hxSeaM8HaHxjGNiYmDNFhwo29p0hi3pkVg67jt8JWr8w3fgbokbGfEj6';
-        // $username = 'dinacandinato';
-        // $api_key = 'b4f8fcce5b3a6998b1d7496b3f7d4305';
-
-        // $client_id = 'vrf8NTvFrwzuwEfXK3JGyp6BMRgmSley7JXoNzD';
-        // $client_secret = 'N6egfj5HvcsTgm6ela8wpFiKGstjsI1nZxaiUAumsdae0XuWXbyJ6sbsAC3EOaI7i1ZSbcFcYimL1ryfWE6npeYvvNRpPyeEzAi4gjVoTvNRLaPCt6LGfb3KrBbbbjlf';
-        // $username = 'evalynoliva15';
-        // $api_key = 'b436038632c51af02d8667da3dc692c9';
 
         $client_id = 'vrft4gpzThBv0scs3125A3tmhFfpDcrWJgzkpWp';
         $client_secret = 'aHkbYcp82t7y4Yu7VaJpziJedb8TKYnOjvMapfKBlPKmiDbc9RIZAFoxUVzvCgpjEjzKHb4Fbt0D6exl5yhaRbtjiRSZAd3zXUF8RmVb6AYm9ChVz7yggv6L9I0AOVmy';
@@ -396,16 +340,6 @@ class FormController extends Controller
         // $username = 'michaelmaglente29';
         // $api_key = '219278715bf8ef74f5824663f1966fce';
 
-
-
-
-
-
-
-
-
-
-
         $file = public_path() . '/assets/receipts/temp/' . $receipt;
 
         // Veryfi API
@@ -423,11 +357,9 @@ class FormController extends Controller
             case 'gcash':
                 $finalResult = $this->getDataGcash($json_response);
                 break;
-
             case 'Gcash_Email':
                 $finalResult = $this->getDataGcashEmail($json_response);
                 break;
-    
             case 'instapay':
                 $finalResult = $this->getDataInstapay($json_response);
                 break;
@@ -443,39 +375,12 @@ class FormController extends Controller
             case 'PNB':
                 $finalResult = $this->getDataPNB($json_response);
                 break;
-            // case 'gcash_instapay':
-            //     $finalResult = $this->getDataGcashInstapay($json_response);
-            //     break;
-            // case 'bdo_mobile_banking':
-            //     $finalResult = $this->getDataBdoMobileBanking($json_response);
-            //     break;
             case 'bdo_cash_transaction_slip':
                 $finalResult = $this->getDataBdoCashTransactionSlip($json_response);
                 break;
             case 'Others':
                 $finalResult = $this->getDataOthers($json_response);
                 break;
-           
-            /**
-             * New receipt Type
-             *  case 'new_receipt type':
-             *      $finalResult = $this->someCustomeMethod($json_response);    --> use $finalResultVariable
-             *
-             *
-             *      // create new method within this File
-             *      Sample method: getDataBdoCashTransactionSlip()
-             *
-             *
-             *      // format
-             *      $finalResult = [
-             *          'dateTime' => Y-m-d H:i:s
-             *          'referenceNumber' => 'data'
-             *          'amount' => float --> currency 'PHP' not included
-             *      ];
-             *
-             *  break;
-             */
-
             default:
                 echo 'Invalid Update';
         }
@@ -913,13 +818,14 @@ class FormController extends Controller
 
 
         private function getDataGcash($json_response) {
-
-            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total'])) {
+            // dd($json_response);
+            if ( empty($json_response['ocr_text']) || empty($json_response['line_items'][0]['total']) || empty($json_response['date'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
             $gcashFinalResult['dateTime'] = $json_response['date'];
             $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'InstaPay Trace No.', 'Ref No.');
             $gcashFinalResult['amount'] = floatval($json_response['line_items'][0]['total']);
+          
             return $gcashFinalResult;
         }
 

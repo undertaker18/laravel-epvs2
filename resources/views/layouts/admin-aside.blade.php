@@ -53,8 +53,10 @@
           </li>
         @endhasrole
 
-        @hasanyrole('Super Admin|Accounting Staff')
+       
+        
           <li class="nav-item menu-open">
+            @hasanyrole('Super Admin|Accounting Staff')
             <a class="nav-link {{ Request::is('receipt-valid', 'receipt-pending', 'receipt-reject', 'receipt-archive') ? 'active' : '' }}">
               <i class="nav-icon fas fa-receipt"></i>
               <p>
@@ -62,7 +64,9 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            @endhasanyrole
             <ul class="nav nav-treeview">
+              @hasanyrole('Super Admin|Accounting Staff')
               <li class="nav-item">
                 <a href="{{ url('/receipt-valid') }}" class="nav-link {{ Request::is('receipt-valid') ? 'active' : '' }}">
                   <i class="far fa-check-circle nav-icon"></i>
@@ -81,15 +85,20 @@
                   <p>Reject</p>
                 </a>
               </li>
+              @endhasanyrole
+
+              @hasanyrole('Super Admin')
               <li class="nav-item">
                 <a href="{{ url('/receipt-archive') }}" class="nav-link {{ Request::is('receipt-archive') ? 'active' : '' }}">
                   <i class="far fa-file-archive nav-icon"></i>
                   <p>Archive</p>
                 </a>
               </li>
+              @endhasanyrole
             </ul>
+            
           </li>
-        @endhasanyrole
+      
           <li class="nav-item menu-open">
             <a class="nav-link {{ Request::is('xero-send', 'xero-sent' , 'xero-sync-accounts') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
