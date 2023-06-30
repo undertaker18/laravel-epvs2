@@ -88,7 +88,7 @@ Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-reject');
 
-    Route::post('/receipt-reject', [ReceiptController::class, 'postReject'])
+    Route::post('/receipt-post-reject', [ReceiptController::class, 'postReject'])
     ->middleware(['auth', 'verified'])
     ->name('receipt-post-reject');
 

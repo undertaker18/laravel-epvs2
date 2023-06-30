@@ -286,6 +286,11 @@
                             <div class="card-2 m-3 bg-form">
                                 <h2 class="card-title pt-3 ">Student 01</h2>
                                 <div id="formsContainer" class="card-body p-3">
+                                    @if(session('errorname'))
+                                    <div class="alert alert-danger">
+                                        {{ session('errorname') }}
+                                    </div>
+                                    @endif
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -688,6 +693,11 @@
                                 
                                 <h2 class="card-title pt-3 ">Student 01</h2>
                                 <div id="formsContainer" class="card-body p-3">
+                                    @if(session('errorname'))
+                                    <div class="alert alert-danger">
+                                        {{ session('errorname') }}
+                                    </div>
+                                    @endif
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -1526,6 +1536,11 @@
                             <div class="card-2 m-3 bg-form">
                                 <h2 class="card-title pt-3 ">Student 01</h2>
                                 <div id="formsContainer" class="card-body p-3">
+                                    @if(session('errorname'))
+                                    <div class="alert alert-danger">
+                                        {{ session('errorname') }}
+                                    </div>
+                                    @endif
                                     <div class="row">
 
                                         <div class="col-md-6">

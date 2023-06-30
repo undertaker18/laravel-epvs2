@@ -1,5 +1,13 @@
 <x-admin-layout>
+<style>
+       .flexed {
+            display: flex !important;
+        }
 
+        .end {
+            justify-content: flex-end !important;
+        }
+</style>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="background-color: #EAF1F8;">
             <!-- Content Header (Page header) -->
@@ -99,14 +107,40 @@
                     <!-- /.row -->
             </section>
             <!-- right col -->
-            <form method="POST" action="/receipt-reject">
-            <div style="text-align: right;  ">
-                @csrf
-                <input type="hidden" name="csv_ids" id="csv_ids">
-                <button type="submit" id="myButton" class="btn btn-default mr-4 mb-3" style="background-color: #D74747; color: #ffffff; width: 170px;">
-                <i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;SEND TO EMAIL</button>
-            </div>
-            </form>
+
+            <a  class="m-0 p-0 button-container flexed end">
+                <button type="button" class="btn btn-default mr-4 mb-3" style="background-color: #D74747; color: #ffffff; width: 170px;" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;SEND TO EMAIL</button>
+            </a>
+                 <!-- Modal -->
+                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                Are you sure you want to send in email?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a  class=" p-0 button-container ">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" style="width: 100px !important">No</button>
+                            </a>
+                            <form method="POST" action="{{ route('receipt-post-reject') }}">
+                                <div style="text-align: right;  ">
+                                    @csrf
+                                    <input type="hidden" name="csv_ids" id="csv_ids">
+                                    <button type="submit" id="myButton" class="btn btn-success" style="background-color: green; color: #ffffff; width: 100px !important;">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+            
             <!-- data tables -->
             <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
                 <!-- Title Form -->
@@ -147,17 +181,18 @@
                             <thead>
                                 <tr> 
                                     <th>Select</th>
-                                    {{-- <th>Invoice ID</th> --}}
+                                    <th >ID</th>
                                     
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    {{-- <th >Email</th> --}}
                                     <th>Description</th>
                                     <th>Amount</th>
                                     <th>Reference</th>
                                     <th>Date</th>
                                     {{-- <th>Receipt Type</th> --}}
+                                    {{-- <th>Receipt name</th> --}}
                                     <th>Receipt Source</th>
-                                    <th>Action</th>
+                                    <th>Action</th> 
 
                                     {{-- <th>Receipt Status</th> --}}
                                 </tr>
@@ -166,17 +201,17 @@
                                 @foreach ($invoices as $invoice)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" id="my-checkbox" name="my-checkbox"
-                                            class="checkbox invoice_checkbox" data-id="{{$invoice->id}}">
+                                    <input type="checkbox" id="my-checkbox" name="my-checkbox" class="checkbox invoice_checkbox" data-id="{{$invoice->id}}">
                                     </td>
-                                    {{-- <td>{{ $invoice->id }}</td> --}}
+                                    <td >{{ $invoice->id }}</td>
                                     <td>{{ $invoice->fullname }}</td>
-                                    <td>{{ $invoice->email }}</td>
+                                    {{-- <td >{{ $invoice->email }}</td> --}}
                                     <td>{{ $invoice->description }}</td>
                                     <td>{{ $invoice->amount }}</td>
                                     <td>{{ $invoice->reference }}</td>                                   
                                     <td>{{ $invoice->date }}</td> 
                                     {{-- <td>{{ $invoice->receipt_type }}</td> --}}
+                                    {{-- <td>{{ $invoice->receipt_src }}</td> --}}
                                     <td>
                                         @if ($invoice->receipt_src)
                                             <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">

@@ -636,7 +636,7 @@
                                                         <input type="text" class="form-control" id="fullname"
                                                             name="fullname1##{{$key}}"
                                                             value="{{ $transaction->fullname1 }}" readonly>
-                                                        <input type="text" class="form-control" id="fullname"
+                                                        <input type="hidden" class="form-control" id="fullname"
                                                             name="xero_account_id1##{{$key}}"
                                                             value="{{ $transaction->xero_account_id1 }}" readonly>
                                                     </div>

@@ -156,8 +156,9 @@
                                     <th>Description</th>
                                     <th>Amount</th>
                                     <th>Reference</th>
-                                    <th>Email</th>
+                                   
                                     <th>Receipt Type</th>
+                                    <th>Status</th>
                                     <th>Receipt Source</th>
                                    
                                 </tr>
@@ -174,8 +175,15 @@
                                         <td>{{ $invoice->description }}</td>
                                         <td>{{ $invoice->amount }}</td>
                                         <td>{{ $invoice->reference }}</td>                                   
-                                        <td>{{ $invoice->email }}</td>
+                                       
                                         <td>{{ $invoice->receipt_type }}</td>
+                                        <td>
+                                            @if ($invoice->receiptStatus == 4)
+                                                <p class="text-success">Already Sent</p>
+                                            @else
+                                                {{ $invoice->receiptStatus }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($invoice->receipt_src)
                                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#receiptModal{{ $invoice->id }}">

@@ -697,6 +697,11 @@ class FormController extends Controller
                 });
                 
                 foreach ($filterfullnames as $index => $fullname) {
+                    if (!isset($filterxero_account_ids[$index])) {
+                        return redirect()
+                        ->route('profile-form')
+                        ->with('errorname', 'Input the Correct Fullname');
+                    }  
                     $xero_account_ids = $filterxero_account_ids[$index];
                     $scholarshipStatus = $filterscholarshipStatuses[$index];
                     $email = $filteremails[$index];

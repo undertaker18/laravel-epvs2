@@ -119,12 +119,16 @@ class ReceiptController extends Controller
 
         $csvIds = $request->all()['csv_ids']; 
         $arrayIds = explode(',', $csvIds);
-
+     
         $xeroInvoice = XeroInvoice::leftJoin('xero_users', 'xero_users.xero_account_id', '=', 'xero_invoice.xero_account_id')
-            ->select('xero_invoice.id as id', 'xero_invoice.fullname', 'xero_invoice.xero_account_id', 'xero_invoice.description', 'amount', 'reference', 'xero_invoice.created_at', 'xero_invoice.updated_at',
+            ->select('xero_invoice.id as id', 'xero_invoice.fullname', 'xero_invoice.xero_account_id', 'xero_invoice.description', 
+                'xero_invoice.amount', 'xero_invoice.reference', 'xero_invoice.created_at', 'xero_invoice.updated_at',
                 'xero_invoice.email', 'xero_invoice.receipt_type', 'xero_invoice.receipt_src', 'xero_invoice.receiptStatus')
             ->whereIn('xero_invoice.id', $arrayIds)
             ->get();
+
+          
+
 
         $sampleReceiptType = [
             'gcash_email' => public_path() . '/assets/sample-receipts/Gcash-email.png',
@@ -134,7 +138,7 @@ class ReceiptController extends Controller
             'unionbank' => public_path() . '/assets/sample-receipts/unionbank.jpg',
             'PNB-debit' => public_path() . '/assets/sample-receipts/PNB-debit.jpg',
             'instapay' => public_path() . '/assets/sample-receipts/send-money-instapay.jpg',
-            'pesonet-gateway' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
+            'MAYA' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
         ];
 
         try {
@@ -142,7 +146,9 @@ class ReceiptController extends Controller
                 // todo: May 28, this is for testing - Change the following
                 // if from table: $value->xero_account_name ($value->[column_name])
                 $receiptType = $value->receipt_type;
+                
                 $sampleReceipt =  $sampleReceiptType[$receiptType]; // should match with $sampleReceiptType key
+                // dd($sampleReceipt);
                 $receipt =   public_path() . $value->receipt_src;// change: get value from database
                 $recipient = $value->email; // change: get value from database
                 //end

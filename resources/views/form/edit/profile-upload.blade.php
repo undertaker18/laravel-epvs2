@@ -233,6 +233,7 @@
                             {{ session('error') }}
                         </div>
                         @endif
+                       
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
@@ -2203,9 +2204,10 @@
 
                             @else
 
-                            <div class="card-2 m-3 bg-form">
+                            <div class="card-2 m-3 bg-form">                        
                                 <h2 class="card-title pt-3 ">Student 01</h2>
                                 <div id="formsContainer" class="card-body p-3">
+                               
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -2213,9 +2215,11 @@
                                                 <label for="Fullname" class="form-label"><b>1</b>. Full Name (Delacruz, Juan A.):</label>
                                                 <input type="text" name="fullname1" id="searchInput"
                                                     class="form-control" value="{{ $transaction->fullname1 }}"
-                                                    placeholder="Fullname" readonly required>
+                                                    placeholder="Fullname" required>
+                                                
                                             </div>
                                         </div>
+                                               
                                                 <div id="fullnameValidationMessage" class="invalid-feedback"></div>
 
                                                 <script>
