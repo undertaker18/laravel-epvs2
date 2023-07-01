@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\XeroController;
 use App\Http\Controllers\Admin\SystemlogController;
+use App\Http\Controllers\Admin\DisabledController;
 use App\Http\Controllers\XeroApiController;
 use App\Mail\PaymentSummary;
 use Illuminate\Support\Facades\Mail;
@@ -165,6 +166,12 @@ Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
 Route::get('/system-log', [SystemlogController::class, 'index'])
     ->middleware(['auth', 'verified', 'role:Super Admin'])
     ->name('system-log');
+
+/* Disabled ACCOUNT*/
+
+Route::get('/disabled-account', [DisabledController::class, 'index'])
+    ->middleware(['auth', 'verified', 'role:Super Admin'])
+    ->name('disabled-account');
 
 
 /* user account*/

@@ -18,21 +18,21 @@ class UserSeeder extends Seeder
             'name' => 'Angel Blaze Candinato',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'password' => bcrypt('K!5@F6w#9g$2rL8a'),
         ]);
 
         $registrar = User::create([
             'name' => 'Madelyn Romero',
             'email' => 'registrar@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'password' => bcrypt('K!5@F6w#9g$2rL8a'),
         ]);
 
         $accounting = User::create([
             'name' => 'Jordan Earl Pascua',
             'email' => 'accounting@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'password' => bcrypt('K!5@F6w#9g$2rL8a'),
         ]);
 
 
