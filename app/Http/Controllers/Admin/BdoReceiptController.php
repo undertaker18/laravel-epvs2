@@ -15,7 +15,7 @@ class BdoReceiptController extends Controller
     {
         // activity()->log('Viewed BDO Transactions');
 
-        $bdoReceipts = BdoReceipt::orderBy('posting_datetime', 'desc')->paginate(100);
+        $bdoReceipts = BdoReceipt::orderBy('posting_datetime', 'desc')->paginate(1000);
         $latestUploadTimestamp = BdoReceipt::latest('created_at')->value('created_at');
         
         return view('bdo-receipts', [

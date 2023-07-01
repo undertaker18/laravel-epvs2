@@ -27,7 +27,7 @@ class XeroApiController extends Controller
     public function __construct()
     {
         // CHANGE THIS WHEN THERE IS NEW ACCOUNT
-        // EPVS APP
+        // // EPVS APP
         $this->clientId = '7F688CDD3AB24199AEF10B04B9F85A60';
         $this->clientSecret = 'FyzsLVLfdzGD5KKXiIY8fPxiy_7XBHx1tAbLmNd3y-BX-qIx';
         $this->authotizarionBase64 = 'N0Y2ODhDREQzQUIyNDE5OUFFRjEwQjA0QjlGODVBNjA6Rnl6c0xWTGZkekdENUtLWGlJWThmUHhpeV83WEJIeDF0QWJMbU5kM3ktQlgtcUl4';
