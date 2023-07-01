@@ -140,12 +140,12 @@ class ReceiptController extends Controller
 
 
         $sampleReceiptType = [
-            'gcash_email' => public_path() . '/assets/sample-receipts/Gcash-email.png',
+            'Gcash_Email' => public_path() . '/assets/sample-receipts/Gcash-email.png',
             'gcash_instapay' => public_path() . '/assets/sample-receipts/Gcash-mobile-save.jpg',
             'gcash' => public_path() . '/assets/sample-receipts/Gcash-mobile-ss.jpg',
-            'metrobank' => public_path() . '/assets/sample-receipts/metrobank.jpg',
-            'unionbank' => public_path() . '/assets/sample-receipts/unionbank.jpg',
-            'PNB-debit' => public_path() . '/assets/sample-receipts/PNB-debit.jpg',
+            'MetroBank' => public_path() . '/assets/sample-receipts/metrobank.jpg',
+            'UnionBank' => public_path() . '/assets/sample-receipts/unionbank.jpg',
+            'PNB' => public_path() . '/assets/sample-receipts/PNB-debit.jpg',
             'instapay' => public_path() . '/assets/sample-receipts/send-money-instapay.jpg',
             'MAYA' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
         ];
