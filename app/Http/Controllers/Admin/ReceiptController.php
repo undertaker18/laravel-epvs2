@@ -317,13 +317,17 @@ class ReceiptController extends Controller
             if ($bdo_receipt) {
                 $receipt->receiptStatus = 2; // Update to "valid and see the registrar staff"
             } else {
-                // Check if the reference date is greater than the last upload date
-                if ($receipt->date >= $lastUploadDate) {
+                // Check if the receipt status is 4 and the status is 1
+                if ($receipt->receiptStatus == 4) {
+                    // Remain in number 4
+                    // No need to update the receipt status
+                } elseif ($receipt->date >= $lastUploadDate) {
                     $receipt->receiptStatus = 1; // No match, keep the original status
                 } else {
                     $receipt->receiptStatus = 3; // Update to "reject" for no match within the date span
                 }
             }
+            
             
             // Save the changes for each receipt
             $receipt->save();
