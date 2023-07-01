@@ -486,8 +486,8 @@ class XeroApiController extends Controller
             $invoiceParams = [];
             $invoiceParams['contactId'] = $value->xero_account_id;// look like this '8f3dffed-7590-43c8-8b50-7a09c25f9641'
             $invoiceParams['description'] = $value->description;// payment for
-            $invoiceParams['amount'] = $value->amount;// amount
-            $invoiceParams['lineAmount'] = $value->amount;// amount
+            $invoiceParams['amount'] = $value->each_amount;// amount
+            $invoiceParams['lineAmount'] = $value->each_amount;// amount
             $invoiceParams['date'] = Carbon::now()->format('Y-m-d'); // date
             $invoiceParams['dueDate'] = Carbon::now()->addDay('1')->format('Y-m-d');
             $invoiceParams['reference'] = $value->reference;// reference || invoice no.
