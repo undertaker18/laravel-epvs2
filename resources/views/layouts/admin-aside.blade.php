@@ -139,16 +139,7 @@
           </li>
 
 
-        @hasrole('Super Admin')
-          <li class="nav-item">
-            <a href="{{ url('/reports') }}" class="nav-link {{ Request::is('reports') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Reports
-              </p>
-            </a>
-          </li>
-        @endhasrole
+        
 
         @hasanyrole('Super Admin|Accounting Staff')
           <li class="nav-item menu-open">
