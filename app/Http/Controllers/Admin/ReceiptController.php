@@ -144,10 +144,12 @@ class ReceiptController extends Controller
             'gcash_instapay' => public_path() . '/assets/sample-receipts/Gcash-mobile-save.jpg',
             'gcash' => public_path() . '/assets/sample-receipts/Gcash-mobile-ss.jpg',
             'MetroBank' => public_path() . '/assets/sample-receipts/metrobank.jpg',
-            'UnionBank' => public_path() . '/assets/sample-receipts/unionbank.jpg',
+            'UnionBank' => public_path() . '/assets/sample-receipts/Unionbank.jpg',
             'PNB' => public_path() . '/assets/sample-receipts/PNB-debit.jpg',
-            'instapay' => public_path() . '/assets/sample-receipts/send-money-instapay.jpg',
+            'instapay' => public_path() . '/assets/sample-receipts/Send-money-instapay.jpg',
             'MAYA' => public_path() . '/assets/sample-receipts/pesonet-gateway.jpg',
+            'bdo_cash_transaction_slip' => public_path() . '/assets/sample-receipts/bdo-slip.jpg',
+            'Others' => public_path() . '/assets/sample-receipts/Others.jpg',
         ];
 
         try {
