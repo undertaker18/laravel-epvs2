@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BdoReceipt;
 use Carbon\Carbon;
+use Spatie\Activitylog\Models\Activity;
+use Auth;
 
 class BdoReceiptController extends Controller
 {
@@ -27,6 +29,14 @@ class BdoReceiptController extends Controller
     public function upload(Request $request)
 {
     // activity()->log('Upload BDO Transactions');
+        // FOR activity log 
+        $items = new Activity();
+        $items->log_name = Auth::user()->name;
+        $items->description = 'Uploaded BDO Transaction';
+        $items->causer_id = Auth::user()->id;
+        $items->causer_type = 'App\Models\User';
+        $items->save();
+
 
     $file = $request->file('csv_file');
 

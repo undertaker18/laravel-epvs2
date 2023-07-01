@@ -29,12 +29,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Log Name</th>
-                                    <th>Description</th>
-                                    <th>Subject</th>
-                                    <th>Causer</th>
-                                    <th>Properties</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>Log Description</th>
+                                   
+                                    <th>Log Date & Time</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,11 +41,9 @@
                                     <td>{{ $log->id }}</td>
                                     <td>{{ $log->log_name }}</td>
                                     <td>{{ $log->description }}</td>
-                                    <td>{{ $log->subject_type }} ({{ $log->subject_id }})</td>
-                                    <td>{{ $log->causer_type }} ({{ $log->causer_id }})</td>
-                                    <td>{{ $log->properties }}</td>
+                                  
                                     <td>{{ $log->created_at }}</td>
-                                    <td>{{ $log->updated_at }}</td>
+                                   
                                 </tr>
                                 @endforeach
                             </tbody>               

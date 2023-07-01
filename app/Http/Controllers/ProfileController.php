@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Spatie\Activitylog\Models\Activity;
 
 class ProfileController extends Controller
 {
@@ -16,6 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -26,6 +28,14 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+         // FOR activity
+         $items = new Activity();
+         $items->log_name = Auth::user()->name;
+         $items->description = 'Update Profile Account';
+         $items->causer_id = Auth::user()->id;
+         $items->causer_type = 'App\Models\User';
+         $items->save();
+ 
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -42,6 +52,14 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // FOR activity
+        $items = new Activity();
+        $items->log_name = Auth::user()->name;
+        $items->description = 'Delete Profile Account';
+        $items->causer_id = Auth::user()->id;
+        $items->causer_type = 'App\Models\User';
+        $items->save(); 
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Mail\receiptrejected;
 use App\Models\XeroInvoice;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\User;
 use Spatie\Activitylog\Models\Activity;
+use Auth;
 
 
 class DashboardController extends Controller
@@ -16,11 +19,6 @@ class DashboardController extends Controller
     // for view 
     public function index()
     {
-
-        // FOR COUNTS
-
-        // activity()->log('Viewed Dashboard');
-
 
         $pendingInvoices = DB::table('xero_invoice')->where('receiptStatus', 1)->get();
         $totalCountPending = $pendingInvoices->count();

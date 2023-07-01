@@ -123,9 +123,10 @@
             <script>
                $(function () {
                     $("#example1").DataTable({
-                        "responsive": false,
+                        "responsive": true,
                         "lengthChange": true,
-                        "autoWidth": false,
+                        "autoWidth": true,
+                        "order": [[0, "desc"]], // Sort the first column in descending order
                         "buttons": [
                             {
                                 extend: 'copy',
@@ -154,6 +155,7 @@
                         ]
                     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 });
+
             </script>
     
             

@@ -13,6 +13,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Spatie\Activitylog\Models\Activity;
+use Auth;
+
 
 class ReceiptController extends Controller
 {
@@ -115,7 +118,13 @@ class ReceiptController extends Controller
 
     public function postReject(Request $request)
     {
-        // activity()->log('Viewed Valid Receipt');
+        // FOR activity
+        $items = new Activity();
+        $items->log_name = Auth::user()->name;
+        $items->description = 'Emailed Reject Receipt/s';
+        $items->causer_id = Auth::user()->id;
+        $items->causer_type = 'App\Models\User';
+        $items->save();
 
         $csvIds = $request->all()['csv_ids']; 
         $arrayIds = explode(',', $csvIds);
@@ -177,6 +186,14 @@ class ReceiptController extends Controller
 
     public function revertReceiptStatus(Request $request)
     {
+        // FOR activity
+        $items = new Activity();
+        $items->log_name = Auth::user()->name;
+        $items->description = 'Reverted Reject to Pending';
+        $items->causer_id = Auth::user()->id;
+        $items->causer_type = 'App\Models\User';
+        $items->save();
+
 
         $invoiceId = $request->input('invoiceId');
         $receiptStatus = $request->input('receiptStatus');
@@ -242,6 +259,13 @@ class ReceiptController extends Controller
         {
 
             // activity()->log('Viewed Receiptt');
+                // FOR activity
+            $items = new Activity();
+            $items->log_name = Auth::user()->name;
+            $items->description = 'Deleted Archive Receipt/s';
+            $items->causer_id = Auth::user()->id;
+            $items->causer_type = 'App\Models\User';
+            $items->save();
             
             $deleteIds = $request->input('delete_ids');
             $arrayIds = explode(',', $deleteIds);
@@ -267,6 +291,14 @@ class ReceiptController extends Controller
 
     public function updateReceiptStatus()
     {
+        // FOR activity
+        $items = new Activity();
+        $items->log_name = Auth::user()->name;
+        $items->description = 'Validated Receipt/s';
+        $items->causer_id = Auth::user()->id;
+        $items->causer_type = 'App\Models\User';
+        $items->save();
+
         // Get all the receipts
         $receipts = XeroInvoice::all();
         

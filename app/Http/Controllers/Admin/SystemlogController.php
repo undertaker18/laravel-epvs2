@@ -11,9 +11,11 @@ class SystemlogController extends Controller
 {
     public function index()
     {
-        $logs = DB::table('activity_log')->get(); // Retrieve all records from the table
-        
-        return view('system-log', compact('logs'));
+        $logs = DB::table('activity_log')
+        ->orderBy('created_at', 'desc')
+        ->get(); // Retrieve all records from the table in descending order of creation time
+
+    return view('system-log', compact('logs'));
     }
     
 
