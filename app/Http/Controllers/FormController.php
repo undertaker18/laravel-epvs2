@@ -794,6 +794,26 @@ class FormController extends Controller
             return rtrim(ltrim(substr($paragraph, $stringOnePosition + (strlen($string1)), $stringTwoPosition - $stringOnePosition - (strlen($string1)))));
         }
 
+        private function getValueOnestring($paragraph, $string) {
+            $stringPosition = strpos($paragraph, $string, 0);
+        
+            if ($stringPosition !== false) {
+                $startPosition = $stringPosition + strlen($string);
+                $value = substr($paragraph, $startPosition);
+                $nextStringPosition = strpos($value, $string, 0);
+        
+                if ($nextStringPosition !== false) {
+                    $value = substr($value, 0, $nextStringPosition);
+                }
+        
+                return trim($value);
+            }
+        
+            return null; // Return null if the string is not found
+        }
+        
+        
+
         // create new method within this File
         private function getDataBdoMobileBanking($json_response) {
               
@@ -849,7 +869,7 @@ class FormController extends Controller
         }
 
         private function getDataBdoCashTransactionSlip($json_response) {
-//  dd($json_response);
+            //  dd($json_response);
             // Check if any text is not detected
             if (empty($json_response['date'])  || empty($json_response['ocr_text'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
@@ -905,16 +925,15 @@ class FormController extends Controller
         private function getDataMetroBank($json_response) {
             // dd($json_response);
             // Check if any text is not detected
-            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['total'])) {
+            if (empty($json_response['date']) || empty($json_response['total'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             // Process the data
             $gcashFinalResult['dateTime'] = $json_response['date'];
-            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
-
+            $gcashFinalResult['referenceNumber'] = $this->getValueOnestring($json_response['ocr_text'], 'REFERENCE NUMBER');
             $gcashFinalResult['amount'] =  floatval($json_response['total']);
-
+            // dd($gcashFinalResult);
             return $gcashFinalResult;
         }
 

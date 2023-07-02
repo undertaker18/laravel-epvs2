@@ -14,7 +14,7 @@ class SystemlogController extends Controller
         $logs = DB::table('activity_log')
         ->orderBy('created_at', 'desc')
         ->get(); // Retrieve all records from the table in descending order of creation time
-
+        
     return view('system-log', compact('logs'));
     }
     
