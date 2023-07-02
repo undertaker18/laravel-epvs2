@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class UserController extends Controller
@@ -20,8 +21,9 @@ class UserController extends Controller
       ->get();
 
       $roles = Role::get();
+      $permissions = Permission::get();
 
-      return view('users', compact(['Account', 'roles']));
+      return view('users', compact(['Account', 'roles', 'permissions']));
    }
 
     

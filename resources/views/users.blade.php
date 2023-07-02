@@ -27,8 +27,8 @@
                               <th>Name</th>
                               <th>Email</th>
                               <th>Role</th>
-                              <th>Activity</th>
-                              <th>Action</th>
+                              <th>Permission</th>
+                              <th>Created_at</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -44,9 +44,17 @@
                               @endif
                               @endforeach
                             </td>
-
+                              <td>
+                                @if ($role->permissions)
+                                    @foreach ($role->permissions as $role_permission)
+                                    <span class="badge badge-dim bg-outline-primary rounded-pill" >
+                                        {{ $role_permission->name }}
+                                    </span>
+                                    @endforeach
+                                @endif
+                              </td>
                             <td>{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y h:i A')}}</td>
-                            <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('M d, Y h:i A')}}</td>
+                           
                         </tr>
                         @endforeach
                 </tbody>
@@ -59,3 +67,13 @@
   </div><!-- /.container-fluid -->
   </section>
 </x-admin-layout>
+
+<td>
+  @if ($role->permissions)
+      @foreach ($role->permissions as $role_permission)
+      <span class="badge badge-dim bg-outline-primary rounded-pill" >
+          {{ $role_permission->name }}
+      </span>
+      @endforeach
+  @endif
+</td>
