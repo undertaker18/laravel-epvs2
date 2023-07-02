@@ -17,6 +17,7 @@ class RoleSeeder extends Seeder
     $superAdmin  =  Role::create(['name' => 'Super Admin']);
     $Registrar = Role::create(['name' => 'Registrar']);
     $Accounting  = Role::create(['name' => 'Accounting Staff']);
+    $disabled  = Role::create(['name' => 'Disabled']);
 
         Permission::create(['name' => 'create']);
         Permission::create(['name' => 'read']);
@@ -29,6 +30,7 @@ class RoleSeeder extends Seeder
     $superAdmin->syncPermissions($permissions);
 
     // Assign specific permissions to the $userRole
+    $disabled->syncPermissions(['read']);
     $Registrar->syncPermissions(['read']);
 
     // Assign specific permissions to the $userRole

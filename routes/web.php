@@ -62,7 +62,7 @@ Route::post('/submit-form/{id}', [FormController::Class, 'postSubmit' ])->name('
 /************** ADMIN USER ****************/
     /* For Dashboard*/
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified','role:Super Admin|Accounting Staff'])
     ->name('dashboard');
 
     /* for USER*/
@@ -72,33 +72,33 @@ Route::get('/users', [UserController::class, 'index'])
 
    /* For Receipts*/
 Route::get('/receipt-valid', [ReceiptController::class, 'valid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipt-valid');
 
 Route::get('/receipt-pending', [ReceiptController::class, 'pending'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipt-pending');
 
 Route::post('/receipts/update-status', [ReceiptController::class, 'updateReceiptStatus'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipts.updateStatus');
 
 
 
 Route::get('/receipt-reject', [ReceiptController::class, 'reject'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipt-reject');
 
     Route::post('/receipt-post-reject', [ReceiptController::class, 'postReject'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipt-post-reject');
 
     Route::post('/receipt-reject', [ReceiptController::class, 'revertReceiptStatus'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('receipt-revert');
 
 Route::get('/receipt-image', [ReceiptController::class, 'image'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified','role:Super Admin|Accounting Staff'])
     ->name('receipt-image');
 
 Route::get('/receipt-archive', [ReceiptController::class, 'archive'])
@@ -113,14 +113,14 @@ Route::get('/receipt-archive', [ReceiptController::class, 'archive'])
 /* For Xero intergration */
 
 Route::get('/xero-send', [XeroController::class, 'send'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('xero-send');
 
 Route::get('/xero-sent', [XeroController::class, 'sent'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff|Registrar'])
     ->name('xero-sent');
 Route::get('/xero-sync-accounts', [XeroController::class, 'syncAccount'])
-    ->middleware(['auth'])
+    ->middleware(['auth', 'role:Super Admin|Accounting Staff'])
     ->name('xero-sync-account');
 
 
@@ -134,21 +134,21 @@ Route::get('/reports', [ReportController::class, 'index'])
 // Bdo Receipts
 
 Route::get('/bdo-xero-receipts', [XeroApiController::class, 'getXeroTransactions'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('bdo-xero-receipts');
 
 // Bdo Receipts
 
 Route::get('/bdo-receipts', [BdoReceiptController::class, 'timestamp'])
-->middleware(['auth', 'verified'])
+->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
 ->name('bdo-receipts');
 
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('upload');
 
 Route::post('/bdo-receipt/upload', [BdoReceiptController::class, 'upload'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:Super Admin|Accounting Staff'])
     ->name('bdo-receipt.upload');
 
 
@@ -170,7 +170,7 @@ Route::get('/system-log', [SystemlogController::class, 'index'])
 /* Disabled ACCOUNT*/
 
 Route::get('/disabled-account', [DisabledController::class, 'index'])
-    ->middleware(['auth', 'verified', 'role:Super Admin'])
+    ->middleware(['auth', 'verified'])
     ->name('disabled-account');
 
 

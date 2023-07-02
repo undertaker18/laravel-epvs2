@@ -35,9 +35,16 @@ class UserSeeder extends Seeder
             'password' => bcrypt('K!5@F6w#9g$2rL8a'),
         ]);
 
+        $disabled = User::create([
+            'name' => 'Earl Scoth',
+            'email' => 'disabled@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('K!5@F6w#9g$2rL8a'),
+        ]);
+
 
         // Assign roles to users
-
+        $disabled->assignRole('Disabled');
         $registrar->assignRole('Registrar');
         $accounting->assignRole('Accounting Staff');
 
