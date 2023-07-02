@@ -100,6 +100,7 @@
             </section>
             <!-- right col -->
             <form method="POST" action="{{ route('receipt-archive-delete') }}">
+                 
                 <div style="text-align: right;">
                     @csrf
                     @method('DELETE')
@@ -112,7 +113,19 @@
             
             
             <!-- data tables -->
+ 
             <section style="width:98%; margin-left:15px; margin-right: 80px; border-radius: 8px;">
+                @if(session('successMessage'))
+                <div class="alert alert-success">
+                    {{ session('successMessage') }}
+                </div>
+                @endif
+                
+                @if(session('errorMessage'))
+                    <div class="alert alert-danger">
+                        {{ session('errorMessage') }}
+                    </div>
+                @endif
                 <!-- Title Form -->
                 <div class="card" style="background-color: ; ">
                     <div class="card-body"  style="color: #000000; ">

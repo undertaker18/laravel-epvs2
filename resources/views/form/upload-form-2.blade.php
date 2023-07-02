@@ -494,6 +494,8 @@
             showFile(); //calling function
         });
 
+
+        //FOR IMAGE FILTER CAN ACCEPT "image/jpeg", "image/jpg", "image/png"
         function showFile() {
             console.log('showFile');
             let fileType = file.type; //getting selected file type
@@ -512,7 +514,7 @@
             } else {
                 alert("This is not valid receipt!");
                 dropArea.classList.remove("active");
-                dragText.textContent = "Drag & Drop to Upload File";
+                dragText.textContent = "";
             }
         }
 

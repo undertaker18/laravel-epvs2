@@ -78,7 +78,7 @@ class DashboardController extends Controller
 
         for ($i = -10; $i <= 1; $i++) {
             // Calculate the month index (considering wrap-around at December)
-            $monthIndex = ($currentMonth + $i + 4) % 12;
+            $monthIndex = ($currentMonth + $i + 3) % 12;
         
             // Get the month name for the current index
             $monthLabel = Carbon::create()->month($monthIndex + 1)->format('F');

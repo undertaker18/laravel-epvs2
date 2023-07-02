@@ -310,15 +310,15 @@ class FormController extends Controller
 
         //Not use
 
-        $client_id = 'vrfaT0noL4rfyaib4B2UgJpChKCVO8ppSNIJ6mc';
-        $client_secret = 'SAXwfKwPBIx2jgzeY9fjGS5uLyZeI7YhcYGo8WCWSggOS7JIJIEbrUjaij0wtwsMdHBgvYKbDytuSsjNHUC3BLjgvPN2sYiaGnouOfFcD8aW1Wa2phBO9cWrmF2DL2j8';
-        $username = 'angelcandinatofiles1';
-        $api_key = '3e6d87407da2d580d66b9fa905656891';
+        // $client_id = 'vrfaT0noL4rfyaib4B2UgJpChKCVO8ppSNIJ6mc';
+        // $client_secret = 'SAXwfKwPBIx2jgzeY9fjGS5uLyZeI7YhcYGo8WCWSggOS7JIJIEbrUjaij0wtwsMdHBgvYKbDytuSsjNHUC3BLjgvPN2sYiaGnouOfFcD8aW1Wa2phBO9cWrmF2DL2j8';
+        // $username = 'angelcandinatofiles1';
+        // $api_key = '3e6d87407da2d580d66b9fa905656891';
 
-        // $client_id = 'vrfJY7FLVwLBILw2xrrc5HaEt3J3B4EO2PCDzb3';
-        // $client_secret = 'oUFoz23Nc9R939BZpnGiA9ZRKc6PKGhahz5TkVfzHK2KR7lN9ksUCHJuMbnlP3syyBPPoZEfWVEoArzMivUwKeiCdmvJJfHyJMhNO1BxtRy8Ih0s85vjbiNiNub2eaKp';
-        // $username = 'angelcandinatofiles2';
-        // $api_key = 'ad472242ed564545b73762c11b49a250';
+        $client_id = 'vrfJY7FLVwLBILw2xrrc5HaEt3J3B4EO2PCDzb3';
+        $client_secret = 'oUFoz23Nc9R939BZpnGiA9ZRKc6PKGhahz5TkVfzHK2KR7lN9ksUCHJuMbnlP3syyBPPoZEfWVEoArzMivUwKeiCdmvJJfHyJMhNO1BxtRy8Ih0s85vjbiNiNub2eaKp';
+        $username = 'angelcandinatofiles2';
+        $api_key = 'ad472242ed564545b73762c11b49a250';
 
         // $client_id = 'vrfDJ3MNkO30ITn0AWu4FX1NWkjXYKSZ8DC7SsK';
         // $client_secret = '92WeaOym5JJZNkRWf0wvFrLPGCiZsuPSANT3Jyr8oOSbThW1NkvITSWZuRG8tTKhEygit6PHORBYTHLhtzZ1xB3n4skgn3N4Wu9ellVk35TP9FtDxiHgkXXzsvNpeBrF';
@@ -796,8 +796,9 @@ class FormController extends Controller
 
         // create new method within this File
         private function getDataBdoMobileBanking($json_response) {
-           
+              
             if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
+                 // IF IMAGE BUT NOT A RECIEPT DETECTION
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
             $gcashFinalResult['dateTime'] = $json_response['date'];
@@ -918,18 +919,18 @@ class FormController extends Controller
         }
 
         private function getDataMaya($json_response) {
-            // dd($json_response);
+          
             // Check if any text is not detected
-            if (empty($json_response['date']) || empty($json_response['document_reference_number']) || empty($json_response['total'])) {
+            if (empty($json_response['date']) || empty($json_response['ocr_text']) || empty($json_response['total'])) {
                 return ['error' => "Please try again. Your upload may not have been read correctly for the following reasons: NO amount, reference, date and time, or the uploaded image may not be a receipt."];
             }
 
             // Process the data
             $gcashFinalResult['dateTime'] = $json_response['date'];
-            $gcashFinalResult['referenceNumber'] = $json_response['document_reference_number'];
+            $gcashFinalResult['referenceNumber'] = $this->getValueBetweenstrings($json_response['ocr_text'], 'Reference ID', 'Juan Dela Cruz');
 
             $gcashFinalResult['amount'] =  floatval($json_response['total']);
-
+            // dd($gcashFinalResult);
             return $gcashFinalResult;
         }
 

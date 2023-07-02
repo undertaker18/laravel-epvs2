@@ -268,14 +268,25 @@ class ReceiptController extends Controller
             $items->causer_id = Auth::user()->id;
             $items->causer_type = 'App\Models\User';
             $items->save();
-            
+
+          
             $deleteIds = $request->input('delete_ids');
+            if (!empty($deleteIds)) {
             $arrayIds = explode(',', $deleteIds);
             
-            // Delete the records from the database
-            DB::table('xero_invoice')->whereIn('id', $arrayIds)->delete();
-            // dd($deleteIds);
-            return redirect('/receipt-archive');
+           
+                // Delete the records from the database
+                DB::table('xero_invoice')->whereIn('id', $arrayIds)->delete();
+                
+                // Set success message
+              
+            } else {
+                // Set error message
+                $errorMessage = 'Nothing selected.';
+                return redirect('/receipt-archive')->with('errorMessage', $errorMessage);
+            }
+            $successMessage = 'Receipts successfully deleted!';
+            return redirect('/receipt-archive')->with('successMessage', $successMessage);
         }
         
 

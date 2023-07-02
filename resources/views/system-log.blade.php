@@ -40,10 +40,8 @@
                                 <tr>
                                     <td>{{ $log->id }}</td>
                                     <td>{{ $log->log_name }}</td>
-                                    <td>{{ $log->description }}</td>
-                                  
-                                    <td>{{ $log->created_at }}</td>
-                                   
+                                    <td>{{ $log->description }}</td>                          
+                                    <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $log->created_at)->setTimezone('Asia/Manila')->format('F d, Y h:i A') }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>               
